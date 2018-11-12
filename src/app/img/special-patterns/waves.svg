@@ -1,0 +1,22 @@
+<svg width="342px" height="83px" viewBox="0 0 342 83" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 51.3 (57544) - http://www.bohemiancoding.com/sketch -->
+    <desc>Created with Sketch.</desc>
+    <defs>
+        <linearGradient x1="96.9961911%" y1="14.7198276%" x2="4.44511773%" y2="54.8221983%" id="linearGradient-1">
+            <stop stop-color="#FFFFFF" stop-opacity="0.05" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.022729846" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="90.9908107%" y1="31.0802802%" x2="8.63057121%" y2="56.3793103%" id="linearGradient-2">
+            <stop stop-color="#FFFFFF" stop-opacity="0.0574331975" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" stop-opacity="0.1" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Bezier" transform="translate(0.000000, -56.000000)">
+            <g id="pattern" transform="translate(-122.000000, 53.000000)">
+                <path d="M113,0 C200.451823,32.671875 274.123698,49.0078125 334.015625,49.0078125 C393.907552,49.0078125 440.56901,32.671875 474,0 L474,145 L113,145 L113,0 Z" id="Rectangle-2" fill="url(#linearGradient-1)"></path>
+                <path d="M0,28 C86.6729281,49.4792077 148.587348,62.8785393 185.743259,68.1979946 C226.76711,74.0712065 264.442371,77.0078125 298.769044,77.0078125 C379.730985,77.0078125 442.80797,60.671875 488,28 L488,173 L0,173 L0,28 Z" id="Rectangle-2" fill="url(#linearGradient-2)"></path>
+            </g>
+        </g>
+    </g>
+</svg>
