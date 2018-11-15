@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as ReactSwipe from 'react-swipe';
 import { css } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { Utils } from 'app/ts/lib/Utils';
@@ -12,23 +13,39 @@ export class Item extends React.PureComponent<IProps, {}> {
 	public render() {
 		const { id, videoFiles, title } = this.props.item;
 
-		const thumbnail = videoFiles.filter(
+		const thumbnails = videoFiles.filter(
 			videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail,
 		);
-		const video = videoFiles.filter(
+
+		const videos = videoFiles.filter(
 			videoFile => videoFile.type === ItemsStore.EFileType.Video,
 		);
-		const preview = videoFiles.filter(
+
+		const previews = videoFiles.filter(
 			videoFile => videoFile.type === ItemsStore.EFileType.Preview,
 		);
 
 		return (
 			<div className={root}>
 				<h3 className={h3}>{title}</h3>
-				<img
-					className={previewImage}
-					src={Utils.getFilePath(id, `${thumbnail[0].fileName}.webp`)}
-				/>
+
+				<div>
+					<ReactSwipe className="carousel" swipeOptions={{ continuous: false }}>
+						{thumbnails.map((thumbnail, i) => (
+							<div key={i}>
+								<img
+									className={previewImage}
+									src={Utils.getFilePath(id, thumbnail.fileName, 'thumbnail')}
+								/>
+							</div>
+						))}
+						<div>
+							<img
+								src={Utils.getFilePath(id, previews[0].fileName, 'preview')}
+							/>
+						</div>
+					</ReactSwipe>
+				</div>
 			</div>
 		);
 	}
