@@ -12,6 +12,7 @@ const header = css`
 	height: ${THEME.HEADER_HEIGHT}px;
 	width: 100vw;
 	position: fixed;
+	z-index: 1000;
 	top: 0;
 	left: 0;
 	background-color: ${COLORS.WHITE.toString()};

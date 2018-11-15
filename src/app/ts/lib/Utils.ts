@@ -10,15 +10,18 @@ export class Utils {
 
 		switch (kind) {
 			case 'preview': {
-				return '.gif';
+				extension = '.gif';
+				break;
 			}
 
 			case 'thumbnail': {
-				return '.webp';
+				extension = '.webp';
+				break;
 			}
 
 			case 'video': {
-				return '.mp4';
+				extension = '.mp4';
+				break;
 			}
 		}
 
