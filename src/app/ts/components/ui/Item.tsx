@@ -33,6 +33,14 @@ export class Item extends React.PureComponent<IProps, {}> {
 				<div>
 					<ReactSwipe className="carousel" swipeOptions={{ continuous: false }}>
 						<div>
+							<video
+								autoPlay
+								loop
+								width="100%"
+								src={Utils.getVideoPath(id, videoFiles, EVideoFileSize.LD)}
+							/>
+						</div>
+						<div>
 							<img
 								width="100%"
 								src={Utils.getImagePath(
