@@ -24,10 +24,10 @@ export class Item extends React.PureComponent<IProps, {}> {
 
 		return (
 			<div className={root}>
-				<h3 className={title}>{title}</h3>
+				<h3 className={h3}>{title}</h3>
 				<img
 					className={previewImage}
-					src={Utils.getFilePath(id, `${thumbnail[0].fileName}`)}
+					src={Utils.getFilePath(id, `${thumbnail[0].fileName}.webp`)}
 				/>
 			</div>
 		);
@@ -49,7 +49,7 @@ const previewImage = css`
 	display: block;
 `;
 
-const title = css`
+const h3 = css`
 	padding: 10px 15px;
 	margin: 0;
 `;
