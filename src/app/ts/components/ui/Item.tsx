@@ -10,7 +10,7 @@ interface IProps {
 
 export class Item extends React.PureComponent<IProps, {}> {
 	public render() {
-		const { id, videoFiles } = this.props.item;
+		const { id, videoFiles, title } = this.props.item;
 
 		const thumbnail = videoFiles.filter(
 			videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail,
@@ -24,10 +24,10 @@ export class Item extends React.PureComponent<IProps, {}> {
 
 		return (
 			<div className={root}>
-				<h3 className={title}>{id}</h3>
+				<h3 className={title}>{title}</h3>
 				<img
 					className={previewImage}
-					src={Utils.getFilePath(id, thumbnail[0].fileName)}
+					src={Utils.getFilePath(id, `${thumbnail[0].fileName}`)}
 				/>
 			</div>
 		);

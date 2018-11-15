@@ -11,6 +11,7 @@ export namespace ItemsStore {
 		avgFrameRate: number;
 		duration: number;
 		id: number;
+		title: string;
 		priority: number;
 		processedDate: Date;
 		videoFiles: IVideoFile[];
