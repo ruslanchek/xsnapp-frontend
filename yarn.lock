@@ -1232,6 +1232,10 @@ deep-extend@^0.6.0:
   version "0.6.0"
   resolved "https://npmjs.eoadm.com/deep-extend/-/deep-extend-0.6.0.tgz#c4fa7c95404a17a9c3e8ca7e1537312b736330ac"
 
+deepmerge@^2.0.1:
+  version "2.2.1"
+  resolved "https://npmjs.eoadm.com/deepmerge/-/deepmerge-2.2.1.tgz#5d3ff22a01c00f645405a2fbc17d0778a1801170"
+
 default-gateway@^2.6.0:
   version "2.7.2"
   resolved "https://npmjs.eoadm.com/default-gateway/-/default-gateway-2.7.2.tgz#b7ef339e5e024b045467af403d50348db4642d0f"
@@ -2518,6 +2522,10 @@ lcid@^2.0.0:
   dependencies:
     invert-kv "^2.0.0"
 
+load-script@^1.0.0:
+  version "1.0.0"
+  resolved "https://npmjs.eoadm.com/load-script/-/load-script-1.0.0.tgz#0491939e0bee5643ee494a7e3da3d2bac70c6ca4"
+
 loader-runner@^2.3.0:
   version "2.3.1"
   resolved "https://npmjs.eoadm.com/loader-runner/-/loader-runner-2.3.1.tgz#026f12fe7c3115992896ac02ba022ba92971b979"
@@ -3315,7 +3323,7 @@ prop-types@15.5.10:
     fbjs "^0.8.9"
     loose-envify "^1.3.1"
 
-prop-types@^15.5.4, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
+prop-types@^15.5.4, prop-types@^15.5.6, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1, prop-types@^15.6.2:
   version "15.6.2"
   resolved "https://npmjs.eoadm.com/prop-types/-/prop-types-15.6.2.tgz#05d5ca77b4453e985d60fc7ff8c859094a497102"
   dependencies:
@@ -3515,6 +3523,14 @@ react-localization@^1.0.10:
   dependencies:
     localized-strings "^0.2.00"
     react "^16.0.0"
+
+react-player@^1.6.6:
+  version "1.6.6"
+  resolved "https://npmjs.eoadm.com/react-player/-/react-player-1.6.6.tgz#336de320fc8c0610d8f2292ec16b0056312a1964"
+  dependencies:
+    deepmerge "^2.0.1"
+    load-script "^1.0.0"
+    prop-types "^15.5.6"
 
 react-responsive@^4.1.0:
   version "4.1.0"

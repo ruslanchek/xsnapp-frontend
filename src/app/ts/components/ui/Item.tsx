@@ -4,6 +4,7 @@ import { css } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { Utils } from 'app/ts/lib/Utils';
 import { COLORS } from 'app/ts/theme';
+import { EVideoImageKind, EVideoFileSize } from 'app/ts/enums/video';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -31,19 +32,29 @@ export class Item extends React.PureComponent<IProps, {}> {
 
 				<div>
 					<ReactSwipe className="carousel" swipeOptions={{ continuous: false }}>
+						<div>
+							<img
+								width="100%"
+								src={Utils.getImagePath(
+									id,
+									previews[0].fileName,
+									EVideoImageKind.Preview,
+								)}
+							/>
+						</div>
 						{thumbnails.map((thumbnail, i) => (
 							<div key={i}>
 								<img
+									width="100%"
 									className={previewImage}
-									src={Utils.getFilePath(id, thumbnail.fileName, 'thumbnail')}
+									src={Utils.getImagePath(
+										id,
+										thumbnail.fileName,
+										EVideoImageKind.Thumbnail,
+									)}
 								/>
 							</div>
 						))}
-						<div>
-							<img
-								src={Utils.getFilePath(id, previews[0].fileName, 'preview')}
-							/>
-						</div>
 					</ReactSwipe>
 				</div>
 			</div>
