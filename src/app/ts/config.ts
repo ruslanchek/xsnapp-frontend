@@ -11,8 +11,8 @@ export const API_PATHS = {
 
 export const CONFIG = {
 	API_BASE_URL: 'http://localhost:3031/api',
-	STATIC_PATH: 'https://s13co219wmjazi.cloudfront.net/static',
-	CONTENT_PATH: 'https://s13co219wmjazi.cloudfront.net/content',
+	STATIC_PATH: 'https://d15hjmscxdyus1.cloudfront.net/static',
+	CONTENT_PATH: 'https://d15hjmscxdyus1.cloudfront.net/content',
 	STORAGE: {
 		PREFIX: 'REALTHUB',
 		COOKIES: {
