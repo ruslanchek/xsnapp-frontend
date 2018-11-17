@@ -5,12 +5,21 @@ import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { Utils } from 'app/ts/lib/Utils';
 import { COLORS } from 'app/ts/theme';
 import { EVideoImageKind, EVideoFileSize } from 'app/ts/enums/video';
+import { Image } from './Image';
 
 interface IProps {
 	item: ItemsStore.IItem;
 }
 
-export class Item extends React.PureComponent<IProps, {}> {
+interface IState {
+	current: number;
+}
+
+export class Item extends React.PureComponent<IProps, IState> {
+	public state: IState = {
+		current: 0,
+	};
+
 	public render() {
 		const { id, videoFiles, title } = this.props.item;
 
@@ -24,11 +33,24 @@ export class Item extends React.PureComponent<IProps, {}> {
 
 		return (
 			<div className={root}>
-				<h3 className={h3}>{title}</h3>
+				<h3 className={h3}>
+					{title} {this.state.current}
+				</h3>
 
 				<div>
-					<ReactSwipe className="carousel" swipeOptions={{ continuous: false }}>
-						<div>
+					<ReactSwipe
+						className="carousel"
+						swipeOptions={{
+							continuous: false,
+							callback: (index, elem) => {
+								this.setState({ current: index });
+							},
+							transitionEnd: (index, elem) => {
+								console.log(index, elem);
+							},
+						}}
+					>
+						{/* <div>
 							<img
 								width="100%"
 								src={Utils.getImagePath(
@@ -37,18 +59,19 @@ export class Item extends React.PureComponent<IProps, {}> {
 									EVideoImageKind.Preview,
 								)}
 							/>
-						</div>
+						</div> */}
 						{thumbnails.map((thumbnail, i) => (
-							<div key={i}>
-								<img
-									width="100%"
-									className={previewImage}
-									src={Utils.getImagePath(
-										id,
-										thumbnail.fileName,
-										EVideoImageKind.Thumbnail,
-									)}
-								/>
+							<div key={i} className={frame}>
+								<div className={imageHolder}>
+									<Image
+										show={i === this.state.current}
+										src={Utils.getImagePath(
+											id,
+											thumbnail.fileName,
+											EVideoImageKind.Thumbnail,
+										)}
+									/>
+								</div>
 							</div>
 						))}
 					</ReactSwipe>
@@ -69,8 +92,20 @@ const root = css`
 	}
 `;
 
+const frame = css``;
+
+const imageHolder = css`
+	padding-top: 100%;
+	position: relative;
+`;
+
 const previewImage = css`
 	display: block;
+	object-fit: cover;
+	position: absolute;
+	top: 0;
+	height: 100%;
+	width: 100%;
 `;
 
 const h3 = css`
