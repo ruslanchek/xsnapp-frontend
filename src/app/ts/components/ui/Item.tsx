@@ -23,9 +23,11 @@ export class Item extends React.PureComponent<IProps, IState> {
 	public render() {
 		const { id, videoFiles, title } = this.props.item;
 
-		const thumbnails = videoFiles.filter(
-			videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail,
-		);
+		const thumbnails = videoFiles
+			.filter(videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail)
+			.sort((a, b) => {
+				return a.fileName.localeCompare(b.fileName);
+			});
 
 		const previews = videoFiles.filter(
 			videoFile => videoFile.type === ItemsStore.EFileType.Preview,
