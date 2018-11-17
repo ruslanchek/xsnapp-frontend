@@ -49,7 +49,7 @@ const image = css`
 	height: 100%;
 	width: 100%;
 	opacity: 0;
-	transform: scale(0.98);
+	transform: scale(0.94);
 	transition: transform 0.2s, opacity 0.2s;
 
 	&.active {

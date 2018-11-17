@@ -66,7 +66,11 @@ export class Item extends React.PureComponent<IProps, IState> {
 							<div key={i} className={frame}>
 								<div className={imageHolder}>
 									<Image
-										show={i === this.state.current}
+										show={
+											i === this.state.current ||
+											i === this.state.current - 1 ||
+											i === this.state.current + 1
+										}
 										src={Utils.getImagePath(
 											id,
 											thumbnail.fileName,
