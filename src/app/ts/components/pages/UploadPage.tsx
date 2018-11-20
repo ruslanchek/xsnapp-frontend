@@ -29,9 +29,10 @@ export class UploadPage extends React.Component<IProps, IState> {
 						{(
 							status: EUploadStatus,
 							progress: number,
-							start,
-							clear,
 							selectFile,
+							start,
+							cancel,
+							clear,
 						) => {
 							return (
 								<div>
@@ -56,6 +57,15 @@ export class UploadPage extends React.Component<IProps, IState> {
 											}}
 										>
 											clear
+										</button>
+									</p>
+									<p>
+										<button
+											onClick={() => {
+												cancel();
+											}}
+										>
+											cancel
 										</button>
 									</p>
 								</div>

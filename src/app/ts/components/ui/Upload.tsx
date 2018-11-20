@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { BrowserDetect } from 'app/ts/lib/BrowserDetect';
+import axios from 'axios';
 import { managers } from 'app/ts/managers';
-import { API_PATHS } from 'app/ts/config';
+import { API_PATHS, CONFIG } from 'app/ts/config';
 import { IApiResult, IApiResultItem } from 'app/ts/managers/ApiManager';
 import { css } from 'react-emotion';
 
@@ -39,6 +39,7 @@ export class Upload extends React.PureComponent<IProps, IState> {
 
 	private inputRef = React.createRef<HTMLInputElement>();
 	private formRef = React.createRef<HTMLFormElement>();
+	private cancelToken = null;
 
 	public state: IState = {
 		status: EUploadStatus.Ready,
@@ -105,6 +106,14 @@ export class Upload extends React.PureComponent<IProps, IState> {
 		}
 	};
 
+	private cancel = async () => {
+		if (this.cancelToken && this.state.status === EUploadStatus.Uploading) {
+			await this.cancelToken.cancel('Operation canceled by the user.');
+		}
+
+		this.clear();
+	};
+
 	private resetStatus = () => {
 		this.setState({
 			status: EUploadStatus.Ready,
@@ -127,9 +136,10 @@ export class Upload extends React.PureComponent<IProps, IState> {
 			return children(
 				status,
 				progress,
-				this.start,
-				this.clear,
 				this.selectFile,
+				this.start,
+				this.cancel,
+				this.clear,
 				childProps,
 			);
 		}
@@ -156,27 +166,49 @@ export class Upload extends React.PureComponent<IProps, IState> {
 
 	private async upload(): Promise<IApiResult<IApiResultItem<any>>> {
 		if (this.state.files && this.state.files.length > 0) {
+			const file = this.state.files[0];
+
 			this.setState({
 				status: EUploadStatus.Uploading,
 			});
 
-			const result = await managers.api.upload(
-				API_PATHS.UPLOAD,
-				this.state.files[0],
-				(loaded: number, total: number, time: number) => {
-					const progress = loaded / (total / 100);
+			const formData = new FormData();
+			const url: string = `${CONFIG.API_BASE_URL}${API_PATHS.UPLOAD}`;
+			let token: string = managers.storage.cookies.get('token');
+
+			token = token ? `Bearer ${token}` : '';
+
+			formData.append('file', file);
+
+			this.cancelToken = axios.CancelToken.source();
+
+			const result = await axios.post(url, formData, {
+				cancelToken: this.cancelToken.token,
+				headers: {
+					Authorization: token,
+					'Content-Type': 'multipart/form-data',
+				},
+				onUploadProgress: progressEvent => {
+					const progress = progressEvent.loaded / (progressEvent.total / 100);
 
 					this.setState({
 						progress,
 					});
 				},
-			);
+			});
 
-			return result;
+			if (result && result.data) {
+				return result.data;
+			} else {
+				return {
+					data: null,
+					error: null,
+				};
+			}
 		} else {
 			return {
 				data: null,
-				error: 'No file',
+				error: 'NO_FILE',
 			};
 		}
 	}

@@ -41,45 +41,6 @@ export class ApiManager extends Manager {
 		});
 	}
 
-	public async upload(
-		path: string,
-		file: File,
-		onProgress: (loaded: number, total: number, timestamp: number) => void,
-	): Promise<IApiResult<any>> {
-		const formData = new FormData();
-		const url: string = `${CONFIG.API_BASE_URL}${path}`;
-		let token: string = managers.storage.cookies.get('token');
-
-		token = token ? `Bearer ${token}` : '';
-
-		formData.append('file', file);
-
-		const result = await axios.post(url, formData, {
-			headers: {
-				Authorization: token,
-				'Content-Type': 'multipart/form-data',
-			},
-			onUploadProgress: progressEvent => {
-				console.log(progressEvent);
-
-				onProgress(
-					progressEvent.loaded,
-					progressEvent.total,
-					progressEvent.timeStamp,
-				);
-			},
-		});
-
-		if (result && result.data) {
-			return result.data;
-		} else {
-			return {
-				data: null,
-				error: null,
-			};
-		}
-	}
-
 	public async request<ResultPayload>(
 		type: EApiRequestType,
 		path: string,
