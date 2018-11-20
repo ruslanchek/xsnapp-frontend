@@ -79,7 +79,7 @@ export class Page extends React.Component<IProps, IState> {
 					!AuthStore.store.state.profile ||
 					!AuthStore.store.state.authorized
 				) {
-					url = PATHS.AUTH_LOG_IN;
+					url = PATHS.AUTH_LOGIN;
 				}
 				break;
 			}

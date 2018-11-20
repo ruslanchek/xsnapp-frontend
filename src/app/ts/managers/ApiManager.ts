@@ -24,12 +24,12 @@ export interface IApiResultCreate {
 	id: number;
 }
 
-export interface IApiResultList<Entity> {
-	list: Entity[];
+export interface IApiResultItems<Entity> {
+	items: Entity[];
 }
 
-export interface IApiResultOne<Entity> {
-	entity: Entity;
+export interface IApiResultItem<Entity> {
+	item: Entity;
 }
 
 export class ApiManager extends Manager {
@@ -39,6 +39,45 @@ export class ApiManager extends Manager {
 		return new Promise<any>((resolve, reject) => {
 			resolve();
 		});
+	}
+
+	public async upload(
+		path: string,
+		file: File,
+		onProgress: (loaded: number, total: number, timestamp: number) => void,
+	): Promise<IApiResult<any>> {
+		const formData = new FormData();
+		const url: string = `${CONFIG.API_BASE_URL}${path}`;
+		let token: string = managers.storage.cookies.get('token');
+
+		token = token ? `Bearer ${token}` : '';
+
+		formData.append('file', file);
+
+		const result = await axios.post(url, formData, {
+			headers: {
+				Authorization: token,
+				'Content-Type': 'multipart/form-data',
+			},
+			onUploadProgress: progressEvent => {
+				console.log(progressEvent);
+
+				onProgress(
+					progressEvent.loaded,
+					progressEvent.total,
+					progressEvent.timeStamp,
+				);
+			},
+		});
+
+		if (result && result.data) {
+			return result.data;
+		} else {
+			return {
+				data: null,
+				error: null,
+			};
+		}
 	}
 
 	public async request<ResultPayload>(

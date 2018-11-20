@@ -1,12 +1,15 @@
 export const PATHS = {
 	HOME: '/',
-	AUTH_LOG_IN: '/auth/log-in',
+	AUTH_LOGIN: '/auth/login',
+	UPLOAD: '/upload',
 };
 
 export const API_PATHS = {
 	GET_ITEMS: '/items',
 	GET_PROFILE: '/profile',
-	AUTH_LOG_IN: '/auth/log-in',
+	AUTH_LOGIN: '/auth/login',
+	AUTH_REGISTER: '/auth/register',
+	UPLOAD: '/upload',
 };
 
 export const CONFIG = {

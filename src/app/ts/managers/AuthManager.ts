@@ -46,14 +46,14 @@ export class AuthManager extends Manager {
 	}
 
 	public async login(
-		email: string,
+		username: string,
 		password: string,
 	): Promise<IApiResult<any>> {
 		const result = await managers.api.request<any>(
 			EApiRequestType.POST,
-			API_PATHS.AUTH_LOG_IN,
+			API_PATHS.AUTH_LOGIN,
 			{
-				email,
+				username,
 				password,
 			},
 		);
@@ -67,14 +67,14 @@ export class AuthManager extends Manager {
 	}
 
 	public async signUp(
-		email: string,
+		username: string,
 		password: string,
 	): Promise<IApiResult<any>> {
 		const result = await managers.api.request<any>(
 			EApiRequestType.POST,
 			'/auth/register',
 			{
-				email,
+				username,
 				password,
 			},
 		);

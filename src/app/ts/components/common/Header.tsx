@@ -1,10 +1,23 @@
 import * as React from 'react';
 import { css } from 'react-emotion';
 import { COLORS, THEME } from 'app/ts/theme';
+import { Link } from 'react-router-dom';
+import { PATHS } from 'app/ts/config';
+import { followStore } from 'react-stores';
+import { AuthStore } from 'app/ts/stores/AuthStore';
 
+@followStore(AuthStore.store)
 export class Header extends React.PureComponent<{}, {}> {
 	public render() {
-		return <header className={header} />;
+		return (
+			<header className={header}>
+				{AuthStore.store.state.authorized ? (
+					<Link to={PATHS.UPLOAD}>Upload</Link>
+				) : (
+					<Link to={PATHS.AUTH_LOGIN}>Auth</Link>
+				)}
+			</header>
+		);
 	}
 }
 
