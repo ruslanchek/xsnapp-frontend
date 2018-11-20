@@ -102,7 +102,11 @@ export class Upload extends React.PureComponent<IProps, IState> {
 
 	private start = async () => {
 		if (this.state.status === EUploadStatus.FileSelected) {
-			await this.upload();
+			try {
+				await this.upload();
+			} catch (e) {
+				console.log(e);
+			}
 		}
 	};
 
