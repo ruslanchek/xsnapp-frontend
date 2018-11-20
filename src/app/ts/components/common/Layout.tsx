@@ -15,7 +15,7 @@ export class Layout extends React.PureComponent<{}, {}> {
 }
 
 const root = css`
-	height: 100vh;
+	height: calc(100vh - ${THEME.HEADER_HEIGHT}px);
 	width: 100vw;
 	padding-top: ${THEME.HEADER_HEIGHT}px;
 `;
