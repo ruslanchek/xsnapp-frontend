@@ -26,9 +26,9 @@ const applyGlobal = () => injectGlobal`
 	body {
 		font-family: ${THEME.FONT};
 		font-size: ${THEME.FONT_SIZE_REGULAR}px;
-		color: ${COLORS.BLACK.toString()};
+		color: ${COLORS.WHITE.toString()};
 		margin: 0;
-		background-color: ${COLORS.WHITE.toString()};
+		background-color: ${COLORS.BLACK.toString()};
 	}
 `;
 

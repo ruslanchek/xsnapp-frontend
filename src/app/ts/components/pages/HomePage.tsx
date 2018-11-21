@@ -47,5 +47,5 @@ export class HomePage extends React.Component<IProps, IState> {
 }
 
 const root = css`
-	padding: 15px;
+	padding: 10px;
 `;

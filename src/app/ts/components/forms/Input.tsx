@@ -174,18 +174,18 @@ const input = css`
 	height: ${THEME.INPUT_HEIGHT}px;
 	line-height: ${THEME.INPUT_HEIGHT}px;
 	font-size: ${THEME.FONT_SIZE_REGULAR}px;
-	border: 1px solid ${COLORS.GRAY_DARK.darken(0.05).toString()};
+	border: 1px solid ${COLORS.GRAY.darken(0.05).toString()};
 	font-weight: 600;
 	color: ${COLORS.BLACK.toString()};
 	transition: border-color 0.2s;
 	box-sizing: border-box;
 
 	&:hover {
-		border-color: ${COLORS.GRAY_DARK.darken(0.1).toString()};
+		border-color: ${COLORS.GRAY.darken(0.1).toString()};
 	}
 
 	&:focus {
-		border-color: ${COLORS.GRAY_DARK.darken(0.15).toString()};
+		border-color: ${COLORS.GRAY.darken(0.15).toString()};
 	}
 `;
 

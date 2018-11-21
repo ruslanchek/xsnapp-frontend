@@ -3,9 +3,10 @@ import * as ReactSwipe from 'react-swipe';
 import { css } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { Utils } from 'app/ts/lib/Utils';
-import { COLORS } from 'app/ts/theme';
+import { COLORS, THEME } from 'app/ts/theme';
 import { EVideoImageKind, EVideoFileSize } from 'app/ts/enums/video';
 import { Image } from './Image';
+import { Avatar } from './Avatar';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -35,9 +36,22 @@ export class Item extends React.PureComponent<IProps, IState> {
 
 		return (
 			<div className={root}>
-				<h3 className={h3}>
-					{title} {this.state.current}
-				</h3>
+				<div className={header}>
+					<div className={ava}>
+						<Avatar
+							size={36}
+							src="https://randomuser.me/api/portraits/men/51.jpg"
+						/>
+					</div>
+
+					<div className={titleBlock}>
+						<h3 className={h3}>
+							{title} {this.state.current}
+						</h3>
+
+						<span className={username}>SuperUsername</span>
+					</div>
+				</div>
 
 				<div>
 					<ReactSwipe
@@ -90,8 +104,8 @@ export class Item extends React.PureComponent<IProps, IState> {
 const root = css`
 	border-radius: 3px;
 	overflow: hidden;
-	background-color: ${COLORS.GRAY_LIGHT.toString()};
-	margin-top: 20px;
+	background-color: ${COLORS.BLACK_LIGHT.toString()};
+	margin-top: 10px;
 
 	&:first-of-type {
 		margin-top: 0;
@@ -105,16 +119,27 @@ const imageHolder = css`
 	position: relative;
 `;
 
-const previewImage = css`
-	display: block;
-	object-fit: cover;
-	position: absolute;
-	top: 0;
-	height: 100%;
-	width: 100%;
+const h3 = css`
+	margin: 0;
+	font-weight: 800;
 `;
 
-const h3 = css`
+const username = css`
+	font-size: ${THEME.FONT_SIZE_SMALL};
+	color: ${COLORS.GRAY.toString()};
+`;
+
+const header = css`
+	display: flex;
 	padding: 10px 15px;
-	margin: 0;
+	justify-content: flex-start;
+	align-items: center;
+`;
+
+const titleBlock = css``;
+
+const ava = css`
+	overflow: hidden;
+	border-radius: 20px;
+	margin-right: 10px;
 `;
