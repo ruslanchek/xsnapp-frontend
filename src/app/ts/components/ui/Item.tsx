@@ -7,6 +7,14 @@ import { COLORS, THEME } from 'app/ts/theme';
 import { EVideoImageKind, EVideoFileSize } from 'app/ts/enums/video';
 import { Image } from './Image';
 import { Avatar } from './Avatar';
+import {
+	ArrowUpwardRounded,
+	ChatTwoTone,
+	FavoriteTwoTone,
+	ShareTwoTone,
+	MoreHoriz,
+	RemoveRedEyeRounded,
+} from '@material-ui/icons';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -39,17 +47,26 @@ export class Item extends React.PureComponent<IProps, IState> {
 				<div className={header}>
 					<div className={ava}>
 						<Avatar
-							size={36}
+							size={42}
 							src="https://randomuser.me/api/portraits/men/51.jpg"
 						/>
 					</div>
 
 					<div className={titleBlock}>
-						<h3 className={h3}>
-							{title} {this.state.current}
-						</h3>
+						<div className={titleTop}>
+							<h3 className={h3}>
+								{title} {this.state.current}
+							</h3>
+							<MoreHoriz />
+						</div>
 
-						<span className={username}>SuperUsername</span>
+						<div className={titleBottom}>
+							<span className={username}>SuperUsername</span>
+							<div className={views}>
+								<span className="count">84</span>
+								<RemoveRedEyeRounded fontSize={'inherit'} />
+							</div>
+						</div>
 					</div>
 				</div>
 
@@ -66,16 +83,6 @@ export class Item extends React.PureComponent<IProps, IState> {
 							},
 						}}
 					>
-						{/* <div>
-							<img
-								width="100%"
-								src={Utils.getImagePath(
-									id,
-									previews[0].fileName,
-									EVideoImageKind.Preview,
-								)}
-							/>
-						</div> */}
 						{thumbnails.map((thumbnail, i) => (
 							<div key={i} className={frame}>
 								<div className={imageHolder}>
@@ -95,6 +102,41 @@ export class Item extends React.PureComponent<IProps, IState> {
 							</div>
 						))}
 					</ReactSwipe>
+				</div>
+
+				<div className={content}>
+					Lorem Ipsum is simply dummy text of the printing and typesetting
+					industry. Lorem Ipsum has been the industry's standard dummy text ever
+					since the 1500s, when an unknown printer took a galley of type and
+					scrambled it to make a type specimen book1.
+				</div>
+
+				<div className={actions}>
+					<div className={actionButton}>
+						<ArrowUpwardRounded className={actionButtonIcon} />
+						71
+					</div>
+
+					<div className={actionButton}>
+						<ChatTwoTone
+							style={{ top: '.05em' }}
+							className={actionButtonIcon}
+						/>
+						Comments
+					</div>
+
+					<div className={actionButton}>
+						<FavoriteTwoTone
+							style={{ top: '.05em' }}
+							className={actionButtonIcon}
+						/>
+						14
+					</div>
+
+					<div className={actionButton}>
+						<ShareTwoTone className={actionButtonIcon} />
+						Share
+					</div>
 				</div>
 			</div>
 		);
@@ -122,6 +164,19 @@ const imageHolder = css`
 const h3 = css`
 	margin: 0;
 	font-weight: 800;
+	color: ${COLORS.GRAY_LIGHT.toString()};
+`;
+
+const titleTop = css`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+const titleBottom = css`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
 `;
 
 const username = css`
@@ -131,15 +186,54 @@ const username = css`
 
 const header = css`
 	display: flex;
-	padding: 10px 15px;
-	justify-content: flex-start;
+	padding: 10px;
+	justify-content: space-between;
 	align-items: center;
 `;
 
-const titleBlock = css``;
+const titleBlock = css`
+	flex-grow: 1;
+`;
 
 const ava = css`
 	overflow: hidden;
 	border-radius: 20px;
 	margin-right: 10px;
+`;
+
+const content = css`
+	padding: 10px;
+	font-size: ${THEME.FONT_SIZE_SMALL};
+	color: ${COLORS.GRAY_LIGHT.toString()};
+`;
+
+const actions = css`
+	padding: 10px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+`;
+
+const actionButton = css`
+	display: flex;
+	align-items: center;
+	font-weight: 800;
+	color: ${COLORS.GRAY_LIGHT.toString()};
+`;
+
+const actionButtonIcon = css`
+	margin-right: 0.4ex;
+	position: relative;
+`;
+
+const views = css`
+	font-size: ${THEME.FONT_SIZE_SMALL}px;
+	font-weight: 800;
+	color: ${COLORS.GRAY.toString()};
+	display: flex;
+	align-items: center;
+
+	.count {
+		margin-right: 0.6ex;
+	}
 `;

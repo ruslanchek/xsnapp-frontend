@@ -3,6 +3,7 @@ import { css } from 'emotion';
 
 export const COLORS = {
 	GRAY: Color('#A5AEC1'),
+	GRAY_LIGHT: Color('#E2E5E9'),
 	WHITE: Color('#FFFFFF'),
 	BLACK: Color('#212123'),
 	BLACK_LIGHT: Color('#33353A'),
