@@ -1,8 +1,9 @@
 export enum EVideoFileExtension {
 	Webp = '.webp',
-	Jpg = '.jpg',
+	Jpeg = '.jpg',
 	Gif = '.gif',
 	Mp4 = '.mp4',
+	Image = 'image',
 }
 
 export enum EVideoImageKind {

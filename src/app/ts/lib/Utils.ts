@@ -21,7 +21,7 @@ export class Utils {
 			}
 
 			case EVideoImageKind.Thumbnail: {
-				extension = EVideoFileExtension.Webp;
+				extension = EVideoFileExtension.Image;
 				break;
 			}
 		}

@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { css, cx } from 'react-emotion';
+import { EVideoFileExtension } from 'app/ts/enums/video';
 
 interface IProps {
 	src: string;
 	show: boolean;
+	title: string;
 }
 
 interface IState {
@@ -18,34 +20,58 @@ export class Image extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		if (!this.props.show) {
+		const { title, show, src } = this.props;
+		const { loaded, error } = this.state;
+		const webp = src.replace(
+			EVideoFileExtension.Image,
+			EVideoFileExtension.Webp,
+		);
+		const jpeg = src.replace(
+			EVideoFileExtension.Image,
+			EVideoFileExtension.Jpeg,
+		);
+
+		if (!show) {
 			return null;
 		}
 
 		return (
-			<img
-				onLoad={() =>
-					this.setState({
-						loaded: true,
-					})
-				}
-				onError={() =>
-					this.setState({
-						error: true,
-					})
-				}
-				className={cx(image, this.state.loaded ? 'active' : '')}
-				src={this.props.src}
-			/>
+			<div className={imageContainer}>
+				<div className={loading}>Loading...</div>
+				<picture>
+					<source srcSet={webp} type="image/webp" />
+					<source srcSet={jpeg} type="image/jpeg" />
+					<img
+						className={cx(img, loaded ? 'active' : '')}
+						src={jpeg}
+						alt={title}
+						onLoad={() =>
+							this.setState({
+								loaded: true,
+							})
+						}
+						onError={() =>
+							this.setState({
+								error: true,
+							})
+						}
+					/>
+				</picture>
+			</div>
 		);
 	}
 }
 
-const image = css`
-	display: block;
-	object-fit: cover;
+const imageContainer = css`
 	position: absolute;
 	top: 0;
+	height: 100%;
+	width: 100%;
+`;
+
+const img = css`
+	display: block;
+	object-fit: cover;
 	height: 100%;
 	width: 100%;
 	opacity: 0;
@@ -56,4 +82,11 @@ const image = css`
 		transform: scale(1);
 		opacity: 1;
 	}
+`;
+
+const loading = css`
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
 `;

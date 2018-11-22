@@ -70,7 +70,7 @@ export class Item extends React.PureComponent<IProps, IState> {
 					</div>
 				</div>
 
-				<div>
+				<div className={gallery}>
 					<ReactSwipe
 						className="carousel"
 						swipeOptions={{
@@ -87,6 +87,7 @@ export class Item extends React.PureComponent<IProps, IState> {
 							<div key={i} className={frame}>
 								<div className={imageHolder}>
 									<Image
+										title={title}
 										show={
 											i === this.state.current ||
 											i === this.state.current - 1 ||
@@ -113,28 +114,25 @@ export class Item extends React.PureComponent<IProps, IState> {
 
 				<div className={actions}>
 					<div className={actionButton}>
-						<ArrowUpwardRounded className={actionButtonIcon} />
+						<ArrowUpwardRounded
+							className={actionButtonIcon}
+							fontSizeAdjust={14}
+						/>
 						71
 					</div>
 
 					<div className={actionButton}>
-						<ChatTwoTone
-							style={{ top: '.05em' }}
-							className={actionButtonIcon}
-						/>
+						<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
 						Comments
 					</div>
 
 					<div className={actionButton}>
-						<FavoriteTwoTone
-							style={{ top: '.05em' }}
-							className={actionButtonIcon}
-						/>
+						<FavoriteTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
 						14
 					</div>
 
 					<div className={actionButton}>
-						<ShareTwoTone className={actionButtonIcon} />
+						<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
 						Share
 					</div>
 				</div>
@@ -199,6 +197,7 @@ const ava = css`
 	overflow: hidden;
 	border-radius: 20px;
 	margin-right: 10px;
+	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
 `;
 
 const content = css`
@@ -224,6 +223,7 @@ const actionButton = css`
 const actionButtonIcon = css`
 	margin-right: 0.4ex;
 	position: relative;
+	font-size: 20px;
 `;
 
 const views = css`
@@ -236,4 +236,8 @@ const views = css`
 	.count {
 		margin-right: 0.6ex;
 	}
+`;
+
+const gallery = css`
+	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
 `;
