@@ -29,7 +29,13 @@ const DISABLED_INPUT_STATUSES = [
 	EUploadStatus.Done,
 ];
 
-const VALID_TYPES: string[] = ['video/mp4'];
+const VALID_TYPES: string[] = [
+	'video/mp4',
+	'video/quicktime',
+	'video/3gpp2',
+	'video/x-m4v',
+	'video/webm',
+];
 const MAX_SIZE: number = 10 * 1024 * 1024 * 1024; // 10 MB
 
 export class Upload extends React.PureComponent<IProps, IState> {
