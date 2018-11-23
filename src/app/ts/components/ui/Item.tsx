@@ -47,43 +47,42 @@ export class Item extends React.PureComponent<IProps, IState> {
 		);
 
 		return (
-			<VisibilitySensor
-				partialVisibility={'top'}
-				scrollCheck={true}
-				resizeCheck={true}
-				onClange={isVisible =>
-					this.setState({
-						isVisible,
-					})
-				}
-			>
-				<div className={root}>
-					<div className={header}>
-						<div className={ava}>
-							<Avatar
-								size={45}
-								src="https://randomuser.me/api/portraits/men/51.jpg"
-							/>
+			<div className={root}>
+				<div className={header}>
+					<div className={ava}>
+						<Avatar
+							size={45}
+							src="https://randomuser.me/api/portraits/men/51.jpg"
+						/>
+					</div>
+
+					<div className={titleBlock}>
+						<div className={titleTop}>
+							<h3 className={h3}>
+								{title} {current} {isVisible.toString()}
+							</h3>
+							<MoreHoriz className={more} />
 						</div>
 
-						<div className={titleBlock}>
-							<div className={titleTop}>
-								<h3 className={h3}>
-									{title} {current} {isVisible.toString()}
-								</h3>
-								<MoreHoriz className={more} />
-							</div>
-
-							<div className={titleBottom}>
-								<span className={username}>SuperUsername</span>
-								<div className={views}>
-									<span className="count">84</span>
-									<RemoveRedEyeRounded fontSize={'inherit'} />
-								</div>
+						<div className={titleBottom}>
+							<span className={username}>SuperUsername</span>
+							<div className={views}>
+								<span className="count">84</span>
+								<RemoveRedEyeRounded fontSize={'inherit'} />
 							</div>
 						</div>
 					</div>
+				</div>
 
+				<VisibilitySensor
+					scrollCheck={true}
+					resizeCheck={true}
+					onChange={isVisible =>
+						this.setState({
+							isVisible,
+						})
+					}
+				>
 					<div className={gallery}>
 						<ReactSwipe
 							className="carousel"
@@ -119,48 +118,45 @@ export class Item extends React.PureComponent<IProps, IState> {
 							))}
 						</ReactSwipe>
 					</div>
+				</VisibilitySensor>
 
-					{tags && tags.length > 0 && (
-						<div className={tagsBlock}>
-							{tags.map(tag => (
-								<a className="tag" href="#">
-									#{tag}
-								</a>
-							))}
-						</div>
-					)}
+				{tags && tags.length > 0 && (
+					<div className={tagsBlock}>
+						{tags.map((tag, i) => (
+							<a key={i} className="tag" href="#">
+								#{tag}
+							</a>
+						))}
+					</div>
+				)}
 
-					<div className={content}>{description}</div>
+				<div className={content}>{description}</div>
 
-					<div className={actions}>
-						<div className={actionButton}>
-							<ArrowUpwardRounded
-								className={actionButtonIcon}
-								fontSizeAdjust={14}
-							/>
-							71
-						</div>
+				<div className={actions}>
+					<div className={actionButton}>
+						<ArrowUpwardRounded
+							className={actionButtonIcon}
+							fontSizeAdjust={14}
+						/>
+						71
+					</div>
 
-						<div className={actionButton}>
-							<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
-							Comments
-						</div>
+					<div className={actionButton}>
+						<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
+						Comments
+					</div>
 
-						<div className={actionButton}>
-							<FavoriteTwoTone
-								className={actionButtonIcon}
-								fontSizeAdjust={14}
-							/>
-							14
-						</div>
+					<div className={actionButton}>
+						<FavoriteTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
+						14
+					</div>
 
-						<div className={actionButton}>
-							<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
-							Share
-						</div>
+					<div className={actionButton}>
+						<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
+						Share
 					</div>
 				</div>
-			</VisibilitySensor>
+			</div>
 		);
 	}
 }
@@ -242,7 +238,7 @@ const actionButton = css`
 const actionButtonIcon = css`
 	margin-right: 0.4ex;
 	position: relative;
-	font-size: 20px;
+	font-size: 18px;
 `;
 
 const views = css`
