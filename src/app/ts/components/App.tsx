@@ -31,6 +31,18 @@ const applyGlobal = () => injectGlobal`
 		background-color: ${COLORS.BLACK.toString()};
 		line-height: 1.4;
 	}
+	
+	a {
+		text-decoration: none;
+	}
+
+	a:link, a.visited {
+		color: ${COLORS.GREEN.toString()};
+	}
+
+	a:hover, a.active {
+		color: ${COLORS.GREEN.lighten(0.5).toString()};
+	}
 `;
 
 @followStore(StateStore.store)

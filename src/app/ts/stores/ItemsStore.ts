@@ -15,6 +15,8 @@ export namespace ItemsStore {
 		priority: number;
 		processedDate: Date;
 		videoFiles: IVideoFile[];
+		description: string;
+		tags: string[];
 	}
 
 	export interface IVideoFile {

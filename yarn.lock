@@ -3767,6 +3767,12 @@ react-transition-group@^2.2.1, react-transition-group@^2.3.1, react-transition-g
     prop-types "^15.6.2"
     react-lifecycles-compat "^3.0.4"
 
+react-visibility-sensor@^5.0.2:
+  version "5.0.2"
+  resolved "https://npmjs.eoadm.com/react-visibility-sensor/-/react-visibility-sensor-5.0.2.tgz#e360fff81572cb3a2a9fd680484447a9da09a55d"
+  dependencies:
+    prop-types "^15.6.2"
+
 react@15.4.2:
   version "15.4.2"
   resolved "https://npmjs.eoadm.com/react/-/react-15.4.2.tgz#41f7991b26185392ba9bae96c8889e7e018397ef"

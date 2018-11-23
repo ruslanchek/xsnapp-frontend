@@ -19,26 +19,43 @@ export class Avatar extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
+		const { size, src } = this.props;
+		const { loaded, error } = this.state;
+
 		return (
-			<img
-				width={this.props.size}
-				height={this.props.size}
-				onLoad={() =>
-					this.setState({
-						loaded: true,
-					})
-				}
-				onError={() =>
-					this.setState({
-						error: true,
-					})
-				}
-				className={cx(image, this.state.loaded ? 'active' : '')}
-				src={this.props.src}
-			/>
+			<div
+				className={root}
+				style={{
+					minWidth: size,
+					minHeight: size,
+				}}
+			>
+				<img
+					width={size}
+					height={size}
+					onLoad={() =>
+						this.setState({
+							loaded: true,
+						})
+					}
+					onError={() =>
+						this.setState({
+							error: true,
+						})
+					}
+					className={cx(image, loaded ? 'active' : '')}
+					src={src}
+				/>
+			</div>
 		);
 	}
 }
+
+const root = css`
+	overflow: hidden;
+	border-radius: 50%;
+	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
+`;
 
 const image = css`
 	display: block;

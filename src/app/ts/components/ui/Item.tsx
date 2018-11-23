@@ -1,5 +1,6 @@
 import * as React from 'react';
 import * as ReactSwipe from 'react-swipe';
+import VisibilitySensor from 'react-visibility-sensor';
 import { css } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { Utils } from 'app/ts/lib/Utils';
@@ -22,15 +23,18 @@ interface IProps {
 
 interface IState {
 	current: number;
+	isVisible: boolean;
 }
 
 export class Item extends React.PureComponent<IProps, IState> {
 	public state: IState = {
 		current: 0,
+		isVisible: false,
 	};
 
 	public render() {
-		const { id, videoFiles, title } = this.props.item;
+		const { id, videoFiles, title, description, tags } = this.props.item;
+		const { isVisible, current } = this.state;
 
 		const thumbnails = videoFiles
 			.filter(videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail)
@@ -43,100 +47,120 @@ export class Item extends React.PureComponent<IProps, IState> {
 		);
 
 		return (
-			<div className={root}>
-				<div className={header}>
-					<div className={ava}>
-						<Avatar
-							size={42}
-							src="https://randomuser.me/api/portraits/men/51.jpg"
-						/>
-					</div>
-
-					<div className={titleBlock}>
-						<div className={titleTop}>
-							<h3 className={h3}>
-								{title} {this.state.current}
-							</h3>
-							<MoreHoriz />
+			<VisibilitySensor
+				partialVisibility={'top'}
+				scrollCheck={true}
+				resizeCheck={true}
+				onClange={isVisible =>
+					this.setState({
+						isVisible,
+					})
+				}
+			>
+				<div className={root}>
+					<div className={header}>
+						<div className={ava}>
+							<Avatar
+								size={45}
+								src="https://randomuser.me/api/portraits/men/51.jpg"
+							/>
 						</div>
 
-						<div className={titleBottom}>
-							<span className={username}>SuperUsername</span>
-							<div className={views}>
-								<span className="count">84</span>
-								<RemoveRedEyeRounded fontSize={'inherit'} />
+						<div className={titleBlock}>
+							<div className={titleTop}>
+								<h3 className={h3}>
+									{title} {current} {isVisible.toString()}
+								</h3>
+								<MoreHoriz className={more} />
 							</div>
-						</div>
-					</div>
-				</div>
 
-				<div className={gallery}>
-					<ReactSwipe
-						className="carousel"
-						swipeOptions={{
-							continuous: false,
-							callback: (index, elem) => {
-								this.setState({ current: index });
-							},
-							transitionEnd: (index, elem) => {
-								console.log(index, elem);
-							},
-						}}
-					>
-						{thumbnails.map((thumbnail, i) => (
-							<div key={i} className={frame}>
-								<div className={imageHolder}>
-									<Image
-										title={title}
-										show={
-											i === this.state.current ||
-											i === this.state.current - 1 ||
-											i === this.state.current + 1
-										}
-										src={Utils.getImagePath(
-											id,
-											thumbnail.fileName,
-											EVideoImageKind.Thumbnail,
-										)}
-									/>
+							<div className={titleBottom}>
+								<span className={username}>SuperUsername</span>
+								<div className={views}>
+									<span className="count">84</span>
+									<RemoveRedEyeRounded fontSize={'inherit'} />
 								</div>
 							</div>
-						))}
-					</ReactSwipe>
+						</div>
+					</div>
+
+					<div className={gallery}>
+						<ReactSwipe
+							className="carousel"
+							swipeOptions={{
+								continuous: false,
+								callback: (index, elem) => {
+									this.setState({ current: index });
+								},
+								transitionEnd: (index, elem) => {
+									console.log(index, elem);
+								},
+							}}
+						>
+							{thumbnails.map((thumbnail, i) => (
+								<div key={i} className={frame}>
+									<div className={imageHolder}>
+										<Image
+											title={title}
+											show={
+												isVisible &&
+												(i === this.state.current ||
+													i === this.state.current - 1 ||
+													i === this.state.current + 1)
+											}
+											src={Utils.getImagePath(
+												id,
+												thumbnail.fileName,
+												EVideoImageKind.Thumbnail,
+											)}
+										/>
+									</div>
+								</div>
+							))}
+						</ReactSwipe>
+					</div>
+
+					{tags && tags.length > 0 && (
+						<div className={tagsBlock}>
+							{tags.map(tag => (
+								<a className="tag" href="#">
+									#{tag}
+								</a>
+							))}
+						</div>
+					)}
+
+					<div className={content}>{description}</div>
+
+					<div className={actions}>
+						<div className={actionButton}>
+							<ArrowUpwardRounded
+								className={actionButtonIcon}
+								fontSizeAdjust={14}
+							/>
+							71
+						</div>
+
+						<div className={actionButton}>
+							<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
+							Comments
+						</div>
+
+						<div className={actionButton}>
+							<FavoriteTwoTone
+								className={actionButtonIcon}
+								fontSizeAdjust={14}
+							/>
+							14
+						</div>
+
+						<div className={actionButton}>
+							<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
+							Share
+						</div>
+					</div>
 				</div>
-
-				<div className={content}>
-					Lorem Ipsum is simply dummy text of the printing and typesetting
-					industry. Lorem Ipsum has been the industry's standard dummy text ever
-					since the 1500s, when an unknown printer took a galley of type and
-					scrambled it to make a type specimen book1.
-				</div>
-
-				<div className={actions}>
-					<div className={actionButton}>
-						<ArrowUpwardRounded
-							className={actionButtonIcon}
-							fontSizeAdjust={14}
-						/>
-						71
-					</div>
-
-					<div className={actionButton}>
-						<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
-						Comments
-					</div>
-
-					<div className={actionButton}>
-						<FavoriteTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
-						14
-					</div>
-
-					<div className={actionButton}>
-						<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
-						Share
-					</div>
-				</div>
-			</div>
+			</VisibilitySensor>
 		);
 	}
 }
@@ -168,7 +192,7 @@ const h3 = css`
 const titleTop = css`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
+	align-items: top;
 `;
 
 const titleBottom = css`
@@ -178,7 +202,6 @@ const titleBottom = css`
 `;
 
 const username = css`
-	font-size: ${THEME.FONT_SIZE_SMALL};
 	color: ${COLORS.GRAY.toString()};
 `;
 
@@ -186,7 +209,7 @@ const header = css`
 	display: flex;
 	padding: 10px;
 	justify-content: space-between;
-	align-items: center;
+	align-items: top;
 `;
 
 const titleBlock = css`
@@ -194,15 +217,11 @@ const titleBlock = css`
 `;
 
 const ava = css`
-	overflow: hidden;
-	border-radius: 20px;
 	margin-right: 10px;
-	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
 `;
 
 const content = css`
 	padding: 10px;
-	font-size: ${THEME.FONT_SIZE_SMALL};
 	color: ${COLORS.GRAY_LIGHT.toString()};
 `;
 
@@ -227,11 +246,11 @@ const actionButtonIcon = css`
 `;
 
 const views = css`
-	font-size: ${THEME.FONT_SIZE_SMALL}px;
 	font-weight: 800;
 	color: ${COLORS.GRAY.toString()};
 	display: flex;
 	align-items: center;
+	margin-left: 10px;
 
 	.count {
 		margin-right: 0.6ex;
@@ -240,4 +259,16 @@ const views = css`
 
 const gallery = css`
 	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
+`;
+
+const more = css`
+	margin-left: 10px;
+`;
+
+const tagsBlock = css`
+	padding: 10px 10px 0;
+
+	> .tag {
+		margin-right: 1ex;
+	}
 `;
