@@ -5,7 +5,7 @@ import { EApiRequestType } from 'app/ts/managers/ApiManager';
 import { API_PATHS, CONFIG } from 'app/ts/config';
 import { Layout } from '../common/Layout';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
-import { Item } from '../ui/Item';
+import { ListItem } from '../ui/ListItem';
 import { css } from 'react-emotion';
 
 interface IProps {}
@@ -38,7 +38,7 @@ export class HomePage extends React.Component<IProps, IState> {
 			<Layout>
 				<main className={root}>
 					{this.state.items.map((item, i) => {
-						return <Item item={item} key={i} />;
+						return <ListItem item={item} key={i} />;
 					})}
 				</main>
 			</Layout>

@@ -1,17 +1,6 @@
 import * as React from 'react';
-import { followStore } from 'react-stores';
-import { managers } from 'app/ts/managers';
-import { EApiRequestType } from 'app/ts/managers/ApiManager';
-import { API_PATHS, CONFIG, PATHS } from 'app/ts/config';
 import { Layout } from '../common/Layout';
-import { ItemsStore } from 'app/ts/stores/ItemsStore';
-import { Item } from '../ui/Item';
 import { css } from 'react-emotion';
-import { Form, EFormValidateOn, IFormModelOutput } from '../forms/Form';
-import { Input } from '../forms/Input';
-import { ValidatorIsEmail } from '../forms/Validators/ValidatorIsEmail';
-import { Validator } from '../forms/Validators/Validator';
-import { ValidatorIsRequired } from '../forms/Validators/ValidatorIsRequired';
 import { Upload, EUploadStatus } from '../ui/Upload';
 
 interface IProps {}

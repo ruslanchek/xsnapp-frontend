@@ -1,12 +1,8 @@
 import * as React from 'react';
-import * as ReactSwipe from 'react-swipe';
 import VisibilitySensor from 'react-visibility-sensor';
 import { css } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
-import { Utils } from 'app/ts/lib/Utils';
-import { COLORS, THEME } from 'app/ts/theme';
-import { EVideoImageKind, EVideoFileSize } from 'app/ts/enums/video';
-import { Image } from './Image';
+import { COLORS } from 'app/ts/theme';
 import { Avatar } from './Avatar';
 import {
 	ArrowUpwardRounded,
@@ -16,25 +12,24 @@ import {
 	MoreHoriz,
 	RemoveRedEyeRounded,
 } from '@material-ui/icons';
+import { ListGallery } from './ListGallery';
 
 interface IProps {
 	item: ItemsStore.IItem;
 }
 
 interface IState {
-	current: number;
 	isVisible: boolean;
 }
 
-export class Item extends React.PureComponent<IProps, IState> {
+export class ListItem extends React.PureComponent<IProps, IState> {
 	public state: IState = {
-		current: 0,
 		isVisible: false,
 	};
 
 	public render() {
 		const { id, videoFiles, title, description, tags } = this.props.item;
-		const { isVisible, current } = this.state;
+		const { isVisible } = this.state;
 
 		const thumbnails = videoFiles
 			.filter(videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail)
@@ -59,7 +54,7 @@ export class Item extends React.PureComponent<IProps, IState> {
 					<div className={titleBlock}>
 						<div className={titleTop}>
 							<h3 className={h3}>
-								{title} {current} {isVisible.toString()}
+								{title} {isVisible.toString()}
 							</h3>
 							<MoreHoriz className={more} />
 						</div>
@@ -83,41 +78,12 @@ export class Item extends React.PureComponent<IProps, IState> {
 						})
 					}
 				>
-					<div className={gallery}>
-						<ReactSwipe
-							className="carousel"
-							swipeOptions={{
-								continuous: false,
-								callback: (index, elem) => {
-									this.setState({ current: index });
-								},
-								transitionEnd: (index, elem) => {
-									console.log(index, elem);
-								},
-							}}
-						>
-							{thumbnails.map((thumbnail, i) => (
-								<div key={i} className={frame}>
-									<div className={imageHolder}>
-										<Image
-											title={title}
-											show={
-												isVisible &&
-												(i === this.state.current ||
-													i === this.state.current - 1 ||
-													i === this.state.current + 1)
-											}
-											src={Utils.getImagePath(
-												id,
-												thumbnail.fileName,
-												EVideoImageKind.Thumbnail,
-											)}
-										/>
-									</div>
-								</div>
-							))}
-						</ReactSwipe>
-					</div>
+					<ListGallery
+						id={id}
+						isVisible={isVisible}
+						thumbnails={thumbnails}
+						title={title}
+					/>
 				</VisibilitySensor>
 
 				{tags && tags.length > 0 && (
@@ -136,23 +102,23 @@ export class Item extends React.PureComponent<IProps, IState> {
 					<div className={actionButton}>
 						<ArrowUpwardRounded
 							className={actionButtonIcon}
-							fontSizeAdjust={14}
+							fontSizeAdjust={10}
 						/>
 						71
 					</div>
 
 					<div className={actionButton}>
-						<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
+						<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
 						Comments
 					</div>
 
 					<div className={actionButton}>
-						<FavoriteTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
-						14
+						<FavoriteTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
+						23
 					</div>
 
 					<div className={actionButton}>
-						<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={14} />
+						<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
 						Share
 					</div>
 				</div>
@@ -170,13 +136,6 @@ const root = css`
 	&:first-of-type {
 		margin-top: 0;
 	}
-`;
-
-const frame = css``;
-
-const imageHolder = css`
-	padding-top: 100%;
-	position: relative;
 `;
 
 const h3 = css`
@@ -238,7 +197,6 @@ const actionButton = css`
 const actionButtonIcon = css`
 	margin-right: 0.4ex;
 	position: relative;
-	font-size: 18px;
 `;
 
 const views = css`
@@ -251,10 +209,6 @@ const views = css`
 	.count {
 		margin-right: 0.6ex;
 	}
-`;
-
-const gallery = css`
-	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
 `;
 
 const more = css`
