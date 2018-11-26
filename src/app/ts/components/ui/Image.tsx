@@ -1,6 +1,9 @@
 import * as React from 'react';
 import { css, cx } from 'react-emotion';
 import { EVideoFileExtension } from 'app/ts/enums/video';
+import { Loader } from '../common/Loader';
+import { COLORS } from 'app/ts/theme';
+import { CloseRounded } from '@material-ui/icons';
 
 interface IProps {
 	src: string;
@@ -40,34 +43,49 @@ export class Image extends React.PureComponent<IProps, IState> {
 
 		return (
 			<div className={imageContainer}>
-				<div className={loading}>Loading...</div>
-				<picture>
-					<source srcSet={webp} type="image/webp" />
-					<source srcSet={jpeg} type="image/jpeg" />
-					<img
-						className={cx(img, loaded ? 'active' : '')}
-						src={jpeg}
-						alt={title}
-						onLoad={() => {
-							this.setState({
-								loaded: true,
-							});
+				{!loaded && (
+					<div className={loading}>
+						<Loader color={COLORS.WHITE} />
+					</div>
+				)}
 
-							if (onLoad) {
-								onLoad(true);
-							}
-						}}
-						onError={() => {
-							this.setState({
-								error: true,
-							});
+				{error && (
+					<div className={errorBox}>
+						<CloseRounded fontSize={'inherit'} />
+					</div>
+				)}
 
-							if (onLoad) {
-								onLoad(false);
-							}
-						}}
-					/>
-				</picture>
+				{!error && (
+					<picture>
+						<source srcSet={webp} type="image/webp" />
+						<source srcSet={jpeg} type="image/jpeg" />
+						<img
+							className={cx(img, loaded ? 'active' : '')}
+							src={jpeg}
+							alt={title}
+							onLoad={() => {
+								this.setState({
+									error: false,
+									loaded: false,
+								});
+
+								if (onLoad) {
+									onLoad(false);
+								}
+							}}
+							onError={() => {
+								this.setState({
+									error: false,
+									loaded: false,
+								});
+
+								if (onLoad) {
+									onLoad(false);
+								}
+							}}
+						/>
+					</picture>
+				)}
 			</div>
 		);
 	}
@@ -100,4 +118,12 @@ const loading = css`
 	left: 50%;
 	top: 50%;
 	transform: translate(-50%, -50%);
+`;
+
+const errorBox = css`
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	transform: translate(-50%, -50%);
+	font-size: 46px;
 `;
