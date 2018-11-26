@@ -8,6 +8,7 @@ import { css } from 'react-emotion';
 import { Utils } from 'app/ts/lib/Utils';
 import { EVideoFileSize } from 'app/ts/enums/video';
 import { PageLoading } from '../common/PageLoading';
+import { Comments } from '../blocks/Comments';
 
 interface IProps {}
 
@@ -59,11 +60,14 @@ export class ItemPage extends React.Component<IProps, IState> {
 			);
 
 			return (
-				<video
-					controls={true}
-					width="100%"
-					src={Utils.getVideoPath(id, videos, EVideoFileSize.SD)}
-				/>
+				<div>
+					<video
+						controls={true}
+						width="100%"
+						src={Utils.getVideoPath(id, videos, EVideoFileSize.SD)}
+					/>
+					<Comments />
+				</div>
 			);
 		} else {
 			return <PageLoading />;

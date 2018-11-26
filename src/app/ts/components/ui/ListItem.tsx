@@ -58,6 +58,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 					<div className={header}>
 						<div className={ava}>
 							<Avatar
+								show={isVisible}
 								size={45}
 								src="https://randomuser.me/api/portraits/men/51.jpg"
 							/>

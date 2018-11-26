@@ -13,6 +13,7 @@ export const API_PATHS = {
 	AUTH_LOGIN: '/auth/login',
 	AUTH_REGISTER: '/auth/register',
 	UPLOAD: '/upload',
+	GET_COMMENTS: '/comments',
 };
 
 export const CONFIG = {

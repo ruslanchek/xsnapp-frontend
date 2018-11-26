@@ -90,7 +90,7 @@ export class Routes extends React.Component<{}, IState> {
 							<Page
 								{...props}
 								layout={PageLayout.Default}
-								authRule={ERouteAuthRule.AuthorizedOnly}
+								authRule={ERouteAuthRule.Shared}
 							>
 								<NotFoundPage />
 							</Page>

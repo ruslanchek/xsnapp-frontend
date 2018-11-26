@@ -5,6 +5,7 @@ import { COLORS } from 'app/ts/theme';
 interface IProps {
 	src: string;
 	size: number;
+	show: boolean;
 }
 
 interface IState {
@@ -19,7 +20,7 @@ export class Avatar extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { size, src } = this.props;
+		const { size, src, show } = this.props;
 		const { loaded, error } = this.state;
 
 		return (
@@ -30,22 +31,24 @@ export class Avatar extends React.PureComponent<IProps, IState> {
 					minHeight: size,
 				}}
 			>
-				<img
-					width={size}
-					height={size}
-					onLoad={() =>
-						this.setState({
-							loaded: true,
-						})
-					}
-					onError={() =>
-						this.setState({
-							error: true,
-						})
-					}
-					className={cx(image, loaded ? 'active' : '')}
-					src={src}
-				/>
+				{show && (
+					<img
+						width={size}
+						height={size}
+						onLoad={() =>
+							this.setState({
+								loaded: true,
+							})
+						}
+						onError={() =>
+							this.setState({
+								error: true,
+							})
+						}
+						className={cx(image, loaded ? 'active' : '')}
+						src={src}
+					/>
+				)}
 			</div>
 		);
 	}
