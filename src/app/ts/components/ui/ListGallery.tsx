@@ -1,6 +1,6 @@
 import * as React from 'react';
 import * as ReactSwipe from 'react-swipe';
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import { COLORS } from 'app/ts/theme';
 import { EVideoImageKind } from 'app/ts/enums/video';
 import { Image } from './Image';
@@ -34,6 +34,19 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 
 		return (
 			<div className={gallery}>
+				<div className={pages}>
+					{previews && previews.length > 0 && (
+						<i className={cx(pageSpecial, currentIndex === 0 && 'active')} />
+					)}
+
+					{thumbnails.map((thumbnail, i) => (
+						<i
+							key={i}
+							className={cx(page, i + 1 === currentIndex && 'active')}
+						/>
+					))}
+				</div>
+
 				<ReactSwipe
 					className="carousel"
 					swipeOptions={{
@@ -96,9 +109,54 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 
 const gallery = css`
 	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
+	user-select: none;
+	position: relative;
 `;
 
 const imageHolder = css`
 	padding-top: 100%;
 	position: relative;
+`;
+
+const pages = css`
+	pointer-events: none;
+	position: absolute;
+	padding: 10px;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	z-index: 2;
+	box-sizing: border-box;
+`;
+
+const page = css`
+	width: 4px;
+	height: 4px;
+	transition: transform 0.15s, background-color 0.15s;
+	margin: 0 5px 5px;
+	background-color: ${COLORS.WHITE.alpha(0.5).toString()};
+	border-radius: 50%;
+
+	&.active {
+		transform: scale(1.2);
+		background-color: ${COLORS.WHITE.alpha(0.8).toString()};
+	}
+`;
+
+const pageSpecial = css`
+	width: 4px;
+	height: 4px;
+	transition: transform 0.15s, background-color 0.15s;
+	margin: 0 5px 5px;
+	background-color: ${COLORS.GREEN.alpha(0.75).toString()};
+	border-radius: 50%;
+	box-shadow: 0 0 1px ${COLORS.BLACK.alpha(0.5).toString()};
+
+	&.active {
+		transform: scale(1.2);
+		background-color: ${COLORS.GREEN.alpha(1).toString()};
+	}
 `;
