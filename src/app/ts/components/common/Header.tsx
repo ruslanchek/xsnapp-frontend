@@ -13,25 +13,15 @@ export class Header extends React.PureComponent<{}, {}> {
 	public render() {
 		return (
 			<header className={header}>
-				{AuthStore.store.state.authorized ? (
-					<>
-						{managers.route.history.location.pathname === PATHS.UPLOAD ? (
-							<Link className={button} to={PATHS.HOME}>
-								Home
-							</Link>
-						) : (
-							<Link className={button} to={PATHS.UPLOAD}>
-								Upload
-							</Link>
-						)}
-					</>
-				) : (
-					<Link className={button} to={PATHS.AUTH_LOGIN}>
-						Auth
+				{managers.route.history.location.pathname === PATHS.UPLOAD ? null : (
+					<Link className={button} to={PATHS.UPLOAD}>
+						Upload
 					</Link>
 				)}
 
-				<div className={logo}>Porngur</div>
+				<Link className={logoBtn} to={PATHS.HOME}>
+					<div className={logo}>imgur</div>
+				</Link>
 
 				<div className="menu">
 					<MenuRounded fontSize={'large'} />
@@ -72,11 +62,15 @@ const button = css`
 `;
 
 const logo = css`
-	font-weight: 200;
+	font-weight: 800;
 	font-size: ${THEME.FONT_SIZE_BIG}px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	letter-spacing: 1px;
+`;
+
+const logoBtn = css`
+	color: ${COLORS.WHITE.toString()} !important;
 `;

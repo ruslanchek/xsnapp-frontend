@@ -1,11 +1,14 @@
 export const PATHS = {
 	HOME: '/',
+	ITEM: '/item/:id',
 	AUTH_LOGIN: '/auth/login',
 	UPLOAD: '/upload',
+	NOT_FOUND: '/404',
 };
 
 export const API_PATHS = {
 	GET_ITEMS: '/items',
+	GET_ITEM: '/item/:id',
 	GET_PROFILE: '/profile',
 	AUTH_LOGIN: '/auth/login',
 	AUTH_REGISTER: '/auth/register',

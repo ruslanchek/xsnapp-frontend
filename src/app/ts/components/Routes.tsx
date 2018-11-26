@@ -7,6 +7,8 @@ import { HomePage } from './pages/HomePage';
 import { Page, PageLayout } from './pages/Page';
 import { LoginPage } from './pages/LoginPage';
 import { UploadPage } from './pages/UploadPage';
+import { ItemPage } from './pages/ItemPage';
+import { NotFoundPage } from './pages/NotFoundPage';
 
 interface IState {
 	key: number;
@@ -27,6 +29,22 @@ export class Routes extends React.Component<{}, IState> {
 								authRule={ERouteAuthRule.Shared}
 							>
 								<HomePage />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.ITEM}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<ItemPage />
 							</Page>
 						);
 					}}
@@ -64,7 +82,27 @@ export class Routes extends React.Component<{}, IState> {
 					}}
 				/>
 
-				<Route exact path="*" render={() => <Redirect to={PATHS.HOME} />} />
+				<Route
+					exact={true}
+					path={PATHS.NOT_FOUND}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.AuthorizedOnly}
+							>
+								<NotFoundPage />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact
+					path="*"
+					render={() => <Redirect to={PATHS.NOT_FOUND} />}
+				/>
 			</Switch>
 		);
 	}

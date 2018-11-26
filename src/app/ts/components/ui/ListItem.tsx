@@ -13,6 +13,8 @@ import {
 	RemoveRedEyeRounded,
 } from '@material-ui/icons';
 import { ListGallery } from './ListGallery';
+import { Link } from 'react-router-dom';
+import { PATHS } from 'app/ts/config';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -42,88 +44,92 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 		);
 
 		return (
-			<div className={root}>
-				<div className={header}>
-					<div className={ava}>
-						<Avatar
-							size={45}
-							src="https://randomuser.me/api/portraits/men/51.jpg"
-						/>
-					</div>
-
-					<div className={titleBlock}>
-						<div className={titleTop}>
-							<h3 className={h3}>
-								{title} {isVisible.toString()}
-							</h3>
-							<MoreHoriz className={more} />
+			<VisibilitySensor
+				partialVisibility={true}
+				scrollCheck={true}
+				resizeCheck={true}
+				onChange={isVisible =>
+					this.setState({
+						isVisible,
+					})
+				}
+			>
+				<div className={root}>
+					<div className={header}>
+						<div className={ava}>
+							<Avatar
+								size={45}
+								src="https://randomuser.me/api/portraits/men/51.jpg"
+							/>
 						</div>
 
-						<div className={titleBottom}>
-							<span className={username}>SuperUsername</span>
-							<div className={views}>
-								<span className="count">84</span>
-								<RemoveRedEyeRounded fontSize={'inherit'} />
+						<div className={titleBlock}>
+							<div className={titleTop}>
+								<h3 className={h3}>{title}</h3>
+								<MoreHoriz className={more} />
+							</div>
+
+							<div className={titleBottom}>
+								<span className={username}>SuperUsername</span>
+								<div className={views}>
+									<span className="count">84</span>
+									<RemoveRedEyeRounded fontSize={'inherit'} />
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
 
-				<VisibilitySensor
-					scrollCheck={true}
-					resizeCheck={true}
-					onChange={isVisible =>
-						this.setState({
-							isVisible,
-						})
-					}
-				>
-					<ListGallery
-						id={id}
-						isVisible={true}
-						previews={previews}
-						thumbnails={thumbnails}
-						title={title}
-					/>
-				</VisibilitySensor>
-
-				{tags && tags.length > 0 && (
-					<div className={tagsBlock}>
-						{tags.map((tag, i) => (
-							<a key={i} className="tag" href="#">
-								#{tag}
-							</a>
-						))}
-					</div>
-				)}
-
-				<div className={content}>{description}</div>
-
-				<div className={actions}>
-					<div className={actionButton}>
-						<ArrowUpwardRounded
-							className={actionButtonIcon}
-							fontSizeAdjust={10}
+					<Link to={PATHS.ITEM.replace(':id', id.toString())}>
+						<ListGallery
+							id={id}
+							isVisible={isVisible}
+							previews={previews}
+							thumbnails={thumbnails}
+							title={title}
 						/>
-						71
-					</div>
+					</Link>
 
-					<div className={actionButton}>
-						<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
-						Comments
-					</div>
+					{tags && tags.length > 0 && (
+						<div className={tagsBlock}>
+							{tags.map((tag, i) => (
+								<a key={i} className="tag" href="#">
+									#{tag}
+								</a>
+							))}
+						</div>
+					)}
 
-					<div className={actionButton}>
-						<FavoriteTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
-						23
-					</div>
+					<div className={content}>{description}</div>
 
-					<div className={actionButton}>
-						<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
-						Share
+					<div className={actions}>
+						<div className={actionButton}>
+							<ArrowUpwardRounded
+								className={actionButtonIcon}
+								fontSizeAdjust={10}
+							/>
+							71
+						</div>
+
+						<div className={actionButton}>
+							<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
+							Comments
+						</div>
+
+						<div className={actionButton}>
+							<FavoriteTwoTone
+								className={actionButtonIcon}
+								fontSizeAdjust={10}
+							/>
+							23
+						</div>
+
+						<div className={actionButton}>
+							<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
+							Share
+						</div>
 					</div>
 				</div>
-			</div>
+			</VisibilitySensor>
 		);
 	}
 }
