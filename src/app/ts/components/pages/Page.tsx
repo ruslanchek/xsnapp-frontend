@@ -19,7 +19,6 @@ interface IProps extends RouteComponentProps<{}> {
 interface IState {
 	routeKey: string;
 	location: string;
-	inTransition: boolean;
 }
 
 @followStore(StateStore.store)
@@ -27,7 +26,6 @@ export class Page extends React.Component<IProps, IState> {
 	public state: IState = {
 		routeKey: null,
 		location: null,
-		inTransition: false,
 	};
 
 	public componentWillMount() {
@@ -49,7 +47,6 @@ export class Page extends React.Component<IProps, IState> {
 				{
 					routeKey: key,
 					location,
-					inTransition: true,
 				},
 				() => {
 					managers.route.initPage(
@@ -57,10 +54,6 @@ export class Page extends React.Component<IProps, IState> {
 						this.props.match.params,
 						authRule,
 					);
-
-					this.setState({
-						inTransition: false,
-					});
 				},
 			);
 		}
