@@ -34,74 +34,77 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 
 		return (
 			<div className={gallery}>
-				<div className={pages}>
-					{previews && previews.length > 0 && (
-						<i className={cx(pageSpecial, currentIndex === 0 && 'active')} />
-					)}
-
-					{thumbnails.map((thumbnail, i) => (
-						<i
-							key={i}
-							className={cx(page, i + 1 === currentIndex && 'active')}
-						/>
-					))}
-				</div>
-
-				<ReactSwipe
-					className="carousel"
-					swipeOptions={{
-						startSlide: START_FRAME,
-						continuous: false,
-						callback: (index, elem) => {
-							this.setState({ currentIndex: index });
-						},
-						transitionEnd: (index, elem) => {
-							console.log(index, elem);
-						},
-					}}
-				>
-					{previews && previews.length > 0 && (
-						<div>
-							<div className={imageHolder}>
-								<Image
-									title={title}
-									show={isVisible && (currentIndex === 0 || isPreviewLoaded)}
-									onLoad={(successful: boolean) => {
-										this.setState({
-											isPreviewLoaded: true,
-										});
-									}}
-									src={Utils.getImagePath(
-										id,
-										previews[0].fileName,
-										EVideoImageKind.Preview,
-									)}
+				{isVisible && (
+					<>
+						<div className={pages}>
+							{previews && previews.length > 0 && (
+								<i
+									className={cx(pageSpecial, currentIndex === 0 && 'active')}
 								/>
-							</div>
-						</div>
-					)}
+							)}
 
-					{thumbnails.map((thumbnail, i) => (
-						<div key={i}>
-							<div className={imageHolder}>
-								<Image
-									title={title}
-									show={
-										isVisible &&
-										(i + 1 === currentIndex ||
-											i + 1 === currentIndex - 1 ||
-											i + 1 === currentIndex + 1)
-									}
-									src={Utils.getImagePath(
-										id,
-										thumbnail.fileName,
-										EVideoImageKind.Thumbnail,
-									)}
+							{thumbnails.map((thumbnail, i) => (
+								<i
+									key={i}
+									className={cx(page, i + 1 === currentIndex && 'active')}
 								/>
-							</div>
+							))}
 						</div>
-					))}
-				</ReactSwipe>
+
+						<ReactSwipe
+							className={reactSwipe}
+							swipeOptions={{
+								speed: 400,
+								continuous: false,
+								startSlide: START_FRAME,
+								callback: (index, elem) => {
+									this.setState({ currentIndex: index });
+								},
+							}}
+						>
+							{previews && previews.length > 0 && (
+								<div>
+									<div className={imageHolder}>
+										<Image
+											title={title}
+											show={currentIndex === 0 || isPreviewLoaded}
+											onLoad={(successful: boolean) => {
+												this.setState({
+													isPreviewLoaded: true,
+												});
+											}}
+											src={Utils.getImagePath(
+												id,
+												previews[0].fileName,
+												EVideoImageKind.Preview,
+											)}
+										/>
+									</div>
+								</div>
+							)}
+
+							{thumbnails.map((thumbnail, i) => (
+								<div key={i}>
+									<div className={imageHolder}>
+										<Image
+											title={title}
+											show={
+												i + 1 === currentIndex ||
+												i + 1 === currentIndex - 1 ||
+												i + 1 === currentIndex + 1
+											}
+											src={Utils.getImagePath(
+												id,
+												thumbnail.fileName,
+												EVideoImageKind.Thumbnail,
+											)}
+										/>
+									</div>
+								</div>
+							))}
+						</ReactSwipe>
+					</>
+				)}
 			</div>
 		);
 	}
@@ -111,11 +114,7 @@ const gallery = css`
 	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
 	user-select: none;
 	position: relative;
-`;
-
-const imageHolder = css`
 	padding-top: 100%;
-	position: relative;
 `;
 
 const pages = css`
@@ -159,4 +158,15 @@ const pageSpecial = css`
 		transform: scale(1.2);
 		background-color: ${COLORS.GREEN.alpha(1).toString()};
 	}
+`;
+
+const imageHolder = css`
+	padding-top: 100%;
+	width: 100%;
+`;
+
+const reactSwipe = css`
+	position: absolute !important;
+	top: 0;
+	width: 100%;
 `;

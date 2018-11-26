@@ -80,7 +80,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 				>
 					<ListGallery
 						id={id}
-						isVisible={isVisible}
+						isVisible={true}
 						previews={previews}
 						thumbnails={thumbnails}
 						title={title}

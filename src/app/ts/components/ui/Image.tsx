@@ -9,6 +9,7 @@ interface IProps {
 	src: string;
 	show: boolean;
 	title: string;
+	className?: string;
 	onLoad?: (successful: boolean) => void;
 }
 
@@ -24,7 +25,7 @@ export class Image extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { title, show, src, onLoad } = this.props;
+		const { title, show, src, onLoad, className } = this.props;
 		const { loaded, error } = this.state;
 
 		const webp = src.replace(
@@ -42,7 +43,7 @@ export class Image extends React.PureComponent<IProps, IState> {
 		}
 
 		return (
-			<div className={imageContainer}>
+			<div className={cx(imageContainer, className)}>
 				{!loaded && (
 					<div className={loading}>
 						<Loader color={COLORS.WHITE} />
