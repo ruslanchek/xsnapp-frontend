@@ -10,28 +10,34 @@ import { ItemsStore } from 'app/ts/stores/ItemsStore';
 interface IProps {
 	isVisible: boolean;
 	thumbnails: ItemsStore.IVideoFile[];
+	previews: ItemsStore.IVideoFile[];
 	title: string;
 	id: number;
 }
 
 interface IState {
 	currentIndex: number;
+	isPreviewLoaded: boolean;
 }
+
+const START_FRAME = 1;
 
 export class ListGallery extends React.PureComponent<IProps, IState> {
 	public state: IState = {
-		currentIndex: 0,
+		currentIndex: START_FRAME,
+		isPreviewLoaded: false,
 	};
 
 	public render() {
-		const { isVisible, thumbnails, title, id } = this.props;
-		const { currentIndex } = this.state;
+		const { isVisible, thumbnails, previews, title, id } = this.props;
+		const { currentIndex, isPreviewLoaded } = this.state;
 
 		return (
 			<div className={gallery}>
 				<ReactSwipe
 					className="carousel"
 					swipeOptions={{
+						startSlide: START_FRAME,
 						continuous: false,
 						callback: (index, elem) => {
 							this.setState({ currentIndex: index });
@@ -41,6 +47,27 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 						},
 					}}
 				>
+					{previews && previews.length > 0 && (
+						<div>
+							<div className={imageHolder}>
+								<Image
+									title={title}
+									show={isVisible && (currentIndex === 0 || isPreviewLoaded)}
+									onLoad={(successful: boolean) => {
+										this.setState({
+											isPreviewLoaded: true,
+										});
+									}}
+									src={Utils.getImagePath(
+										id,
+										previews[0].fileName,
+										EVideoImageKind.Preview,
+									)}
+								/>
+							</div>
+						</div>
+					)}
+
 					{thumbnails.map((thumbnail, i) => (
 						<div key={i}>
 							<div className={imageHolder}>
@@ -48,9 +75,9 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 									title={title}
 									show={
 										isVisible &&
-										(i === currentIndex ||
-											i === currentIndex - 1 ||
-											i === currentIndex + 1)
+										(i + 1 === currentIndex ||
+											i + 1 === currentIndex - 1 ||
+											i + 1 === currentIndex + 1)
 									}
 									src={Utils.getImagePath(
 										id,

@@ -81,6 +81,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 					<ListGallery
 						id={id}
 						isVisible={isVisible}
+						previews={previews}
 						thumbnails={thumbnails}
 						title={title}
 					/>

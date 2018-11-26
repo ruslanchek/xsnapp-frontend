@@ -6,6 +6,7 @@ interface IProps {
 	src: string;
 	show: boolean;
 	title: string;
+	onLoad?: (successful: boolean) => void;
 }
 
 interface IState {
@@ -20,12 +21,14 @@ export class Image extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { title, show, src } = this.props;
+		const { title, show, src, onLoad } = this.props;
 		const { loaded, error } = this.state;
+
 		const webp = src.replace(
 			EVideoFileExtension.Image,
 			EVideoFileExtension.Webp,
 		);
+
 		const jpeg = src.replace(
 			EVideoFileExtension.Image,
 			EVideoFileExtension.Jpeg,
@@ -45,16 +48,24 @@ export class Image extends React.PureComponent<IProps, IState> {
 						className={cx(img, loaded ? 'active' : '')}
 						src={jpeg}
 						alt={title}
-						onLoad={() =>
+						onLoad={() => {
 							this.setState({
 								loaded: true,
-							})
-						}
-						onError={() =>
+							});
+
+							if (onLoad) {
+								onLoad(true);
+							}
+						}}
+						onError={() => {
 							this.setState({
 								error: true,
-							})
-						}
+							});
+
+							if (onLoad) {
+								onLoad(false);
+							}
+						}}
 					/>
 				</picture>
 			</div>
