@@ -65,18 +65,18 @@ export class Image extends React.PureComponent<IProps, IState> {
 							alt={title}
 							onLoad={() => {
 								this.setState({
-									error: false,
-									loaded: false,
+									error: true,
+									loaded: true,
 								});
 
 								if (onLoad) {
-									onLoad(false);
+									onLoad(true);
 								}
 							}}
 							onError={() => {
 								this.setState({
-									error: false,
-									loaded: false,
+									error: true,
+									loaded: true,
 								});
 
 								if (onLoad) {
@@ -126,4 +126,5 @@ const errorBox = css`
 	top: 50%;
 	transform: translate(-50%, -50%);
 	font-size: 46px;
+	color: ${COLORS.GRAY_LIGHT.toString()};
 `;
