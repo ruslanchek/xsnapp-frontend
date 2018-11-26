@@ -65,7 +65,7 @@ export class Image extends React.PureComponent<IProps, IState> {
 							alt={title}
 							onLoad={() => {
 								this.setState({
-									error: true,
+									error: false,
 									loaded: true,
 								});
 
