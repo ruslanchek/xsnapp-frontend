@@ -3,7 +3,7 @@ export enum EVideoFileExtension {
 	Jpeg = '.jpg',
 	Gif = '.gif',
 	Mp4 = '.mp4',
-	Image = 'image',
+	Image = '.image',
 }
 
 export enum EVideoImageKind {

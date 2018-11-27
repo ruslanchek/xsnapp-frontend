@@ -73,10 +73,13 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 
 							<div className={titleBottom}>
 								<span className={username}>SuperUsername</span>
-								<div className={views}>
-									<span className="count">84</span>
-									<RemoveRedEyeRounded fontSize={'inherit'} />
-								</div>
+
+								{isVisible && (
+									<div className={views}>
+										<span className="count">84</span>
+										<RemoveRedEyeRounded fontSize={'inherit'} />
+									</div>
+								)}
 							</div>
 						</div>
 					</div>

@@ -132,8 +132,8 @@ const pages = css`
 `;
 
 const page = css`
-	width: 4px;
-	height: 4px;
+	width: 5px;
+	height: 5px;
 	transition: transform 0.15s, background-color 0.15s;
 	margin: 0 5px 5px;
 	background-color: ${COLORS.WHITE.alpha(0.5).toString()};
@@ -146,8 +146,8 @@ const page = css`
 `;
 
 const pageSpecial = css`
-	width: 4px;
-	height: 4px;
+	width: 5px;
+	height: 5px;
 	transition: transform 0.15s, background-color 0.15s;
 	margin: 0 5px 5px;
 	background-color: ${COLORS.GREEN.alpha(0.75).toString()};

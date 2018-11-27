@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css, cx } from 'react-emotion';
 import { COLORS } from 'app/ts/theme';
+import { EVideoFileExtension } from 'app/ts/enums/video';
 
 interface IProps {
 	src: string;
@@ -23,6 +24,16 @@ export class Avatar extends React.PureComponent<IProps, IState> {
 		const { size, src, show } = this.props;
 		const { loaded, error } = this.state;
 
+		const webp = src.replace(
+			EVideoFileExtension.Image,
+			EVideoFileExtension.Webp,
+		);
+
+		const jpeg = src.replace(
+			EVideoFileExtension.Image,
+			EVideoFileExtension.Jpeg,
+		);
+
 		return (
 			<div
 				className={root}
@@ -32,22 +43,28 @@ export class Avatar extends React.PureComponent<IProps, IState> {
 				}}
 			>
 				{show && (
-					<img
-						width={size}
-						height={size}
-						onLoad={() =>
-							this.setState({
-								loaded: true,
-							})
-						}
-						onError={() =>
-							this.setState({
-								error: true,
-							})
-						}
-						className={cx(image, loaded ? 'active' : '')}
-						src={src}
-					/>
+					<picture>
+						<source srcSet={webp} type="image/webp" />
+						<source srcSet={jpeg} type="image/jpeg" />
+						<img
+							width={size}
+							height={size}
+							className={cx(image, loaded ? 'active' : '')}
+							src={jpeg}
+							onLoad={() => {
+								this.setState({
+									error: false,
+									loaded: true,
+								});
+							}}
+							onError={() => {
+								this.setState({
+									error: true,
+									loaded: true,
+								});
+							}}
+						/>
+					</picture>
 				)}
 			</div>
 		);
