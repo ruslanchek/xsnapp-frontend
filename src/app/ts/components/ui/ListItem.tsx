@@ -15,6 +15,7 @@ import {
 import { ListGallery } from './ListGallery';
 import { Link } from 'react-router-dom';
 import { PATHS } from 'app/ts/config';
+import { Utils } from 'app/ts/lib/Utils';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -30,7 +31,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { id, videoFiles, title, description, tags } = this.props.item;
+		const { id, videoFiles, title, description, tags, user } = this.props.item;
 		const { isVisible } = this.state;
 
 		const thumbnails = videoFiles
@@ -60,7 +61,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 							<Avatar
 								show={isVisible}
 								size={45}
-								src="https://randomuser.me/api/portraits/men/51.jpg"
+								src={Utils.getAvatarPath(user.id)}
 							/>
 						</div>
 

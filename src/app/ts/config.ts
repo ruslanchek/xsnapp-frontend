@@ -20,6 +20,7 @@ export const CONFIG = {
 	API_BASE_URL: 'http://localhost:3031/api',
 	STATIC_PATH: 'https://d15hjmscxdyus1.cloudfront.net/static',
 	CONTENT_PATH: 'https://d15hjmscxdyus1.cloudfront.net/content',
+	AVATARS_PATH: 'https://d15hjmscxdyus1.cloudfront.net/avatars',
 	STORAGE: {
 		PREFIX: 'REALTHUB',
 		COOKIES: {

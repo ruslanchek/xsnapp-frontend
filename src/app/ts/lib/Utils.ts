@@ -29,6 +29,12 @@ export class Utils {
 		return `${CONFIG.CONTENT_PATH}/${videoId}/${fileName}${extension}`;
 	}
 
+	public static getAvatarPath(userId: number): string {
+		return `${CONFIG.AVATARS_PATH}/${userId}/avatar${
+			EVideoFileExtension.Image
+		}`;
+	}
+
 	public static getVideoPath(
 		videoId: number,
 		videos: ItemsStore.IVideoFile[],
