@@ -56,7 +56,7 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 							swipeOptions={{
 								speed: 400,
 								continuous: false,
-								startSlide: START_FRAME,
+								startSlide: this.state.currentIndex,
 								callback: (index, elem) => {
 									this.setState({ currentIndex: index });
 								},
