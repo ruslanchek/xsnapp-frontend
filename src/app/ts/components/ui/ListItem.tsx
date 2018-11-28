@@ -31,7 +31,15 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 	};
 
 	public render() {
-		const { id, videoFiles, title, description, tags, user } = this.props.item;
+		const {
+			id,
+			videoFiles,
+			title,
+			description,
+			tags,
+			user,
+			views,
+		} = this.props.item;
 		const { isVisible } = this.state;
 
 		const thumbnails = videoFiles
@@ -72,11 +80,11 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 							</div>
 
 							<div className={titleBottom}>
-								<span className={username}>SuperUsername</span>
+								<span className={username}>{user.username}</span>
 
 								{isVisible && (
-									<div className={views}>
-										<span className="count">84</span>
+									<div className={viewsBlock}>
+										<span className="count">{views}</span>
 										<RemoveRedEyeRounded fontSize={'inherit'} />
 									</div>
 								)}
@@ -211,7 +219,7 @@ const actionButtonIcon = css`
 	position: relative;
 `;
 
-const views = css`
+const viewsBlock = css`
 	font-weight: 800;
 	color: ${COLORS.GRAY.toString()};
 	display: flex;

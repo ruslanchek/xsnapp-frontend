@@ -17,8 +17,10 @@ export namespace ItemsStore {
 		videoFiles: IVideoFile[];
 		description: string;
 		tags: string[];
+		views: number;
 		user: {
 			id: number;
+			username: string;
 		};
 	}
 

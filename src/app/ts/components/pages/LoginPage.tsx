@@ -18,7 +18,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 	private handleSubmit = async (output: IFormModelOutput) => {
 		if (output.isValid) {
 			const result = await managers.auth.login(
-				output.values.username,
+				output.values.email,
 				output.values.password,
 			);
 
@@ -40,8 +40,8 @@ export class LoginPage extends React.Component<IProps, IState> {
 					>
 						<Input
 							containerClassName={input}
-							name="username"
-							label="Username"
+							name="email"
+							label="E-mail"
 							validators={[new ValidatorIsEmail()]}
 						/>
 

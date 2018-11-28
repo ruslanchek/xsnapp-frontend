@@ -3,7 +3,7 @@ import { css, cx } from 'react-emotion';
 import { EVideoFileExtension } from 'app/ts/enums/video';
 import { Loader } from '../common/Loader';
 import { COLORS } from 'app/ts/theme';
-import { CloseRounded } from '@material-ui/icons';
+import { CloseRounded, PlayCircleFilledRounded } from '@material-ui/icons';
 
 interface IProps {
 	src: string;
@@ -15,6 +15,7 @@ interface IProps {
 interface IState {
 	loaded: boolean;
 	error: boolean;
+	playing: boolean;
 }
 
 export class Video extends React.PureComponent<IProps, IState> {
@@ -23,11 +24,12 @@ export class Video extends React.PureComponent<IProps, IState> {
 	public state: IState = {
 		loaded: false,
 		error: false,
+		playing: false,
 	};
 
 	public render() {
 		const { show, src, onLoad, className } = this.props;
-		const { loaded, error } = this.state;
+		const { loaded, error, playing } = this.state;
 
 		if (!show) {
 			return null;
@@ -35,6 +37,10 @@ export class Video extends React.PureComponent<IProps, IState> {
 
 		return (
 			<div className={cx(imageContainer, className)}>
+				<p>loaded: {loaded.toString()}</p>
+				<p>error: {error.toString()}</p>
+				<p>playing: {playing.toString()}</p>
+
 				{!loaded && (
 					<div className={loading}>
 						<Loader color={COLORS.WHITE} />
@@ -47,9 +53,22 @@ export class Video extends React.PureComponent<IProps, IState> {
 					</div>
 				)}
 
+				{!playing && (
+					<div
+						className={playButton}
+						onClick={e => {
+							e.preventDefault();
+							this.videoRef.play();
+						}}
+					>
+						<PlayCircleFilledRounded fontSize={'inherit'} />
+					</div>
+				)}
+
 				{!error && (
 					<video
 						ref={ref => (this.videoRef = ref)}
+						playsinline={true}
 						autoPlay={true}
 						muted={true}
 						controls={false}
@@ -77,6 +96,11 @@ export class Video extends React.PureComponent<IProps, IState> {
 							}
 
 							this.videoRef.play();
+						}}
+						onPlay={() => {
+							this.setState({
+								playing: true,
+							});
 						}}
 					/>
 				)}
@@ -111,6 +135,7 @@ const loading = css`
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	z-index: 2;
 	transform: translate(-50%, -50%);
 `;
 
@@ -118,6 +143,17 @@ const errorBox = css`
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	z-index: 2;
+	transform: translate(-50%, -50%);
+	font-size: 46px;
+	color: ${COLORS.GRAY_LIGHT.toString()};
+`;
+
+const playButton = css`
+	position: absolute;
+	left: 50%;
+	top: 50%;
+	z-index: 2;
 	transform: translate(-50%, -50%);
 	font-size: 46px;
 	color: ${COLORS.GRAY_LIGHT.toString()};
