@@ -6,6 +6,7 @@ import { EVideoImageKind } from 'app/ts/enums/video';
 import { Image } from './Image';
 import { Utils } from 'app/ts/lib/Utils';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
+import { Video } from './Video';
 
 interface IProps {
 	isVisible: boolean;
@@ -55,7 +56,7 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 							className={reactSwipe}
 							swipeOptions={{
 								speed: 400,
-								continuous: false,
+								continuous: true,
 								startSlide: this.state.currentIndex,
 								callback: (index, elem) => {
 									this.setState({ currentIndex: index });
@@ -65,8 +66,7 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 							{previews && previews.length > 0 && (
 								<div>
 									<div className={imageHolder}>
-										<Image
-											title={title}
+										<Video
 											show={currentIndex === 0 || isPreviewLoaded}
 											onLoad={(successful: boolean) => {
 												this.setState({

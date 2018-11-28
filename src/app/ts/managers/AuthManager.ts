@@ -23,25 +23,33 @@ export class AuthManager extends Manager {
 	}
 
 	public setToken(token: string): void {
+		console.log(token);
+
 		managers.storage.cookies.set('token', token);
 	}
 
-	public async auth(): Promise<any> {
-		const result = await managers.api.request<any>(
-			EApiRequestType.GET,
-			API_PATHS.GET_PROFILE,
-		);
+	public getToken(): string {
+		return managers.storage.cookies.get('token');
+	}
 
-		if (result && !result.error && result.data) {
-			AuthStore.store.setState({
-				authorized: true,
-				profile: result.data,
-			});
-		} else {
-			AuthStore.store.setState({
-				authorized: false,
-				profile: null,
-			});
+	public async auth(): Promise<any> {
+		if (this.getToken()) {
+			const result = await managers.api.request<any>(
+				EApiRequestType.GET,
+				API_PATHS.GET_PROFILE,
+			);
+
+			if (result && !result.error && result.data) {
+				AuthStore.store.setState({
+					authorized: true,
+					profile: result.data,
+				});
+			} else {
+				AuthStore.store.setState({
+					authorized: false,
+					profile: null,
+				});
+			}
 		}
 	}
 

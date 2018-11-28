@@ -25,7 +25,7 @@ export const CONFIG = {
 		PREFIX: 'REALTHUB',
 		COOKIES: {
 			OPTIONS: {
-				domain: '.local',
+				domain: '.mbrtn.local',
 				path: '/',
 				expires: new Date(
 					new Date().setFullYear(new Date().getFullYear() + 10),
@@ -40,3 +40,10 @@ export const CONFIG = {
 	},
 	DEFAULT_API_VERSION: 12,
 };
+
+// s3
+export const S3_ACCESS_KEY_ID: string = 'AKIAIKPY3VXKBMXW7BBQ';
+export const S3_SECRET_ACCESS_KEY: string =
+	'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';
+export const S3_BUCKET: string = 'ppp-coder';
+export const PUBLIC_DIR: string = 'content';

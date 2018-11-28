@@ -16,7 +16,7 @@ export class Utils {
 
 		switch (kind) {
 			case EVideoImageKind.Preview: {
-				extension = EVideoFileExtension.Gif;
+				extension = EVideoFileExtension.Mp4;
 				break;
 			}
 

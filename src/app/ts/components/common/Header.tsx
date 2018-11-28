@@ -20,7 +20,7 @@ export class Header extends React.PureComponent<{}, {}> {
 				)}
 
 				<Link className={logoBtn} to={PATHS.HOME}>
-					<div className={logo}>imgur</div>
+					<div className={logo}>🤨</div>
 				</Link>
 
 				<div className="menu">
