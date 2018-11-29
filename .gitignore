@@ -5,3 +5,4 @@ dist
 electron/dist
 Crypto-darwin-x64
 .awcache
+.env
