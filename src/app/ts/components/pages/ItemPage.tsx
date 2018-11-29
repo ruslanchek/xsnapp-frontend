@@ -9,8 +9,13 @@ import { Utils } from 'app/ts/lib/Utils';
 import { EVideoFileSize } from 'app/ts/enums/video';
 import { PageLoading } from '../common/PageLoading';
 import { Comments } from '../blocks/Comments';
+import { COLORS, THEME } from 'app/ts/theme';
 
-interface IProps {}
+interface IProps {
+	ruteParams: {
+		id: string;
+	};
+}
 
 interface IState {
 	item: ItemsStore.IItem;
@@ -26,12 +31,13 @@ export class ItemPage extends React.Component<IProps, IState> {
 	async componentDidMount() {
 		const result = await managers.api.request<{ item: ItemsStore.IItem }>(
 			EApiRequestType.GET,
-			API_PATHS.GET_ITEM.replace(':id', managers.route.params.id),
+			API_PATHS.GET_ITEM.replace(':id', this.props.ruteParams.id),
 			{},
 		);
 
 		if (result.data) {
 			const { item } = result.data;
+
 			this.setState({
 				item,
 				isLoaded: true,
@@ -53,20 +59,25 @@ export class ItemPage extends React.Component<IProps, IState> {
 		const { isLoaded } = this.state;
 
 		if (isLoaded) {
-			const { videoFiles, id } = this.state.item;
+			const { videoFiles, id, title, views } = this.state.item;
 
 			const videos = videoFiles.filter(
 				videoFile => videoFile.type === ItemsStore.EFileType.Video,
 			);
 
 			return (
-				<div>
+				<div className={videoContainer}>
+					<h1 className={titleBlock}>{title}</h1>
 					<video
+						muted
+						className={video}
 						controls={true}
 						width="100%"
 						src={Utils.getVideoPath(id, videos, EVideoFileSize.SD)}
 					/>
-					<Comments />
+					stats:
+					<p>views: {views}</p>
+					<Comments itemId={id} />
 				</div>
 			);
 		} else {
@@ -76,5 +87,22 @@ export class ItemPage extends React.Component<IProps, IState> {
 }
 
 const root = css`
+	padding: 10px;
+`;
+
+const video = css`
+	display: block;
+`;
+
+const videoContainer = css`
+	background-color: ${COLORS.BLACK_LIGHT.toString()};
+	border-radius: 3px;
+	overflow: hidden;
+`;
+
+const titleBlock = css`
+	font-size: ${THEME.FONT_SIZE_MEDIUM}px;
+	font-weight: 800;
+	margin: 0;
 	padding: 10px;
 `;

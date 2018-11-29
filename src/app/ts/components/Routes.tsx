@@ -44,7 +44,7 @@ export class Routes extends React.Component<{}, IState> {
 								layout={PageLayout.Default}
 								authRule={ERouteAuthRule.Shared}
 							>
-								<ItemPage />
+								<ItemPage ruteParams={props.match.params} />
 							</Page>
 						);
 					}}

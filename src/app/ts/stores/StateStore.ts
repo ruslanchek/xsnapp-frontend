@@ -12,7 +12,7 @@ export namespace StateStore {
 		appReady: false,
 		online: false,
 		title: '',
-		backAvailable: false
+		backAvailable: false,
 	};
 
 	export let store: Store<IState> = new Store<IState>(initialState);

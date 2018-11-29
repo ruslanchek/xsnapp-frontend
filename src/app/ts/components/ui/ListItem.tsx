@@ -2,7 +2,7 @@ import * as React from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
 import { css } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
-import { COLORS } from 'app/ts/theme';
+import { COLORS, THEME } from 'app/ts/theme';
 import { Avatar } from './Avatar';
 import {
 	ArrowUpwardRounded,
@@ -161,6 +161,7 @@ const root = css`
 const h3 = css`
 	margin: 0;
 	font-weight: 800;
+	font-size: ${THEME.FONT_SIZE_MEDIUM}px;
 	color: ${COLORS.GRAY_LIGHT.toString()};
 `;
 

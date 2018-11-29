@@ -6,7 +6,9 @@ import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { EApiRequestType } from 'app/ts/managers/ApiManager';
 import { API_PATHS, PATHS } from 'app/ts/config';
 
-interface IProps {}
+interface IProps {
+	itemId: number;
+}
 
 interface IState {
 	comments: IComment[];
@@ -42,7 +44,9 @@ export class Comments extends React.Component<IProps, IState> {
 		const result = await managers.api.request<{ items: IComment[] }>(
 			EApiRequestType.GET,
 			API_PATHS.GET_COMMENTS,
-			{},
+			{
+				videoId: this.props.itemId,
+			},
 		);
 
 		if (result.data) {
