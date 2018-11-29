@@ -37,10 +37,6 @@ export class Video extends React.PureComponent<IProps, IState> {
 
 		return (
 			<div className={cx(imageContainer, className)}>
-				<p>loaded: {loaded.toString()}</p>
-				<p>error: {error.toString()}</p>
-				<p>playing: {playing.toString()}</p>
-
 				{!loaded && (
 					<div className={loading}>
 						<Loader color={COLORS.WHITE} />
@@ -53,7 +49,7 @@ export class Video extends React.PureComponent<IProps, IState> {
 					</div>
 				)}
 
-				{!playing && (
+				{loaded && !playing && (
 					<div
 						className={playButton}
 						onClick={e => {
@@ -68,7 +64,7 @@ export class Video extends React.PureComponent<IProps, IState> {
 				{!error && (
 					<video
 						ref={ref => (this.videoRef = ref)}
-						playsinline={true}
+						playsInline={true}
 						autoPlay={true}
 						muted={true}
 						controls={false}
@@ -150,9 +146,14 @@ const errorBox = css`
 `;
 
 const playButton = css`
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	position: absolute;
 	left: 50%;
 	top: 50%;
+	width: 100%;
+	height: 100%;
 	z-index: 2;
 	transform: translate(-50%, -50%);
 	font-size: 46px;
