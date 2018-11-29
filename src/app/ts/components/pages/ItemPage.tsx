@@ -6,13 +6,17 @@ import { Layout } from '../common/Layout';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { css } from 'react-emotion';
 import { Utils } from 'app/ts/lib/Utils';
-import { EVideoFileSize } from 'app/ts/enums/video';
+import {
+	EVideoFileSize,
+	EVideoImageKind,
+	EVideoFileExtension,
+} from 'app/ts/enums/video';
 import { PageLoading } from '../common/PageLoading';
 import { Comments } from '../blocks/Comments';
 import { COLORS, THEME } from 'app/ts/theme';
 
 interface IProps {
-	ruteParams: {
+	routeParams: {
 		id: string;
 	};
 }
@@ -31,7 +35,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 	async componentDidMount() {
 		const result = await managers.api.request<{ item: ItemsStore.IItem }>(
 			EApiRequestType.GET,
-			API_PATHS.GET_ITEM.replace(':id', this.props.ruteParams.id),
+			API_PATHS.GET_ITEM.replace(':id', this.props.routeParams.id),
 			{},
 		);
 
@@ -65,6 +69,10 @@ export class ItemPage extends React.Component<IProps, IState> {
 				videoFile => videoFile.type === ItemsStore.EFileType.Video,
 			);
 
+			const thumbs = videoFiles.filter(
+				videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail,
+			);
+
 			return (
 				<div className={videoContainer}>
 					<h1 className={titleBlock}>{title}</h1>
@@ -73,6 +81,11 @@ export class ItemPage extends React.Component<IProps, IState> {
 						className={video}
 						controls={true}
 						width="100%"
+						poster={Utils.getImagePath(
+							id,
+							thumbs[0].fileName,
+							EVideoImageKind.Thumbnail,
+						).replace(EVideoFileExtension.Image, EVideoFileExtension.Jpeg)}
 						src={Utils.getVideoPath(id, videos, EVideoFileSize.SD)}
 					/>
 					stats:

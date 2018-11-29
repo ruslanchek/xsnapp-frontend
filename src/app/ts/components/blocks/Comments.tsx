@@ -44,9 +44,7 @@ export class Comments extends React.Component<IProps, IState> {
 		const result = await managers.api.request<{ items: IComment[] }>(
 			EApiRequestType.GET,
 			API_PATHS.GET_COMMENTS,
-			{
-				videoId: this.props.itemId,
-			},
+			{},
 		);
 
 		if (result.data) {
