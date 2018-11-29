@@ -39,7 +39,7 @@ export class HomePage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout>
+			<Layout showHeader={true}>
 				<main className={root}>{this.content}</main>
 			</Layout>
 		);

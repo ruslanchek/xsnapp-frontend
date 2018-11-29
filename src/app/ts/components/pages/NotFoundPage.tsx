@@ -11,7 +11,7 @@ export class NotFoundPage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout>
+			<Layout showHeader={true}>
 				<main className={root}>
 					<h1>404</h1>
 				</main>

@@ -12,7 +12,7 @@ export class UploadPage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout>
+			<Layout showHeader={false}>
 				<main className={root}>
 					<Upload enabled={true}>
 						{(

@@ -22,8 +22,6 @@ export class LoginPage extends React.Component<IProps, IState> {
 				output.values.password,
 			);
 
-			console.log(result);
-
 			if (!result.error && result.data) {
 				managers.route.go(PATHS.HOME);
 			}
@@ -32,7 +30,16 @@ export class LoginPage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout>
+			<Layout showHeader={false}>
+				<video
+					className={bg}
+					src={require('../../../video/bg/bg.mov')}
+					autoPlay
+					muted
+					loop
+					controls={false}
+					playsInline
+				/>
 				<main className={root}>
 					<Form
 						onSubmit={this.handleSubmit}
@@ -42,6 +49,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 							containerClassName={input}
 							name="email"
 							label="E-mail"
+							autoComplete="username"
 							validators={[new ValidatorIsEmail()]}
 						/>
 
@@ -50,6 +58,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 							name="password"
 							label="Password"
 							type="password"
+							autoComplete="current-password"
 							validators={[new ValidatorIsRequired()]}
 						/>
 
@@ -63,8 +72,26 @@ export class LoginPage extends React.Component<IProps, IState> {
 
 const root = css`
 	padding: 15px;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	z-index: 2;
+	box-sizing: border-box;
 `;
 
 const input = css`
 	margin-bottom: 15px;
+`;
+
+const bg = css`
+	display: block;
+	object-fit: cover;
+	z-index: 1;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
 `;

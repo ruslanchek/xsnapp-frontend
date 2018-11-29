@@ -14,6 +14,7 @@ import {
 import { PageLoading } from '../common/PageLoading';
 import { Comments } from '../blocks/Comments';
 import { COLORS, THEME } from 'app/ts/theme';
+import { Surface } from '../common/Surface';
 
 interface IProps {
 	routeParams: {
@@ -53,7 +54,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout>
+			<Layout showHeader={true}>
 				<main className={root}>{this.content}</main>
 			</Layout>
 		);
@@ -74,7 +75,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 			);
 
 			return (
-				<div className={videoContainer}>
+				<Surface>
 					<h1 className={titleBlock}>{title}</h1>
 					<video
 						muted
@@ -91,7 +92,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 					stats:
 					<p>views: {views}</p>
 					<Comments itemId={id} />
-				</div>
+				</Surface>
 			);
 		} else {
 			return <PageLoading />;

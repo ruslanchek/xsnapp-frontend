@@ -6,3 +6,4 @@ electron/dist
 Crypto-darwin-x64
 .awcache
 .env
+.DS_Store

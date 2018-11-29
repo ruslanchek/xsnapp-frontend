@@ -9,6 +9,7 @@ import { PATHS } from '../../config';
 
 export enum PageLayout {
 	Default,
+	Close,
 }
 
 interface IProps extends RouteComponentProps<{}> {

@@ -16,6 +16,7 @@ import { ListGallery } from './ListGallery';
 import { Link } from 'react-router-dom';
 import { PATHS } from 'app/ts/config';
 import { Utils } from 'app/ts/lib/Utils';
+import { Surface } from '../common/Surface';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -63,7 +64,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 					})
 				}
 			>
-				<div className={root}>
+				<Surface className={root}>
 					<div className={header}>
 						<div className={ava}>
 							<Avatar
@@ -141,16 +142,13 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 							Share
 						</div>
 					</div>
-				</div>
+				</Surface>
 			</VisibilitySensor>
 		);
 	}
 }
 
 const root = css`
-	border-radius: 3px;
-	overflow: hidden;
-	background-color: ${COLORS.BLACK_LIGHT.toString()};
 	margin-top: 10px;
 
 	&:first-of-type {

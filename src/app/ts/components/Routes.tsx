@@ -73,7 +73,7 @@ export class Routes extends React.Component<{}, IState> {
 						return (
 							<Page
 								{...props}
-								layout={PageLayout.Default}
+								layout={PageLayout.Close}
 								authRule={ERouteAuthRule.AuthorizedOnly}
 							>
 								<UploadPage />

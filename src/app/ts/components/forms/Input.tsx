@@ -13,6 +13,7 @@ interface IProps {
 	value?: string;
 	type?: string;
 	icon?: string;
+	autoComplete?: string;
 	validators?: Validator[];
 	inputClassName?: string;
 	containerClassName?: string;
@@ -110,6 +111,7 @@ export class Input extends React.PureComponent<IProps, {}> {
 									id={id}
 									name={this.props.name}
 									type={this.props.type}
+									autoComplete={this.props.autoComplete}
 									autoFocus={this.props.autoFocus}
 									ref={ref => (this.input = ref)}
 									className={cx(
