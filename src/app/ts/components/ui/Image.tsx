@@ -3,6 +3,7 @@ import { css, cx } from 'react-emotion';
 import { EVideoFileExtension } from 'app/ts/enums/video';
 import { Loader } from '../common/Loader';
 import { COLORS } from 'app/ts/theme';
+import { SvgIcon, EIconName } from './SvgIcon';
 
 interface IProps {
 	src: string;
@@ -51,7 +52,7 @@ export class Image extends React.PureComponent<IProps, IState> {
 
 				{error && (
 					<div className={errorBox}>
-						<CloseRounded fontSize={'inherit'} />
+						<SvgIcon name={EIconName.Close} />
 					</div>
 				)}
 

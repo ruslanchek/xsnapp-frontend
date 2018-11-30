@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { PATHS } from 'app/ts/config';
 import { Utils } from 'app/ts/lib/Utils';
 import { Surface } from '../common/Surface';
+import { SvgIcon, EIconName } from './SvgIcon';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -69,7 +70,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 						<div className={titleBlock}>
 							<div className={titleTop}>
 								<h3 className={h3}>{title}</h3>
-								<MoreHoriz className={more} />
+								<SvgIcon name={EIconName.More} className={more} />
 							</div>
 
 							<div className={titleBottom}>
@@ -78,7 +79,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 								{isVisible && (
 									<div className={viewsBlock}>
 										<span className="count">{views}</span>
-										<RemoveRedEyeRounded fontSize={'inherit'} />
+										<SvgIcon name={EIconName.Eye} className={more} />
 									</div>
 								)}
 							</div>
@@ -109,28 +110,25 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 
 					<div className={actions}>
 						<div className={actionButton}>
-							<ArrowUpwardRounded
+							<SvgIcon
+								name={EIconName.ArrowUpward}
 								className={actionButtonIcon}
-								fontSizeAdjust={10}
 							/>
 							71
 						</div>
 
 						<div className={actionButton}>
-							<ChatTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
+							<SvgIcon name={EIconName.Chat} className={actionButtonIcon} />
 							Comments
 						</div>
 
 						<div className={actionButton}>
-							<FavoriteTwoTone
-								className={actionButtonIcon}
-								fontSizeAdjust={10}
-							/>
+							<SvgIcon name={EIconName.Favorite} className={actionButtonIcon} />
 							23
 						</div>
 
 						<div className={actionButton}>
-							<ShareTwoTone className={actionButtonIcon} fontSizeAdjust={10} />
+							<SvgIcon name={EIconName.Share} className={actionButtonIcon} />
 							Share
 						</div>
 					</div>

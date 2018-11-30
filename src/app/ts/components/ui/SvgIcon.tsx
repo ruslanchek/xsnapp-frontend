@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled, { css } from 'react-emotion';
 
-export enum EIconNames {
+export enum EIconName {
 	ArrowUpward,
 	ArrowForward,
 	Close,
@@ -15,7 +15,16 @@ export enum EIconNames {
 }
 
 const icons = {
-	[EIconNames.Close]: require('@img/svg-icons/add.svg'),
+	[EIconName.ArrowUpward]: require('@img/svg-icons/round-arrow_forward-24px.svg'),
+	[EIconName.ArrowForward]: require('@img/svg-icons/round-arrow_upward-24px.svg'),
+	[EIconName.Close]: require('@img/svg-icons/round-close-24px.svg'),
+	[EIconName.Menu]: require('@img/svg-icons/round-menu-24px.svg'),
+	[EIconName.Play]: require('@img/svg-icons/round-play_arrow-24px.svg'),
+	[EIconName.More]: require('@img/svg-icons/round-more_horiz-24px.svg'),
+	[EIconName.Eye]: require('@img/svg-icons/round-remove_red_eye-24px.svg'),
+	[EIconName.Chat]: require('@img/svg-icons/round-chat-24px.svg'),
+	[EIconName.Favorite]: require('@img/svg-icons/round-favorite-24px.svg'),
+	[EIconName.Share]: require('@img/svg-icons/round-share-24px.svg'),
 };
 
 export interface IIconProps extends React.HTMLAttributes<SVGElement> {
@@ -24,7 +33,7 @@ export interface IIconProps extends React.HTMLAttributes<SVGElement> {
 	filled?: boolean;
 	height?: string;
 	innerRef?: React.RefObject<HTMLSpanElement>;
-	name: EIconNames;
+	name: EIconName;
 	rotate?: number;
 	stroke?: number;
 	width?: string;
@@ -53,14 +62,14 @@ export class SvgIcon extends React.PureComponent<IIconProps, any> {
 			...sharedProps
 		} = this.props;
 
-		const SvgIcon = icons[name].default;
+		const Icon = icons[name].default;
 
 		return (
 			<IconStyler
 				className={className}
 				{...{ innerRef, width, height, color, rotate, filled, stroke }}
 			>
-				<SvgIcon width="100%" height="100%" {...sharedProps} />
+				<Icon width="100%" height="100%" {...sharedProps} />
 			</IconStyler>
 		);
 	}

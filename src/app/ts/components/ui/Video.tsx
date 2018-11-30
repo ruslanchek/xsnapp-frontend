@@ -2,6 +2,7 @@ import * as React from 'react';
 import { css, cx } from 'react-emotion';
 import { Loader } from '../common/Loader';
 import { COLORS } from 'app/ts/theme';
+import { SvgIcon, EIconName } from './SvgIcon';
 
 interface IProps {
 	src: string;
@@ -43,7 +44,7 @@ export class Video extends React.PureComponent<IProps, IState> {
 
 				{error && (
 					<div className={errorBox}>
-						<CloseRounded fontSize={'inherit'} />
+						<SvgIcon name={EIconName.Close} />
 					</div>
 				)}
 
@@ -55,7 +56,7 @@ export class Video extends React.PureComponent<IProps, IState> {
 							this.videoRef.play();
 						}}
 					>
-						<PlayCircleFilledRounded fontSize={'inherit'} />
+						<SvgIcon name={EIconName.Play} />
 					</div>
 				)}
 

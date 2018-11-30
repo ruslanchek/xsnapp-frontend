@@ -12,7 +12,10 @@
 		"importHelpers": true,
 		"typeRoots": ["./node_modules/@types/"],
 		"baseUrl": "./src",
-		"isolatedModules": false
+		"isolatedModules": false,
+		"paths": {
+			"@img/*": ["./app/img/*"]
+		}
 	},
 	"include": ["./src/**/*.ts", "./src/**/*.tsx"]
 }

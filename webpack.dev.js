@@ -104,7 +104,30 @@ module.exports = {
 			},
 
 			{
-				test: /\.(gif|png|jpe?g|svg|mp4|mov)$/i,
+				test: /\.svg?$/,
+				use: [
+					{
+						loader: 'react-svg-loader',
+						query: {
+							svgo: {
+								pretty: true,
+								plugins: [
+									{
+										removeStyleElement: true,
+									},
+									{
+										removeTitle: true,
+									},
+								],
+							},
+						},
+					},
+				],
+				include: [path.resolve(__dirname, 'src/app/img/svg-icons')],
+			},
+
+			{
+				test: /\.(gif|png|jpe?g|mp4|mov)$/i,
 				loaders: ['file-loader'],
 			},
 		],

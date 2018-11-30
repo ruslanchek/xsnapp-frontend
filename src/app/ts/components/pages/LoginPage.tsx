@@ -10,6 +10,7 @@ import { ValidatorIsRequired } from '../forms/Validators/ValidatorIsRequired';
 import { Button } from '../ui/Button';
 import { Link } from 'react-router-dom';
 import { THEME, COLORS } from 'app/ts/theme';
+import { SvgIcon, EIconName } from '../ui/SvgIcon';
 
 interface IProps {}
 
@@ -35,7 +36,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 		return (
 			<Layout showHeader={false}>
 				<Link to={PATHS.HOME} className={close}>
-					<CloseRounded />
+					<SvgIcon name={EIconName.Close} />
 				</Link>
 				<video
 					className={bg}
@@ -69,7 +70,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 						/>
 
 						<Button type="submit">
-							Next <ArrowForwardRounded />
+							Next <SvgIcon name={EIconName.ArrowForward} />
 						</Button>
 					</Form>
 				</main>

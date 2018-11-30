@@ -4,6 +4,7 @@ import { FormContext, IFormContext } from './Form';
 import { Validator } from './Validators/Validator';
 import { InputErrors } from './InputErrors';
 import styled, { css, cx } from 'react-emotion';
+import { SvgIcon, EIconName } from '../ui/SvgIcon';
 
 interface IProps {
 	name: string;
@@ -11,7 +12,7 @@ interface IProps {
 	autoFocus?: boolean;
 	value?: string;
 	type?: string;
-	icon?: string;
+	icon?: EIconName;
 	autoComplete?: string;
 	validators?: Validator[];
 	inputClassName?: string;
@@ -33,7 +34,7 @@ export class Input extends React.PureComponent<IProps, {}> {
 		validators: [],
 		autoFocus: false,
 		value: '',
-		icon: '',
+		icon: null,
 		type: 'text',
 		name: '',
 		label: '',
@@ -89,11 +90,7 @@ export class Input extends React.PureComponent<IProps, {}> {
 								<Labels>
 									{this.props.icon && (
 										<Icon>
-											<Ionicon
-												icon={this.props.icon}
-												fontSize="22px"
-												color={COLORS.BLACK.toString()}
-											/>
+											<SvgIcon name={this.props.icon} />
 										</Icon>
 									)}
 

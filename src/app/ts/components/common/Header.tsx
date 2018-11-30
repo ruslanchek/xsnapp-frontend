@@ -6,6 +6,7 @@ import { PATHS } from 'app/ts/config';
 import { followStore } from 'react-stores';
 import { AuthStore } from 'app/ts/stores/AuthStore';
 import { managers } from 'app/ts/managers';
+import { SvgIcon, EIconName } from '../ui/SvgIcon';
 
 @followStore(AuthStore.store)
 export class Header extends React.PureComponent<{}, {}> {
@@ -23,7 +24,7 @@ export class Header extends React.PureComponent<{}, {}> {
 				</Link>
 
 				<div className="menu">
-					<MenuRounded fontSize={'large'} />
+					<SvgIcon name={EIconName.Menu} />
 				</div>
 			</header>
 		);
