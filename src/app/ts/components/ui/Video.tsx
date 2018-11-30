@@ -1,9 +1,7 @@
 import * as React from 'react';
 import { css, cx } from 'react-emotion';
-import { EVideoFileExtension } from 'app/ts/enums/video';
 import { Loader } from '../common/Loader';
 import { COLORS } from 'app/ts/theme';
-import { CloseRounded, PlayCircleFilledRounded } from '@material-ui/icons';
 
 interface IProps {
 	src: string;

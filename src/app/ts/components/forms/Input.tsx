@@ -1,5 +1,4 @@
 import * as React from 'react';
-import * as Ionicon from 'react-ionicons';
 import { COLORS, THEME } from '../../theme';
 import { FormContext, IFormContext } from './Form';
 import { Validator } from './Validators/Validator';
@@ -169,25 +168,22 @@ interface IIconText {
 
 const input = css`
 	width: 100%;
-	background-color: ${COLORS.WHITE.toString()};
-	padding: 0 ${THEME.SECTION_PADDING_H / 2}px;
+	background-color: transparent;
+	padding: 0;
 	outline: none;
-	border-radius: 4px;
 	height: ${THEME.INPUT_HEIGHT}px;
 	line-height: ${THEME.INPUT_HEIGHT}px;
-	font-size: ${THEME.FONT_SIZE_REGULAR}px;
-	border: 1px solid ${COLORS.GRAY.darken(0.05).toString()};
+	font-size: ${THEME.FONT_SIZE_BIG}px;
+	border: none;
+	border-bottom: 2px solid ${COLORS.WHITE.alpha(0.5).toString()};
 	font-weight: 600;
-	color: ${COLORS.BLACK.toString()};
+	color: ${COLORS.WHITE.toString()};
 	transition: border-color 0.2s;
 	box-sizing: border-box;
-
-	&:hover {
-		border-color: ${COLORS.GRAY.darken(0.1).toString()};
-	}
+	font-weight: 600;
 
 	&:focus {
-		border-color: ${COLORS.GRAY.darken(0.15).toString()};
+		border-color: ${COLORS.WHITE.alpha(1).toString()};
 	}
 `;
 
@@ -201,8 +197,8 @@ const Label = styled('label')`
 	align-items: center;
 	position: relative;
 	height: ${THEME.INPUT_HEIGHT}px;
-	font-size: ${THEME.FONT_SIZE_REGULAR}px;
-	color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
+	font-size: ${THEME.FONT_SIZE_BIG}px;
+	color: ${COLORS.WHITE.alpha(0.5).toString()};
 	top: 0;
 	left: 0;
 `;
@@ -234,8 +230,8 @@ const LabelText = styled('span')<IIconText>`
 		props.isShowed ? 'scale(1)' : 'scale(.8)'};
 	height: ${THEME.INPUT_HEIGHT}px;
 	line-height: ${THEME.INPUT_HEIGHT}px;
-	font-size: ${THEME.FONT_SIZE_REGULAR}px;
+	font-size: ${THEME.FONT_SIZE_BIG}px;
 	white-space: nowrap;
-	margin-left: ${(props: IIconText) =>
-		props.isIcon ? `${THEME.SECTION_PADDING_H / 2}px` : 0};
+	color: ${COLORS.WHITE.alpha(0.5).toString()};
+	font-weight: 600;
 `;

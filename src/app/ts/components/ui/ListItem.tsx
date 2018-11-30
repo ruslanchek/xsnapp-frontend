@@ -4,14 +4,6 @@ import { css } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { COLORS, THEME } from 'app/ts/theme';
 import { Avatar } from './Avatar';
-import {
-	ArrowUpwardRounded,
-	ChatTwoTone,
-	FavoriteTwoTone,
-	ShareTwoTone,
-	MoreHoriz,
-	RemoveRedEyeRounded,
-} from '@material-ui/icons';
 import { ListGallery } from './ListGallery';
 import { Link } from 'react-router-dom';
 import { PATHS } from 'app/ts/config';

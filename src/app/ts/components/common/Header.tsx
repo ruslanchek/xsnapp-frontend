@@ -6,7 +6,6 @@ import { PATHS } from 'app/ts/config';
 import { followStore } from 'react-stores';
 import { AuthStore } from 'app/ts/stores/AuthStore';
 import { managers } from 'app/ts/managers';
-import { MenuRounded } from '@material-ui/icons';
 
 @followStore(AuthStore.store)
 export class Header extends React.PureComponent<{}, {}> {
