@@ -1,20 +1,27 @@
 import * as React from 'react';
 import Color = require('color');
+import { COLORS } from 'app/ts/theme';
 
 interface IProps {
 	color: Color;
+	size?: number;
 }
 
 interface IState {}
 
 export class Loader extends React.PureComponent<IProps, IState> {
+	public static defaultProps: Partial<IProps> = {
+		color: COLORS.WHITE,
+		size: 50,
+	};
+
 	public render() {
-		const { color } = this.props;
+		const { color, size } = this.props;
 
 		return (
 			<svg
-				width="50"
-				height="50"
+				width={size}
+				height={size}
 				viewBox="0 0 42 42"
 				xmlns="http://www.w3.org/2000/svg"
 				stroke={color.toString()}

@@ -23,8 +23,8 @@ export class Header extends React.PureComponent<{}, {}> {
 					<div className={logo}>🤨</div>
 				</Link>
 
-				<div className="menu">
-					<SvgIcon name={EIconName.Menu} />
+				<div className={menu}>
+					<SvgIcon name={EIconName.Menu} width="30px" height="30px" />
 				</div>
 			</header>
 		);
@@ -73,4 +73,10 @@ const logo = css`
 
 const logoBtn = css`
 	color: ${COLORS.WHITE.toString()} !important;
+`;
+
+const menu = css`
+	height: 30px;
+	width: 30px;
+	margin-right: -3px;
 `;

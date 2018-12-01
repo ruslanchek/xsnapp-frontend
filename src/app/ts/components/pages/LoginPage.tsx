@@ -11,33 +11,64 @@ import { Button } from '../ui/Button';
 import { Link } from 'react-router-dom';
 import { THEME, COLORS, COMMON_STYLES } from 'app/ts/theme';
 import { SvgIcon, EIconName } from '../ui/SvgIcon';
+import { Loader } from '../common/Loader';
+import { FormError } from '../ui/FormError';
 
 interface IProps {}
 
-interface IState {}
+interface IState {
+	isLoading: boolean;
+	error: string;
+}
 
 export class LoginPage extends React.Component<IProps, IState> {
-	public state: IState = {};
+	public state: IState = {
+		isLoading: false,
+		error: null,
+	};
 
 	private handleSubmit = async (output: IFormModelOutput) => {
+		this.setState({
+			error: null,
+		});
+
 		if (output.isValid) {
+			this.setState({
+				isLoading: true,
+			});
+
 			const result = await managers.auth.login(
 				output.values.email,
 				output.values.password,
 			);
 
+			this.setState({
+				isLoading: false,
+			});
+
 			if (!result.error && result.data) {
 				managers.route.go(PATHS.HOME);
+			} else {
+				this.setState({
+					error: result.error,
+				});
 			}
+		} else {
+			this.setState({
+				error: 'INVALID_DATA',
+			});
 		}
 	};
 
 	public render() {
+		const { isLoading, error } = this.state;
+
 		return (
 			<Layout showHeader={false}>
 				<Link to={PATHS.HOME} className={close}>
 					<SvgIcon name={EIconName.Close} width="30px" height="30px" />
 				</Link>
+
 				<video
 					className={bg}
 					src={require('../../../video/bg/bg.mov')}
@@ -54,23 +85,31 @@ export class LoginPage extends React.Component<IProps, IState> {
 						validateOn={EFormValidateOn.SUBMIT}
 					>
 						<div className={form}>
-							<h1>Hello!</h1>
-							<Input
-								containerClassName={input}
-								name="email"
-								label="E-mail"
-								autoComplete="username"
-								validators={[new ValidatorIsEmail()]}
-							/>
+							<h1 className={head}>Hello!</h1>
 
-							<Input
-								containerClassName={input}
-								name="password"
-								label="Password"
-								type="password"
-								autoComplete="current-password"
-								validators={[new ValidatorIsRequired()]}
-							/>
+							<div className={inputs}>
+								<Input
+									showError={false}
+									containerClassName={input}
+									name="email"
+									label="E-mail"
+									autoComplete="username"
+									validators={[new ValidatorIsEmail()]}
+								/>
+
+								<Input
+									showError={false}
+									containerClassName={input}
+									name="password"
+									label="Password"
+									type="password"
+									autoComplete="current-password"
+									validators={[new ValidatorIsRequired()]}
+								/>
+								<div className={errorBlock}>
+									<FormError errors={[error]} />
+								</div>
+							</div>
 						</div>
 
 						<div className={buttons}>
@@ -81,18 +120,22 @@ export class LoginPage extends React.Component<IProps, IState> {
 								Forgot your password?
 							</Link>
 
-							<Button
-								type="submit"
-								iconLeft={
-									<SvgIcon
-										width={'30px'}
-										height={'30px'}
-										name={EIconName.ArrowForward}
-									/>
-								}
-							>
-								Next{' '}
-							</Button>
+							{isLoading ? (
+								<Loader color={COLORS.WHITE} size={40} />
+							) : (
+								<Button
+									type="submit"
+									iconRight={
+										<SvgIcon
+											width={'30px'}
+											height={'30px'}
+											name={EIconName.ArrowForward}
+										/>
+									}
+								>
+									Next{' '}
+								</Button>
+							)}
 						</div>
 					</Form>
 				</main>
@@ -101,7 +144,13 @@ export class LoginPage extends React.Component<IProps, IState> {
 	}
 }
 
-const form = css``;
+const form = css`
+	flex-direction: column;
+	display: flex;
+	justify-content: center;
+	flex-grow: 1;
+	position: relative;
+`;
 
 const formContainer = css`
 	display: flex;
@@ -115,6 +164,7 @@ const buttons = css`
 	justify-content: space-between;
 	align-items: center;
 	justify-self: baseline;
+	min-height: 50px;
 `;
 
 const close = css`
@@ -163,4 +213,19 @@ const bg = css`
 	width: 100%;
 	height: 100%;
 	animation: ${fadeIn} 5s;
+`;
+
+const head = css`
+	color: ${COLORS.WHITE.toString()};
+`;
+
+const errorBlock = css`
+	position: absolute;
+	top: 100%;
+	left: 50%;
+	transform: translateX(-50%);
+`;
+
+const inputs = css`
+	position: relative;
 `;

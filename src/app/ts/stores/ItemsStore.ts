@@ -7,6 +7,11 @@ export namespace ItemsStore {
 		Preview = 'preview',
 	}
 
+	export interface IItemUser {
+		id: number;
+		username: string;
+	}
+
 	export interface IItem {
 		avgFrameRate: number;
 		duration: number;
@@ -18,10 +23,7 @@ export namespace ItemsStore {
 		description: string;
 		tags: string[];
 		views: number;
-		user: {
-			id: number;
-			username: string;
-		};
+		user: IItemUser;
 	}
 
 	export interface IVideoFile {

@@ -14,9 +14,9 @@ export class Button extends React.PureComponent<IProps, {}> {
 
 		return (
 			<button className={button} type={type}>
-				{iconLeft && <span className={iconLeftIcon}>{iconLeft}</span>}
+				{iconLeft && <span className={iconLeftStyle}>{iconLeft}</span>}
 				{children}
-				{iconRight && <span className={iconRightIcon}>{iconRight}</span>}
+				{iconRight && <span className={iconRightStyle}>{iconRight}</span>}
 			</button>
 		);
 	}
@@ -38,10 +38,16 @@ const button = css`
 	padding: 0 15px;
 `;
 
-const iconLeftIcon = css`
-	margin-left: 1ex;
+const iconLeftStyle = css`
+	margin-right: 1ex;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;
 
-const iconRightIcon = css`
-	margin-right: 1ex;
+const iconRightStyle = css`
+	margin-left: 1ex;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 `;

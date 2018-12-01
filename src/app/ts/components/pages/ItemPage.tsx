@@ -15,6 +15,8 @@ import { PageLoading } from '../common/PageLoading';
 import { Comments } from '../blocks/Comments';
 import { COLORS, THEME } from 'app/ts/theme';
 import { Surface } from '../common/Surface';
+import { ItemHeader } from '../common/ItemHeader';
+import { Tags } from '../ui/Tags';
 
 interface IProps {
 	routeParams: {
@@ -64,7 +66,15 @@ export class ItemPage extends React.Component<IProps, IState> {
 		const { isLoaded } = this.state;
 
 		if (isLoaded) {
-			const { videoFiles, id, title, views } = this.state.item;
+			const {
+				videoFiles,
+				description,
+				id,
+				title,
+				views,
+				user,
+				tags,
+			} = this.state.item;
 
 			const videos = videoFiles.filter(
 				videoFile => videoFile.type === ItemsStore.EFileType.Video,
@@ -76,7 +86,13 @@ export class ItemPage extends React.Component<IProps, IState> {
 
 			return (
 				<Surface>
-					<h1 className={titleBlock}>{title}</h1>
+					<ItemHeader
+						title={title}
+						views={views}
+						isVisible={true}
+						user={user}
+						itemId={id}
+					/>
 					<video
 						muted
 						className={video}
@@ -89,9 +105,9 @@ export class ItemPage extends React.Component<IProps, IState> {
 						).replace(EVideoFileExtension.Image, EVideoFileExtension.Jpeg)}
 						src={Utils.getVideoPath(id, videos, EVideoFileSize.SD)}
 					/>
-					stats:
-					<p>views: {views}</p>
+					<Tags tags={tags} />
 					<Comments itemId={id} />
+					{description && <section className={desc}>{description}</section>}
 				</Surface>
 			);
 		} else {
@@ -108,15 +124,6 @@ const video = css`
 	display: block;
 `;
 
-const videoContainer = css`
-	background-color: ${COLORS.BLACK_LIGHT.toString()};
-	border-radius: 3px;
-	overflow: hidden;
-`;
-
-const titleBlock = css`
-	font-size: ${THEME.FONT_SIZE_MEDIUM}px;
-	font-weight: 800;
-	margin: 0;
+const desc = css`
 	padding: 10px;
 `;

@@ -17,6 +17,7 @@ interface IProps {
 	validators?: Validator[];
 	inputClassName?: string;
 	containerClassName?: string;
+	showError: boolean;
 	onFocus?: (e) => void;
 	onBlur?: (e) => void;
 	onChange?: (e) => void;
@@ -75,7 +76,22 @@ export class Input extends React.PureComponent<IProps, {}> {
 	}
 
 	public render() {
-		const id = `input-${this.props.name}`;
+		const {
+			showError,
+			name,
+			icon,
+			label,
+			type,
+			autoComplete,
+			onKeyDown,
+			onChange,
+			onBlur,
+			onFocus,
+			inputClassName,
+			autoFocus,
+		} = this.props;
+		const { animatedLabel, value } = this.state;
+		const id = `input-${name}`;
 
 		return (
 			<FormContext.Consumer>
@@ -85,55 +101,51 @@ export class Input extends React.PureComponent<IProps, {}> {
 					return (
 						<React.Fragment>
 							<Label htmlFor={id} className={this.props.containerClassName}>
-								<InputErrors inputName={this.props.name} />
+								{showError && <InputErrors inputName={name} />}
 
 								<Labels>
 									{this.props.icon && (
 										<Icon>
-											<SvgIcon name={this.props.icon} />
+											<SvgIcon name={icon} />
 										</Icon>
 									)}
 
 									<LabelText
-										isAnimated={this.state.animatedLabel}
-										isIcon={!this.props.icon}
-										isShowed={!this.state.value}
+										isAnimated={animatedLabel}
+										isIcon={!icon}
+										isShowed={!value}
 									>
-										{this.props.label}
+										{label}
 									</LabelText>
 								</Labels>
 
 								<input
 									id={id}
-									name={this.props.name}
-									type={this.props.type}
-									autoComplete={this.props.autoComplete}
-									autoFocus={this.props.autoFocus}
+									name={name}
+									type={type}
+									autoComplete={autoComplete}
+									autoFocus={autoFocus}
 									ref={ref => (this.input = ref)}
-									className={cx(
-										input,
-										this.props.inputClassName,
-										this.props.icon ? inputIcon : '',
-									)}
+									className={cx(input, inputClassName, icon ? inputIcon : '')}
 									onFocus={e => {
 										this.setState({
 											isFocused: true,
 										});
-										this.props.onFocus(e);
+										onFocus(e);
 									}}
 									onBlur={e => {
 										this.setState({
 											isFocused: false,
 										});
-										this.props.onBlur(e);
+										onBlur(e);
 									}}
 									onChange={e => {
 										this.setValue(e.target.value);
-										this.props.onChange(e);
+										onChange(e);
 									}}
 									onKeyDown={e => {
 										this.setValue(this.input.value);
-										this.props.onKeyDown(e);
+										onKeyDown(e);
 									}}
 								/>
 							</Label>
@@ -172,6 +184,7 @@ const input = css`
 	line-height: ${THEME.INPUT_HEIGHT}px;
 	font-size: ${THEME.FONT_SIZE_BIG}px;
 	border: none;
+	border-radius: 0;
 	border-bottom: 2px solid ${COLORS.WHITE.alpha(0.5).toString()};
 	font-weight: 600;
 	color: ${COLORS.WHITE.toString()};
@@ -224,7 +237,7 @@ const LabelText = styled('span')<IIconText>`
 		props.isAnimated ? 'transform .2s, opacity .2s' : ''};
 	opacity: ${(props: IIconText) => (props.isShowed ? 1 : 0)};
 	transform: ${(props: IIconText) =>
-		props.isShowed ? 'scale(1)' : 'scale(.8)'};
+		props.isShowed ? 'translateX(0)' : 'translateX(15px)'};
 	height: ${THEME.INPUT_HEIGHT}px;
 	line-height: ${THEME.INPUT_HEIGHT}px;
 	font-size: ${THEME.FONT_SIZE_BIG}px;

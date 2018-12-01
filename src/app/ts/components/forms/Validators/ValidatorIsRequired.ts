@@ -6,8 +6,6 @@ export class ValidatorIsRequired extends Validator {
 	}
 
 	public validate(value: string): boolean {
-		console.log(value);
-
 		return !!value;
 	}
 
