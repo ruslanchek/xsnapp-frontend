@@ -81,7 +81,8 @@ export class Page extends React.Component<IProps, IState> {
 			case ERouteAuthRule.AuthorizedOnly: {
 				if (
 					!AuthStore.store.state.profile ||
-					!AuthStore.store.state.authorized
+					!AuthStore.store.state.authorized ||
+					!managers.auth.getToken()
 				) {
 					url = PATHS.AUTH_LOGIN;
 				}
@@ -89,7 +90,11 @@ export class Page extends React.Component<IProps, IState> {
 			}
 
 			case ERouteAuthRule.UnauthorizedOnly: {
-				if (AuthStore.store.state.profile && AuthStore.store.state.authorized) {
+				if (
+					AuthStore.store.state.profile &&
+					AuthStore.store.state.authorized &&
+					managers.auth.getToken()
+				) {
 					url = PATHS.HOME;
 				}
 				break;

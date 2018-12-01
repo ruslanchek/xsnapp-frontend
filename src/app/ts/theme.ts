@@ -1,5 +1,5 @@
 import Color = require('color');
-import { css } from 'emotion';
+import { css } from 'react-emotion';
 
 export const COLORS = {
 	GRAY: Color('#A5AEC1'),
@@ -47,33 +47,58 @@ export const THEME = {
 };
 
 export const COMMON_STYLES = {
-	LINK: css({
-		color: COLORS.BLACK.toString(),
-		textDecoration: 'none',
+	BOLD: css`
+		font-weight: 600;
+	`,
 
-		':link': {
-			color: COLORS.BLACK.toString(),
-		},
+	LINK: css`
+		color: ${COLORS.GREEN.toString()};
+		text-decoration: 'none';
 
-		':visited': {
-			color: COLORS.BLACK.toString(),
-		},
+		&:link {
+			color: ${COLORS.GREEN.toString()};
+		}
 
-		':hover': {
-			color: COLORS.BLACK.lighten(1.25).toString(),
-		},
+		&:visited {
+			color: ${COLORS.GREEN.toString()};
+		}
 
-		':active': {
-			color: COLORS.BLACK.lighten(1).toString(),
-		},
-	}),
+		&:hover {
+			color: ${COLORS.GREEN.lighten(1.25).toString()};
+		}
 
-	SMALL_TEXT: css({
-		fontSize: THEME.FONT_SIZE_SMALL,
-	}),
+		&:active {
+			color: ${COLORS.GREEN.lighten(1).toString()};
+		}
+	`,
 
-	FILTER_ACCENT: css({
-		color: COLORS.BLACK.toString(),
-		fontWeight: 600,
-	}),
+	LINK_WHITE: css`
+		color: ${COLORS.WHITE.toString()};
+		text-decoration: 'none';
+
+		&:link {
+			color: ${COLORS.WHITE.toString()};
+		}
+
+		&:visited {
+			color: ${COLORS.WHITE.toString()};
+		}
+
+		&:hover {
+			color: ${COLORS.WHITE.alpha(0.6).toString()};
+		}
+
+		&:active {
+			color: ${COLORS.WHITE.alpha(0.75).toString()};
+		}
+	`,
+
+	SMALL_TEXT: css`
+		font-size: ${THEME.FONT_SIZE_SMALL}px;
+	`,
+
+	FILTER_ACCENT: css`
+		color: ${COLORS.BLACK.toString()};
+		font-weight: 600;
+	`,
 };

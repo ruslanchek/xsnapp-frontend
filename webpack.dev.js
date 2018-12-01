@@ -10,6 +10,7 @@ const port = 7000;
 const host = '0.0.0.0';
 
 let plugins = [
+	// new BundleAnalyzerPlugin(),
 	new CleanWebpackPlugin(['dist'], {
 		verbose: true,
 	}),

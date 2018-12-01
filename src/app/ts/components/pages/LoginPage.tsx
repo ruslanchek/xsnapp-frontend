@@ -2,14 +2,14 @@ import * as React from 'react';
 import { managers } from 'app/ts/managers';
 import { PATHS } from 'app/ts/config';
 import { Layout } from '../common/Layout';
-import { css, keyframes } from 'react-emotion';
+import { css, keyframes, cx } from 'react-emotion';
 import { Form, EFormValidateOn, IFormModelOutput } from '../forms/Form';
 import { Input } from '../forms/Input';
 import { ValidatorIsEmail } from '../forms/Validators/ValidatorIsEmail';
 import { ValidatorIsRequired } from '../forms/Validators/ValidatorIsRequired';
 import { Button } from '../ui/Button';
 import { Link } from 'react-router-dom';
-import { THEME, COLORS } from 'app/ts/theme';
+import { THEME, COLORS, COMMON_STYLES } from 'app/ts/theme';
 import { SvgIcon, EIconName } from '../ui/SvgIcon';
 
 interface IProps {}
@@ -36,7 +36,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 		return (
 			<Layout showHeader={false}>
 				<Link to={PATHS.HOME} className={close}>
-					<SvgIcon name={EIconName.Close} />
+					<SvgIcon name={EIconName.Close} width="30px" height="30px" />
 				</Link>
 				<video
 					className={bg}
@@ -49,35 +49,73 @@ export class LoginPage extends React.Component<IProps, IState> {
 				/>
 				<main className={root}>
 					<Form
+						className={formContainer}
 						onSubmit={this.handleSubmit}
 						validateOn={EFormValidateOn.SUBMIT}
 					>
-						<Input
-							containerClassName={input}
-							name="email"
-							label="E-mail"
-							autoComplete="username"
-							validators={[new ValidatorIsEmail()]}
-						/>
+						<div className={form}>
+							<h1>Hello!</h1>
+							<Input
+								containerClassName={input}
+								name="email"
+								label="E-mail"
+								autoComplete="username"
+								validators={[new ValidatorIsEmail()]}
+							/>
 
-						<Input
-							containerClassName={input}
-							name="password"
-							label="Password"
-							type="password"
-							autoComplete="current-password"
-							validators={[new ValidatorIsRequired()]}
-						/>
+							<Input
+								containerClassName={input}
+								name="password"
+								label="Password"
+								type="password"
+								autoComplete="current-password"
+								validators={[new ValidatorIsRequired()]}
+							/>
+						</div>
 
-						<Button type="submit">
-							Next <SvgIcon name={EIconName.ArrowForward} />
-						</Button>
+						<div className={buttons}>
+							<Link
+								className={cx(COMMON_STYLES.LINK_WHITE, COMMON_STYLES.BOLD)}
+								to={'#'}
+							>
+								Forgot your password?
+							</Link>
+
+							<Button
+								type="submit"
+								iconLeft={
+									<SvgIcon
+										width={'30px'}
+										height={'30px'}
+										name={EIconName.ArrowForward}
+									/>
+								}
+							>
+								Next{' '}
+							</Button>
+						</div>
 					</Form>
 				</main>
 			</Layout>
 		);
 	}
 }
+
+const form = css``;
+
+const formContainer = css`
+	display: flex;
+	flex-direction: column;
+	flex-grow: 1;
+	justify-content: center;
+`;
+
+const buttons = css`
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	justify-self: baseline;
+`;
 
 const close = css`
 	position: absolute;
@@ -96,7 +134,6 @@ const root = css`
 	height: 100%;
 	z-index: 2;
 	box-sizing: border-box;
-	padding-top: ${THEME.HEADER_HEIGHT}px;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;

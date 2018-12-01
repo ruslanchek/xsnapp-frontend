@@ -4,15 +4,19 @@ import { THEME, COLORS } from 'app/ts/theme';
 
 interface IProps {
 	type: 'submit' | 'button';
+	iconLeft?: JSX.Element;
+	iconRight?: JSX.Element;
 }
 
 export class Button extends React.PureComponent<IProps, {}> {
 	public render() {
-		const { type } = this.props;
+		const { type, children, iconLeft, iconRight } = this.props;
 
 		return (
 			<button className={button} type={type}>
-				{this.props.children}
+				{iconLeft && <span className={iconLeftIcon}>{iconLeft}</span>}
+				{children}
+				{iconRight && <span className={iconRightIcon}>{iconRight}</span>}
 			</button>
 		);
 	}
@@ -32,4 +36,12 @@ const button = css`
 	justify-content: center;
 	font-weight: 600;
 	padding: 0 15px;
+`;
+
+const iconLeftIcon = css`
+	margin-left: 1ex;
+`;
+
+const iconRightIcon = css`
+	margin-right: 1ex;
 `;

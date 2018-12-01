@@ -15,8 +15,8 @@ export enum EIconName {
 }
 
 const icons = {
-	[EIconName.ArrowUpward]: require('@img/svg-icons/round-arrow_forward-24px.svg'),
-	[EIconName.ArrowForward]: require('@img/svg-icons/round-arrow_upward-24px.svg'),
+	[EIconName.ArrowUpward]: require('@img/svg-icons/round-arrow_upward-24px.svg'),
+	[EIconName.ArrowForward]: require('@img/svg-icons/round-arrow_forward-24px.svg'),
 	[EIconName.Close]: require('@img/svg-icons/round-close-24px.svg'),
 	[EIconName.Menu]: require('@img/svg-icons/round-menu-24px.svg'),
 	[EIconName.Play]: require('@img/svg-icons/round-play_arrow-24px.svg'),

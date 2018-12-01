@@ -97,7 +97,7 @@ export class Input extends React.PureComponent<IProps, {}> {
 									<LabelText
 										isAnimated={this.state.animatedLabel}
 										isIcon={!this.props.icon}
-										isShowed={!this.state.isFocused && !this.state.value}
+										isShowed={!this.state.value}
 									>
 										{this.props.label}
 									</LabelText>
@@ -195,7 +195,7 @@ const Label = styled('label')`
 	position: relative;
 	height: ${THEME.INPUT_HEIGHT}px;
 	font-size: ${THEME.FONT_SIZE_BIG}px;
-	color: ${COLORS.WHITE.alpha(0.5).toString()};
+	color: ${COLORS.WHITE.alpha(0.65).toString()};
 	top: 0;
 	left: 0;
 `;
