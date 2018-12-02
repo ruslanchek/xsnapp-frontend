@@ -66,6 +66,11 @@ export class AuthManager extends Manager {
 					profile: null,
 				});
 			}
+		} else {
+			AuthStore.store.setState({
+				authorized: false,
+				profile: null,
+			});
 		}
 	}
 

@@ -93,6 +93,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 						user={user}
 						itemId={id}
 					/>
+
 					<video
 						muted
 						className={video}
@@ -105,9 +106,12 @@ export class ItemPage extends React.Component<IProps, IState> {
 						).replace(EVideoFileExtension.Image, EVideoFileExtension.Jpeg)}
 						src={Utils.getVideoPath(id, videos, EVideoFileSize.SD)}
 					/>
+
 					<Tags tags={tags} />
-					<Comments itemId={id} />
+
 					{description && <section className={desc}>{description}</section>}
+
+					<Comments itemId={id} />
 				</Surface>
 			);
 		} else {

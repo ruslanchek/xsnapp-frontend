@@ -14,6 +14,7 @@ export const API_PATHS = {
 	AUTH_REGISTER: '/auth/register',
 	UPLOAD: '/upload',
 	GET_COMMENTS: '/comments',
+	ADD_COMMENT: '/comments',
 };
 
 export const CONFIG = {

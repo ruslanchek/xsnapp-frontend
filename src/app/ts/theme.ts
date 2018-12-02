@@ -54,6 +54,7 @@ export const COMMON_STYLES = {
 	LINK: css`
 		color: ${COLORS.GREEN.toString()};
 		text-decoration: 'none';
+		outline: none;
 
 		&:link {
 			color: ${COLORS.GREEN.toString()};

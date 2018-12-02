@@ -23,6 +23,7 @@ export class Button extends React.PureComponent<IProps, {}> {
 }
 
 const button = css`
+	outline: none;
 	height: ${THEME.INPUT_HEIGHT}px;
 	line-height: ${THEME.INPUT_HEIGHT}px;
 	background-color: ${COLORS.WHITE.toString()};

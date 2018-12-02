@@ -3,7 +3,6 @@ import { Redirect, RouteComponentProps } from 'react-router';
 import { followStore } from 'react-stores';
 import { managers } from '../../managers';
 import { ERouteAuthRule } from '../../managers/RouteManager';
-import { StateStore } from '../../stores/StateStore';
 import { AuthStore } from '../../stores/AuthStore';
 import { PATHS } from '../../config';
 
@@ -22,7 +21,7 @@ interface IState {
 	location: string;
 }
 
-@followStore(StateStore.store)
+@followStore(AuthStore.store)
 export class Page extends React.Component<IProps, IState> {
 	private currentLocation: string = null;
 
@@ -83,11 +82,7 @@ export class Page extends React.Component<IProps, IState> {
 
 		switch (this.props.authRule) {
 			case ERouteAuthRule.AuthorizedOnly: {
-				if (
-					!AuthStore.store.state.profile ||
-					!AuthStore.store.state.authorized ||
-					!managers.auth.getToken()
-				) {
+				if (!AuthStore.store.state.authorized) {
 					url = PATHS.AUTH_LOGIN;
 					managers.auth.setBackUrl(this.currentLocation);
 				}
@@ -95,11 +90,7 @@ export class Page extends React.Component<IProps, IState> {
 			}
 
 			case ERouteAuthRule.UnauthorizedOnly: {
-				if (
-					AuthStore.store.state.profile &&
-					AuthStore.store.state.authorized &&
-					managers.auth.getToken()
-				) {
+				if (AuthStore.store.state.authorized) {
 					url = PATHS.HOME;
 				}
 				break;
