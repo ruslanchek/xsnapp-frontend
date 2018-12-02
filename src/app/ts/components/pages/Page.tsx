@@ -24,6 +24,8 @@ interface IState {
 
 @followStore(StateStore.store)
 export class Page extends React.Component<IProps, IState> {
+	private currentLocation: string = null;
+
 	public state: IState = {
 		routeKey: null,
 		location: null,
@@ -37,11 +39,13 @@ export class Page extends React.Component<IProps, IState> {
 		);
 	}
 
-	public componentDidUpdate() {
+	public componentWillUpdate() {
 		const { key } = this.props.location;
 		const { authRule } = this.props;
 		const { pathname, hash, search } = this.props.history.location;
 		const location = `${pathname}${search}${hash}`;
+
+		this.currentLocation = location;
 
 		if (key !== this.state.routeKey || location !== this.state.location) {
 			this.setState(
@@ -85,6 +89,7 @@ export class Page extends React.Component<IProps, IState> {
 					!managers.auth.getToken()
 				) {
 					url = PATHS.AUTH_LOGIN;
+					managers.auth.setBackUrl(this.currentLocation);
 				}
 				break;
 			}

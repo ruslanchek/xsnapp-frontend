@@ -3,7 +3,6 @@ import { History } from 'history';
 import { CONFIG, PATHS } from '../config';
 import { StateStore } from '../stores/StateStore';
 import { Manager } from './Manager';
-import { AuthStore } from '../stores/AuthStore';
 
 export enum ERouteAuthRule {
 	UnauthorizedOnly,

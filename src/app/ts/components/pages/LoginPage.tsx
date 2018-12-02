@@ -47,7 +47,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 			});
 
 			if (!result.error && result.data) {
-				managers.route.go(PATHS.HOME);
+				managers.auth.goAuth();
 			} else {
 				this.setState({
 					error: result.error,

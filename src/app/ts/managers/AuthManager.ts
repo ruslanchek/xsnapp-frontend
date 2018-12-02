@@ -22,9 +22,25 @@ export class AuthManager extends Manager {
 		managers.route.go(PATHS.HOME);
 	}
 
-	public setToken(token: string): void {
-		console.log(token);
+	public setBackUrl(url: string) {
+		if (url) {
+			managers.storage.session.setJSON('authBackUrl', url);
+		}
+	}
 
+	public goAuth() {
+		const backUrl = managers.storage.session.getJSON('authBackUrl');
+		console.log(backUrl);
+
+		if (Boolean(backUrl)) {
+			managers.route.go(backUrl);
+			managers.storage.session.remove('authBackUrl');
+		} else {
+			managers.route.go(PATHS.HOME);
+		}
+	}
+
+	public setToken(token: string): void {
 		managers.storage.cookies.set('token', token);
 	}
 
