@@ -19,6 +19,7 @@ interface IState {
 	text: string;
 	isLoadingForm: boolean;
 	error: string;
+	parentId: number;
 }
 
 interface IComment {
@@ -49,6 +50,7 @@ export class Comments extends React.Component<IProps, IState> {
 		text: '',
 		isLoadingForm: false,
 		error: null,
+		parentId: 0,
 	};
 
 	componentDidMount() {
@@ -86,6 +88,7 @@ export class Comments extends React.Component<IProps, IState> {
 			API_PATHS.ADD_COMMENT,
 			{
 				text: this.state.text,
+				parentId: this.state.parentId,
 			},
 		);
 
@@ -126,6 +129,15 @@ export class Comments extends React.Component<IProps, IState> {
 									text: event.target.value,
 								});
 							}}
+						/>
+
+						<input
+							onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+								this.setState({
+									parentId: parseInt(event.target.value),
+								});
+							}}
+							value={this.state.parentId}
 						/>
 
 						{isLoadingForm ? (
