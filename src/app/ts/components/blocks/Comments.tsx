@@ -25,6 +25,7 @@ interface IState {
 interface IComment {
 	id: number;
 	text: string;
+	date: Date;
 	children: IComment[];
 }
 
@@ -33,6 +34,7 @@ const Comment = (props: { comment: IComment }) => {
 		<div>
 			id: {props.comment.id}
 			text: {props.comment.text}
+			date: {props.comment.date}
 			<br />
 			<div className={commentChildren}>
 				{props.comment.children.map((item, i) => {
