@@ -13,14 +13,13 @@ import {
 } from 'app/ts/enums/video';
 import { PageLoading } from '../common/PageLoading';
 import { Comments } from '../blocks/Comments';
-import { COLORS, THEME } from 'app/ts/theme';
 import { Surface } from '../common/Surface';
 import { ItemHeader } from '../common/ItemHeader';
 import { Tags } from '../ui/Tags';
 
 interface IProps {
 	routeParams: {
-		id: string;
+		itemId: string;
 	};
 }
 
@@ -38,7 +37,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 	async componentDidMount() {
 		const result = await managers.api.request<{ item: ItemsStore.IItem }>(
 			EApiRequestType.GET,
-			API_PATHS.GET_ITEM.replace(':id', this.props.routeParams.id),
+			API_PATHS.GET_ITEM.replace(':itemId', this.props.routeParams.itemId),
 			{},
 		);
 

@@ -1,6 +1,6 @@
 export const PATHS = {
 	HOME: '/',
-	ITEM: '/item/:id',
+	ITEM: '/item/:itemId',
 	AUTH_LOGIN: '/auth/login',
 	UPLOAD: '/upload',
 	NOT_FOUND: '/404',
@@ -8,12 +8,12 @@ export const PATHS = {
 
 export const API_PATHS = {
 	GET_ITEMS: '/items',
-	GET_ITEM: '/item/:id',
+	GET_ITEM: '/item/:itemId',
 	GET_PROFILE: '/profile',
 	AUTH_LOGIN: '/auth/login',
 	AUTH_REGISTER: '/auth/register',
 	UPLOAD: '/upload',
-	GET_COMMENTS: '/comments',
+	GET_COMMENTS: '/comments/:itemId',
 	ADD_COMMENT: '/comments',
 };
 

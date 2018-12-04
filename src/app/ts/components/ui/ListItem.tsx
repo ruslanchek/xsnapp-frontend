@@ -66,7 +66,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 						itemId={id}
 					/>
 
-					<Link to={PATHS.ITEM.replace(':id', id.toString())}>
+					<Link to={PATHS.ITEM.replace(':itemId', id.toString())}>
 						<ListGallery
 							id={id}
 							isVisible={isVisible}

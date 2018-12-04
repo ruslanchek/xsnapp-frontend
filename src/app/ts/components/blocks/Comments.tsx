@@ -9,6 +9,7 @@ import { followStore } from 'react-stores';
 import { StateStore } from 'app/ts/stores/StateStore';
 import { AuthStore } from 'app/ts/stores/AuthStore';
 import { Loader } from '../common/Loader';
+import { Modal } from '../modals/Modal';
 
 interface IProps {
 	itemId: number;
@@ -18,8 +19,10 @@ interface IState {
 	comments: IComment[];
 	text: string;
 	isLoadingForm: boolean;
+	isLoadingList: boolean;
 	error: string;
 	parentId: number;
+	isModalOpened: boolean;
 }
 
 interface IComment {
@@ -51,8 +54,10 @@ export class Comments extends React.Component<IProps, IState> {
 		comments: [],
 		text: '',
 		isLoadingForm: false,
+		isLoadingList: false,
 		error: null,
 		parentId: 0,
+		isModalOpened: false,
 	};
 
 	componentDidMount() {
@@ -60,10 +65,15 @@ export class Comments extends React.Component<IProps, IState> {
 	}
 
 	private async loadComments() {
+		this.setState({
+			isLoadingList: true,
+		});
+
+		const { itemId } = this.props;
+
 		const result = await managers.api.request<{ items: IComment[] }>(
 			EApiRequestType.GET,
-			API_PATHS.GET_COMMENTS,
-			{},
+			API_PATHS.GET_COMMENTS.replace(':itemId', itemId.toString()),
 		);
 
 		if (result.data) {
@@ -71,6 +81,10 @@ export class Comments extends React.Component<IProps, IState> {
 				comments: result.data.items,
 			});
 		}
+
+		this.setState({
+			isLoadingList: false,
+		});
 	}
 
 	private async postComment() {
@@ -85,12 +99,16 @@ export class Comments extends React.Component<IProps, IState> {
 			error: null,
 		});
 
+		const { parentId, text } = this.state;
+		const { itemId } = this.props;
+
 		const result = await managers.api.request<{ items: IComment[] }>(
 			EApiRequestType.POST,
 			API_PATHS.ADD_COMMENT,
 			{
-				text: this.state.text,
-				parentId: this.state.parentId,
+				text,
+				parentId,
+				itemId,
 			},
 		);
 
@@ -111,8 +129,14 @@ export class Comments extends React.Component<IProps, IState> {
 		}
 	}
 
+	private handleModalOnClose = () => {
+		this.setState({
+			parentId: 0,
+		});
+	};
+
 	public render() {
-		const { isLoadingForm } = this.state;
+		const { isLoadingForm, isModalOpened } = this.state;
 
 		if (AuthStore.store.state.authorized) {
 			return (
@@ -133,15 +157,6 @@ export class Comments extends React.Component<IProps, IState> {
 							}}
 						/>
 
-						<input
-							onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-								this.setState({
-									parentId: parseInt(event.target.value),
-								});
-							}}
-							value={this.state.parentId}
-						/>
-
 						{isLoadingForm ? (
 							<Loader size={32} />
 						) : (
@@ -154,6 +169,8 @@ export class Comments extends React.Component<IProps, IState> {
 							return <Comment key={i} comment={comment} />;
 						})}
 					</div>
+
+					<Modal isVisible={isModalOpened} onClose={this.handleModalOnClose} />
 				</div>
 			);
 		} else {

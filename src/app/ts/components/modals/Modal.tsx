@@ -22,7 +22,7 @@ const DEFAULT_WIDTH: number = 400;
 
 export class Modal extends React.PureComponent<IProps, IState> {
 	public state: IState = {
-		isContentVisible: false
+		isContentVisible: false,
 	};
 
 	private animationDelay = null;
@@ -41,12 +41,12 @@ export class Modal extends React.PureComponent<IProps, IState> {
 		if (nextProps) {
 			this.animationDelay = setTimeout(() => {
 				this.setState({
-					isContentVisible: nextProps.isVisible
+					isContentVisible: nextProps.isVisible,
 				});
 			}, 10);
 		}
 
-		if(nextProps.isVisible) {
+		if (nextProps.isVisible) {
 			document.body.classList.add('hidden');
 		} else {
 			document.body.classList.remove('hidden');
@@ -121,7 +121,7 @@ interface IContentProps {
 }
 
 const Container = styled('div')`
-  align-items: center;
+	align-items: center;
 	background-color: ${COLORS.BLACK_LIGHT.alpha(0.8).toString()};
 	bottom: 0;
 	display: flex;
@@ -134,7 +134,7 @@ const Container = styled('div')`
 	top: 0;
 	z-index: 1000;
 	box-sizing: border-box;
-	
+
 	${mq.phone} {
 		width: 100vw;
 		height: 100vh;
@@ -142,7 +142,7 @@ const Container = styled('div')`
 `;
 
 const Content = styled('div')<IContentProps>`
-  background-color: ${COLORS.WHITE.toString()};
+	background-color: ${COLORS.WHITE.toString()};
 	border-radius: 6px;
 	overflow: hidden;
 	position: relative;
@@ -150,7 +150,7 @@ const Content = styled('div')<IContentProps>`
 	margin: auto;
 	font-size: ${THEME.FONT_SIZE_SMALL};
 	width: ${(props: IContentProps) => props.width}px;
-	
+
 	${mq.phone} {
 		width: 100% !important;
 		overflow: auto;
@@ -160,7 +160,7 @@ const Content = styled('div')<IContentProps>`
 
 const container = {
 	enter: css`
-		opacity: .01;
+		opacity: 0.01;
 	`,
 
 	enterActive: css`
@@ -173,20 +173,20 @@ const container = {
 	`,
 
 	exitActive: css`
-		opacity: .01;
+		opacity: 0.01;
 		transition: opacity ${ANIMATION_TIME}ms;
 	`,
 };
 
 const content = {
 	enter: css`
-		transform: scale(.9);
+		transform: scale(0.9);
 	`,
 
 	enterActive: css`
 		transform: scale(1);
 		transition: transform ${ANIMATION_TIME}ms;
-		transition-timing-function: cubic-bezier(.175, .885, .390, 1.100);
+		transition-timing-function: cubic-bezier(0.175, 0.885, 0.39, 1.1);
 	`,
 
 	exit: css`
@@ -194,8 +194,8 @@ const content = {
 	`,
 
 	exitActive: css`
-		transform: scale(.9);
+		transform: scale(0.9);
 		transition: transform ${ANIMATION_TIME}ms;
-		transition-timing-function: cubic-bezier(.045, .175, .435, 1.040);
+		transition-timing-function: cubic-bezier(0.045, 0.175, 0.435, 1.04);
 	`,
 };
