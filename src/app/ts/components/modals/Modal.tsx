@@ -67,7 +67,7 @@ export class Modal extends React.PureComponent<IProps, IState> {
 				}}
 			>
 				<Portal>
-					<Container onClick={this.handleClickOnOverlay}>
+					<div className={root} onClick={this.handleClickOnOverlay}>
 						<CSSTransition
 							in={this.state.isContentVisible}
 							unmountOnExit
@@ -79,14 +79,11 @@ export class Modal extends React.PureComponent<IProps, IState> {
 								exitActive: content.exitActive,
 							}}
 						>
-							<Content
-								width={this.props.width || DEFAULT_WIDTH}
-								onClick={this.handleClickOnContent}
-							>
+							<div className={content.root} onClick={this.handleClickOnContent}>
 								{this.props.children}
-							</Content>
+							</div>
 						</CSSTransition>
-					</Container>
+					</div>
 				</Portal>
 			</CSSTransition>
 		);
@@ -120,42 +117,20 @@ interface IContentProps {
 	width: number;
 }
 
-const Container = styled('div')`
+const root = css`
 	align-items: center;
 	background-color: ${COLORS.BLACK_LIGHT.alpha(0.8).toString()};
 	bottom: 0;
-	display: flex;
-	justify-content: center;
 	left: 0;
 	padding: 15px;
 	position: fixed;
 	right: 0;
-	overflow: auto;
+	overflow: hidden;
 	top: 0;
 	z-index: 1000;
 	box-sizing: border-box;
-
-	${mq.phone} {
-		width: 100vw;
-		height: 100vh;
-	}
-`;
-
-const Content = styled('div')<IContentProps>`
-	background-color: ${COLORS.WHITE.toString()};
-	border-radius: 6px;
-	overflow: hidden;
-	position: relative;
-	box-shadow: ${THEME.BOX_SHADOW_ELEVATION_2};
-	margin: auto;
-	font-size: ${THEME.FONT_SIZE_SMALL};
-	width: ${(props: IContentProps) => props.width}px;
-
-	${mq.phone} {
-		width: 100% !important;
-		overflow: auto;
-		-webkit-overflow-scrolling: touch;
-	}
+	width: 100vw;
+	height: 100vh;
 `;
 
 const container = {
@@ -179,23 +154,36 @@ const container = {
 };
 
 const content = {
+	root: css`
+		background-color: ${COLORS.BLACK.toString()};
+		border-radius: 6px;
+		position: absolute;
+		box-shadow: ${THEME.BOX_SHADOW_ELEVATION_2};
+		width: calc(100% - 20px);
+		overflow: auto;
+		-webkit-overflow-scrolling: touch;
+		height: calc(80vh + 20px);
+		bottom: -20px;
+		left: 10px;
+	`,
+
 	enter: css`
-		transform: scale(0.9);
+		transform: translateY(100vh);
 	`,
 
 	enterActive: css`
-		transform: scale(1);
+		transform: translateY(0%);
 		transition: transform ${ANIMATION_TIME}ms;
-		transition-timing-function: cubic-bezier(0.175, 0.885, 0.39, 1.1);
+		transition-timing-function: spring(100 100 100 -100);
 	`,
 
 	exit: css`
-		transform: scale(1);
+		transform: translateY(0%);
 	`,
 
 	exitActive: css`
-		transform: scale(0.9);
+		transform: translateY(100vh);
 		transition: transform ${ANIMATION_TIME}ms;
-		transition-timing-function: cubic-bezier(0.045, 0.175, 0.435, 1.04);
+		transition-timing-function: spring(1 90 11 -0.2);
 	`,
 };

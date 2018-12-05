@@ -38,6 +38,8 @@ export class Avatar extends React.PureComponent<IProps, IState> {
 			<div
 				className={root}
 				style={{
+					width: size,
+					height: size,
 					minWidth: size,
 					minHeight: size,
 				}}

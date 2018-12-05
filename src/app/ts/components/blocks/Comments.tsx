@@ -1,4 +1,5 @@
 import * as React from 'react';
+import * as dayjs from 'dayjs';
 import { css } from 'react-emotion';
 import { managers } from 'app/ts/managers';
 import { EApiRequestType } from 'app/ts/managers/ApiManager';
@@ -10,6 +11,7 @@ import { StateStore } from 'app/ts/stores/StateStore';
 import { AuthStore } from 'app/ts/stores/AuthStore';
 import { Loader } from '../common/Loader';
 import { Modal } from '../modals/Modal';
+import { Avatar } from '../ui/Avatar';
 
 interface IProps {
 	itemId: number;
@@ -32,21 +34,77 @@ interface IComment {
 	children: IComment[];
 }
 
-const Comment = (props: { comment: IComment }) => {
+const Comment = (props: {
+	comment: IComment;
+	onReply: (commentId: number) => void;
+}) => {
+	const { comment, onReply } = props;
+	const { id, text, date } = comment;
+
+	// very strange shit with the date and time...
+	// Server send it with TZ but its 2 hour earlir :-(
+
 	return (
-		<div>
-			id: {props.comment.id}
-			text: {props.comment.text}
-			date: {props.comment.date}
-			<br />
-			<div className={commentChildren}>
+		<div className={commentBlock}>
+			<div className={commentAvatar}>
+				<Avatar
+					size={26}
+					show={true}
+					src="https://d15hjmscxdyus1.cloudfront.net/avatars/1/avatar.image"
+				/>
+			</div>
+
+			<div className={commentContent}>
+				<div className={commentTitle}>
+					username &bull; {dayjs(new Date()).diff(dayjs(date), 'hour')} h
+				</div>
+
+				<div>{text}</div>
+
+				<div className={commentSettings}>
+					<span
+						onClick={() => {
+							onReply(id);
+						}}
+					>
+						Reply
+					</span>
+				</div>
+			</div>
+
+			{/* <div className={commentChildren}>
 				{props.comment.children.map((item, i) => {
 					return <Comment key={i} comment={item} />;
 				})}
-			</div>
+			</div> */}
 		</div>
 	);
 };
+
+const commentBlock = css`
+	border-bottom: 1px solid ${COLORS.BLACK.toString()};
+	padding: 10px;
+	display: flex;
+	justify-content: flex-start;
+`;
+
+const commentAvatar = css``;
+
+const commentContent = css`
+	padding-left: 10px;
+`;
+
+const commentTitle = css`
+	color: ${COLORS.GRAY.toString()};
+	margin-bottom: 3px;
+	font-weight: 600;
+`;
+
+const commentSettings = css`
+	font-weight: 600;
+	margin-top: 5px;
+	color: ${COLORS.GRAY.toString()};
+`;
 
 @followStore(StateStore.store)
 export class Comments extends React.Component<IProps, IState> {
@@ -119,6 +177,8 @@ export class Comments extends React.Component<IProps, IState> {
 		if (!result.error && result.data) {
 			this.setState({
 				text: '',
+				isModalOpened: false,
+				parentId: 0,
 			});
 
 			this.loadComments();
@@ -132,6 +192,7 @@ export class Comments extends React.Component<IProps, IState> {
 	private handleModalOnClose = () => {
 		this.setState({
 			parentId: 0,
+			isModalOpened: false,
 		});
 	};
 
@@ -141,36 +202,48 @@ export class Comments extends React.Component<IProps, IState> {
 		if (AuthStore.store.state.authorized) {
 			return (
 				<div className={root}>
-					<form
-						onSubmit={e => {
-							e.preventDefault();
-							this.postComment();
-						}}
-					>
-						<textarea
-							className={textInput}
-							value={this.state.text}
-							onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
-								this.setState({
-									text: event.target.value,
-								});
-							}}
-						/>
-
-						{isLoadingForm ? (
-							<Loader size={32} />
-						) : (
-							<Button type={'submit'}>Submit</Button>
-						)}
-					</form>
-
 					<div className={connents}>
 						{this.state.comments.map((comment, i) => {
-							return <Comment key={i} comment={comment} />;
+							return (
+								<Comment
+									key={i}
+									comment={comment}
+									onReply={(commentId: number) => {
+										this.setState({
+											parentId: commentId,
+											isModalOpened: true,
+										});
+									}}
+								/>
+							);
 						})}
 					</div>
 
-					<Modal isVisible={isModalOpened} onClose={this.handleModalOnClose} />
+					<Modal isVisible={isModalOpened} onClose={this.handleModalOnClose}>
+						<form
+							onSubmit={e => {
+								e.preventDefault();
+								this.postComment();
+							}}
+						>
+							<h2 className={modalHeader}>Reply comment</h2>
+							<textarea
+								className={textInput}
+								value={this.state.text}
+								onChange={(event: React.ChangeEvent<HTMLTextAreaElement>) => {
+									this.setState({
+										text: event.target.value,
+									});
+								}}
+							/>
+
+							{isLoadingForm ? (
+								<Loader size={32} />
+							) : (
+								<Button type={'submit'}>Submit</Button>
+							)}
+						</form>
+					</Modal>
 				</div>
 			);
 		} else {
@@ -179,13 +252,7 @@ export class Comments extends React.Component<IProps, IState> {
 	}
 }
 
-const root = css`
-	padding: 10px;
-`;
-
-const commentChildren = css`
-	margin-left: 10px;
-`;
+const root = css``;
 
 const textInput = css`
 	display: block;
@@ -207,4 +274,11 @@ const textInput = css`
 
 const connents = css`
 	margin-top: 10px;
+`;
+
+const modalHeader = css`
+	font-size: ${THEME.FONT_SIZE_MEDIUM}px;
+	text-align: center;
+	padding: 10px;
+	margin: 0;
 `;
