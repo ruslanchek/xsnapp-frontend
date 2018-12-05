@@ -19,9 +19,9 @@ export const API_PATHS = {
 
 export const CONFIG = {
 	API_BASE_URL: 'http://mbrtn.local:3031/api',
-	STATIC_PATH: 'https://d15hjmscxdyus1.cloudfront.net/static',
-	CONTENT_PATH: 'https://d15hjmscxdyus1.cloudfront.net/content',
-	AVATARS_PATH: 'https://d15hjmscxdyus1.cloudfront.net/avatars',
+	STATIC_PATH: 'https://storage.googleapis.com/ppp-coder/static',
+	CONTENT_PATH: 'https://storage.googleapis.com/ppp-coder/content',
+	AVATARS_PATH: 'https://storage.googleapis.com/ppp-coder/avatars',
 	STORAGE: {
 		PREFIX: 'REALTHUB',
 		COOKIES: {
@@ -41,10 +41,3 @@ export const CONFIG = {
 	},
 	DEFAULT_API_VERSION: 12,
 };
-
-// s3
-export const S3_ACCESS_KEY_ID: string = 'AKIAIKPY3VXKBMXW7BBQ';
-export const S3_SECRET_ACCESS_KEY: string =
-	'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';
-export const S3_BUCKET: string = 'ppp-coder';
-export const PUBLIC_DIR: string = 'content';
