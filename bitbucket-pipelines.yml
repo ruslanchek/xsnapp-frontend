@@ -1,20 +1,20 @@
- image: node:8.9.1
+image: node:8.9.1
 
- pipelines:
-   branches:
-     master:
-       - step:
-           caches:
-             - node
+pipelines:
+  branches:
+    master:
+      - step:
+          caches:
+            - node
 
-           script:
-             # install rsync
-             - eval `ssh-agent`
-             - ssh-add /opt/atlassian/pipelines/agent/data/id_rsa
-             - yarn global add typescript
-             - yarn install
-             - yarn build:prod
-             - ls
-             - apt-get update && apt-get install -y rsync
-             - ssh -p ${PORT} -l ${USERNAME} ${HOSTNAME} "mkdir ~/apps/web -p"
-             - rsync -av ./dist ${USERNAME}@${HOSTNAME}:~/apps/web
+          script:
+            # install rsync
+            - eval `ssh-agent`
+            - ssh-add /opt/atlassian/pipelines/agent/data/id_rsa
+            - yarn global add typescript
+            - yarn install
+            - yarn build:prod
+            - ls
+            - apt-get update && apt-get install -y rsync
+            - ssh -p ${PORT} -l ${USERNAME} ${HOSTNAME} "mkdir ~/apps/web -p"
+            - rsync -av ./dist ${USERNAME}@${HOSTNAME}:~/apps/web

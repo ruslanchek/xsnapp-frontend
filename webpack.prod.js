@@ -1,9 +1,8 @@
 const path = require('path');
-const webpack = require('webpack');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 
 let plugins = [
 	new CleanWebpackPlugin(['dist'], {
@@ -13,14 +12,14 @@ let plugins = [
 		entry: path.join(process.cwd(), 'src/app/hbs', '*.hbs'),
 		output: path.join(process.cwd(), 'dist', '[name].html'),
 		data: {
-			publicPath: ''
+			publicPath: '',
 		},
 	}),
 ];
 
 module.exports = {
 	entry: {
-		app: './src/app/ts/app.ts'
+		app: './src/app/ts/app.ts',
 	},
 
 	output: {
@@ -30,23 +29,7 @@ module.exports = {
 	},
 
 	optimization: {
-		minimizer: [
-			new UglifyJsPlugin({
-				extractComments: true,
-				uglifyOptions: {
-					warnings: false,
-					parse: {},
-					compress: {},
-					mangle: true,
-					output: null,
-					toplevel: false,
-					nameCache: null,
-					ie8: false,
-					keep_fnames: false,
-					drop_console: true,
-				}
-			}),
-		],
+		minimizer: [new TerserPlugin()],
 	},
 
 	mode: 'production',
@@ -66,25 +49,43 @@ module.exports = {
 		rules: [
 			{
 				test: /\.tsx?$/,
-				loaders: ['awesome-typescript-loader'],
-				include: [
-					path.resolve(__dirname, 'src/app/ts'),
+				loaders: [
+					{
+						loader: 'awesome-typescript-loader',
+						options: {
+							useCache: false,
+						},
+					},
 				],
+				exclude: [/node_modules/],
+				include: [path.resolve(__dirname, 'src/app/ts')],
 			},
 
 			{
-				test: /\.glsl$/,
-				loader: 'webpack-glsl-loader',
+				test: /\.svg?$/,
+				use: [
+					{
+						loader: 'react-svg-loader',
+						query: {
+							svgo: {
+								pretty: true,
+								plugins: [
+									{
+										removeStyleElement: true,
+									},
+									{
+										removeTitle: true,
+									},
+								],
+							},
+						},
+					},
+				],
+				include: [path.resolve(__dirname, 'src/app/img/svg-icons')],
 			},
 
 			{
-				enforce: 'pre',
-				test: /\.js$/,
-				loader: 'source-map-loader',
-			},
-
-			{
-				test: /\.(gif|png|jpe?g|svg)$/i,
+				test: /\.(gif|png|jpe?g|mp4|mov)$/i,
 				loaders: ['file-loader'],
 			},
 		],

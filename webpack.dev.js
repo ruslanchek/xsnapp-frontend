@@ -24,7 +24,6 @@ let plugins = [
 			publicPath: '/',
 		},
 	}),
-	// new BundleAnalyzerPlugin(),
 	// new HardSourceWebpackPlugin(),
 ];
 
