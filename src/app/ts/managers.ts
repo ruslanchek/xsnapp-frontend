@@ -7,9 +7,6 @@ import { FakerManager } from './managers/FakerManager';
 import { LocaleManager } from './managers/LocaleManager';
 import { AuthManager } from './managers/AuthManager';
 
-const PRELOADING_ANIMATION_TIME: number = 0;
-const LOADING_ANIMATION_TIME: number = 500;
-
 export class Managers {
 	public locale: LocaleManager;
 	public route: RouteManager;

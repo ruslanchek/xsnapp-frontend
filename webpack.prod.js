@@ -1,8 +1,8 @@
 const path = require('path');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 let plugins = [
 	new CleanWebpackPlugin(['dist'], {
@@ -42,24 +42,12 @@ module.exports = {
 			__dirname + '/src/chart/ts',
 			__dirname + '/src/app/ts',
 		],
-		plugins: [new TsConfigPathsPlugin()],
+		plugins: [new TsconfigPathsPlugin({})],
 	},
 
 	module: {
 		rules: [
-			{
-				test: /\.tsx?$/,
-				loaders: [
-					{
-						loader: 'awesome-typescript-loader',
-						options: {
-							useCache: false,
-						},
-					},
-				],
-				exclude: [/node_modules/],
-				include: [path.resolve(__dirname, 'src/app/ts')],
-			},
+			{ test: /\.tsx?$/, loader: 'ts-loader' },
 
 			{
 				test: /\.svg?$/,

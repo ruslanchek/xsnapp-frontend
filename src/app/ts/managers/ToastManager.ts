@@ -13,9 +13,7 @@ export enum EToastType {
 }
 
 export class ToastManager extends Manager {
-	public reset(): void {
-
-	}
+	public reset(): void {}
 
 	public init(): Promise<any> {
 		return new Promise((resolve, reject) => {
@@ -33,34 +31,36 @@ export class ToastManager extends Manager {
 		});
 	}
 
-	private getType(type: EToastType): ToastType {
+	private getType(type: EToastType) {
 		switch (type) {
-			case EToastType.Info : {
-				return toast.TYPE.DEFAULT as ToastType;
+			case EToastType.Info: {
+				return toast.TYPE.DEFAULT;
 			}
 
-			case EToastType.Error : {
-				return toast.TYPE.ERROR as ToastType;
+			case EToastType.Error: {
+				return toast.TYPE.ERROR;
 			}
 
-			case EToastType.Success : {
-				return toast.TYPE.SUCCESS as ToastType;
+			case EToastType.Success: {
+				return toast.TYPE.SUCCESS;
 			}
 
-			case EToastType.Warning : {
-				return toast.TYPE.WARNING as ToastType;
+			case EToastType.Warning: {
+				return toast.TYPE.WARNING;
 			}
 
-			case EToastType.Default :
+			case EToastType.Default:
 			default: {
-				return toast.TYPE.DEFAULT as ToastType;
+				return toast.TYPE.DEFAULT;
 			}
 		}
 	}
 }
 
 const toastStyle = css`
-  background: ${Color('#000').alpha(0.5).toString()};
+	background: ${Color('#000')
+		.alpha(0.5)
+		.toString()};
 	border-radius: 10px;
 	font-family: ${THEME.FONT};
 	font-size: ${THEME.FONT_SIZE_SMALL}px;
@@ -75,6 +75,4 @@ const progressStyle = css`
 	height: 0;
 `;
 
-const bodyStyle = css`
-  
-`;
+const bodyStyle = css``;

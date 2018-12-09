@@ -1,9 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
-const { TsConfigPathsPlugin } = require('awesome-typescript-loader');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
-const ErrorOverlayPlugin = require('error-overlay-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;
 const port = 7000;
@@ -24,7 +23,6 @@ let plugins = [
 			publicPath: '/',
 		},
 	}),
-	// new HardSourceWebpackPlugin(),
 ];
 
 module.exports = {
@@ -77,24 +75,12 @@ module.exports = {
 			__dirname + '/src/chart/ts',
 			__dirname + '/src/app/ts',
 		],
-		plugins: [new TsConfigPathsPlugin()],
+		plugins: [new TsconfigPathsPlugin({})],
 	},
 
 	module: {
 		rules: [
-			{
-				test: /\.tsx?$/,
-				loaders: [
-					{
-						loader: 'awesome-typescript-loader',
-						options: {
-							useCache: false,
-						},
-					},
-				],
-				exclude: [/node_modules/],
-				include: [path.resolve(__dirname, 'src/app/ts')],
-			},
+			{ test: /\.tsx?$/, loader: 'ts-loader' },
 
 			{
 				enforce: 'pre',
