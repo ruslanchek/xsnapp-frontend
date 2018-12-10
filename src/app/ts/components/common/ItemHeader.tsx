@@ -28,6 +28,7 @@ export class ItemHeader extends React.PureComponent<IProps, IState> {
 			<div className={header}>
 				<div className={ava}>
 					<Avatar
+						username={user.username}
 						show={isVisible}
 						size={45}
 						src={Utils.getAvatarPath(user.id)}

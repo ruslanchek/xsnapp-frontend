@@ -27,7 +27,7 @@ const button = css`
 	height: ${THEME.INPUT_HEIGHT}px;
 	line-height: ${THEME.INPUT_HEIGHT}px;
 	background-color: ${COLORS.WHITE.toString()};
-	color: ${COLORS.GREEN.toString()};
+	color: ${COLORS.BLACK.toString()};
 	border-radius: ${THEME.INPUT_HEIGHT / 2}px;
 	border: none;
 	font-family: ${THEME.FONT};

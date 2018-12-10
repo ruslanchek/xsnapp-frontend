@@ -48,7 +48,7 @@ const header = css`
 `;
 
 const button = css`
-	color: ${COLORS.WHITE.toString()} !important;
+	color: ${COLORS.BLACK.toString()} !important;
 	padding: 2px 10px 5px;
 	display: inline-block;
 	text-decoration: none;

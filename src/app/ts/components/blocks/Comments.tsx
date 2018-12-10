@@ -48,6 +48,7 @@ const Comment = (props: {
 		<div className={commentBlock}>
 			<div className={commentAvatar}>
 				<Avatar
+					username="default"
 					size={26}
 					show={true}
 					src="https://d15hjmscxdyus1.cloudfront.net/avatars/1/avatar.image"

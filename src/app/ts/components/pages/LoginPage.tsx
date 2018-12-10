@@ -69,15 +69,6 @@ export class LoginPage extends React.Component<IProps, IState> {
 					<SvgIcon name={EIconName.Close} width="30px" height="30px" />
 				</Link>
 
-				<video
-					className={bg}
-					src={require('../../../video/bg/bg.mov')}
-					autoPlay
-					muted
-					loop
-					controls={false}
-					playsInline
-				/>
 				<main className={root}>
 					<Form
 						className={formContainer}
