@@ -7,7 +7,7 @@ import { Form, EFormValidateOn, IFormModelOutput } from '../forms/Form';
 import { Input } from '../forms/Input';
 import { ValidatorIsEmail } from '../forms/Validators/ValidatorIsEmail';
 import { ValidatorIsRequired } from '../forms/Validators/ValidatorIsRequired';
-import { Button } from '../ui/Button';
+import { Button, EButtonTheme } from '../ui/Button';
 import { Link } from 'react-router-dom';
 import { THEME, COLORS, COMMON_STYLES } from 'app/ts/theme';
 import { SvgIcon, EIconName } from '../ui/SvgIcon';
@@ -115,6 +115,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 								<Loader color={COLORS.WHITE} size={40} />
 							) : (
 								<Button
+									theme={EButtonTheme.ThemeRound}
 									type="submit"
 									iconRight={
 										<SvgIcon

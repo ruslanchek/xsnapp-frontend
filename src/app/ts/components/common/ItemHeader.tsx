@@ -37,7 +37,7 @@ export class ItemHeader extends React.PureComponent<IProps, IState> {
 
 				<div className={titleBlock}>
 					<div className={titleTop}>
-						<Link to={PATHS.ITEM.replace(':id', String(itemId))}>
+						<Link to={PATHS.ITEM.replace(':itemId', String(itemId))}>
 							<header className={head}>{title}</header>
 						</Link>
 						<SvgIcon

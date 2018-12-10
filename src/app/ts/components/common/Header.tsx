@@ -7,6 +7,7 @@ import { followStore } from 'react-stores';
 import { AuthStore } from 'app/ts/stores/AuthStore';
 import { managers } from 'app/ts/managers';
 import { SvgIcon, EIconName } from '../ui/SvgIcon';
+import { Button, EButtonTheme } from '../ui/Button';
 
 @followStore(AuthStore.store)
 export class Header extends React.PureComponent<{}, {}> {
@@ -14,8 +15,10 @@ export class Header extends React.PureComponent<{}, {}> {
 		return (
 			<header className={header}>
 				{managers.route.history.location.pathname === PATHS.UPLOAD ? null : (
-					<Link className={button} to={PATHS.UPLOAD}>
-						Upload
+					<Link to={PATHS.UPLOAD}>
+						<Button type="button" theme={EButtonTheme.Theme3d}>
+							Upload
+						</Button>
 					</Link>
 				)}
 
@@ -45,20 +48,6 @@ const header = css`
 	align-items: center;
 	justify-content: space-between;
 	box-sizing: border-box;
-`;
-
-const button = css`
-	color: ${COLORS.BLACK.toString()} !important;
-	padding: 2px 10px 5px;
-	display: inline-block;
-	text-decoration: none;
-	font-weight: 800;
-	background-color: ${COLORS.GREEN.toString()};
-	border-radius: 4px;
-	height: 26px;
-	display: flex;
-	align-items: center;
-	box-shadow: inset 0 -3px 0 0 ${COLORS.BLACK.alpha(0.4).toString()};
 `;
 
 const logo = css`

@@ -4,7 +4,7 @@ import { css } from 'react-emotion';
 import { managers } from 'app/ts/managers';
 import { EApiRequestType } from 'app/ts/managers/ApiManager';
 import { API_PATHS } from 'app/ts/config';
-import { Button } from '../ui/Button';
+import { Button, EButtonTheme } from '../ui/Button';
 import { THEME, COLORS } from 'app/ts/theme';
 import { followStore } from 'react-stores';
 import { StateStore } from 'app/ts/stores/StateStore';
@@ -241,7 +241,9 @@ export class Comments extends React.Component<IProps, IState> {
 							{isLoadingForm ? (
 								<Loader size={32} />
 							) : (
-								<Button type={'submit'}>Submit</Button>
+								<Button theme={EButtonTheme.ThemeRound} type={'submit'}>
+									Submit
+								</Button>
 							)}
 						</form>
 					</Modal>
