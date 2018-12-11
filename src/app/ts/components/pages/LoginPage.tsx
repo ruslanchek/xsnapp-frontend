@@ -105,7 +105,11 @@ export class LoginPage extends React.Component<IProps, IState> {
 
 						<div className={buttons}>
 							<Link
-								className={cx(COMMON_STYLES.LINK_WHITE, COMMON_STYLES.BOLD)}
+								className={cx(
+									COMMON_STYLES.LINK_WHITE,
+									COMMON_STYLES.BOLD,
+									link,
+								)}
 								to={'#'}
 							>
 								Forgot your password?
@@ -115,6 +119,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 								<Loader color={COLORS.WHITE} size={40} />
 							) : (
 								<Button
+									className={button}
 									theme={EButtonTheme.ThemeRound}
 									type="submit"
 									iconRight={
@@ -125,7 +130,7 @@ export class LoginPage extends React.Component<IProps, IState> {
 										/>
 									}
 								>
-									Next{' '}
+									Sign in{' '}
 								</Button>
 							)}
 						</div>
@@ -167,6 +172,14 @@ const close = css`
 	color: ${COLORS.WHITE.toString()} !important;
 `;
 
+const button = css`
+	box-shadow: 0 6px 12px ${COLORS.BLACK.alpha(0.05).toString()};
+`;
+
+const link = css`
+	text-shadow: 0 1px 1px ${COLORS.BLACK.alpha(0.3).toString()};
+`;
+
 const root = css`
 	padding: 15px;
 	position: absolute;
@@ -179,6 +192,12 @@ const root = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	background-image: linear-gradient(
+		10deg,
+		${COLORS.GREEN.toString()},
+		${COLORS.BLACK.toString()},
+		${COLORS.BLACK_EXTRA_LIGHT.toString()}
+	);
 `;
 
 const input = css`
@@ -193,18 +212,6 @@ const fadeIn = keyframes`
 	to {
     opacity: 1;
   }
-`;
-
-const bg = css`
-	display: block;
-	object-fit: cover;
-	z-index: 1;
-	position: absolute;
-	top: 0;
-	left: 0;
-	width: 100%;
-	height: 100%;
-	animation: ${fadeIn} 5s;
 `;
 
 const head = css`

@@ -6,6 +6,7 @@ interface IProps {
 	type: 'submit' | 'button';
 	iconLeft?: JSX.Element;
 	iconRight?: JSX.Element;
+	className?: string;
 	theme: EButtonTheme;
 }
 
@@ -16,12 +17,19 @@ export enum EButtonTheme {
 
 export class Button extends React.PureComponent<IProps, {}> {
 	public render() {
-		const { type, children, iconLeft, iconRight, theme } = this.props;
+		const {
+			type,
+			children,
+			iconLeft,
+			iconRight,
+			theme,
+			className,
+		} = this.props;
 
 		const themeClass = themes[theme];
 
 		return (
-			<button className={themeClass} type={type}>
+			<button className={cx(className, themeClass)} type={type}>
 				{iconLeft && <span className={iconLeftStyle}>{iconLeft}</span>}
 				{children}
 				{iconRight && <span className={iconRightStyle}>{iconRight}</span>}
