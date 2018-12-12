@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import { COLORS, THEME } from 'app/ts/theme';
 import { Link } from 'react-router-dom';
 import { PATHS } from 'app/ts/config';
@@ -8,12 +8,16 @@ import { AuthStore } from 'app/ts/stores/AuthStore';
 import { managers } from 'app/ts/managers';
 import { SvgIcon, EIconName } from '../ui/SvgIcon';
 import { Button, EButtonTheme } from '../ui/Button';
+import { StateStore } from 'app/ts/stores/StateStore';
 
 @followStore(AuthStore.store)
+@followStore(StateStore.store)
 export class Header extends React.PureComponent<{}, {}> {
 	public render() {
 		return (
-			<header className={header}>
+			<header
+				className={cx(header, !StateStore.store.state.showHeader && 'hidden')}
+			>
 				{managers.route.history.location.pathname === PATHS.UPLOAD ? null : (
 					<Link to={PATHS.UPLOAD}>
 						<Button type="button" theme={EButtonTheme.Theme3d}>
@@ -48,6 +52,10 @@ const header = css`
 	align-items: center;
 	justify-content: space-between;
 	box-sizing: border-box;
+
+	&.hidden {
+		transform: translateY(-110%);
+	}
 `;
 
 const logo = css`
