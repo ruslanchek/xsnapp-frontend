@@ -18,7 +18,7 @@ export const API_PATHS = {
 };
 
 export const CONFIG = {
-	API_BASE_URL: 'http://mbrtn.local:3031/api',
+	API_BASE_URL: 'https://xsnapp.com/api',
 	STATIC_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/static',
 	CONTENT_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/content',
 	AVATARS_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/avatars',
@@ -26,7 +26,7 @@ export const CONFIG = {
 		PREFIX: 'REALTHUB',
 		COOKIES: {
 			OPTIONS: {
-				domain: '.mbrtn.local',
+				domain: '.xsnapp.com',
 				path: '/',
 				expires: new Date(
 					new Date().setFullYear(new Date().getFullYear() + 10),
@@ -36,8 +36,6 @@ export const CONFIG = {
 	},
 	REF_PARAMS: [],
 	DEFAULT_LOCALE: 'en',
-	LOCALE_SYNONYMS: {
-		fil: ['tl'],
-	},
+	LOCALE_SYNONYMS: {},
 	DEFAULT_API_VERSION: 12,
 };
