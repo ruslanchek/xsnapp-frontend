@@ -54,7 +54,7 @@ const header = css`
 	box-sizing: border-box;
 
 	&.hidden {
-		transform: translateY(-110%);
+		/* transform: translateY(-110%); */
 	}
 `;
 
