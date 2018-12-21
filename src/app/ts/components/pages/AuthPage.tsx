@@ -184,7 +184,7 @@ export class AuthPage extends React.Component<IProps, IState> {
 									name="password"
 									label="Password"
 									type="password"
-									autoComplete="current-password"
+									autoComplete="new-password"
 									validators={[new ValidatorIsRequired()]}
 								/>
 								<div className={errorBlock} onClick={this.handleClearErrors}>
