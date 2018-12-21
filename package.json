@@ -25,6 +25,7 @@
 		"add": "^2.0.6",
 		"chunk-rename-webpack-plugin": "^1.1.1",
 		"clean-webpack-plugin": "^0.1.19",
+		"copy-webpack-plugin": "^4.6.0",
 		"dotenv": "^6.1.0",
 		"error-overlay-webpack-plugin": "^0.1.5",
 		"file-loader": "^1.1.11",

@@ -2,6 +2,7 @@ const path = require('path');
 const webpack = require('webpack');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;
@@ -13,6 +14,18 @@ let plugins = [
 	new CleanWebpackPlugin(['dist'], {
 		verbose: true,
 	}),
+	new CopyWebpackPlugin(
+		[
+			{
+				from: 'src/assets',
+				to: __dirname + '/dist',
+			},
+		],
+		{
+			debug: false,
+			copyUnmodified: false,
+		},
+	),
 	new webpack.NamedModulesPlugin(),
 	new webpack.HotModuleReplacementPlugin(),
 	new HandlebarsPlugin({

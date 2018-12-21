@@ -1,6 +1,7 @@
 const path = require('path');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TerserPlugin = require('terser-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
@@ -15,6 +16,18 @@ let plugins = [
 			publicPath: '',
 		},
 	}),
+	new CopyWebpackPlugin(
+		[
+			{
+				from: 'src/assets',
+				to: __dirname + '/dist',
+			},
+		],
+		{
+			debug: false,
+			copyUnmodified: false,
+		},
+	),
 ];
 
 module.exports = {
