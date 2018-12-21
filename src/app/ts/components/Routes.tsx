@@ -1,11 +1,11 @@
 import * as React from 'react';
 import { Redirect, Route, Switch } from 'react-router';
 
-import { CONFIG, PATHS } from '../config';
+import { PATHS } from '../config';
 import { ERouteAuthRule } from '../managers/RouteManager';
 import { HomePage } from './pages/HomePage';
 import { Page, PageLayout } from './pages/Page';
-import { LoginPage } from './pages/LoginPage';
+import { AuthPage, EAuthPageFormType } from './pages/AuthPage';
 import { UploadPage } from './pages/UploadPage';
 import { ItemPage } from './pages/ItemPage';
 import { NotFoundPage } from './pages/NotFoundPage';
@@ -52,7 +52,7 @@ export class Routes extends React.Component<{}, IState> {
 
 				<Route
 					exact={true}
-					path={PATHS.AUTH_LOGIN}
+					path={PATHS.SIGN_IN}
 					render={props => {
 						return (
 							<Page
@@ -60,7 +60,23 @@ export class Routes extends React.Component<{}, IState> {
 								layout={PageLayout.Default}
 								authRule={ERouteAuthRule.Shared}
 							>
-								<LoginPage />
+								<AuthPage type={EAuthPageFormType.SignIn} />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.SIGN_UP}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<AuthPage type={EAuthPageFormType.SignUp} />
 							</Page>
 						);
 					}}

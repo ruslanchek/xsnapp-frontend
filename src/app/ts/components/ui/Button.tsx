@@ -59,7 +59,6 @@ const themes = {
 	theme3d: css`
 		color: ${COLORS.BLACK.toString()} !important;
 		padding: 2px 10px 5px;
-		display: inline-block;
 		text-decoration: none;
 		font-weight: 800;
 		background-color: ${COLORS.GREEN.toString()};
@@ -68,7 +67,6 @@ const themes = {
 		display: flex;
 		align-items: center;
 		border: none;
-		display: block;
 		font-size: ${THEME.FONT_SIZE_REGULAR}px;
 		box-shadow: inset 0 -3px 0 0 ${COLORS.BLACK.alpha(0.4).toString()};
 	`,

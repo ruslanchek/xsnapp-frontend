@@ -1,34 +1,32 @@
 import * as React from 'react';
 import { css, cx } from 'react-emotion';
-import { COLORS, THEME } from 'app/ts/theme';
 import { Link } from 'react-router-dom';
-import { PATHS } from 'app/ts/config';
 import { followStore } from 'react-stores';
-import { AuthStore } from 'app/ts/stores/AuthStore';
-import { managers } from 'app/ts/managers';
 import { SvgIcon, EIconName } from '../ui/SvgIcon';
 import { Button, EButtonTheme } from '../ui/Button';
-import { StateStore } from 'app/ts/stores/StateStore';
+import { PATHS } from '../../config';
+import { AuthStore } from '../../stores/AuthStore';
+import { StateStore } from '../../stores/StateStore';
+import { managers } from '../../managers';
+import { COLORS, THEME } from '../../theme';
 
 @followStore(AuthStore.store)
 @followStore(StateStore.store)
-export class Header extends React.PureComponent<{}, {}> {
+export class Header extends React.Component<{}, {}> {
 	public render() {
 		return (
 			<header
-				className={cx(header, !StateStore.store.state.showHeader && 'hidden')}
+				className={cx(header, StateStore.store.state.hideHeader && 'hidden')}
 			>
 				{managers.route.history.location.pathname === PATHS.UPLOAD ? null : (
 					<Link to={PATHS.UPLOAD}>
 						<Button type="button" theme={EButtonTheme.Theme3d}>
-							Upload
+							Post
 						</Button>
 					</Link>
 				)}
 
-				<Link className={logoBtn} to={PATHS.HOME}>
-					<div className={logo}>🤨</div>
-				</Link>
+				<Link className={logo} to={PATHS.HOME} />
 
 				<div className={menu}>
 					<SvgIcon name={EIconName.Menu} width="30px" height="30px" />
@@ -52,24 +50,26 @@ const header = css`
 	align-items: center;
 	justify-content: space-between;
 	box-sizing: border-box;
+	transition: transform 0.3s;
 
 	&.hidden {
-		/* transform: translateY(-110%); */
+		transform: translateY(-105%);
 	}
 `;
 
 const logo = css`
-	font-weight: 800;
-	font-size: ${THEME.FONT_SIZE_BIG}px;
 	position: absolute;
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
 	letter-spacing: 1px;
-`;
-
-const logoBtn = css`
-	color: ${COLORS.WHITE.toString()} !important;
+	background-image: url(${require('@img/logos/x-logo.svg')});
+	background-size: 50%;
+	background-position: 50%;
+	background-repeat: no-repeat;
+	width: ${THEME.HEADER_HEIGHT}px;
+	height: ${THEME.HEADER_HEIGHT}px;
+	display: block;
 `;
 
 const menu = css`

@@ -13,6 +13,7 @@
 		"no-namespace": false,
 		"no-console": false,
 		"no-string-literal": false,
+		"no-implicit-dependencies": false,
 		"indent": [
 			true,
 			"tabs",

@@ -4,6 +4,9 @@ import styled, { css } from 'react-emotion';
 export enum EIconName {
 	ArrowUpward,
 	ArrowForward,
+	ArrowBack,
+	AddBox,
+	Add,
 	Close,
 	Menu,
 	Play,
@@ -17,6 +20,9 @@ export enum EIconName {
 const icons = {
 	[EIconName.ArrowUpward]: require('@img/svg-icons/round-arrow_upward-24px.svg'),
 	[EIconName.ArrowForward]: require('@img/svg-icons/round-arrow_forward-24px.svg'),
+	[EIconName.ArrowBack]: require('@img/svg-icons/round-arrow_back-24px.svg'),
+	[EIconName.AddBox]: require('@img/svg-icons/round-add_box-24px.svg'),
+	[EIconName.Add]: require('@img/svg-icons/round-add-24px.svg'),
 	[EIconName.Close]: require('@img/svg-icons/round-close-24px.svg'),
 	[EIconName.Menu]: require('@img/svg-icons/round-menu-24px.svg'),
 	[EIconName.Play]: require('@img/svg-icons/round-play_arrow-24px.svg'),

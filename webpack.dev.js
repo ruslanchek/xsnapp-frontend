@@ -13,7 +13,6 @@ let plugins = [
 	new CleanWebpackPlugin(['dist'], {
 		verbose: true,
 	}),
-	// new ErrorOverlayPlugin(),
 	new webpack.NamedModulesPlugin(),
 	new webpack.HotModuleReplacementPlugin(),
 	new HandlebarsPlugin({
@@ -113,7 +112,7 @@ module.exports = {
 			},
 
 			{
-				test: /\.(gif|png|jpe?g|mp4|mov)$/i,
+				test: /\.(gif|png|jpe?g|mp4|mov|svg)$/i,
 				loaders: ['file-loader'],
 				exclude: [path.resolve(__dirname, 'src/app/img/svg-icons')],
 			},

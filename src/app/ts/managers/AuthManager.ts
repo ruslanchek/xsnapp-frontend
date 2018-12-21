@@ -30,7 +30,6 @@ export class AuthManager extends Manager {
 
 	public goAuth() {
 		const backUrl = managers.storage.session.getJSON('authBackUrl');
-		console.log(backUrl);
 
 		if (Boolean(backUrl)) {
 			managers.route.go(backUrl);
@@ -74,7 +73,7 @@ export class AuthManager extends Manager {
 		}
 	}
 
-	public async login(
+	public async signIn(
 		email: string,
 		password: string,
 	): Promise<IApiResult<any>> {

@@ -1,8 +1,9 @@
 import { History } from 'history';
 
-import { CONFIG, PATHS } from '../config';
+import { PATHS } from '../config';
 import { StateStore } from '../stores/StateStore';
 import { Manager } from './Manager';
+import { THEME } from '../theme';
 
 export enum ERouteAuthRule {
 	UnauthorizedOnly,
@@ -17,11 +18,17 @@ interface IMeta {
 export class RouteManager extends Manager {
 	public history: History | null = null;
 	public params: any = {};
+	private scrollPos: number = 0;
 
-	public reset(): void {}
+	public reset(): void {
+		window.removeEventListener('scroll', this.scrollHandler);
+	}
 
 	public init(): Promise<any> {
 		return new Promise((resolve, reject) => {
+			window.addEventListener('scroll', this.scrollHandler, {
+				passive: true,
+			});
 			resolve();
 		});
 	}
@@ -44,19 +51,11 @@ export class RouteManager extends Manager {
 
 	public go(path: string, replace?: boolean): void {
 		if (replace) {
-			if (this.history) {
-				this.history.replace(path);
-				this.scroll(0);
-			} else {
-				window.history.replaceState({}, '', path);
-			}
+			this.history.replace(path);
+			this.scroll(0);
 		} else {
-			if (this.history) {
-				this.history.push(path);
-				this.scroll(0);
-			} else {
-				window.history.pushState({}, '', path);
-			}
+			this.history.push(path);
+			this.scroll(0);
 		}
 	}
 
@@ -84,7 +83,7 @@ export class RouteManager extends Manager {
 		switch (path) {
 			case PATHS.HOME: {
 				return {
-					title: `EST`,
+					title: 'EST',
 				};
 			}
 
@@ -93,4 +92,20 @@ export class RouteManager extends Manager {
 			}
 		}
 	}
+
+	private scrollHandler = event => {
+		if(document.body.getBoundingClientRect().top > this.scrollPos) {
+			StateStore.store.setState({
+				hideHeader: false,
+			});
+		} else {
+			if(window.scrollY > THEME.HEADER_THRESHOLD) {
+				StateStore.store.setState({
+					hideHeader: true,
+				});
+			}
+		}
+
+		this.scrollPos = document.body.getBoundingClientRect().top;
+	};
 }

@@ -36,16 +36,13 @@ const VALID_TYPES: string[] = [
 	'video/x-m4v',
 	'video/webm',
 ];
-const MAX_SIZE: number = 10 * 1024 * 1024 * 1024; // 10 MB
+
+const MAX_SIZE: number = 10 * 1024 * 1024 * 1024; // 10 GB
 
 export class Upload extends React.PureComponent<IProps, IState> {
-	constructor(props, context) {
-		super(props, context);
-	}
-
-	private inputRef = React.createRef<HTMLInputElement>();
-	private formRef = React.createRef<HTMLFormElement>();
-	private cancelToken = null;
+	public static childContextTypes = {
+		transitionGroup: () => {},
+	};
 
 	public state: IState = {
 		status: EUploadStatus.Ready,
@@ -53,9 +50,13 @@ export class Upload extends React.PureComponent<IProps, IState> {
 		progress: 0,
 	};
 
-	public static childContextTypes = {
-		transitionGroup: () => {},
-	};
+	private inputRef = React.createRef<HTMLInputElement>();
+	private formRef = React.createRef<HTMLFormElement>();
+	private cancelToken = null;
+
+	constructor(props, context) {
+		super(props, context);
+	}
 
 	public getChildContext() {
 		return { transitionGroup: null };

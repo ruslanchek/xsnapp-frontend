@@ -1,7 +1,8 @@
 export const PATHS = {
 	HOME: '/',
 	ITEM: '/item/:itemId',
-	AUTH_LOGIN: '/auth/login',
+	SIGN_IN: '/auth/sign-in',
+	SIGN_UP: '/auth/sign-up',
 	UPLOAD: '/upload',
 	NOT_FOUND: '/404',
 };
@@ -10,7 +11,7 @@ export const API_PATHS = {
 	GET_ITEMS: '/items',
 	GET_ITEM: '/item/:itemId',
 	GET_PROFILE: '/profile',
-	AUTH_LOGIN: '/auth/login',
+	AUTH_LOGIN: '/auth/signIn',
 	AUTH_REGISTER: '/auth/register',
 	UPLOAD: '/upload',
 	GET_COMMENTS: '/comments/:itemId',

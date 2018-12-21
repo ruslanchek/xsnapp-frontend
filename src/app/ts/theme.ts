@@ -22,6 +22,7 @@ export const THEME = {
 	FONT:
 		'-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
 	HEADER_HEIGHT: 54,
+	HEADER_THRESHOLD: 100,
 	NAV_HEIGHT: 0,
 	CURRENCY_ICON_SIZE: 36,
 	SECTION_PADDING_H: 20,
@@ -53,7 +54,7 @@ export const COMMON_STYLES = {
 
 	LINK: css`
 		color: ${COLORS.GREEN.toString()};
-		text-decoration: 'none';
+		text-decoration: none;
 		outline: none;
 
 		&:link {

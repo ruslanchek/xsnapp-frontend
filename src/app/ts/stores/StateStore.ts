@@ -6,7 +6,7 @@ export namespace StateStore {
 		online: boolean;
 		title: string;
 		backAvailable: boolean;
-		showHeader: boolean;
+		hideHeader: boolean;
 	}
 
 	export const initialState: IState = {
@@ -14,7 +14,7 @@ export namespace StateStore {
 		online: false,
 		title: '',
 		backAvailable: false,
-		showHeader: false,
+		hideHeader: false,
 	};
 
 	export let store: Store<IState> = new Store<IState>(initialState);

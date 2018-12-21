@@ -23,12 +23,12 @@ interface IState {
 
 @followStore(AuthStore.store)
 export class Page extends React.Component<IProps, IState> {
-	private currentLocation: string = null;
-
 	public state: IState = {
 		routeKey: null,
 		location: null,
 	};
+
+	private currentLocation: string = null;
 
 	public componentWillMount() {
 		managers.route.initPage(
@@ -83,7 +83,7 @@ export class Page extends React.Component<IProps, IState> {
 		switch (this.props.authRule) {
 			case ERouteAuthRule.AuthorizedOnly: {
 				if (!AuthStore.store.state.authorized) {
-					url = PATHS.AUTH_LOGIN;
+					url = PATHS.SIGN_UP;
 					managers.auth.setBackUrl(this.currentLocation);
 				}
 				break;
