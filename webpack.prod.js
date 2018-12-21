@@ -75,6 +75,7 @@ module.exports = {
 			{
 				test: /\.(gif|png|jpe?g|mp4|mov|svg)$/i,
 				loaders: ['file-loader'],
+				exclude: [path.resolve(__dirname, 'src/app/img/svg-icons')],
 			},
 		],
 	},
