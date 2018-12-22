@@ -5,7 +5,7 @@
 	"display": "standalone",
 	"background_color": "#1E2250",
 	"theme_color": "#1E2250",
-	"description": "Videos",
+	"description": "",
 	"icons": [{
 		"src": "/favicons/apple-touch-icon-57x57.png",
 		"sizes": "48x48",
