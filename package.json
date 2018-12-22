@@ -1,6 +1,6 @@
 {
 	"name": "xsnapp-front",
-	"version": "0.0.5",
+	"version": "0.0.6",
 	"description": "Xsnapp.com",
 	"scripts": {
 		"build:prod": "webpack --config webpack.prod.js",
