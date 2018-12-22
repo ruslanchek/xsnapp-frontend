@@ -11,19 +11,23 @@ export class Footer extends React.Component<{}, {}> {
 			<footer className={root}>
 				<nav className={nav}>
 					<NavLink to={PATHS.HOME} className="link" activeClassName="active">
-						<SvgIcon name={EIconName.ColorHome} width="30px" height="30px" />
+						<SvgIcon name={EIconName.ColorHome} width="24px" height="24px" />
 					</NavLink>
+
 					<NavLink to={PATHS.SEARCH} className="link" activeClassName="active">
-						<SvgIcon name={EIconName.ColorSearch} width="30px" height="30px" />
+						<SvgIcon name={EIconName.ColorSearch} width="22px" height="22px" />
 					</NavLink>
+
 					<NavLink to={PATHS.TV} className="link" activeClassName="active">
-						<SvgIcon name={EIconName.ColorTV} width="30px" height="30px" />
+						<SvgIcon name={EIconName.ColorTV} width="26px" height="26px" />
 					</NavLink>
+
 					<NavLink to={PATHS.CATEGORIES} className="link" activeClassName="active">
-						<SvgIcon name={EIconName.ColorCategories} width="30px" height="30px" />
+						<SvgIcon name={EIconName.ColorCategories} width="24px" height="24px" />
 					</NavLink>
+
 					<NavLink to={PATHS.USER} className="link" activeClassName="active">
-						<SvgIcon name={EIconName.ColorUser} width="30px" height="30px" />
+						<SvgIcon name={EIconName.ColorUser} width="24px" height="24px" />
 					</NavLink>
 				</nav>
 			</footer>
@@ -46,12 +50,14 @@ const root = css`
 const nav = css`
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	height: ${THEME.FOOTER_HEIGHT}px;
-	padding: 2px ${THEME.SECTION_PADDING_H}px;
+	padding: 0 ${THEME.SECTION_PADDING_H}px;
 	
 	>.link {
+		display: flex;
 		color: ${COLORS.GRAY.toString()};
+		height: ${THEME.FOOTER_HEIGHT}px;
+		align-items: center;
 		
 		&.active {
 			color: ${COLORS.GRAY_LIGHT.toString()};

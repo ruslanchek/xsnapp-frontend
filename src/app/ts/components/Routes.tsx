@@ -36,6 +36,70 @@ export class Routes extends React.Component<{}, IState> {
 
 				<Route
 					exact={true}
+					path={PATHS.SEARCH}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<HomePage />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.TV}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<HomePage />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.CATEGORIES}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<HomePage />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.USER}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<HomePage />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
 					path={PATHS.ITEM}
 					render={props => {
 						return (

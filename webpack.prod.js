@@ -45,6 +45,9 @@ module.exports = {
 
 	optimization: {
 		minimizer: [new TerserPlugin()],
+		splitChunks: {
+			chunks: 'all'
+		}
 	},
 
 	mode: 'production',
