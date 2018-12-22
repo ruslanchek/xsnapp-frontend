@@ -1,14 +1,14 @@
 {
-	"name": "realthub-front",
+	"name": "xsnapp-front",
 	"version": "0.0.1",
-	"description": "Realthub",
+	"description": "Xsnapp.com",
 	"scripts": {
 		"build:prod": "webpack --config webpack.prod.js",
 		"dev": "webpack-dev-server --config webpack.dev.js --inline --mode=development",
 		"lint": "node_modules/tslint/bin/tslint \"src/app/**/*.ts\" \"src/app/**/*.tsx\" --project ./tsconfig.json",
 		"test": "jest --config ./jest.config.json --no-cache"
 	},
-	"author": "Realthub Ltd.",
+	"author": "Xsnapp.com",
 	"license": "ISC",
 	"devDependencies": {
 		"@types/axios": "^0.14.0",

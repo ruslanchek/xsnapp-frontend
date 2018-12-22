@@ -1,4 +1,5 @@
 const path = require('path');
+const packageData = require('./package');
 const webpack = require('webpack');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
@@ -33,6 +34,7 @@ let plugins = [
 		output: path.join(process.cwd(), 'dist', '[name].html'),
 		data: {
 			publicPath: '/',
+			version: packageData.version,
 		},
 	}),
 ];

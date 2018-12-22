@@ -1,4 +1,5 @@
 const path = require('path');
+const packageData = require('./package');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
@@ -14,6 +15,7 @@ let plugins = [
 		output: path.join(process.cwd(), 'dist', '[name].html'),
 		data: {
 			publicPath: '',
+			version: packageData.version,
 		},
 	}),
 	new CopyWebpackPlugin(
