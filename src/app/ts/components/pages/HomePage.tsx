@@ -22,7 +22,7 @@ export class HomePage extends React.Component<IProps, IState> {
 		isLoaded: false,
 	};
 
-	async componentDidMount() {
+	public async componentDidMount() {
 		const result = await managers.api.request<{ items: ItemsStore.IItem[] }>(
 			EApiRequestType.GET,
 			API_PATHS.GET_ITEMS,
@@ -39,7 +39,7 @@ export class HomePage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout showHeader={true}>
+			<Layout showHeader={true} showFooter={true}>
 				<main className={root}>{this.content}</main>
 			</Layout>
 		);

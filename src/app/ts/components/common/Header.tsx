@@ -9,34 +9,69 @@ import { AuthStore } from '../../stores/AuthStore';
 import { StateStore } from '../../stores/StateStore';
 import { managers } from '../../managers';
 import { COLORS, THEME } from '../../theme';
+import { CSSTransition } from 'react-transition-group';
+
+const ANIMATION_TIME = 200;
 
 @followStore(AuthStore.store)
 @followStore(StateStore.store)
 export class Header extends React.Component<{}, {}> {
 	public render() {
 		return (
-			<header
-				className={cx(header, StateStore.store.state.hideHeader && 'hidden')}
+			<CSSTransition
+				in={!StateStore.store.state.hideHeader}
+				unmountOnExit
+				timeout={ANIMATION_TIME}
+				classNames={{
+					enter: header.enter,
+					enterActive: header.enterActive,
+					exit: header.exit,
+					exitActive: header.exitActive,
+				}}
 			>
-				{managers.route.history.location.pathname === PATHS.UPLOAD ? null : (
-					<Link to={PATHS.UPLOAD}>
-						<Button type="button" theme={EButtonTheme.Theme3d}>
-							Post
-						</Button>
-					</Link>
-				)}
+				<header
+					className={root}
+				>
+					{managers.route.history.location.pathname === PATHS.UPLOAD ? null : (
+						<Link to={PATHS.UPLOAD}>
+							<Button type="button" theme={EButtonTheme.Theme3d}>
+								Post
+							</Button>
+						</Link>
+					)}
 
-				<Link className={logo} to={PATHS.HOME} />
+					<Link className={logo} to={PATHS.HOME} />
 
-				<div className={menu}>
-					<SvgIcon name={EIconName.Menu} width="30px" height="30px" />
-				</div>
-			</header>
+					<div className={menu}>
+						<SvgIcon name={EIconName.Menu} width="30px" height="30px" />
+					</div>
+				</header>
+			</CSSTransition>
 		);
 	}
 }
 
-const header = css`
+const header = {
+	enter: css`
+		transform: translateY(-105%);
+	`,
+
+	enterActive: css`
+		transform: translateY(0);
+		transition: transform ${ANIMATION_TIME}ms;
+	`,
+
+	exit: css`
+		transform: translateY(0);
+	`,
+
+	exitActive: css`
+		transform: translateY(-105%);
+		transition: transform ${ANIMATION_TIME}ms;
+	`,
+};
+
+const root = css`
 	height: ${THEME.HEADER_HEIGHT}px;
 	width: 100vw;
 	position: fixed;
@@ -51,10 +86,6 @@ const header = css`
 	justify-content: space-between;
 	box-sizing: border-box;
 	transition: transform 0.3s;
-
-	&.hidden {
-		transform: translateY(-105%);
-	}
 `;
 
 const logo = css`

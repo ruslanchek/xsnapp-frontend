@@ -34,7 +34,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 		isLoaded: false,
 	};
 
-	async componentDidMount() {
+	public async componentDidMount() {
 		const result = await managers.api.request<{ item: ItemsStore.IItem }>(
 			EApiRequestType.GET,
 			API_PATHS.GET_ITEM.replace(':itemId', this.props.routeParams.itemId),
@@ -55,7 +55,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout showHeader={true}>
+			<Layout showHeader={true} showFooter={true}>
 				<main className={root}>{this.content}</main>
 			</Layout>
 		);

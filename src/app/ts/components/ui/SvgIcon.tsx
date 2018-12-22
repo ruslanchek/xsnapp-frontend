@@ -15,6 +15,11 @@ export enum EIconName {
 	Chat,
 	Favorite,
 	Share,
+	ColorSearch,
+	ColorHome,
+	ColorTV,
+	ColorUser,
+	ColorCategories,
 }
 
 const icons = {
@@ -31,6 +36,11 @@ const icons = {
 	[EIconName.Chat]: require('@img/svg-icons/round-chat-24px.svg'),
 	[EIconName.Favorite]: require('@img/svg-icons/round-favorite-24px.svg'),
 	[EIconName.Share]: require('@img/svg-icons/round-share-24px.svg'),
+	[EIconName.ColorSearch]: require('@img/svg-icons/icons8-search.svg'),
+	[EIconName.ColorHome]: require('@img/svg-icons/icons8-home.svg'),
+	[EIconName.ColorTV]: require('@img/svg-icons/icons8-tv.svg'),
+	[EIconName.ColorUser]: require('@img/svg-icons/icons8-user.svg'),
+	[EIconName.ColorCategories]: require('@img/svg-icons/icons8-categories.svg'),
 };
 
 export interface IIconProps extends React.HTMLAttributes<SVGElement> {

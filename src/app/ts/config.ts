@@ -1,5 +1,9 @@
 export const PATHS = {
 	HOME: '/',
+	SEARCH: '/search',
+	TV: '/tv',
+	CATEGORIES: '/categories',
+	USER: '/user',
 	ITEM: '/item/:itemId',
 	SIGN_IN: '/auth/sign-in',
 	SIGN_UP: '/auth/sign-up',

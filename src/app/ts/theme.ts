@@ -2,8 +2,8 @@ import Color = require('color');
 import { css } from 'react-emotion';
 
 export const COLORS = {
-	GRAY: Color('#A5AEC1'),
-	GRAY_LIGHT: Color('#E2E5E9'),
+	GRAY: Color('#8E91AE'),
+	GRAY_LIGHT: Color('#E5E7F9'),
 	WHITE: Color('#FFFFFF'),
 	BLACK: Color('#0F1128'),
 	BLACK_LIGHT: Color('#0F1128').lighten(0.7),
@@ -11,7 +11,7 @@ export const COLORS = {
 	RED: Color('#F14669'),
 	BLUE_LIGHT: Color('#E9F1FB'),
 	BLUE_LIGHT_ACTIVE: Color('#D3E4F7'),
-	BLUE: Color('#017AD5'),
+	BLUE: Color('#0061E5'),
 	BLUE_SELECTED: Color('#017AD5').alpha(0.05),
 	BLUE_HOVER: Color('#017AD5').alpha(0.038),
 	GREEN: Color('#00FFFF'),
@@ -21,8 +21,9 @@ export const COLORS = {
 export const THEME = {
 	FONT:
 		'-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif',
-	HEADER_HEIGHT: 54,
+	HEADER_HEIGHT: 50,
 	HEADER_THRESHOLD: 100,
+	FOOTER_HEIGHT: 50,
 	NAV_HEIGHT: 0,
 	CURRENCY_ICON_SIZE: 36,
 	SECTION_PADDING_H: 20,

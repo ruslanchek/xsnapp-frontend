@@ -29,6 +29,8 @@ export enum EAuthPageFormType {
 	RestorePassword,
 }
 
+const LOGO_SIZE = 180;
+
 export class AuthPage extends React.Component<IProps, IState> {
 	public state: IState = {
 		isLoading: false,
@@ -37,7 +39,7 @@ export class AuthPage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout showHeader={false}>
+			<Layout showHeader={false} showFooter={false}>
 				<div className={heading}>
 					<Link to={PATHS.HOME} className={close}>
 						<SvgIcon name={EIconName.ArrowBack} width="30px" height="30px" />
@@ -418,27 +420,12 @@ const fadeIn = keyframes`
 `;
 
 const logo = css`
-	width: 120px;
-	height: 120px;
+	width: ${LOGO_SIZE}px;
+	height: ${LOGO_SIZE}px;
 	display: block;
 	margin: 0 auto 60px;
 	animation: ${fadeIn} 20s infinite;
 	border-radius: 50%;
-
-	&:before {
-		content: '';
-		display: block;
-		background-size: 100%;
-		background-position: 50%;
-		background-repeat: no-repeat;
-		z-index: 1;
-		width: 120px;
-		height: 120px;
-		margin: 0 auto 60px;
-		position: absolute;
-		filter: blur(30px);
-		background-image: url(${require('@img/logos/x-logo.png')});
-	}
 
 	&:after {
 		content: '';
@@ -447,11 +434,11 @@ const logo = css`
 		background-position: 50%;
 		background-repeat: no-repeat;
 		z-index: 2;
-		width: 120px;
-		height: 120px;
+		width: ${LOGO_SIZE}px;
+		height: ${LOGO_SIZE}px;
 		margin: 0 auto 60px;
 		position: absolute;
-		background-image: url(${require('@img/logos/x-logo.png')});
+		background-image: url(${require('@img/logos/x-logo-blur.png')});
 	}
 `;
 
