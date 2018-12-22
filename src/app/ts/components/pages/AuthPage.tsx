@@ -418,8 +418,8 @@ const fadeIn = keyframes`
 `;
 
 const logo = css`
-	width: 100px;
-	height: 100px;
+	width: 120px;
+	height: 120px;
 	display: block;
 	margin: 0 auto 60px;
 	animation: ${fadeIn} 20s infinite;
@@ -432,12 +432,12 @@ const logo = css`
 		background-position: 50%;
 		background-repeat: no-repeat;
 		z-index: 1;
-		width: 100px;
-		height: 100px;
+		width: 120px;
+		height: 120px;
 		margin: 0 auto 60px;
 		position: absolute;
 		filter: blur(30px);
-		background-image: url(${require('@img/logos/x-logo.svg')});
+		background-image: url(${require('@img/logos/x-logo.png')});
 	}
 
 	&:after {
@@ -447,11 +447,11 @@ const logo = css`
 		background-position: 50%;
 		background-repeat: no-repeat;
 		z-index: 2;
-		width: 100px;
-		height: 100px;
+		width: 120px;
+		height: 120px;
 		margin: 0 auto 60px;
 		position: absolute;
-		background-image: url(${require('@img/logos/x-logo.svg')});
+		background-image: url(${require('@img/logos/x-logo.png')});
 	}
 `;
 
