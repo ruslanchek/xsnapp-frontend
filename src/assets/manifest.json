@@ -2,10 +2,12 @@
 	"name": "Xsnapp",
 	"short_name": "Xsnapp",
 	"start_url": "/",
-	"display": "standalone",
 	"background_color": "#1E2250",
 	"theme_color": "#1E2250",
 	"description": "",
+	"orientation": "portrait",
+	"display": "standalone",
+	"gcm_sender_id": "0",
 	"icons": [{
 		"src": "/favicons/apple-touch-icon-57x57.png",
 		"sizes": "48x48",
