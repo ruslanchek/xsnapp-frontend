@@ -43,6 +43,8 @@ const root = css`
 	z-index: 1000;
 	left: 0;
 	bottom: 0;
+	bottom: constant(safe-area-inset-bottom); /* iOS 11.0 */
+	bottom: env(safe-area-inset-bottom); /* iOS 11.2 */
 	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
 	box-shadow: 0 -3px 5px ${COLORS.BLACK.alpha(0.3).toString()};
 `;
@@ -52,7 +54,7 @@ const nav = css`
 	justify-content: space-between;
 	height: ${THEME.FOOTER_HEIGHT}px;
 	padding: 0 ${THEME.SECTION_PADDING_H}px;
-	
+
 	>.link {
 		display: flex;
 		color: ${COLORS.GRAY.toString()};

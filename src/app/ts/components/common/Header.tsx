@@ -29,9 +29,7 @@ export class Header extends React.Component<{}, {}> {
 					exitActive: header.exitActive,
 				}}
 			>
-				<header
-					className={root}
-				>
+				<header className={root}>
 					{managers.route.history.location.pathname === PATHS.UPLOAD ? null : (
 						<Link to={PATHS.UPLOAD}>
 							<Button type="button" theme={EButtonTheme.Theme3d}>
@@ -86,6 +84,8 @@ const root = css`
 	justify-content: space-between;
 	box-sizing: border-box;
 	transition: transform 0.3s;
+	top: constant(safe-area-inset-top); /* iOS 11.0 */
+	top: env(safe-area-inset-top); /* iOS 11.2 */
 `;
 
 const logo = css`
