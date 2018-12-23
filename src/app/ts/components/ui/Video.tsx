@@ -18,13 +18,13 @@ interface IState {
 }
 
 export class Video extends React.PureComponent<IProps, IState> {
-	private videoRef: HTMLVideoElement = null;
-
 	public state: IState = {
 		loaded: false,
 		error: false,
 		playing: false,
 	};
+
+	private videoRef: HTMLVideoElement = null;
 
 	public render() {
 		const { show, src, onLoad, className } = this.props;

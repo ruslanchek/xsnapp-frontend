@@ -13,9 +13,9 @@ export class Surface extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<section className={cx(surface, this.props.className)}>
+			<div className={cx(surface, this.props.className)}>
 				{this.props.children}
-			</section>
+			</div>
 		);
 	}
 }

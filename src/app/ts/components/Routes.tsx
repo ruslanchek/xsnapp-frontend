@@ -9,6 +9,8 @@ import { AuthPage, EAuthPageFormType } from './pages/AuthPage';
 import { UploadPage } from './pages/UploadPage';
 import { ItemPage } from './pages/ItemPage';
 import { NotFoundPage } from './pages/NotFoundPage';
+import { TVPage } from './pages/TVPage';
+import { CategoriesPage } from './pages/CategoriesPage';
 
 interface IState {
 	key: number;
@@ -60,7 +62,7 @@ export class Routes extends React.Component<{}, IState> {
 								layout={PageLayout.Default}
 								authRule={ERouteAuthRule.Shared}
 							>
-								<HomePage />
+								<TVPage />
 							</Page>
 						);
 					}}
@@ -76,7 +78,7 @@ export class Routes extends React.Component<{}, IState> {
 								layout={PageLayout.Default}
 								authRule={ERouteAuthRule.Shared}
 							>
-								<HomePage />
+								<CategoriesPage />
 							</Page>
 						);
 					}}

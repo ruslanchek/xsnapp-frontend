@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { followStore } from 'react-stores';
 import { managers } from 'app/ts/managers';
 import { EApiRequestType } from 'app/ts/managers/ApiManager';
 import { API_PATHS, CONFIG } from 'app/ts/config';
@@ -8,6 +7,8 @@ import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { ListItem } from '../ui/ListItem';
 import { css } from 'react-emotion';
 import { PageLoading } from '../common/PageLoading';
+import Masonry from 'react-masonry-component';
+import { ListItemSmall } from '../ui/ListItemSmall';
 import { THEME } from '../../theme';
 
 interface IProps {}
@@ -17,7 +18,7 @@ interface IState {
 	isLoaded: boolean;
 }
 
-export class HomePage extends React.Component<IProps, IState> {
+export class CategoriesPage extends React.Component<IProps, IState> {
 	public state: IState = {
 		items: [],
 		isLoaded: false,
@@ -49,10 +50,25 @@ export class HomePage extends React.Component<IProps, IState> {
 	private get content() {
 		const { isLoaded } = this.state;
 
+		const masonryOptions = {
+			transitionDuration: 400,
+			gutter: 10
+		};
+
 		if (isLoaded) {
-			return this.state.items.map((item, i) => {
-				return <ListItem item={item} key={i} />;
-			});
+			return (
+				<Masonry
+					className={'my-gallery-class'}
+					elementType={'div'}
+					options={masonryOptions}
+					disableImagesLoaded={false}
+					updateOnEachImageLoad={false}
+				>
+					{this.state.items.map((item, i) => {
+						return <ListItemSmall item={item} key={i} />;
+					})}
+				</Masonry>
+			);
 		} else {
 			return <PageLoading />;
 		}
@@ -60,5 +76,5 @@ export class HomePage extends React.Component<IProps, IState> {
 }
 
 const root = css`
-	padding: 10px 10px ${THEME.FOOTER_HEIGHT + 10}px 10px;
+	padding: 0 0 ${THEME.FOOTER_HEIGHT + 10}px 10px;
 `;

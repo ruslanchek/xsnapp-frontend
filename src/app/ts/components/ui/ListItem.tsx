@@ -51,9 +51,9 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 				partialVisibility={true}
 				scrollCheck={true}
 				resizeCheck={true}
-				onChange={isVisible =>
+				onChange={visible =>
 					this.setState({
-						isVisible,
+						isVisible: visible,
 					})
 				}
 			>

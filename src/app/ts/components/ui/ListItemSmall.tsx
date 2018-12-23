@@ -1,0 +1,138 @@
+import * as React from 'react';
+import VisibilitySensor from 'react-visibility-sensor';
+import { css } from 'react-emotion';
+import { ItemsStore } from 'app/ts/stores/ItemsStore';
+import { COLORS, THEME } from 'app/ts/theme';
+import { Surface } from '../common/Surface';
+import { EIconName, SvgIcon } from './SvgIcon';
+import { Utils } from '../../lib/Utils';
+import { EVideoImageKind } from '../../enums/video';
+import { Video } from './Video';
+import { Link } from 'react-router-dom';
+import { PATHS } from '../../config';
+
+interface IProps {
+	item: ItemsStore.IItem;
+}
+
+interface IState {
+	isVisible: boolean;
+	isPreviewLoaded: boolean;
+}
+
+export class ListItemSmall extends React.PureComponent<IProps, IState> {
+	public state: IState = {
+		isVisible: false,
+		isPreviewLoaded: false,
+	};
+
+	public render() {
+		const { id, videoFiles, user, views, title } = this.props.item;
+		const { isVisible } = this.state;
+
+		const previews = videoFiles.filter(
+			videoFile => videoFile.type === ItemsStore.EFileType.Preview,
+		);
+
+		return (
+			<VisibilitySensor
+				partialVisibility={true}
+				scrollCheck={true}
+				resizeCheck={true}
+				onChange={visible =>
+					this.setState({
+						isVisible: visible,
+					})
+				}
+			>
+				<Surface className={root}>
+					<Link
+						to={PATHS.ITEM.replace(':itemId', String(id))}
+						className={videoContainer}
+					>
+						<Video
+							className={video}
+							show={isVisible}
+							onLoad={(successful: boolean) => {
+								this.setState({
+									isPreviewLoaded: true,
+								});
+							}}
+							src={Utils.getImagePath(
+								id,
+								previews[0].fileName,
+								EVideoImageKind.Preview,
+							)}
+						/>
+					</Link>
+
+					<h3 className={titleCn}>{title}</h3>
+
+					<div className={subtitle}>
+						<div className={viewsCn}>
+							<SvgIcon
+								className="icon"
+								name={EIconName.Eye}
+								width="12px"
+								height="12px"
+							/>
+							{views}
+						</div>
+
+						<div className={viewsCn}>
+							<SvgIcon
+								className="icon"
+								name={EIconName.ArrowUpward}
+								width="12px"
+								height="12px"
+							/>
+							16
+						</div>
+					</div>
+				</Surface>
+			</VisibilitySensor>
+		);
+	}
+}
+
+const root = css`
+	width: calc(50vw - 15px);
+	margin-top: 10px;
+`;
+
+const videoContainer = css`
+	width: calc(50vw - 15px);
+	height: calc(50vw - 15px);
+	display: block;
+`;
+
+const video = css`
+	width: calc(50vw - 15px);
+	height: calc(50vw - 15px);
+	position: static;
+	overflow: hidden;
+`;
+
+const titleCn = css`
+	font-size: ${THEME.FONT_SIZE_SMALL}px;
+	padding: 0;
+	margin: 5px 5px 0;
+`;
+
+const subtitle = css`
+	display: flex;
+	justify-content: flex-start;
+`;
+
+const viewsCn = css`
+	font-size: ${THEME.FONT_SIZE_SMALL}px;
+	font-weight: 400;
+	color: ${COLORS.GRAY.toString()};
+	margin: 0 5px 5px;
+	display: flex;
+	align-items: center;
+
+	.icon {
+		margin-right: 0.5ex;
+	}
+`;
