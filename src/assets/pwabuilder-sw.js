@@ -25,6 +25,10 @@ self.addEventListener('fetch', function(evt) {
 		'[PWA Builder] The service worker is serving the asset.' + evt.request.url,
 	);
 
+	if (evt.request.method.toLowerCase() === 'POST') {
+		return;
+	}
+
 	if (evt.request.url.match(/\.(mp4)$/)) {
 		return;
 	}
