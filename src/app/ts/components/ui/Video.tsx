@@ -48,7 +48,7 @@ export class Video extends React.PureComponent<IProps, IState> {
 					</div>
 				)}
 
-				{loaded && !playing && (
+				{loaded && !playing && !error && (
 					<div
 						className={playButton}
 						onClick={e => {

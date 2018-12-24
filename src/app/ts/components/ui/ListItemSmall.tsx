@@ -7,9 +7,9 @@ import { Surface } from '../common/Surface';
 import { EIconName, SvgIcon } from './SvgIcon';
 import { Utils } from '../../lib/Utils';
 import { EVideoImageKind } from '../../enums/video';
-import { Video } from './Video';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../config';
+import { Image } from './Image';
 
 interface IProps {
 	item: ItemsStore.IItem;
@@ -31,7 +31,7 @@ export class ListItemSmall extends React.PureComponent<IProps, IState> {
 		const { isVisible } = this.state;
 
 		const previews = videoFiles.filter(
-			videoFile => videoFile.type === ItemsStore.EFileType.Preview,
+			videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail,
 		);
 
 		return (
@@ -46,15 +46,14 @@ export class ListItemSmall extends React.PureComponent<IProps, IState> {
 				}
 			>
 				<Surface className={root}>
-					<h3 className={titleCn}>{title}</h3>
-
 					<Link
 						to={PATHS.ITEM.replace(':itemId', String(id))}
 						className={videoContainer}
 					>
-						<Video
-							className={cx(video, isVisible ? '' : 'hidden')}
-							show={true}
+						<Image
+							className={picture}
+							title={title}
+							show={isVisible}
 							onLoad={(successful: boolean) => {
 								this.setState({
 									isPreviewLoaded: true,
@@ -63,10 +62,12 @@ export class ListItemSmall extends React.PureComponent<IProps, IState> {
 							src={Utils.getImagePath(
 								id,
 								previews[0].fileName,
-								EVideoImageKind.Preview,
+								EVideoImageKind.Thumbnail,
 							)}
 						/>
 					</Link>
+
+					<h3 className={titleCn}>{title}</h3>
 
 					<div className={subtitle}>
 						<div className={viewsCn}>
@@ -106,21 +107,17 @@ const videoContainer = css`
 	display: block;
 `;
 
-const video = css`
+const picture = css`
 	width: calc(50vw - 15px);
 	height: calc(50vw - 15px);
 	position: static;
 	overflow: hidden;
 	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
-	
-	&.hidden {
-		display: none;
-	}
 `;
 
 const titleCn = css`
 	font-size: ${THEME.FONT_SIZE_SMALL}px;
-	padding: 5px 10px;
+	padding: 7px 10px 0;
 	margin: 0;
 `;
 
