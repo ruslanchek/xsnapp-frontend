@@ -46,6 +46,8 @@ export class ListItemSmall extends React.PureComponent<IProps, IState> {
 				}
 			>
 				<Surface className={root}>
+					<h3 className={titleCn}>{title}</h3>
+
 					<Link
 						to={PATHS.ITEM.replace(':itemId', String(id))}
 						className={videoContainer}
@@ -65,8 +67,6 @@ export class ListItemSmall extends React.PureComponent<IProps, IState> {
 							)}
 						/>
 					</Link>
-
-					<h3 className={titleCn}>{title}</h3>
 
 					<div className={subtitle}>
 						<div className={viewsCn}>
@@ -111,6 +111,7 @@ const video = css`
 	height: calc(50vw - 15px);
 	position: static;
 	overflow: hidden;
+	background-color: ${COLORS.BLACK_EXTRA_LIGHT.toString()};
 	
 	&.hidden {
 		display: none;
@@ -119,20 +120,20 @@ const video = css`
 
 const titleCn = css`
 	font-size: ${THEME.FONT_SIZE_SMALL}px;
-	padding: 0;
-	margin: 5px 5px 0;
+	padding: 5px 10px;
+	margin: 0;
 `;
 
 const subtitle = css`
 	display: flex;
 	justify-content: flex-start;
+	margin: 5px 10px;
 `;
 
 const viewsCn = css`
 	font-size: ${THEME.FONT_SIZE_SMALL}px;
 	font-weight: 400;
 	color: ${COLORS.GRAY.toString()};
-	margin: 0 5px 5px;
 	display: flex;
 	align-items: center;
 
