@@ -1,6 +1,6 @@
 import * as React from 'react';
 import VisibilitySensor from 'react-visibility-sensor';
-import { css } from 'react-emotion';
+import { css, cx } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { COLORS, THEME } from 'app/ts/theme';
 import { Surface } from '../common/Surface';
@@ -51,8 +51,8 @@ export class ListItemSmall extends React.PureComponent<IProps, IState> {
 						className={videoContainer}
 					>
 						<Video
-							className={video}
-							show={isVisible}
+							className={cx(video, isVisible ? '' : 'hidden')}
+							show={true}
 							onLoad={(successful: boolean) => {
 								this.setState({
 									isPreviewLoaded: true,
@@ -111,6 +111,10 @@ const video = css`
 	height: calc(50vw - 15px);
 	position: static;
 	overflow: hidden;
+	
+	&.hidden {
+		display: none;
+	}
 `;
 
 const titleCn = css`
