@@ -4,15 +4,15 @@
 <head>
     <title>Xsnapp</title>
     <base href="/">
-    <meta charset="UTF-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"/>
-    <meta name="apple-mobile-web-app-status-bar-style" content="white"/>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="white" />
     <meta name="apple-mobile-web-app-title" content="Xsnapp">
-    <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
-    <meta name="theme-color" content="#101227"/>
-    <meta name="msapplication-navbutton-color" content="#101227"/>
-    <meta name="application-name" content="Xsnapp"/>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <meta name="theme-color" content="#101227" />
+    <meta name="msapplication-navbutton-color" content="#101227" />
+    <meta name="application-name" content="Xsnapp" />
     <meta name="msapplication-TileColor" content="#101227" />
     <meta name="msapplication-TileImage" content="/favicons/mstile-144x144.png" />
     <meta name="msapplication-square70x70logo" content="/favicons/mstile-70x70.png" />
@@ -40,6 +40,15 @@
     <main id="app"></main>
     <script async src="{{{publicPath}}}vendors~app.js?v={{{version}}}"></script>
     <script async src="{{{publicPath}}}app.js?v={{{version}}}"></script>
+
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-131402342-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'UA-131402342-1');
+    </script>
 </body>
 
 </html>
