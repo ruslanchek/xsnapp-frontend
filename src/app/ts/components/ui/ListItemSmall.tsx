@@ -6,7 +6,7 @@ import { COLORS, THEME } from 'app/ts/theme';
 import { Surface } from '../common/Surface';
 import { EIconName, SvgIcon } from './SvgIcon';
 import { Utils } from '../../lib/Utils';
-import { EVideoImageKind } from '../../enums/video';
+import { EVideoFileKind } from '../../enums/video';
 import { Link } from 'react-router-dom';
 import { PATHS } from '../../config';
 import { Image } from './Image';
@@ -62,7 +62,7 @@ export class ListItemSmall extends React.PureComponent<IProps, IState> {
 							src={Utils.getImagePath(
 								id,
 								previews[0].fileName,
-								EVideoImageKind.Thumbnail,
+								EVideoFileKind.Thumbnail,
 							)}
 						/>
 					</Link>

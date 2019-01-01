@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactSwipe from 'react-swipe';
 import { css, cx } from 'react-emotion';
 import { COLORS } from 'app/ts/theme';
-import { EVideoImageKind } from 'app/ts/enums/video';
+import { EVideoFileKind } from 'app/ts/enums/video';
 import { Image } from './Image';
 import { Utils } from 'app/ts/lib/Utils';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
@@ -76,7 +76,7 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 											src={Utils.getImagePath(
 												id,
 												previews[0].fileName,
-												EVideoImageKind.Preview,
+												EVideoFileKind.Preview,
 											)}
 										/>
 									</div>
@@ -96,7 +96,7 @@ export class ListGallery extends React.PureComponent<IProps, IState> {
 											src={Utils.getImagePath(
 												id,
 												thumbnail.fileName,
-												EVideoImageKind.Thumbnail,
+												EVideoFileKind.Thumbnail,
 											)}
 										/>
 									</div>

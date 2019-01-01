@@ -8,7 +8,7 @@ import { css } from 'react-emotion';
 import { Utils } from 'app/ts/lib/Utils';
 import {
 	EVideoFileSize,
-	EVideoImageKind,
+	EVideoFileKind,
 	EVideoFileExtension,
 } from 'app/ts/enums/video';
 import { PageLoading } from '../common/PageLoading';
@@ -101,7 +101,7 @@ export class ItemPage extends React.Component<IProps, IState> {
 						poster={Utils.getImagePath(
 							id,
 							thumbs[0].fileName,
-							EVideoImageKind.Thumbnail,
+							EVideoFileKind.Thumbnail,
 						).replace(EVideoFileExtension.Image, EVideoFileExtension.Jpeg)}
 						src={Utils.getVideoPath(id, videos, EVideoFileSize.SD)}
 					/>
