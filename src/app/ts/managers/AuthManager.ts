@@ -100,10 +100,48 @@ export class AuthManager extends Manager {
 	): Promise<IApiResult<any>> {
 		const result = await managers.api.request<any>(
 			EApiRequestType.POST,
-			'/auth/register',
+			API_PATHS.AUTH_REGISTER,
 			{
 				email,
 				password,
+			},
+		);
+
+		if (!result.error && result.data.token) {
+			this.setToken(result.data.token);
+			await this.auth();
+		}
+
+		return result;
+	}
+
+	public async passwordReset(email: string): Promise<IApiResult<any>> {
+		const result = await managers.api.request<any>(
+			EApiRequestType.POST,
+			API_PATHS.PASSWORD_RESET,
+			{
+				email,
+			},
+		);
+
+		if (!result.error && result.data.token) {
+			this.setToken(result.data.token);
+			await this.auth();
+		}
+
+		return result;
+	}
+
+	public async passwordResetConfirm(
+		token: string,
+		newPassword: string,
+	): Promise<IApiResult<any>> {
+		const result = await managers.api.request<any>(
+			EApiRequestType.POST,
+			API_PATHS.PASSWORD_RESET_CONFIRM,
+			{
+				token,
+				newPassword,
 			},
 		);
 

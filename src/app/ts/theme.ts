@@ -77,7 +77,7 @@ export const COMMON_STYLES = {
 
 	LINK_WHITE: css`
 		color: ${COLORS.WHITE.toString()};
-		text-decoration: 'none';
+		text-decoration: none;
 
 		&:link {
 			color: ${COLORS.WHITE.toString()};

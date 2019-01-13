@@ -150,6 +150,38 @@ export class Routes extends React.Component<{}, IState> {
 
 				<Route
 					exact={true}
+					path={PATHS.PASSWORD_RESET}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<AuthPage type={EAuthPageFormType.PasswordReset} />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.PASSWORD_RESET_CONFIRM}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<AuthPage type={EAuthPageFormType.PasswordResetConfirm} />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
 					path={PATHS.UPLOAD}
 					render={props => {
 						return (

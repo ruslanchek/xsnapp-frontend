@@ -3,9 +3,9 @@ import { StorageManager } from './managers/StorageManager';
 import { StateStore } from './stores/StateStore';
 import { ApiManager } from './managers/ApiManager';
 import { ToastManager } from './managers/ToastManager';
-import { FakerManager } from './managers/FakerManager';
 import { LocaleManager } from './managers/LocaleManager';
 import { AuthManager } from './managers/AuthManager';
+import { ItemsManager } from './managers/ItemsManager';
 
 export class Managers {
 	public locale: LocaleManager;
@@ -13,8 +13,8 @@ export class Managers {
 	public storage: StorageManager;
 	public api: ApiManager;
 	public auth: AuthManager;
+	public items: ItemsManager;
 	public toast: ToastManager;
-	public faker: FakerManager;
 
 	private initStartTime: number = 0;
 
@@ -24,8 +24,8 @@ export class Managers {
 		this.storage = new StorageManager();
 		this.api = new ApiManager();
 		this.auth = new AuthManager();
+		this.items = new ItemsManager();
 		this.toast = new ToastManager();
-		this.faker = new FakerManager();
 
 		this.init();
 	}
@@ -62,8 +62,8 @@ export class Managers {
 		this.storage.reset();
 		this.api.reset();
 		this.auth.reset();
+		this.items.reset();
 		this.toast.reset();
-		this.faker.reset();
 	}
 
 	private async initManagers(): Promise<any> {
@@ -82,11 +82,11 @@ export class Managers {
 		await this.auth.init();
 		this.logTime('AuthManager ready');
 
+		await this.items.init();
+		this.logTime('Items ready');
+
 		await this.toast.init();
 		this.logTime('ToastManager ready');
-
-		await this.faker.init();
-		this.logTime('FakerManager ready');
 	}
 }
 

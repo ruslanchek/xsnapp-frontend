@@ -24,13 +24,7 @@ export class HomePage extends React.Component<IProps, IState> {
 	};
 
 	public async componentDidMount() {
-		const result = await managers.api.request<{ items: ItemsStore.IItem[] }>(
-			EApiRequestType.GET,
-			API_PATHS.GET_ITEMS,
-			{},
-		);
-
-		const { items } = result.data;
+		const items = await managers.items.fetchItems();
 
 		this.setState({
 			items,
