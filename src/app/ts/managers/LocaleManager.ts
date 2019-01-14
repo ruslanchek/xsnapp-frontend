@@ -1,41 +1,31 @@
 import { Manager } from './Manager';
-import LocalizedStrings, { LocalizedStringsMethods } from 'react-localization';
+import i18n from 'i18next';
+import { reactI18nextModule } from 'react-i18next';
 
-export interface IStrings extends LocalizedStringsMethods {
-	test: string;
-	currentDate: string;
-}
+const RESOURCES = {
+	en: {
+		translation: require('../../locales/en.json'),
+	},
+};
 
 export class LocaleManager extends Manager {
-	public strings: IStrings = null;
+	public t = null;
 
-	public reset(): void {
-	}
+	public reset(): void {}
 
-	public init(): Promise<any> {
-		return new Promise<any>((resolve, reject) => {
-			this.strings = new LocalizedStrings({
-				en: {
-					test: 'Help!!!',
-					currentDate: 'The current date is {month} {day}, {year}!'
-				},
-				ru: {
-					test: 'Хелп',
-					currentDate: 'Сейчас {day} {month}, {year}!'
-				},
-			});
-
-			this.strings.setLanguage('en');
-
-			console.log(this.strings.formatString(this.strings.currentDate, {
-				month: 'Jan',
-				day: 12,
-				year: 2018
-			}));
-
-			console.log(this.strings.test);
-
-			resolve();
+	public async init(): Promise<any> {
+		this.t = await i18n.use(reactI18nextModule).init({
+			resources: RESOURCES,
+			lng: 'en',
+			fallbackLng: 'en',
+			interpolation: {
+				escapeValue: false,
+			},
+			react: {
+				wait: false,
+			}
 		});
+
+		return Promise.resolve();
 	}
 }

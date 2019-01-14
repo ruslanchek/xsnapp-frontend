@@ -7,17 +7,6 @@ import { Toast } from './ui/Toast';
 import { THEME, COLORS } from '../theme';
 import { injectGlobal } from 'react-emotion';
 
-const locales = [
-	{
-		language: 'en',
-		messages: {},
-	},
-	{
-		language: 'ru',
-		messages: {},
-	},
-];
-
 const applyGlobal = () => injectGlobal`
 	html {
 		min-height: 100vh;

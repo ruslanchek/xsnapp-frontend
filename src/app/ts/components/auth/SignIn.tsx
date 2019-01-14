@@ -14,6 +14,7 @@ import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { managers } from '../../managers';
 import { AUTH_STYLES } from './styles';
 import { ValidatorMinLength } from '../forms/Validators/ValidatorMinLength';
+import { Trans } from '../hocs/Trans';
 
 interface IProps {}
 
@@ -41,8 +42,8 @@ export class SignIn extends React.Component<IProps, IState> {
 					<div className={AUTH_STYLES.logo} />
 
 					<div className={AUTH_STYLES.head}>
-						<h1>SIGN_IN::TITLE</h1>
-						<h2>SIGN_IN::TEXT</h2>
+						<h1><Trans id="SIGN_IN.TITLE"/></h1>
+						<h2><Trans id="SIGN_IN.TEXT"/></h2>
 					</div>
 
 					<div className={AUTH_STYLES.inputs}>
@@ -50,7 +51,7 @@ export class SignIn extends React.Component<IProps, IState> {
 							showError={false}
 							containerClassName={AUTH_STYLES.input}
 							name="email"
-							label="FORM_LABEL::EMAIL"
+							label="FORM_LABEL.EMAIL"
 							autoComplete="username"
 							validators={[new ValidatorIsEmail()]}
 						/>
@@ -59,7 +60,7 @@ export class SignIn extends React.Component<IProps, IState> {
 							showError={false}
 							containerClassName={AUTH_STYLES.input}
 							name="password"
-							label="FORM_LABEL::PASSWORD"
+							label="FORM_LABEL.PASSWORD"
 							type="password"
 							autoComplete="current-password"
 							validators={[
@@ -86,7 +87,7 @@ export class SignIn extends React.Component<IProps, IState> {
 						)}
 						to={PATHS.PASSWORD_RESET}
 					>
-						PASSWORD_RESET::LINK
+						<Trans id="PASSWORD_RESET.LINK"/>
 					</Link>
 
 					{isLoading ? (
@@ -104,7 +105,7 @@ export class SignIn extends React.Component<IProps, IState> {
 								/>
 							}
 						>
-							SIGN_IN::LINK
+							<Trans id="SIGN_IN.LINK"/>
 						</Button>
 					)}
 				</div>
@@ -146,7 +147,7 @@ export class SignIn extends React.Component<IProps, IState> {
 			}
 		} else {
 			this.setState({
-				error: 'RESPONSE::INVALID_FORM_DATA',
+				error: 'RESPONSE.INVALID_FORM_DATA',
 			});
 		}
 	};

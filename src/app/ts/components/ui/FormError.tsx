@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { css, cx } from 'react-emotion';
 import { COLORS } from 'app/ts/theme';
+import { Trans } from '../hocs/Trans';
 
 interface IProps {
 	errors: string[];
@@ -18,7 +19,9 @@ export class FormError extends React.PureComponent<IProps, IState> {
 		return (
 			<>
 				{errors && errors[0] && (
-					<div className={cx(error, className)}>{errors[0]}</div>
+					<div className={cx(error, className)}>
+						<Trans id={errors[0]} />
+					</div>
 				)}
 			</>
 		);

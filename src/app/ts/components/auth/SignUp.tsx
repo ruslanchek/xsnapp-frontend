@@ -11,6 +11,7 @@ import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { managers } from '../../managers';
 import { AUTH_STYLES } from './styles';
 import { ValidatorMinLength } from '../forms/Validators/ValidatorMinLength';
+import { Trans } from '../hocs/Trans';
 
 interface IProps {}
 
@@ -38,8 +39,12 @@ export class SignUp extends React.Component<IProps, IState> {
 					<div className={AUTH_STYLES.logo} />
 
 					<div className={AUTH_STYLES.head}>
-						<h1>SIGN_UP::TITLE</h1>
-						<h2>SIGN_UP::TEXT</h2>
+						<h1>
+							<Trans id="SIGN_UP.TITLE" />
+						</h1>
+						<h2>
+							<Trans id="SIGN_UP.TEXT" />
+						</h2>
 					</div>
 
 					<div className={AUTH_STYLES.inputs}>
@@ -47,7 +52,7 @@ export class SignUp extends React.Component<IProps, IState> {
 							showError={false}
 							containerClassName={AUTH_STYLES.input}
 							name="email"
-							label="FORM_LABEL::EMAIL"
+							label="FORM_LABEL.EMAIL"
 							autoComplete="username"
 							validators={[new ValidatorIsEmail()]}
 						/>
@@ -56,7 +61,7 @@ export class SignUp extends React.Component<IProps, IState> {
 							showError={false}
 							containerClassName={AUTH_STYLES.input}
 							name="password"
-							label="FORM_LABEL::PASSWORD"
+							label="FORM_LABEL.PASSWORD"
 							type="password"
 							autoComplete="new-password"
 							validators={[
@@ -91,12 +96,14 @@ export class SignUp extends React.Component<IProps, IState> {
 								/>
 							}
 						>
-							SIGN_UP::SUBMIT
+							<Trans id="SIGN_UP.SUBMIT" />
 						</Button>
 					)}
 				</div>
 
-				<div className={AUTH_STYLES.legals}>SIGN_UP::LEGALS</div>
+				<div className={AUTH_STYLES.legals}>
+					<Trans id="SIGN_UP.LEGALS" />
+				</div>
 			</Form>
 		);
 	}
@@ -135,7 +142,7 @@ export class SignUp extends React.Component<IProps, IState> {
 			}
 		} else {
 			this.setState({
-				error: 'RESPONSE::INVALID_FORM_DATA',
+				error: 'RESPONSE.INVALID_FORM_DATA',
 			});
 		}
 	};

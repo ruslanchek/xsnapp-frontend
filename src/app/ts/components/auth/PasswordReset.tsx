@@ -9,6 +9,7 @@ import { Button, EButtonTheme } from '../ui/Button';
 import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { managers } from '../../managers';
 import { AUTH_STYLES } from './styles';
+import { Trans } from '../hocs/Trans';
 
 interface IProps {}
 
@@ -36,8 +37,8 @@ export class PasswordReset extends React.Component<IProps, IState> {
 					<div className={AUTH_STYLES.logo} />
 
 					<div className={AUTH_STYLES.head}>
-						<h1>PASSWORD_RESET::TITLE</h1>
-						<h2>PASSWORD_RESET::TEXT</h2>
+						<h1><Trans id="PASSWORD_RESET.TITLE"/></h1>
+						<h2><Trans id="PASSWORD_RESET.TEXT"/></h2>
 					</div>
 
 					<div className={AUTH_STYLES.inputs}>
@@ -45,7 +46,7 @@ export class PasswordReset extends React.Component<IProps, IState> {
 							showError={false}
 							containerClassName={AUTH_STYLES.input}
 							name="email"
-							label="FORM_LABEL::EMAIL"
+							label="FORM_LABEL.EMAIL"
 							autoComplete="email"
 							validators={[new ValidatorIsEmail()]}
 						/>
@@ -77,7 +78,7 @@ export class PasswordReset extends React.Component<IProps, IState> {
 								/>
 							}
 						>
-							PASSWORD_RESET::SEND
+							<Trans id="PASSWORD_RESET.SEND"/>
 						</Button>
 					)}
 				</div>
@@ -116,7 +117,7 @@ export class PasswordReset extends React.Component<IProps, IState> {
 			}
 		} else {
 			this.setState({
-				error: 'RESPONSE::INVALID_FORM_DATA',
+				error: 'RESPONSE.INVALID_FORM_DATA',
 			});
 		}
 	};

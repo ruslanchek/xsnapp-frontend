@@ -17,6 +17,7 @@ import { SignIn } from '../auth/SignIn';
 import { SignUp } from '../auth/SignUp';
 import { PasswordReset } from '../auth/PasswordReset';
 import { PasswordResetConfirm } from '../auth/PasswordResetConfirm';
+import { Trans } from '../hocs/Trans';
 
 interface IProps {
 	type: EAuthPageFormType;
@@ -53,7 +54,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 			case EAuthPageFormType.SignIn: {
 				return (
 					<Link to={PATHS.SIGN_UP} className={authLink}>
-						SIGN_UP::LINK
+						<Trans id="SIGN_UP.LINK"/>
 					</Link>
 				);
 			}
@@ -63,7 +64,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 			case EAuthPageFormType.SignUp: {
 				return (
 					<Link to={PATHS.SIGN_IN} className={authLink}>
-						SIGN_IN::LINK
+						<Trans id="SIGN_IN.LINK"/>
 					</Link>
 				);
 			}

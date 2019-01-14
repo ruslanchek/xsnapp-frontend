@@ -5,6 +5,7 @@ import { Validator } from './Validators/Validator';
 import { InputErrors } from './InputErrors';
 import styled, { css, cx } from 'react-emotion';
 import { SvgIcon, EIconName } from '../ui/SvgIcon';
+import { Trans } from '../hocs/Trans';
 
 interface IProps {
 	name: string;
@@ -115,7 +116,7 @@ export class Input extends React.PureComponent<IProps, {}> {
 										isIcon={!icon}
 										isShowed={!value}
 									>
-										{label}
+										<Trans id={label}/>
 									</LabelText>
 								</Labels>
 

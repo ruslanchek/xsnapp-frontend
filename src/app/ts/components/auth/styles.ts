@@ -81,7 +81,7 @@ export const AUTH_STYLES = {
 		width: ${LOGO_SIZE}px;
 		height: ${LOGO_SIZE}px;
 		display: block;
-		margin: 0 auto 60px;
+		margin: 0 auto 10px;
 		animation: ${fadeIn} 20s infinite;
 		border-radius: 50%;
 
