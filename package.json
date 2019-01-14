@@ -8,7 +8,7 @@
 		"lint": "node_modules/tslint/bin/tslint \"src/app/**/*.ts\" \"src/app/**/*.tsx\" --project ./tsconfig.json",
 		"test": "jest --config ./jest.config.json --no-cache",
 		"locales": "node locales --download",
-		"push-locales": "git pull GitHub master && git add src/app/locales/*.json && git commit -m \"Locales updated\" && git push GitHub master"
+		"push-locales": "git pull origin master && git add src/app/locales/*.json && git commit -m \"Locales updated\" && git push origin master"
 	},
 	"author": "Xsnapp.com",
 	"license": "ISC",
