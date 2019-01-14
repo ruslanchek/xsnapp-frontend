@@ -3,11 +3,12 @@
 	"version": "0.0.8",
 	"description": "Xsnapp.com",
 	"scripts": {
-		"build:prod": "yarn locales && webpack --config webpack.prod.js",
+		"build:prod": "yarn locales && yarn push-locales && webpack --config webpack.prod.js",
 		"dev": "webpack-dev-server --config webpack.dev.js --inline --mode=development",
 		"lint": "node_modules/tslint/bin/tslint \"src/app/**/*.ts\" \"src/app/**/*.tsx\" --project ./tsconfig.json",
 		"test": "jest --config ./jest.config.json --no-cache",
-		"locales": "node locales --download"
+		"locales": "node locales --download",
+		"push-locales": "git pull GitHub master && git add src/app/locales/*.json && git commit -m \"Locales updated\" && git push GitHub master"
 	},
 	"author": "Xsnapp.com",
 	"license": "ISC",
