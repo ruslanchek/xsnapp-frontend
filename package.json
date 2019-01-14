@@ -3,10 +3,11 @@
 	"version": "0.0.8",
 	"description": "Xsnapp.com",
 	"scripts": {
-		"build:prod": "webpack --config webpack.prod.js",
+		"build:prod": "yarn locales && webpack --config webpack.prod.js",
 		"dev": "webpack-dev-server --config webpack.dev.js --inline --mode=development",
 		"lint": "node_modules/tslint/bin/tslint \"src/app/**/*.ts\" \"src/app/**/*.tsx\" --project ./tsconfig.json",
-		"test": "jest --config ./jest.config.json --no-cache"
+		"test": "jest --config ./jest.config.json --no-cache",
+		"locales": "node locales --download"
 	},
 	"author": "Xsnapp.com",
 	"license": "ISC",
@@ -31,7 +32,9 @@
 		"file-loader": "^1.1.11",
 		"handlebars-webpack-plugin": "^1.4.1",
 		"hard-source-webpack-plugin": "^0.12.0",
+		"lokalise-api": "^1.1.4",
 		"react-svg-loader": "^2.1.0",
+		"select-prompt": "^0.3.1",
 		"source-map-loader": "^0.2.3",
 		"terser-webpack-plugin": "^1.1.0",
 		"ts-loader": "^5.3.1",
