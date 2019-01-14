@@ -3,8 +3,8 @@ const packageData = require('./package');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const TerserPlugin = require('terser-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
-const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
 
 let plugins = [
 	new CleanWebpackPlugin(['dist'], {
@@ -45,22 +45,7 @@ module.exports = {
 
 	optimization: {
 		minimize: true,
-		minimizer: [
-			new UglifyJsPlugin({
-				sourceMap: false,
-				uglifyOptions: {
-					safari10: true,
-					compress: {
-						dead_code: true,
-						drop_console: true,
-					},
-					output: {
-						comments: false,
-						beautify: false,
-					},
-				},
-			}),
-		],
+		minimizer: [new TerserPlugin()],
 		splitChunks: {
 			chunks: 'all'
 		}
