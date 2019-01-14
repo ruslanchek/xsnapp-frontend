@@ -78,7 +78,7 @@ export class PasswordReset extends React.Component<IProps, IState> {
 								/>
 							}
 						>
-							<Trans id="PASSWORD_RESET.SEND"/>
+							<Trans id="PASSWORD_RESET.SUBMIT"/>
 						</Button>
 					)}
 				</div>
