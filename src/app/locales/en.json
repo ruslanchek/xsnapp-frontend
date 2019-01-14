@@ -1,0 +1,29 @@
+{
+	"RESPONSE": {
+		"USER_NOT_FOUND": "User not found",
+		"INVALID_FORM_DATA": "Invalid form data"
+	},
+	"SIGN_UP": {
+		"SUBMIT": "Sign up",
+		"LEGALS": "By continuing, you agree to our<br/><a href=\"{{url}}\">Terms of Use</a>",
+		"TITLE": "Welcome",
+		"TEXT": "Please register here",
+		"LINK": "Sign up"
+	},
+	"PASSWORD_RESET": {
+		"TITLE": "Password reset",
+		"TEXT": "Enter your email and we'll send you instructions",
+		"SUBMIT": "Submit",
+		"LINK": "Forgot your password?"
+	},
+	"SIGN_IN": {
+		"LINK": "Sign in",
+		"TITLE": "Welcome back!",
+		"TEXT": "Put your credentials to sign in"
+	},
+	"FORM_LABEL": {
+		"EMAIL": "Email",
+		"PASSWORD": "Password",
+		"NEW_PASSWORD": "New password"
+	}
+}
