@@ -3,7 +3,7 @@
 	"version": "0.0.8",
 	"description": "Xsnapp.com",
 	"scripts": {
-		"build:prod": "yarn locales && yarn push-locales && webpack --config webpack.prod.js",
+		"build:prod": "yarn locales && webpack --config webpack.prod.js",
 		"dev": "webpack-dev-server --config webpack.dev.js --inline --mode=development",
 		"lint": "node_modules/tslint/bin/tslint \"src/app/**/*.ts\" \"src/app/**/*.tsx\" --project ./tsconfig.json",
 		"test": "jest --config ./jest.config.json --no-cache",
