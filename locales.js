@@ -3,7 +3,7 @@ const lokaliseApi = require('lokalise-api');
 const prompt = require('select-prompt');
 const process = require('process');
 
-const TOKEN = '4f1206bce633cb74c6c387f269bb1e71ac3bbb83';
+const TOKEN = 'c0608975ac1456768405a6422d74ece20088ce35';
 const PROJECT_ID = '788743025c3b176cccda93.78784858';
 
 const lokalise = new lokaliseApi.LokaliseAPI(TOKEN);
@@ -14,7 +14,7 @@ let exportLocalesToLokalise = async () => {
 	for (const locale of locales) {
 		let data = await lokalise.projects.import({
 			id: PROJECT_ID,
-			file: __dirname + '/src/locales/' + locale.locale + '.json',
+			file: __dirname + '/src/app/locales/' + locale.locale + '.json',
 			lang_iso: locale.locale,
 			icu_plurals: 1,
 			replace: 1,
@@ -42,13 +42,13 @@ let importLocales = () => {
 	console.log('\x1b[33m%s\x1b[0m', 'Import data from lokalise');
 
 	lokalise.projects
-		.exportToPath(__dirname + '/src/core/', {
+		.exportToPath(__dirname + '/src/app', {
 			id: PROJECT_ID,
-			type: lokaliseApi.FileFormat.json,
+			type: 'json',
 			export_empty: 'base',
 			json_unescaped_slashes: 1,
-			plural_format: lokaliseApi.PluralFormat.icu,
-			placeholder_format: lokaliseApi.PlaceholderFormat.i18n,
+			plural_format: 'icu',
+			placeholder_format: 'i18n',
 			bundle_structure: 'locales/%LANG_ISO%.%FORMAT%',
 		})
 		.then(data => {
