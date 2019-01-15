@@ -1,7 +1,7 @@
 import * as React from 'react';
-import { css, cx } from 'react-emotion';
+import { css, cx, keyframes } from 'react-emotion';
 import { COLORS } from 'app/ts/theme';
-import { Trans } from '../hocs/Trans';
+import { Locale } from '../hocs/Locale';
 
 interface IProps {
 	errors: string[];
@@ -20,7 +20,7 @@ export class FormError extends React.PureComponent<IProps, IState> {
 			<>
 				{errors && errors[0] && (
 					<div className={cx(error, className)}>
-						<Trans id={errors[0]} />
+						<Locale id={errors[0]} />
 					</div>
 				)}
 			</>
@@ -28,11 +28,25 @@ export class FormError extends React.PureComponent<IProps, IState> {
 	}
 }
 
+const appear = keyframes`
+	from {
+		opacity: 0;
+		transform: scale(.4);
+	}
+	
+	to {
+		opacity: 1;
+		transform: scale(1);
+	}
+`;
+
 const error = css`
 	background-color: ${COLORS.RED.toString()};
-	padding: 10px 10px;
+	padding: 8px 10px;
 	display: flex;
 	border-radius: 5px;
 	color: ${COLORS.WHITE.toString()};
 	font-weight: bold;
+	box-shadow: 0 2px 5px ${COLORS.RED.alpha(.5).toString()};
+	animation: ${appear} .2s cubic-bezier(0.740, 0.240, 0.085, 1.185);
 `;

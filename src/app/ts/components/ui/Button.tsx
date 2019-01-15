@@ -49,10 +49,10 @@ const themes = {
 		border: none;
 		font-family: ${THEME.FONT};
 		font-size: ${THEME.FONT_SIZE_MEDIUM}px;
+		font-weight: 600;
 		display: flex;
 		align-items: center;
 		justify-content: center;
-		font-weight: 600;
 		padding: 0 15px;
 	`,
 

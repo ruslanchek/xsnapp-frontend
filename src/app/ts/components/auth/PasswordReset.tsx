@@ -9,23 +9,26 @@ import { Button, EButtonTheme } from '../ui/Button';
 import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { managers } from '../../managers';
 import { AUTH_STYLES } from './styles';
-import { Trans } from '../hocs/Trans';
+import { Locale } from '../hocs/Locale';
+import { Success } from '../common/Success';
+import { css } from 'emotion';
+import { EToastType } from '../../managers/ToastManager';
 
 interface IProps {}
 
 interface IState {
 	isLoading: boolean;
-	error: string;
+	success: boolean;
 }
 
 export class PasswordReset extends React.Component<IProps, IState> {
 	public state: IState = {
 		isLoading: false,
-		error: null,
+		success: null,
 	};
 
 	public render() {
-		const { isLoading, error } = this.state;
+		const { isLoading, success } = this.state;
 
 		return (
 			<Form
@@ -37,66 +40,63 @@ export class PasswordReset extends React.Component<IProps, IState> {
 					<div className={AUTH_STYLES.logo} />
 
 					<div className={AUTH_STYLES.head}>
-						<h1><Trans id="PASSWORD_RESET.TITLE"/></h1>
-						<h2><Trans id="PASSWORD_RESET.TEXT"/></h2>
+						<h1>
+							<Locale id="PASSWORD_RESET.TITLE" />
+						</h1>
+						<h2>
+							<Locale id="PASSWORD_RESET.TEXT" />
+						</h2>
 					</div>
 
-					<div className={AUTH_STYLES.inputs}>
-						<Input
-							showError={false}
-							containerClassName={AUTH_STYLES.input}
-							name="email"
-							label="FORM_LABEL.EMAIL"
-							autoComplete="email"
-							validators={[new ValidatorIsEmail()]}
-						/>
+					{success && <div className={successCn}><Success/></div>}
 
-						<div
-							className={AUTH_STYLES.errorBlock}
-							onClick={this.handleClearErrors}
-						>
-							<FormError errors={[error]} />
+					{!success && (
+						<div className={AUTH_STYLES.inputs}>
+							<Input
+								showError={false}
+								containerClassName={AUTH_STYLES.input}
+								name="email"
+								label="FORM_LABEL.EMAIL"
+								autoComplete="email"
+								validators={[new ValidatorIsEmail()]}
+							/>
 						</div>
-					</div>
+					)}
 				</div>
 
-				<div className={AUTH_STYLES.buttons}>
-					<div />
+				{!success && (
+					<div className={AUTH_STYLES.buttons}>
+						<div />
 
-					{isLoading ? (
-						<Loader color={COLORS.WHITE} size={40} />
-					) : (
-						<Button
-							className={AUTH_STYLES.button}
-							theme={EButtonTheme.ThemeRound}
-							type="submit"
-							iconRight={
-								<SvgIcon
-									width={'30px'}
-									height={'30px'}
-									name={EIconName.ArrowForward}
-								/>
-							}
-						>
-							<Trans id="PASSWORD_RESET.SUBMIT"/>
-						</Button>
-					)}
+						{isLoading ? (
+							<Loader color={COLORS.WHITE} size={40} />
+						) : (
+							<Button
+								className={AUTH_STYLES.button}
+								theme={EButtonTheme.ThemeRound}
+								type="submit"
+								iconRight={
+									<SvgIcon
+										width={'30px'}
+										height={'30px'}
+										name={EIconName.ArrowForward}
+									/>
+								}
+							>
+								<Locale id="PASSWORD_RESET.SUBMIT" />
+							</Button>
+						)}
+					</div>
+				)}
+
+				<div className={AUTH_STYLES.legals}>
+					<Locale id="SIGN_UP.LEGALS" />
 				</div>
 			</Form>
 		);
 	}
 
-	private handleClearErrors = () => {
-		this.setState({
-			error: null,
-		});
-	};
-
 	private handleSubmit = async (output: IFormModelOutput) => {
-		this.setState({
-			error: null,
-		});
-
 		if (output.isValid) {
 			this.setState({
 				isLoading: true,
@@ -109,16 +109,19 @@ export class PasswordReset extends React.Component<IProps, IState> {
 			});
 
 			if (!result.error && result.data) {
-				console.log(result);
-			} else {
 				this.setState({
-					error: result.error,
+					success: true,
 				});
+			} else {
+				managers.toast.toast(EToastType.Error, managers.locale.t(result.error));
 			}
 		} else {
-			this.setState({
-				error: 'RESPONSE.INVALID_FORM_DATA',
-			});
+			managers.toast.toast(EToastType.Error, managers.locale.t('RESPONSE.INVALID_FORM_DATA'));
 		}
 	};
 }
+
+const successCn = css`
+  display: flex;
+  justify-content: center;
+`;

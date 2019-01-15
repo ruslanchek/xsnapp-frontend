@@ -17,7 +17,7 @@ import { SignIn } from '../auth/SignIn';
 import { SignUp } from '../auth/SignUp';
 import { PasswordReset } from '../auth/PasswordReset';
 import { PasswordResetConfirm } from '../auth/PasswordResetConfirm';
-import { Trans } from '../hocs/Trans';
+import { Locale } from '../hocs/Locale';
 
 interface IProps {
 	type: EAuthPageFormType;
@@ -54,7 +54,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 			case EAuthPageFormType.SignIn: {
 				return (
 					<Link to={PATHS.SIGN_UP} className={authLink}>
-						<Trans id="SIGN_UP.LINK"/>
+						<Locale id="SIGN_UP.LINK"/>
 					</Link>
 				);
 			}
@@ -64,7 +64,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 			case EAuthPageFormType.SignUp: {
 				return (
 					<Link to={PATHS.SIGN_IN} className={authLink}>
-						<Trans id="SIGN_IN.LINK"/>
+						<Locale id="SIGN_IN.LINK"/>
 					</Link>
 				);
 			}
@@ -113,6 +113,7 @@ const close = css`
 
 const authLink = css`
 	color: ${COLORS.WHITE.toString()} !important;
+	font-weight: 600;
 `;
 
 const root = css`
@@ -129,8 +130,9 @@ const root = css`
 	justify-content: center;
 	background-image: linear-gradient(
 		10deg,
-		${COLORS.GREEN.toString()},
-		${COLORS.BLACK.toString()},
-		${COLORS.BLACK_EXTRA_LIGHT.toString()}
+		${COLORS.BLACK_EXTRA_LIGHT.toString()},
+		${COLORS.GREEN.darken(.5).toString()},
+		${COLORS.BLACK_EXTRA_LIGHT.toString()},
+		${COLORS.BLACK.toString()}
 	);
 `;

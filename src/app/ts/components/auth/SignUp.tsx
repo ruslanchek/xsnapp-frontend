@@ -3,7 +3,6 @@ import { EFormValidateOn, Form, IFormModelOutput } from '../forms/Form';
 import { Input } from '../forms/Input';
 import { ValidatorIsEmail } from '../forms/Validators/ValidatorIsEmail';
 import { ValidatorIsRequired } from '../forms/Validators/ValidatorIsRequired';
-import { FormError } from '../ui/FormError';
 import { COLORS } from '../../theme';
 import { Loader } from '../common/Loader';
 import { Button, EButtonTheme } from '../ui/Button';
@@ -11,23 +10,22 @@ import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { managers } from '../../managers';
 import { AUTH_STYLES } from './styles';
 import { ValidatorMinLength } from '../forms/Validators/ValidatorMinLength';
-import { Trans } from '../hocs/Trans';
+import { Locale } from '../hocs/Locale';
+import { EToastType } from '../../managers/ToastManager';
 
 interface IProps {}
 
 interface IState {
 	isLoading: boolean;
-	error: string;
 }
 
 export class SignUp extends React.Component<IProps, IState> {
 	public state: IState = {
 		isLoading: false,
-		error: null,
 	};
 
 	public render() {
-		const { isLoading, error } = this.state;
+		const { isLoading } = this.state;
 
 		return (
 			<Form
@@ -40,10 +38,10 @@ export class SignUp extends React.Component<IProps, IState> {
 
 					<div className={AUTH_STYLES.head}>
 						<h1>
-							<Trans id="SIGN_UP.TITLE" />
+							<Locale id="SIGN_UP.TITLE" />
 						</h1>
 						<h2>
-							<Trans id="SIGN_UP.TEXT" />
+							<Locale id="SIGN_UP.TEXT" />
 						</h2>
 					</div>
 
@@ -69,18 +67,10 @@ export class SignUp extends React.Component<IProps, IState> {
 								new ValidatorMinLength(3),
 							]}
 						/>
-						<div
-							className={AUTH_STYLES.errorBlock}
-							onClick={this.handleClearErrors}
-						>
-							<FormError errors={[error]} />
-						</div>
 					</div>
 				</div>
 
 				<div className={AUTH_STYLES.buttons}>
-					<div />
-
 					{isLoading ? (
 						<Loader color={COLORS.WHITE} size={40} />
 					) : (
@@ -96,29 +86,19 @@ export class SignUp extends React.Component<IProps, IState> {
 								/>
 							}
 						>
-							<Trans id="SIGN_UP.SUBMIT" />
+							<Locale id="SIGN_UP.SUBMIT" />
 						</Button>
 					)}
 				</div>
 
 				<div className={AUTH_STYLES.legals}>
-					<Trans id="SIGN_UP.LEGALS" />
+					<Locale id="SIGN_UP.LEGALS" />
 				</div>
 			</Form>
 		);
 	}
 
-	private handleClearErrors = () => {
-		this.setState({
-			error: null,
-		});
-	};
-
 	private handleSubmit = async (output: IFormModelOutput) => {
-		this.setState({
-			error: null,
-		});
-
 		if (output.isValid) {
 			this.setState({
 				isLoading: true,
@@ -136,14 +116,10 @@ export class SignUp extends React.Component<IProps, IState> {
 			if (!result.error && result.data) {
 				managers.auth.goAuth();
 			} else {
-				this.setState({
-					error: result.error,
-				});
+				managers.toast.toast(EToastType.Error, managers.locale.t(result.error));
 			}
 		} else {
-			this.setState({
-				error: 'RESPONSE.INVALID_FORM_DATA',
-			});
+			managers.toast.toast(EToastType.Error, managers.locale.t('RESPONSE.INVALID_FORM_DATA'));
 		}
 	};
 }

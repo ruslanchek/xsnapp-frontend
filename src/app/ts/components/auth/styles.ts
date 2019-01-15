@@ -59,6 +59,7 @@ export const AUTH_STYLES = {
 
 	buttons: css`
 		display: flex;
+		flex-direction: column;
 		justify-content: space-between;
 		align-items: center;
 		justify-self: baseline;
@@ -71,6 +72,7 @@ export const AUTH_STYLES = {
 
 	link: css`
 		text-shadow: 0 1px 1px ${COLORS.BLACK.alpha(0.3).toString()};
+		margin-top: 20px;
 	`,
 
 	input: css`
@@ -78,8 +80,10 @@ export const AUTH_STYLES = {
 	`,
 
 	logo: css`
-		width: ${LOGO_SIZE}px;
-		height: ${LOGO_SIZE}px;
+		width: 43vw;
+		height: 43vw;
+		max-width: ${LOGO_SIZE}px;
+		max-height: ${LOGO_SIZE}px;
 		display: block;
 		margin: 0 auto 10px;
 		animation: ${fadeIn} 20s infinite;
@@ -92,8 +96,10 @@ export const AUTH_STYLES = {
 			background-position: 50%;
 			background-repeat: no-repeat;
 			z-index: 2;
-			width: ${LOGO_SIZE}px;
-			height: ${LOGO_SIZE}px;
+			width: 43vw;
+			height: 43vw;
+			max-width: ${LOGO_SIZE}px;
+			max-height: ${LOGO_SIZE}px;
 			margin: 0 auto 60px;
 			position: absolute;
 			background-image: url(${require('@img/logos/x-logo-blur.png')});
@@ -103,6 +109,7 @@ export const AUTH_STYLES = {
 	head: css`
 		color: ${COLORS.WHITE.toString()};
 		margin-bottom: 30px;
+		text-align: center;
 
 		> h1 {
 			margin: 0;
@@ -118,9 +125,7 @@ export const AUTH_STYLES = {
 
 	errorBlock: css`
 		position: absolute;
-		top: 100%;
-		left: 50%;
-		transform: translateX(-50%);
+		top: 40px;
 	`,
 
 	inputs: css`
@@ -133,7 +138,7 @@ export const AUTH_STYLES = {
 		margin-top: 20px;
 		color: ${COLORS.WHITE.alpha(0.75).toString()};
 
-		> a {
+		a {
 			${COMMON_STYLES.LINK_WHITE}
 		}
 	`,

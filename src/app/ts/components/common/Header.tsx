@@ -10,7 +10,7 @@ import { StateStore } from '../../stores/StateStore';
 import { managers } from '../../managers';
 import { COLORS, THEME } from '../../theme';
 import { CSSTransition } from 'react-transition-group';
-import { Trans } from '../hocs/Trans';
+import { Locale } from '../hocs/Locale';
 
 const ANIMATION_TIME = 200;
 

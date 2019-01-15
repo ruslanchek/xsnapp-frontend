@@ -25,4 +25,4 @@ class TransComponent extends React.PureComponent<IProps> {
 	}
 }
 
-export const Trans = withI18n()(TransComponent);
+export const Locale = withI18n()(TransComponent);
