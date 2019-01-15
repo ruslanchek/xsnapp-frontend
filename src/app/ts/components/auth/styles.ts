@@ -63,7 +63,7 @@ export const AUTH_STYLES = {
 		justify-content: space-between;
 		align-items: center;
 		justify-self: baseline;
-		min-height: 50px;
+		height: 85px;
 	`,
 
 	button: css`
@@ -108,8 +108,9 @@ export const AUTH_STYLES = {
 
 	head: css`
 		color: ${COLORS.WHITE.toString()};
-		margin-bottom: 30px;
+		margin-bottom: 25px;
 		text-align: center;
+		height: 80px;
 
 		> h1 {
 			margin: 0;
@@ -130,6 +131,7 @@ export const AUTH_STYLES = {
 
 	inputs: css`
 		position: relative;
+		height: 125px;
 	`,
 
 	legals: css`
@@ -141,5 +143,10 @@ export const AUTH_STYLES = {
 		a {
 			${COMMON_STYLES.LINK_WHITE}
 		}
+	`,
+
+	success: css`
+	  display: flex;
+	  justify-content: center;
 	`,
 };

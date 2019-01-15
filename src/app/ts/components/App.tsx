@@ -34,6 +34,13 @@ const applyGlobal = () => injectGlobal`
 	a:active {
 		color: ${COLORS.GREEN.lighten(0.5).toString()};
 	}
+	
+	@keyframes Toastify__trackProgress {
+	}
+	
+	.Toastify__progress-bar {
+	  animation: Toastify__trackProgress linear 1;
+	}
 `;
 
 @followStore(StateStore.store)

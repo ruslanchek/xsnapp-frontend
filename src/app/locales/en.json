@@ -3,20 +3,23 @@
         "USER_NOT_FOUND": "User not found",
         "INVALID_FORM_DATA": "Invalid form data",
         "WRONG_CREDENTIALS": "Wrong credentials",
-        "USER_ALREADY_REGISTERED": "Email already used"
+        "USER_ALREADY_REGISTERED": "Email already used",
+        "REGISTRATION_CLOSED": "Registration temporary closed"
     },
     "SIGN_UP": {
         "SUBMIT": "Sign up",
         "LEGALS": "By continuing, you agree to our<br/><a href=\"{{url}}\">Terms of Use</a>",
-        "TITLE": "Welcome",
+        "TITLE": "Welcome!",
         "TEXT": "Please register here",
         "LINK": "Sign up"
     },
     "PASSWORD_RESET": {
-        "TITLE": "Password reset",
+        "TITLE": "Password recovery",
         "TEXT": "Enter your email and we'll send you instructions",
         "SUBMIT": "Submit",
-        "LINK": "Forgot your password?"
+        "LINK": "Forgot your password?",
+        "TITLE_SUCCESS": "Successful!",
+        "TEXT_SUCCESS": "We've sent you instructions how to obtain your new password"
     },
     "SIGN_IN": {
         "LINK": "Sign in",
@@ -26,6 +29,10 @@
     "FORM_LABEL": {
         "EMAIL": "Email",
         "PASSWORD": "Password",
-        "NEW_PASSWORD": "New password1"
+        "NEW_PASSWORD": "New password"
+    },
+    "PASSWORD_RESET_CONFIRM": {
+        "TITLE": "Password recovery",
+        "TEXT": "Set your new password"
     }
 }

@@ -33,6 +33,10 @@ export class ToastManager extends Manager {
 				autoClose: CONFIG.TOAST_DELAY,
 				className: cx(toastStyle, toastTypes[type]),
 				progressClassName: progress,
+				onClose: () => {
+					this.prevText = null;
+					clearTimeout(this.toastTimeout);
+				}
 			});
 
 			clearTimeout(this.toastTimeout);

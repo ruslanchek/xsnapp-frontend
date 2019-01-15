@@ -12,20 +12,23 @@ import { AUTH_STYLES } from './styles';
 import { ValidatorMinLength } from '../forms/Validators/ValidatorMinLength';
 import { Locale } from '../hocs/Locale';
 import { EToastType } from '../../managers/ToastManager';
+import { Success } from '../common/Success';
 
 interface IProps {}
 
 interface IState {
 	isLoading: boolean;
+	success: boolean;
 }
 
 export class SignUp extends React.Component<IProps, IState> {
 	public state: IState = {
 		isLoading: false,
+		success: null,
 	};
 
 	public render() {
-		const { isLoading } = this.state;
+		const { isLoading, success } = this.state;
 
 		return (
 			<Form
@@ -45,51 +48,61 @@ export class SignUp extends React.Component<IProps, IState> {
 						</h2>
 					</div>
 
-					<div className={AUTH_STYLES.inputs}>
-						<Input
-							showError={false}
-							containerClassName={AUTH_STYLES.input}
-							name="email"
-							label="FORM_LABEL.EMAIL"
-							autoComplete="username"
-							validators={[new ValidatorIsEmail()]}
-						/>
+					{success && (
+						<div className={AUTH_STYLES.success}>
+							<Success />
+						</div>
+					)}
 
-						<Input
-							showError={false}
-							containerClassName={AUTH_STYLES.input}
-							name="password"
-							label="FORM_LABEL.PASSWORD"
-							type="password"
-							autoComplete="new-password"
-							validators={[
-								new ValidatorIsRequired(),
-								new ValidatorMinLength(3),
-							]}
-						/>
-					</div>
-				</div>
+					{!success && (
+						<div className={AUTH_STYLES.inputs}>
+							<Input
+								showError={false}
+								containerClassName={AUTH_STYLES.input}
+								name="email"
+								label="FORM_LABEL.EMAIL"
+								autoComplete="username"
+								validators={[new ValidatorIsEmail()]}
+							/>
 
-				<div className={AUTH_STYLES.buttons}>
-					{isLoading ? (
-						<Loader color={COLORS.WHITE} size={40} />
-					) : (
-						<Button
-							className={AUTH_STYLES.button}
-							theme={EButtonTheme.ThemeRound}
-							type="submit"
-							iconRight={
-								<SvgIcon
-									width={'30px'}
-									height={'30px'}
-									name={EIconName.ArrowForward}
-								/>
-							}
-						>
-							<Locale id="SIGN_UP.SUBMIT" />
-						</Button>
+							<Input
+								showError={false}
+								containerClassName={AUTH_STYLES.input}
+								name="password"
+								label="FORM_LABEL.PASSWORD"
+								type="password"
+								autoComplete="new-password"
+								validators={[
+									new ValidatorIsRequired(),
+									new ValidatorMinLength(3),
+								]}
+							/>
+						</div>
 					)}
 				</div>
+
+				{!success && (
+					<div className={AUTH_STYLES.buttons}>
+						{isLoading ? (
+							<Loader color={COLORS.WHITE} size={40} />
+						) : (
+							<Button
+								className={AUTH_STYLES.button}
+								theme={EButtonTheme.ThemeRound}
+								type="submit"
+								iconRight={
+									<SvgIcon
+										width={'30px'}
+										height={'30px'}
+										name={EIconName.ArrowForward}
+									/>
+								}
+							>
+								<Locale id="SIGN_UP.SUBMIT" />
+							</Button>
+						)}
+					</div>
+				)}
 
 				<div className={AUTH_STYLES.legals}>
 					<Locale id="SIGN_UP.LEGALS" />
@@ -114,12 +127,21 @@ export class SignUp extends React.Component<IProps, IState> {
 			});
 
 			if (!result.error && result.data) {
-				managers.auth.goAuth();
+				this.setState({
+					success: true,
+				});
+
+				setTimeout(() => {
+					managers.auth.goAuth();
+				}, 1500);
 			} else {
 				managers.toast.toast(EToastType.Error, managers.locale.t(result.error));
 			}
 		} else {
-			managers.toast.toast(EToastType.Error, managers.locale.t('RESPONSE.INVALID_FORM_DATA'));
+			managers.toast.toast(
+				EToastType.Error,
+				managers.locale.t('RESPONSE.INVALID_FORM_DATA'),
+			);
 		}
 	};
 }

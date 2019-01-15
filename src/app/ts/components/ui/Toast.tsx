@@ -12,7 +12,11 @@ interface IState {}
 const ANIMATION_DURATION: number = 300;
 
 const ZoomInAndOut = ({ children, position, ...props }) => (
-	<CSSTransition {...props} timeout={ANIMATION_DURATION} classNames={animation}>
+	<CSSTransition
+		{...props}
+		timeout={ANIMATION_DURATION}
+		classNames={animation}
+	>
 		{children}
 	</CSSTransition>
 );

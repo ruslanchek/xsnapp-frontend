@@ -41,14 +41,18 @@ export class PasswordReset extends React.Component<IProps, IState> {
 
 					<div className={AUTH_STYLES.head}>
 						<h1>
-							<Locale id="PASSWORD_RESET.TITLE" />
+							<Locale id={success ? 'PASSWORD_RESET.TITLE_SUCCESS' : 'PASSWORD_RESET.TITLE'} />
 						</h1>
 						<h2>
-							<Locale id="PASSWORD_RESET.TEXT" />
+							<Locale id={success ? 'PASSWORD_RESET.TEXT_SUCCESS' : 'PASSWORD_RESET.TEXT'} />
 						</h2>
 					</div>
 
-					{success && <div className={successCn}><Success/></div>}
+					{success && (
+						<div className={AUTH_STYLES.success}>
+							<Success />
+						</div>
+					)}
 
 					{!success && (
 						<div className={AUTH_STYLES.inputs}>
@@ -66,8 +70,6 @@ export class PasswordReset extends React.Component<IProps, IState> {
 
 				{!success && (
 					<div className={AUTH_STYLES.buttons}>
-						<div />
-
 						{isLoading ? (
 							<Loader color={COLORS.WHITE} size={40} />
 						) : (
@@ -120,8 +122,3 @@ export class PasswordReset extends React.Component<IProps, IState> {
 		}
 	};
 }
-
-const successCn = css`
-  display: flex;
-  justify-content: center;
-`;
