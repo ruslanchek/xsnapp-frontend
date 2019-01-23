@@ -13,6 +13,10 @@ interface IState {
 	status: EUploadStatus;
 	files: FileList;
 	progress: number;
+	eta: number;
+	startTime: number;
+	totalBytes: number;
+	loadedBytes: number;
 }
 
 export enum EUploadStatus {
@@ -48,6 +52,10 @@ export class Upload extends React.PureComponent<IProps, IState> {
 		status: EUploadStatus.Ready,
 		files: null,
 		progress: 0,
+		eta: 0,
+		startTime: 0,
+		totalBytes: 0,
+		loadedBytes: 0,
 	};
 
 	private inputRef = React.createRef<HTMLInputElement>();
@@ -83,6 +91,9 @@ export class Upload extends React.PureComponent<IProps, IState> {
 										progress: 0,
 										files: e.target.files,
 										status: EUploadStatus.FileSelected,
+										startTime: 0,
+										totalBytes: 0,
+										loadedBytes: 0,
 									},
 									async () => {},
 								);
@@ -94,6 +105,13 @@ export class Upload extends React.PureComponent<IProps, IState> {
 				<div className={container}>{this.wrap()}</div>
 			</>
 		);
+	}
+
+	private calculateEta(loaded: number, total: number): number {
+		const now = Date.now();
+		const elapsedtime = now - this.state.startTime;
+
+		return (total / loaded) * elapsedtime - elapsedtime;
 	}
 
 	private selectFile = () => {
@@ -130,6 +148,9 @@ export class Upload extends React.PureComponent<IProps, IState> {
 			status: EUploadStatus.Ready,
 			files: null,
 			progress: 0,
+			startTime: 0,
+			totalBytes: 0,
+			loadedBytes: 0,
 		});
 	};
 
@@ -139,7 +160,7 @@ export class Upload extends React.PureComponent<IProps, IState> {
 	};
 
 	private wrap() {
-		const { status, progress } = this.state;
+		const { status, progress, loadedBytes, totalBytes, eta } = this.state;
 		const { ...childProps } = this.props;
 		const children: any = this.props.children;
 
@@ -147,6 +168,9 @@ export class Upload extends React.PureComponent<IProps, IState> {
 			return children(
 				status,
 				progress,
+				loadedBytes,
+				totalBytes,
+				eta,
 				this.selectFile,
 				this.start,
 				this.cancel,
@@ -181,6 +205,7 @@ export class Upload extends React.PureComponent<IProps, IState> {
 
 			this.setState({
 				status: EUploadStatus.Uploading,
+				startTime: Date.now(),
 			});
 
 			const formData = new FormData();
@@ -200,10 +225,15 @@ export class Upload extends React.PureComponent<IProps, IState> {
 					'Content-Type': 'multipart/form-data',
 				},
 				onUploadProgress: progressEvent => {
+					const { loaded, total } = progressEvent;
 					const progress = progressEvent.loaded / (progressEvent.total / 100);
+					const eta = this.calculateEta(loaded, total);
 
 					this.setState({
 						progress,
+						eta,
+						loadedBytes: loaded,
+						totalBytes: total,
 					});
 				},
 			});
