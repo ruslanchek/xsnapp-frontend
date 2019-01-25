@@ -43,7 +43,7 @@ const VALID_TYPES: string[] = [
 
 const MAX_SIZE: number = 10 * 1024 * 1024 * 1024; // 10 GB
 
-export class Upload extends React.PureComponent<IProps, IState> {
+export class UploadController extends React.PureComponent<IProps, IState> {
 	public static childContextTypes = {
 		transitionGroup: () => {},
 	};
@@ -92,7 +92,7 @@ export class Upload extends React.PureComponent<IProps, IState> {
 										files: e.target.files,
 										status: EUploadStatus.FileSelected,
 										startTime: 0,
-										totalBytes: 0,
+										totalBytes: e.target.files[0].size,
 										loadedBytes: 0,
 									},
 									async () => {},
@@ -160,12 +160,20 @@ export class Upload extends React.PureComponent<IProps, IState> {
 	};
 
 	private wrap() {
-		const { status, progress, loadedBytes, totalBytes, eta } = this.state;
+		const {
+			status,
+			progress,
+			loadedBytes,
+			totalBytes,
+			eta,
+			files,
+		} = this.state;
 		const { ...childProps } = this.props;
 		const children: any = this.props.children;
 
 		if (typeof children === 'function') {
 			return children(
+				files,
 				status,
 				progress,
 				loadedBytes,

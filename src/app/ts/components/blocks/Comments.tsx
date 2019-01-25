@@ -241,7 +241,7 @@ export class Comments extends React.Component<IProps, IState> {
 							{isLoadingForm ? (
 								<Loader size={32} />
 							) : (
-								<Button theme={EButtonTheme.ThemeRound} type={'submit'}>
+								<Button theme={EButtonTheme.Round} type={'submit'}>
 									Submit
 								</Button>
 							)}

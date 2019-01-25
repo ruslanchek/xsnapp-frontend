@@ -1,18 +1,8 @@
 import * as React from 'react';
-import { managers } from 'app/ts/managers';
 import { PATHS } from 'app/ts/config';
-import { Layout } from '../common/Layout';
-import { css, keyframes, cx } from 'react-emotion';
-import { Form, EFormValidateOn, IFormModelOutput } from '../forms/Form';
-import { Input } from '../forms/Input';
-import { ValidatorIsEmail } from '../forms/Validators/ValidatorIsEmail';
-import { ValidatorIsRequired } from '../forms/Validators/ValidatorIsRequired';
-import { Button, EButtonTheme } from '../ui/Button';
+import { ELayoutBackgroundColor, Layout } from '../common/Layout';
+import { css } from 'react-emotion';
 import { Link } from 'react-router-dom';
-import { THEME, COLORS, COMMON_STYLES } from 'app/ts/theme';
-import { SvgIcon, EIconName } from '../ui/SvgIcon';
-import { Loader } from '../common/Loader';
-import { FormError } from '../ui/FormError';
 import { SignIn } from '../auth/SignIn';
 import { SignUp } from '../auth/SignUp';
 import { PasswordReset } from '../auth/PasswordReset';
@@ -33,15 +23,7 @@ export enum EAuthPageFormType {
 export class AuthPage extends React.PureComponent<IProps, {}> {
 	public render() {
 		return (
-			<Layout showHeader={false} showFooter={false}>
-				<div className={heading}>
-					<Link to={PATHS.HOME} className={close}>
-						<SvgIcon name={EIconName.ArrowBack} width="30px" height="30px" />
-					</Link>
-
-					{this.authLink}
-				</div>
-
+			<Layout backLink={PATHS.HOME} background={ELayoutBackgroundColor.Green} topLink={this.authLink}>
 				<main className={root}>{this.getForm}</main>
 			</Layout>
 		);
@@ -53,7 +35,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 		switch (type) {
 			case EAuthPageFormType.SignIn: {
 				return (
-					<Link to={PATHS.SIGN_UP} className={authLink}>
+					<Link to={PATHS.SIGN_UP}>
 						<Locale id="SIGN_UP.LINK"/>
 					</Link>
 				);
@@ -63,7 +45,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 			case EAuthPageFormType.PasswordResetConfirm:
 			case EAuthPageFormType.SignUp: {
 				return (
-					<Link to={PATHS.SIGN_IN} className={authLink}>
+					<Link to={PATHS.SIGN_IN}>
 						<Locale id="SIGN_IN.LINK"/>
 					</Link>
 				);
@@ -94,28 +76,6 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 	}
 }
 
-const heading = css`
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	z-index: 3;
-	position: relative;
-	padding: 10px 15px;
-`;
-
-const close = css`
-	color: ${COLORS.WHITE.toString()} !important;
-	width: 30px;
-	height: 30px;
-	display: block;
-	transform: translateX(-6px);
-`;
-
-const authLink = css`
-	color: ${COLORS.WHITE.toString()} !important;
-	font-weight: 600;
-`;
-
 const root = css`
 	padding: 15px;
 	position: absolute;
@@ -128,11 +88,5 @@ const root = css`
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	background-image: linear-gradient(
-		10deg,
-		${COLORS.BLACK_EXTRA_LIGHT.toString()},
-		${COLORS.GREEN.darken(.5).toString()},
-		${COLORS.BLACK_EXTRA_LIGHT.toString()},
-		${COLORS.BLACK.toString()}
-	);
 `;
+

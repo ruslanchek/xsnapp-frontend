@@ -1,134 +1,76 @@
 import * as React from 'react';
-import { Layout } from '../common/Layout';
+import { ELayoutBackgroundColor, Layout } from '../common/Layout';
 import { css } from 'react-emotion';
-import { Upload, EUploadStatus } from '../ui/Upload';
-import { ProgressCircle } from '../ui/ProgressCircle';
-import { COLORS, THEME } from 'app/ts/theme';
-import { Surface } from '../common/Surface';
-import { distanceInWords } from 'date-fns';
-import { CONFIG } from 'app/ts/config';
+import { UploadGetStarted } from '../upload/UploadGetStarted';
+import { PATHS } from '../../config';
+import { Locale } from '../hocs/Locale';
+import { Link } from 'react-router-dom';
+import { Upload } from '../upload/Upload';
 
-interface IProps {}
+interface IProps {
+	mode: EUploadPageMode;
+}
 
 interface IState {}
 
-const CIRCLE_SIZE = 90;
+export enum EUploadPageMode {
+	GetStarted,
+	Upload,
+}
 
 export class UploadPage extends React.Component<IProps, IState> {
 	public state: IState = {};
 
 	public render() {
 		return (
-			<Layout showHeader={false} showFooter={true}>
+			<Layout
+				background={ELayoutBackgroundColor.Blue}
+				backLink={this.getBackLink}
+				topLink={this.getTopLink}
+			>
 				<main className={root}>
-					<Upload enabled={true}>
-						{(
-							status: EUploadStatus,
-							progress: number,
-							loadedBytes,
-							totalBytes,
-							eta,
-							selectFile,
-							start,
-							cancel,
-							clear,
-						) => {
-							const percent = Math.ceil(progress);
-
-							return (
-								<Surface>
-									<div className={progressCn}>
-										<div className={valueCn}>{percent}%</div>
-
-										<ProgressCircle
-											className={progressCircleCn}
-											size={CIRCLE_SIZE - 4}
-											percent={percent}
-											strokeWidth={2}
-											meterColor={COLORS.GRAY.alpha(0.3).toString()}
-											valueColor={COLORS.GREEN.toString()}
-										/>
-									</div>
-
-									<p>
-										<span onClick={selectFile}>Select file</span>
-									</p>
-									<p>status: {status}</p>
-									<p>progress: {progress}</p>
-									<p>loadedBytes: {loadedBytes}</p>
-									<p>totalBytes: {totalBytes}</p>
-									<p>eta: {eta}</p>
-
-									{eta > 0 && (
-										<p>
-											eta words:{' '}
-											{distanceInWords(new Date(Date.now() + eta), new Date(), {
-												includeSeconds: true,
-											})}
-										</p>
-									)}
-
-									<p>
-										<button
-											onClick={() => {
-												start();
-											}}
-										>
-											start
-										</button>
-									</p>
-									<p>
-										<button
-											onClick={() => {
-												clear();
-											}}
-										>
-											clear
-										</button>
-									</p>
-									<p>
-										<button
-											onClick={() => {
-												cancel();
-											}}
-										>
-											cancel
-										</button>
-									</p>
-								</Surface>
-							);
-						}}
-					</Upload>
+					{this.getContent}
 				</main>
 			</Layout>
+		);
+	}
+
+	private get getContent() {
+		switch (this.props.mode) {
+			case EUploadPageMode.GetStarted : {
+				return <UploadGetStarted />;
+			}
+
+			case EUploadPageMode.Upload : {
+				return <Upload />;
+			}
+		}
+	}
+
+	private get getBackLink() {
+		switch (this.props.mode) {
+			case EUploadPageMode.GetStarted : {
+				return PATHS.HOME;
+			}
+
+			case EUploadPageMode.Upload : {
+				return PATHS.UPLOAD_GET_STARTED;
+			}
+		}
+	}
+
+	private get getTopLink() {
+		return (
+			<Link to={PATHS.HOME}>
+				<Locale id="Your uploads" />
+			</Link>
 		);
 	}
 }
 
 const root = css`
 	padding: 15px;
-`;
-
-const uploadArea = css``;
-
-const progressCircleCn = css`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-`;
-
-const progressCn = css`
-	position: relative;
-	height: ${CIRCLE_SIZE}px;
-	width: ${CIRCLE_SIZE}px;
-`;
-
-const valueCn = css`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-weight: 800px;
-	font-size: ${THEME.FONT_SIZE_MEDIUM}px;
+	flex-grow: 1;
+	display: flex;
+	flex-direction: column;
 `;

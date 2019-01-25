@@ -88,7 +88,7 @@ export class SignUp extends React.Component<IProps, IState> {
 						) : (
 							<Button
 								className={AUTH_STYLES.button}
-								theme={EButtonTheme.ThemeRound}
+								theme={EButtonTheme.Round}
 								type="submit"
 								iconRight={
 									<SvgIcon

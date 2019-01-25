@@ -65,7 +65,7 @@ let importLocales = () => {
 
 const colors = [
 	{ title: 'Download from lokalise', value: importLocales },
-	{ title: 'Upload translations to lokalise', value: exportLocalesToLokalise },
+	{ title: 'UploadController translations to lokalise', value: exportLocalesToLokalise },
 ];
 
 if (process.env.DOWNLOAD || process.argv.indexOf('--download') >= 0) {

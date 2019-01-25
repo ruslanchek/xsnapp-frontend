@@ -78,5 +78,5 @@ const meterCn = css`
 const valueCn = css`
 	fill: none;
 	stroke-linecap: round;
-	transition: stroke-dashoffset 0.2s;
+	transition: stroke-dashoffset 0.5s, stroke .5s;
 `;

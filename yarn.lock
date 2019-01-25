@@ -122,6 +122,10 @@
   version "4.8.6"
   resolved "https://registry.yarnpkg.com/@types/pixi.js/-/pixi.js-4.8.6.tgz#c9bb6844cf581024f6bee07feb1538b37c0429ba"
 
+"@types/pretty-bytes@^5.1.0":
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/@types/pretty-bytes/-/pretty-bytes-5.1.0.tgz#1df59db5c7def05dbbb0df2ad80b46863d9fafda"
+
 "@types/prop-types@*":
   version "15.5.8"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
@@ -3828,6 +3832,10 @@ portfinder@^1.0.9:
 posix-character-classes@^0.1.0:
   version "0.1.1"
   resolved "https://registry.yarnpkg.com/posix-character-classes/-/posix-character-classes-0.1.1.tgz#01eac0fe3b5af71a2a6c02feabb8c1fef7e00eab"
+
+pretty-bytes@^5.1.0:
+  version "5.1.0"
+  resolved "https://registry.yarnpkg.com/pretty-bytes/-/pretty-bytes-5.1.0.tgz#6237ecfbdc6525beaef4de722cc60a58ae0e6c6d"
 
 private@^0.1.8:
   version "0.1.8"

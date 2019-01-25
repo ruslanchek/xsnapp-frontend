@@ -12,6 +12,7 @@ export const COLORS = {
 	BLUE_LIGHT: Color('#E9F1FB'),
 	BLUE_LIGHT_ACTIVE: Color('#D3E4F7'),
 	BLUE: Color('#0061E5'),
+	SKYBLUE: Color('#17A7F5'),
 	BLUE_SELECTED: Color('#017AD5').alpha(0.05),
 	BLUE_HOVER: Color('#017AD5').alpha(0.038),
 	GREEN: Color('#00FFFF'),
@@ -94,6 +95,10 @@ export const COMMON_STYLES = {
 		&:active {
 			color: ${COLORS.WHITE.alpha(0.75).toString()};
 		}
+	`,
+
+	TEXT_WHITE_ALPHA: css`
+		color: ${COLORS.WHITE.alpha(0.55).toString()};
 	`,
 
 	SMALL_TEXT: css`

@@ -6,7 +6,7 @@ import { ERouteAuthRule } from '../managers/RouteManager';
 import { HomePage } from './pages/HomePage';
 import { Page, PageLayout } from './pages/Page';
 import { AuthPage, EAuthPageFormType } from './pages/AuthPage';
-import { UploadPage } from './pages/UploadPage';
+import { EUploadPageMode, UploadPage } from './pages/UploadPage';
 import { ItemPage } from './pages/ItemPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { TVPage } from './pages/TVPage';
@@ -182,7 +182,7 @@ export class Routes extends React.Component<{}, IState> {
 
 				<Route
 					exact={true}
-					path={PATHS.UPLOAD}
+					path={PATHS.UPLOAD_GET_STARTED}
 					render={props => {
 						return (
 							<Page
@@ -190,7 +190,23 @@ export class Routes extends React.Component<{}, IState> {
 								layout={PageLayout.Close}
 								authRule={ERouteAuthRule.AuthorizedOnly}
 							>
-								<UploadPage />
+								<UploadPage mode={EUploadPageMode.GetStarted} />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.UPLOAD_DO_UPLOAD}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Close}
+								authRule={ERouteAuthRule.AuthorizedOnly}
+							>
+								<UploadPage mode={EUploadPageMode.Upload} />
 							</Page>
 						);
 					}}

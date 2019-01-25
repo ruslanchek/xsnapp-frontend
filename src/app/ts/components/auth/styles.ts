@@ -138,10 +138,11 @@ export const AUTH_STYLES = {
 		height: 40px;
 		text-align: center;
 		margin-top: 20px;
-		color: ${COLORS.WHITE.alpha(0.75).toString()};
+		
+		${COMMON_STYLES.TEXT_WHITE_ALPHA}
 
 		a {
-			${COMMON_STYLES.LINK_WHITE}
+			${COMMON_STYLES.LINK_WHITE};
 		}
 	`,
 
