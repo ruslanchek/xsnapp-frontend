@@ -3,7 +3,7 @@
 PORT=22
 USERNAME=xsnapp
 ADDRESS=xsnapp.com
-APP_DIR=/home/${USERNAME}/apps/frontend/current1
+APP_DIR=/home/${USERNAME}/apps/frontend/current
 
 yarn install
 yarn build:prod
