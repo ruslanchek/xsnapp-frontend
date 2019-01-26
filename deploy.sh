@@ -8,4 +8,4 @@ APP_DIR=/home/${USERNAME}/apps/frontend/current
 yarn install
 yarn build:prod
 ssh -p ${PORT} -l ${USERNAME} ${ADDRESS} "mkdir ${APP_DIR} -p"
-rsync -av ./dist ${USERNAME}@${ADDRESS}:${APP_DIR}
+rsync -av ./dist/* ${USERNAME}@${ADDRESS}:${APP_DIR}
