@@ -138,7 +138,7 @@ export const AUTH_STYLES = {
 		height: 40px;
 		text-align: center;
 		margin-top: 20px;
-		
+
 		${COMMON_STYLES.TEXT_WHITE_ALPHA}
 
 		a {
@@ -147,7 +147,7 @@ export const AUTH_STYLES = {
 	`,
 
 	success: css`
-	  display: flex;
-	  justify-content: center;
+		display: flex;
+		justify-content: center;
 	`,
 };
