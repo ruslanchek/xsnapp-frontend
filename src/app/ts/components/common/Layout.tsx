@@ -129,7 +129,7 @@ const backgrounds = {
 	[ELayoutBackgroundColor.Green]: css`
 		background: linear-gradient(
 			10deg,
-			${COLORS.GREEN.toString()},
+			${COLORS.CYAN.toString()},
 			${COLORS.BLACK.toString()},
 			${COLORS.BLACK.toString()}
 		);

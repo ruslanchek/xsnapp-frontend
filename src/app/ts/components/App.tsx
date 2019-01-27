@@ -20,6 +20,14 @@ const applyGlobal = () => injectGlobal`
 		background-color: ${COLORS.BLACK.toString()};
 		line-height: 1.4;
 	}
+
+	h1 {
+		font-size: ${THEME.FONT_SIZE_H1}px;
+	}
+
+	h2 {
+		font-size: ${THEME.FONT_SIZE_BIG}px;
+	}
 	
 	a {
 		text-decoration: none;
@@ -27,12 +35,12 @@ const applyGlobal = () => injectGlobal`
 
 	a:link,
 	a:visited {
-		color: ${COLORS.GREEN.toString()};
+		color: ${COLORS.CYAN.toString()};
 	}
 
 	a:hover,
 	a:active {
-		color: ${COLORS.GREEN.lighten(0.5).toString()};
+		color: ${COLORS.CYAN.lighten(0.5).toString()};
 	}
 	
 	@keyframes Toastify__trackProgress {

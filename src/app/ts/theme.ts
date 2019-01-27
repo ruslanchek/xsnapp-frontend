@@ -15,7 +15,8 @@ export const COLORS = {
 	SKYBLUE: Color('#17A7F5'),
 	BLUE_SELECTED: Color('#017AD5').alpha(0.05),
 	BLUE_HOVER: Color('#017AD5').alpha(0.038),
-	GREEN: Color('#00FFFF'),
+	CYAN: Color('#00FFFF'),
+	GREEN: Color('#03BE7F'),
 	FACEBOOK: Color('#3B5998'),
 };
 
@@ -30,9 +31,9 @@ export const THEME = {
 	SECTION_PADDING_H: 20,
 	SECTION_PADDING_V: 15,
 	FONT_SIZE_H1: 28,
-	FONT_SIZE_REGULAR: 14,
 	FONT_SIZE_BIG: 22,
 	FONT_SIZE_MEDIUM: 18,
+	FONT_SIZE_REGULAR: 14,
 	FONT_SIZE_SMALL: 12,
 	FONT_SIZE_TINY: 10,
 	BOX_SHADOW_ELEVATION_MINIMAL: `0 1px 2px 0 ${COLORS.BLACK.alpha(
@@ -55,24 +56,24 @@ export const COMMON_STYLES = {
 	`,
 
 	LINK: css`
-		color: ${COLORS.GREEN.toString()};
+		color: ${COLORS.CYAN.toString()};
 		text-decoration: none;
 		outline: none;
 
 		&:link {
-			color: ${COLORS.GREEN.toString()};
+			color: ${COLORS.CYAN.toString()};
 		}
 
 		&:visited {
-			color: ${COLORS.GREEN.toString()};
+			color: ${COLORS.CYAN.toString()};
 		}
 
 		&:hover {
-			color: ${COLORS.GREEN.lighten(1.25).toString()};
+			color: ${COLORS.CYAN.lighten(1.25).toString()};
 		}
 
 		&:active {
-			color: ${COLORS.GREEN.lighten(1).toString()};
+			color: ${COLORS.CYAN.lighten(1).toString()};
 		}
 	`,
 

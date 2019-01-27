@@ -150,13 +150,13 @@ const pageSpecial = css`
 	height: 5px;
 	transition: transform 0.15s, background-color 0.15s;
 	margin: 0 5px 5px;
-	background-color: ${COLORS.GREEN.alpha(0.75).toString()};
+	background-color: ${COLORS.CYAN.alpha(0.75).toString()};
 	border-radius: 50%;
 	box-shadow: 0 0 1px ${COLORS.BLACK.alpha(0.5).toString()};
 
 	&.active {
 		transform: scale(1.2);
-		background-color: ${COLORS.GREEN.alpha(1).toString()};
+		background-color: ${COLORS.CYAN.alpha(1).toString()};
 	}
 `;
 

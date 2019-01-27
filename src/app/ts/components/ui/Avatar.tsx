@@ -115,5 +115,5 @@ const noAvatar = css`
 	font-style: normal;
 	letter-spacing: 1px;
 	font-weight: 400;
-	color: ${COLORS.GREEN.toString()};
+	color: ${COLORS.CYAN.toString()};
 `;

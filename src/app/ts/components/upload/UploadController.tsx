@@ -1,8 +1,7 @@
 import * as React from 'react';
-import axios from 'axios';
+import axios, { AxiosError, Cancel } from 'axios';
 import { managers } from 'app/ts/managers';
 import { API_PATHS, CONFIG } from 'app/ts/config';
-import { IApiResult, IApiResultItem } from 'app/ts/managers/ApiManager';
 import { css } from 'react-emotion';
 
 interface IProps {
@@ -14,9 +13,27 @@ interface IState {
 	files: FileList;
 	progress: number;
 	eta: number;
+	requestData: any,
 	startTime: number;
 	totalBytes: number;
 	loadedBytes: number;
+	error: string;
+}
+
+export interface IUploadRenderAttributes {
+	files: File[];
+	status: EUploadStatus;
+	progress: number;
+	loadedBytes: number;
+	totalBytes: number;
+	eta: number;
+	error: string;
+	fileSelected: boolean;
+	requestData: any;
+	selectFile: () => void;
+	start: () => void;
+	cancel: () => void;
+	clear: () => void;
 }
 
 export enum EUploadStatus {
@@ -53,9 +70,11 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 		files: null,
 		progress: 0,
 		eta: 0,
+		requestData: null,
 		startTime: 0,
 		totalBytes: 0,
 		loadedBytes: 0,
+		error: null,
 	};
 
 	private inputRef = React.createRef<HTMLInputElement>();
@@ -94,6 +113,9 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 										startTime: 0,
 										totalBytes: e.target.files[0].size,
 										loadedBytes: 0,
+										requestData: null,
+										eta: 0,
+										error: null,
 									},
 									async () => {},
 								);
@@ -127,17 +149,13 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 
 	private start = async () => {
 		if (this.state.status === EUploadStatus.FileSelected) {
-			try {
-				await this.upload();
-			} catch (e) {
-				console.log(e);
-			}
+			this.upload();
 		}
 	};
 
 	private cancel = async () => {
 		if (this.cancelToken && this.state.status === EUploadStatus.Uploading) {
-			await this.cancelToken.cancel('Operation canceled by the user.');
+			await this.cancelToken.cancel('CANCEL');
 		}
 
 		this.clear();
@@ -151,6 +169,9 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 			startTime: 0,
 			totalBytes: 0,
 			loadedBytes: 0,
+			requestData: null,
+			eta: 0,
+			error: null,
 		});
 	};
 
@@ -167,22 +188,29 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 			totalBytes,
 			eta,
 			files,
+			error,
+			requestData,
 		} = this.state;
 		const { ...childProps } = this.props;
 		const children: any = this.props.children;
 
 		if (typeof children === 'function') {
 			return children(
-				files,
-				status,
-				progress,
-				loadedBytes,
-				totalBytes,
-				eta,
-				this.selectFile,
-				this.start,
-				this.cancel,
-				this.clear,
+				{
+					files,
+					status,
+					progress,
+					loadedBytes,
+					totalBytes,
+					eta,
+					error,
+					requestData,
+					fileSelected: Boolean(files && files[0]),
+					selectFile: this.selectFile,
+					start: this.start,
+					cancel: this.cancel,
+					clear: this.clear,
+				},
 				childProps,
 			);
 		}
@@ -207,7 +235,7 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 		this.formRef.current.reset();
 	};
 
-	private async upload(): Promise<IApiResult<IApiResultItem<any>>> {
+	private upload() {
 		if (this.state.files && this.state.files.length > 0) {
 			const file = this.state.files[0];
 
@@ -226,39 +254,42 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 
 			this.cancelToken = axios.CancelToken.source();
 
-			const result = await axios.post(url, formData, {
-				cancelToken: this.cancelToken.token,
-				headers: {
-					Authorization: token,
-					'Content-Type': 'multipart/form-data',
-				},
-				onUploadProgress: progressEvent => {
-					const { loaded, total } = progressEvent;
-					const progress = progressEvent.loaded / (progressEvent.total / 100);
-					const eta = this.calculateEta(loaded, total);
+			axios
+				.post(url, formData, {
+					cancelToken: this.cancelToken.token,
+					headers: {
+						Authorization: token,
+						'Content-Type': 'multipart/form-data',
+					},
+					onUploadProgress: progressEvent => {
+						const { loaded, total } = progressEvent;
+						const progress = progressEvent.loaded / (progressEvent.total / 100);
+						const eta = this.calculateEta(loaded, total);
 
+						this.setState({
+							progress,
+							eta,
+							loadedBytes: loaded,
+							totalBytes: total,
+						});
+					},
+				})
+				.then((request) => {
 					this.setState({
-						progress,
-						eta,
-						loadedBytes: loaded,
-						totalBytes: total,
+						requestData: request.data,
+						status: EUploadStatus.Done,
 					});
-				},
-			});
-
-			if (result && result.data) {
-				return result.data;
-			} else {
-				return {
-					data: null,
-					error: null,
-				};
-			}
-		} else {
-			return {
-				data: null,
-				error: 'NO_FILE',
-			};
+				})
+				.catch((error: AxiosError) => {
+					if(error.message === 'CANCEL') {
+						this.clear();
+					} else {
+						this.setState({
+							status: EUploadStatus.Error,
+							error: error.code,
+						});
+					}
+				});
 		}
 	}
 }

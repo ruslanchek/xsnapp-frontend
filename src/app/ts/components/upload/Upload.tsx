@@ -1,57 +1,51 @@
 import * as React from 'react';
 import { css, cx, keyframes } from 'react-emotion';
-import { EUploadStatus, UploadController } from './UploadController';
-import { ProgressCircle } from '../ui/ProgressCircle';
+import {
+	EUploadStatus,
+	IUploadRenderAttributes,
+	UploadController,
+} from './UploadController';
+import { UploadProgress } from './UploadProgress';
 import { COLORS, THEME } from 'app/ts/theme';
 import { Button, EButtonTheme } from '../ui/Button';
 import { UPLOAD_STYLES } from './styles';
 import { CSSTransition } from 'react-transition-group';
 import { CropFileName } from '../common/CropFileName';
-import { CONFIG } from '../../config';
+import { CONFIG, PATHS } from '../../config';
 import { distanceInWords } from 'date-fns';
 import * as prettyBytes from 'pretty-bytes';
 import { Locale } from '../hocs/Locale';
+import { managers } from '../../managers';
+import { EIconName, SvgIcon } from '../ui/SvgIcon';
 
 interface IProps {}
 
 interface IState {}
 
-const CIRCLE_SIZE = 140;
+const CIRCLE_SIZE = 160;
 const ANIMATION_TIME = 1000;
 
 export class Upload extends React.Component<IProps, IState> {
 	public state: IState = {};
 
 	public componentDidMount(): void {
-		window.onbeforeunload = () => {
-			return 'Are you sure you want to leave?';
-		};
+		// window.onbeforeunload = () => {
+		// 	return 'Are you sure you want to leave?';
+		// };
 	}
 
 	public render() {
 		return (
 			<section className={root}>
 				<UploadController enabled={true}>
-					{(
-						files: File[],
-						status: EUploadStatus,
-						progress: number,
-						loadedBytes,
-						totalBytes,
-						eta,
-						selectFile,
-						start,
-						cancel,
-						clear,
-					) => {
-						const percent = Math.ceil(progress);
-						const fileSelected = Boolean(files && files[0]);
+					{(upload: IUploadRenderAttributes) => {
+						const percent = Math.ceil(upload.progress);
 
 						return (
 							<div className={root}>
 								<div className={cx(surfaceCn, videoCn)}>
 									<CSSTransition
-										in={!fileSelected}
+										in={!upload.fileSelected}
 										unmountOnExit
 										timeout={ANIMATION_TIME}
 										classNames={{
@@ -65,7 +59,7 @@ export class Upload extends React.Component<IProps, IState> {
 									</CSSTransition>
 
 									<CSSTransition
-										in={fileSelected}
+										in={upload.fileSelected}
 										unmountOnExit
 										timeout={ANIMATION_TIME}
 										classNames={{
@@ -76,120 +70,198 @@ export class Upload extends React.Component<IProps, IState> {
 										}}
 									>
 										<div className={progressCn}>
-											<div className={valueCn}>{Math.ceil(progress)}%</div>
-											<ProgressCircle
+											<UploadProgress
 												className={progressCircleCn}
 												size={CIRCLE_SIZE - 4}
-												percent={percent}
-												strokeWidth={2}
-												meterColor={
-													status === EUploadStatus.Uploading
-														? COLORS.SKYBLUE.alpha(0.3).toString()
-														: COLORS.GRAY.alpha(0.3).toString()
-												}
-												valueColor={COLORS.GREEN.toString()}
+												percent={Math.ceil(percent)}
+												status={upload.status}
 											/>
 										</div>
 									</CSSTransition>
 								</div>
 
-								{fileSelected ? (
-									<>
-										<div className={cx(UPLOAD_STYLES.texts, textsCn)}>
-											<h2>
-												<CropFileName maxLength={20} text={files[0].name} />
-											</h2>
+								<div className={cx(UPLOAD_STYLES.texts)}>
+									<h1>{this.getTitle(upload)}</h1>
+									<div className="text">{this.getText(upload)}</div>
+								</div>
 
-											{status === EUploadStatus.Uploading ? (
-												<div className="text">
-													{prettyBytes(loadedBytes, {
-														locale: CONFIG.DEFAULT_LOCALE,
-													})}{' '}
-													loaded of{' '}
-													{prettyBytes(totalBytes, {
-														locale: CONFIG.DEFAULT_LOCALE,
-													})}
-													<br />
-													{distanceInWords(
-														new Date(Date.now() + eta),
-														new Date(),
-														{
-															includeSeconds: true,
-														},
-													)}
-												</div>
-											) : (
-												<div className="text">
-													{prettyBytes(totalBytes, {
-														locale: CONFIG.DEFAULT_LOCALE,
-													})}
-												</div>
-											)}
+								{this.getButtons(upload)}
+
+								{upload.status !== EUploadStatus.Uploading &&
+									upload.status !== EUploadStatus.Done && (
+										<div className={UPLOAD_STYLES.legals}>
+											<Locale id="SIGN_UP.LEGALS" />
 										</div>
-
-										{status === EUploadStatus.Uploading ? (
-											<Button
-												type="button"
-												color={COLORS.RED.toString()}
-												onClick={cancel}
-												theme={EButtonTheme.Round}
-											>
-												Cancel
-											</Button>
-										) : (
-											<Button
-												type="button"
-												color={COLORS.GREEN.toString()}
-												onClick={start}
-												theme={EButtonTheme.Round}
-											>
-												Start upload
-											</Button>
-										)}
-									</>
-								) : (
-									<>
-										<div className={cx(UPLOAD_STYLES.texts, textsCn)}>
-											<h2>
-												<Locale id="Select video file" />
-											</h2>
-
-											<div className="text">
-												<i>10</i> videos left to upload today
-												<br />
-												Minimum <i>5 seconds</i> for video
-												<br />
-												<i>VR</i> and <i>60 FPS</i> supported
-												<br />
-												<i>4K</i> videos supported
-												<br />
-												Maximum <i>5 GB</i> per video
-												<br />
-											</div>
-										</div>
-
-										<Button
-											type="button"
-											color={COLORS.SKYBLUE.toString()}
-											onClick={selectFile}
-											theme={EButtonTheme.Round}
-										>
-											Select file
-										</Button>
-									</>
-								)}
-
-								{status !== EUploadStatus.Uploading &&  (
-									<div className={UPLOAD_STYLES.legals}>
-										<Locale id="SIGN_UP.LEGALS" />
-									</div>
-								)}
+									)}
 							</div>
 						);
 					}}
 				</UploadController>
 			</section>
 		);
+	}
+
+	private getText(upload: IUploadRenderAttributes) {
+		switch (upload.status) {
+			case EUploadStatus.Ready: {
+				return (
+					<>
+						<i>10</i> videos left to upload today
+						<br />
+						Minimum <i>5 seconds</i> for video
+						<br />
+						<i>VR</i> and <i>60 FPS</i> supported
+						<br />
+						<i>4K</i> videos supported
+						<br />
+						Maximum <i>5 GB</i> per video
+						<br />
+					</>
+				);
+			}
+
+			case EUploadStatus.FileSelected: {
+				return (
+					<>
+						File size:{' '}
+						<i>
+							{prettyBytes(upload.totalBytes, {
+								locale: CONFIG.DEFAULT_LOCALE,
+							})}
+						</i>
+					</>
+				);
+			}
+
+			case EUploadStatus.Uploading: {
+				return (
+					<>
+						<i>
+							{prettyBytes(upload.loadedBytes, {
+								locale: CONFIG.DEFAULT_LOCALE,
+							})}
+						</i>{' '}
+						uploaded of{' '}
+						<i>
+							{prettyBytes(upload.totalBytes, {
+								locale: CONFIG.DEFAULT_LOCALE,
+							})}
+						</i>
+						<br />
+						Estimated time{' '}
+						<i>
+							{distanceInWords(new Date(Date.now() + upload.eta), new Date(), {
+								includeSeconds: true,
+							})}
+						</i>
+					</>
+				);
+			}
+
+			case EUploadStatus.Done: {
+				return <>Upload completed successfully</>;
+			}
+
+			default: {
+				return null;
+			}
+		}
+	}
+
+	private getTitle(upload: IUploadRenderAttributes): React.ReactNode {
+		switch (upload.status) {
+			case EUploadStatus.Ready: {
+				return <Locale id="Select video file" />;
+			}
+
+			case EUploadStatus.FileSelected: {
+				return <CropFileName maxLength={10} text={upload.files[0].name} />;
+			}
+
+			case EUploadStatus.Uploading: {
+				return <>Uploading</>;
+			}
+
+			case EUploadStatus.Done: {
+				return <>Congratulations</>;
+			}
+
+			default: {
+				return null;
+			}
+		}
+	}
+
+	private getButtons(upload: IUploadRenderAttributes): React.ReactNode {
+		switch (upload.status) {
+			case EUploadStatus.Ready: {
+				return (
+					<Button
+						type="button"
+						color={COLORS.SKYBLUE.toString()}
+						onClick={upload.selectFile}
+						theme={EButtonTheme.Round}
+					>
+						Select file
+					</Button>
+				);
+			}
+
+			case EUploadStatus.FileSelected: {
+				return (
+					<Button
+						type="button"
+						color={COLORS.SKYBLUE.toString()}
+						onClick={upload.start}
+						theme={EButtonTheme.Round}
+					>
+						Start upload
+					</Button>
+				);
+			}
+
+			case EUploadStatus.Uploading: {
+				return (
+					<Button
+						type="button"
+						color={COLORS.RED.toString()}
+						onClick={upload.cancel}
+						theme={EButtonTheme.Round}
+					>
+						Cancel
+					</Button>
+				);
+			}
+
+			case EUploadStatus.Done: {
+				return (
+					<Button
+						type="button"
+						color={COLORS.SKYBLUE.toString()}
+						onClick={() => {
+							managers.route.go(
+								PATHS.USER_EDIT_ITEM.replace(
+									':itemId',
+									upload.requestData.data.id,
+								),
+							);
+						}}
+						theme={EButtonTheme.Round}
+					>
+						Continue
+						<SvgIcon
+							width={'30px'}
+							height={'30px'}
+							name={EIconName.ArrowForward}
+						/>
+					</Button>
+				);
+			}
+
+			default: {
+				return null;
+			}
+		}
 	}
 }
 
@@ -219,18 +291,8 @@ const surfaceCn = css`
 	justify-content: center;
 	width: 335px;
 	height: 278px;
-`;
-
-const textsCn = css`
-	.text {
-		i {
-			color: ${COLORS.WHITE.alpha(0.85).toString()};
-			background-color: ${COLORS.SKYBLUE.alpha(0.3).toString()};
-			padding: 0 5px 1px;
-			border-radius: 3px;
-			font-weight: 400;
-		}
-	}
+	position: relative;
+	top: -20px;
 `;
 
 const progressCircleCn = css`
@@ -244,15 +306,6 @@ const progressCn = css`
 	position: relative;
 	height: ${CIRCLE_SIZE}px;
 	width: ${CIRCLE_SIZE}px;
-`;
-
-const valueCn = css`
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
-	font-weight: 200;
-	font-size: ${THEME.FONT_SIZE_BIG}px;
 `;
 
 const videoIllustration = css`
@@ -301,7 +354,7 @@ const videoIllustrationAnimation = {
 const progressAnimation = {
 	enter: css`
 		opacity: 0;
-		transform: scale(0);
+		transform: scale(0.8);
 	`,
 
 	enterActive: css`
@@ -317,7 +370,7 @@ const progressAnimation = {
 
 	exitActive: css`
 		opacity: 0;
-		transform: scale(0);
+		transform: scale(0.8);
 		transition: transform ${ANIMATION_TIME}ms, opacity ${ANIMATION_TIME}ms;
 	`,
 };

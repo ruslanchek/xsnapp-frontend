@@ -10,6 +10,7 @@ export const PATHS = {
 	PASSWORD_RESET: '/auth/password-reset',
 	PASSWORD_RESET_CONFIRM: '/auth/password-reset-confirm',
 	UPLOAD_GET_STARTED: '/upload',
+	USER_EDIT_ITEM: '/user/items/edit/:itemId',
 	UPLOAD_DO_UPLOAD: '/upload/do-upload',
 	NOT_FOUND: '/404',
 };
@@ -36,7 +37,7 @@ export const CONFIG = {
 		PREFIX: 'REALTHUB',
 		COOKIES: {
 			OPTIONS: {
-				domain: 'xsnapp.com',
+				domain: 'mbrtn.local',
 				path: '/',
 				expires: new Date(
 					new Date().setFullYear(new Date().getFullYear() + 10),

@@ -60,7 +60,7 @@ const themes = {
 		outline: none;
 		height: ${THEME.INPUT_HEIGHT}px;
 		line-height: ${THEME.INPUT_HEIGHT}px;
-		background-color: ${COLORS.GREEN.toString()};
+		background-color: ${COLORS.CYAN.toString()};
 		color: ${COLORS.BLACK.toString()};
 		border-radius: ${THEME.INPUT_HEIGHT / 2}px;
 		border: none;
@@ -78,7 +78,7 @@ const themes = {
 		padding: 2px 10px 5px;
 		text-decoration: none;
 		font-weight: 800;
-		background-color: ${COLORS.GREEN.toString()};
+		background-color: ${COLORS.CYAN.toString()};
 		border-radius: 4px;
 		height: 32px;
 		display: flex;

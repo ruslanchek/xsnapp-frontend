@@ -1,4 +1,4 @@
-import { COMMON_STYLES } from '../../theme';
+import { COMMON_STYLES, COLORS, THEME } from '../../theme';
 import { css } from 'emotion';
 
 export const UPLOAD_STYLES = {
@@ -33,16 +33,23 @@ export const UPLOAD_STYLES = {
 		position: relative;
 		top: -60px;
 		line-height: 1.5;
+		color: ${COLORS.WHITE.toString()};
 
-		> h2 {
-			margin-bottom: 0.5em;
+		h1 {
+			margin: 0;
+			font-weight: 800;
 		}
 
-		> .text {
-			${COMMON_STYLES.TEXT_WHITE_ALPHA}
+		.text {
+			${COMMON_STYLES.TEXT_WHITE_ALPHA};
+			/* font-weight: 800; */
 
 			i {
-				font-weight: 600;
+				color: ${COLORS.WHITE.alpha(0.85).toString()};
+				background-color: ${COLORS.SKYBLUE.alpha(0.3).toString()};
+				padding: 0 5px 1px;
+				border-radius: 3px;
+				font-weight: 400;
 				font-style: normal;
 			}
 		}

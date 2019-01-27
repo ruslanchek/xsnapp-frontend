@@ -21,12 +21,12 @@ export class UploadGetStarted extends React.Component<IProps, IState> {
 				<div className={cloud} />
 
 				<div className={UPLOAD_STYLES.texts}>
-					<h2>
+					<h1>
 						<Locale id="Upload your video" />
-					</h2>
+					</h1>
 
 					<div className="text">
-						<Locale id="You can upload up to <i>10</i> videos per day" />
+						You can upload up to <i>10</i> videos per day
 					</div>
 				</div>
 
@@ -80,6 +80,6 @@ const cloud = css`
 	animation: ${cloudAnimation} 2s;
 	animation-delay: 0.1s;
 	animation-fill-mode: backwards;
-	
+
 	${UPLOAD_STYLES.illustration}
 `;

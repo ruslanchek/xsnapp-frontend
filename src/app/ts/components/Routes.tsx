@@ -11,6 +11,7 @@ import { ItemPage } from './pages/ItemPage';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { TVPage } from './pages/TVPage';
 import { CategoriesPage } from './pages/CategoriesPage';
+import { EditItemPage } from './pages/EditItemPage';
 
 interface IState {
 	key: number;
@@ -207,6 +208,22 @@ export class Routes extends React.Component<{}, IState> {
 								authRule={ERouteAuthRule.AuthorizedOnly}
 							>
 								<UploadPage mode={EUploadPageMode.Upload} />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.USER_EDIT_ITEM}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Close}
+								authRule={ERouteAuthRule.AuthorizedOnly}
+							>
+								<EditItemPage />
 							</Page>
 						);
 					}}
