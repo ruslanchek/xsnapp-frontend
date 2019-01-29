@@ -61,7 +61,7 @@ export class UploadPage extends React.Component<IProps, IState> {
 
 	private get getTopLink() {
 		return (
-			<Link to={PATHS.HOME}>
+			<Link to={PATHS.USER_ITEMS}>
 				<Locale id="Your uploads" />
 			</Link>
 		);

@@ -11,7 +11,7 @@ interface IProps {}
 
 interface IState {}
 
-export class EditItemPage extends React.Component<IProps, IState> {
+export class UserItemsEditPage extends React.Component<IProps, IState> {
 	public state: IState = {};
 
 	public render() {

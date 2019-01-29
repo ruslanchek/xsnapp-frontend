@@ -32,9 +32,13 @@ export namespace ItemsStore {
 		type: string;
 	}
 
-	export interface IState {}
+	export interface IState {
+		items: IItem[];
+	}
 
-	export const initialState: IState = {};
+	export const initialState: IState = {
+		items: [],
+	};
 
 	export let store: Store<IState> = new Store<IState>(initialState);
 }

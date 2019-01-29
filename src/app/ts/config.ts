@@ -25,12 +25,14 @@ export const API_PATHS = {
 	PASSWORD_RESET: '/auth/password-reset',
 	PASSWORD_RESET_CONFIRM: '/auth/password-reset-confirm',
 	UPLOAD: '/upload',
+	GET_USER_ITEMS: '/user/items',
+	GET_USER_ITEM: '/user/items/:itemId',
 	GET_COMMENTS: '/comments/:itemId',
 	ADD_COMMENT: '/comments',
 };
 
 export const CONFIG = {
-	API_BASE_URL: 'https://xsnapp.com/api',
+	API_BASE_URL: 'http://mbrtn.local:5566/api',
 	STATIC_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/static',
 	CONTENT_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/content',
 	AVATARS_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/avatars',
@@ -38,7 +40,7 @@ export const CONFIG = {
 		PREFIX: 'REALTHUB',
 		COOKIES: {
 			OPTIONS: {
-				domain: 'xsnapp.com',
+				domain: 'mbrtn.local',
 				path: '/',
 				expires: new Date(
 					new Date().setFullYear(new Date().getFullYear() + 10),

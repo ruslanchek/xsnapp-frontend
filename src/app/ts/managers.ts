@@ -6,27 +6,21 @@ import { ToastManager } from './managers/ToastManager';
 import { LocaleManager } from './managers/LocaleManager';
 import { AuthManager } from './managers/AuthManager';
 import { ItemsManager } from './managers/ItemsManager';
+import { UserItemsManager } from './managers/UserItemsManager';
 
 export class Managers {
-	public locale: LocaleManager;
-	public route: RouteManager;
-	public storage: StorageManager;
-	public api: ApiManager;
-	public auth: AuthManager;
-	public items: ItemsManager;
-	public toast: ToastManager;
+	public locale = new LocaleManager();
+	public route = new RouteManager();
+	public storage = new StorageManager();
+	public api = new ApiManager();
+	public auth = new AuthManager();
+	public items = new ItemsManager();
+	public userItems = new UserItemsManager();
+	public toast = new ToastManager();
 
 	private initStartTime: number = 0;
 
 	public constructor() {
-		this.locale = new LocaleManager();
-		this.route = new RouteManager();
-		this.storage = new StorageManager();
-		this.api = new ApiManager();
-		this.auth = new AuthManager();
-		this.items = new ItemsManager();
-		this.toast = new ToastManager();
-
 		this.init();
 	}
 
@@ -63,6 +57,7 @@ export class Managers {
 		this.api.reset();
 		this.auth.reset();
 		this.items.reset();
+		this.userItems.reset();
 		this.toast.reset();
 	}
 
@@ -84,6 +79,9 @@ export class Managers {
 
 		await this.items.init();
 		this.logTime('Items ready');
+
+		await this.userItems.init();
+		this.logTime('UserItems ready');
 
 		await this.toast.init();
 		this.logTime('ToastManager ready');
