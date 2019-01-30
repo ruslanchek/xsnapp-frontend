@@ -18,7 +18,7 @@ export const PATHS = {
 
 export const API_PATHS = {
 	GET_ITEMS: '/items',
-	GET_ITEM: '/item/:itemId',
+	GET_ITEM: '/items/:itemId',
 	GET_PROFILE: '/profile',
 	AUTH_LOGIN: '/auth/login',
 	AUTH_REGISTER: '/auth/register',
