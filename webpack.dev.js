@@ -12,6 +12,13 @@ const host = '0.0.0.0';
 
 let plugins = [
 	// new BundleAnalyzerPlugin(),
+	new webpack.DefinePlugin({
+		"process.env": {
+			NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+		},
+		__BASE_DOMAIN__: JSON.stringify(process.env.BASE_DOMAIN),
+		__API_BASE_URL__: JSON.stringify(process.env.API_BASE_URL)
+	}),
 	new CleanWebpackPlugin(['dist'], {
 		verbose: true,
 	}),

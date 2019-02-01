@@ -6,7 +6,7 @@ import {
 	UploadController,
 } from './UploadController';
 import { UploadProgress } from './UploadProgress';
-import { COLORS, THEME } from 'app/ts/theme';
+import { COLORS } from 'app/ts/theme';
 import { Button, EButtonTheme } from '../ui/Button';
 import { UPLOAD_STYLES } from './styles';
 import { CSSTransition } from 'react-transition-group';
@@ -15,8 +15,10 @@ import { CONFIG, PATHS } from '../../config';
 import { distanceInWords } from 'date-fns';
 import * as prettyBytes from 'pretty-bytes';
 import { Locale } from '../hocs/Locale';
-import { managers } from '../../managers';
 import { EIconName, SvgIcon } from '../ui/SvgIcon';
+import { ItemsStore } from '../../stores/ItemsStore';
+import IItem = ItemsStore.IItem;
+import { managers } from '../../managers';
 
 interface IProps {}
 
@@ -24,6 +26,11 @@ interface IState {}
 
 const CIRCLE_SIZE = 160;
 const ANIMATION_TIME = 1000;
+
+interface IResultPayload {
+	data: { item: IItem };
+	error: {};
+}
 
 export class Upload extends React.Component<IProps, IState> {
 	public state: IState = {};
@@ -38,7 +45,7 @@ export class Upload extends React.Component<IProps, IState> {
 		return (
 			<section className={root}>
 				<UploadController enabled={true}>
-					{(upload: IUploadRenderAttributes) => {
+					{(upload: IUploadRenderAttributes<IResultPayload>) => {
 						const percent = Math.ceil(upload.progress);
 
 						return (
@@ -101,7 +108,7 @@ export class Upload extends React.Component<IProps, IState> {
 		);
 	}
 
-	private getText(upload: IUploadRenderAttributes) {
+	private getText(upload: IUploadRenderAttributes<IResultPayload>) {
 		switch (upload.status) {
 			case EUploadStatus.Ready: {
 				return (
@@ -168,7 +175,7 @@ export class Upload extends React.Component<IProps, IState> {
 		}
 	}
 
-	private getTitle(upload: IUploadRenderAttributes): React.ReactNode {
+	private getTitle(upload: IUploadRenderAttributes<IResultPayload>): React.ReactNode {
 		switch (upload.status) {
 			case EUploadStatus.Ready: {
 				return <Locale id="Select video file" />;
@@ -192,7 +199,7 @@ export class Upload extends React.Component<IProps, IState> {
 		}
 	}
 
-	private getButtons(upload: IUploadRenderAttributes): React.ReactNode {
+	private getButtons(upload: IUploadRenderAttributes<IResultPayload>): React.ReactNode {
 		switch (upload.status) {
 			case EUploadStatus.Ready: {
 				return (
@@ -242,7 +249,7 @@ export class Upload extends React.Component<IProps, IState> {
 							managers.route.go(
 								PATHS.USER_EDIT_ITEM.replace(
 									':itemId',
-									upload.requestData.data.id,
+									upload.requestData.data.item.id.toString(),
 								),
 							);
 						}}

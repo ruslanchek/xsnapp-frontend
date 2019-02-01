@@ -240,7 +240,7 @@ export class Routes extends React.Component<{}, IState> {
 								layout={PageLayout.Close}
 								authRule={ERouteAuthRule.AuthorizedOnly}
 							>
-								<UserItemsEditPage />
+								<UserItemsEditPage routeParams={props.match.params} />
 							</Page>
 						);
 					}}

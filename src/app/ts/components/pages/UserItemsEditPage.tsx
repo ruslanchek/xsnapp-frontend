@@ -1,26 +1,52 @@
 import * as React from 'react';
-import { ELayoutBackgroundColor, Layout } from '../common/Layout';
+import { Layout } from '../common/Layout';
 import { css } from 'react-emotion';
-import { UploadGetStarted } from '../upload/UploadGetStarted';
-import { PATHS } from '../../config';
-import { Locale } from '../hocs/Locale';
-import { Link } from 'react-router-dom';
-import { Upload } from '../upload/Upload';
+import { API_PATHS, PATHS } from '../../config';
+import { managers } from '../../managers';
+import { ItemsStore } from '../../stores/ItemsStore';
+import { EApiRequestType } from '../../managers/ApiManager';
+import IItem = ItemsStore.IItem;
 
-interface IProps {}
+interface IProps {
+	routeParams: {
+		itemId: string;
+	};
+}
 
-interface IState {}
+interface IState {
+	item: IItem;
+	isLoaded: boolean;
+}
 
 export class UserItemsEditPage extends React.Component<IProps, IState> {
-	public state: IState = {};
+	public state: IState = {
+		item: null,
+		isLoaded: false,
+	};
+
+	public async componentDidMount() {
+		const result = await managers.api.request<{ item: ItemsStore.IItem }>(
+			EApiRequestType.GET,
+			API_PATHS.GET_USER_ITEM.replace(':itemId', this.props.routeParams.itemId),
+			{},
+		);
+
+		if (result.data) {
+			const { item } = result.data;
+
+			this.setState({
+				item,
+				isLoaded: true,
+			});
+		} else {
+			managers.route.go(PATHS.NOT_FOUND, true);
+		}
+	}
 
 	public render() {
 		return (
-			<Layout
-				showFooter={true}
-				showHeader={true}
-			>
-				xxx
+			<Layout showFooter={true} showHeader={true}>
+				{JSON.stringify(this.state.item)}
 			</Layout>
 		);
 	}

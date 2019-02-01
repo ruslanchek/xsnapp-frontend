@@ -7,6 +7,13 @@ const TerserPlugin = require('terser-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 
 let plugins = [
+	new webpack.DefinePlugin({
+		'process.env': {
+			NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+		},
+		__BASE_DOMAIN__: JSON.stringify(process.env.BASE_DOMAIN),
+		__API_BASE_URL__: JSON.stringify(process.env.API_BASE_URL),
+	}),
 	new CleanWebpackPlugin(['dist'], {
 		verbose: true,
 	}),
@@ -47,8 +54,8 @@ module.exports = {
 		minimize: true,
 		minimizer: [new TerserPlugin()],
 		splitChunks: {
-			chunks: 'all'
-		}
+			chunks: 'all',
+		},
 	},
 
 	mode: 'production',

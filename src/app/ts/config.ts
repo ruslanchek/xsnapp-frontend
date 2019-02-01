@@ -1,3 +1,8 @@
+declare global {
+	const __API_BASE_URL__: string;
+	const __BASE_DOMAIN__: string;
+}
+
 export const PATHS = {
 	HOME: '/',
 	SEARCH: '/search',
@@ -32,7 +37,7 @@ export const API_PATHS = {
 };
 
 export const CONFIG = {
-	API_BASE_URL: 'http://mbrtn.local:5566/api',
+	API_BASE_URL: __API_BASE_URL__,
 	STATIC_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/static',
 	CONTENT_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/content',
 	AVATARS_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/avatars',
@@ -40,7 +45,7 @@ export const CONFIG = {
 		PREFIX: 'REALTHUB',
 		COOKIES: {
 			OPTIONS: {
-				domain: 'mbrtn.local',
+				domain: `.${__BASE_DOMAIN__}`,
 				path: '/',
 				expires: new Date(
 					new Date().setFullYear(new Date().getFullYear() + 10),

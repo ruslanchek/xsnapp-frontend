@@ -20,7 +20,7 @@ interface IState {
 	error: string;
 }
 
-export interface IUploadRenderAttributes {
+export interface IUploadRenderAttributes<T> {
 	files: File[];
 	status: EUploadStatus;
 	progress: number;
@@ -29,7 +29,7 @@ export interface IUploadRenderAttributes {
 	eta: number;
 	error: string;
 	fileSelected: boolean;
-	requestData: any;
+	requestData: T;
 	selectFile: () => void;
 	start: () => void;
 	cancel: () => void;
