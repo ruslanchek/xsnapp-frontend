@@ -94,7 +94,9 @@ export class RouteManager extends Manager {
 	}
 
 	private scrollHandler = event => {
-		if (document.body.getBoundingClientRect().top > this.scrollPos) {
+		const box = document.body.getBoundingClientRect();
+
+		if (box.top > this.scrollPos) {
 			StateStore.store.setState({
 				hideHeader: false,
 			});

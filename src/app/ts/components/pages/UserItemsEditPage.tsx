@@ -6,6 +6,9 @@ import { managers } from '../../managers';
 import { ItemsStore } from '../../stores/ItemsStore';
 import { EApiRequestType } from '../../managers/ApiManager';
 import IItem = ItemsStore.IItem;
+import { Locale } from '../hocs/Locale';
+import { COLORS } from '../../theme';
+import { PageHeader } from '../common/PageHeader';
 
 interface IProps {
 	routeParams: {
@@ -46,6 +49,14 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 	public render() {
 		return (
 			<Layout showFooter={true} showHeader={true}>
+				<PageHeader
+					title={<Locale id="UPLOADS.EDIT_ITEM" />}
+					color={COLORS.SKYBLUE}
+				/>
+
+				<div className={root}>
+
+				</div>
 				{JSON.stringify(this.state.item)}
 			</Layout>
 		);
@@ -53,7 +64,7 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 }
 
 const root = css`
-	padding: 15px;
+	padding: 10px;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;

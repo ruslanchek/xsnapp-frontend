@@ -5,10 +5,12 @@ import { css } from 'emotion';
 import { COLORS } from '../../theme';
 import { followStore } from 'react-stores';
 import { AuthStore } from '../../stores/AuthStore';
+import Color = require('color');
 
 interface IProps {
 	count: number;
 	title: string | React.ReactNode;
+	color: Color;
 }
 
 interface IState {}
@@ -18,16 +20,26 @@ export class PageHeader extends React.Component<IProps, IState> {
 	public static defaultProps: Partial<IProps> = {
 		count: null,
 		title: null,
+		color: COLORS.BLACK,
 	};
 
 	public state: IState = {};
 
 	public render() {
-		const { count, title } = this.props;
+		const { count, title, color } = this.props;
 		const { profile } = AuthStore.store.state;
 
 		return (
-			<div className={header}>
+			<div
+				className={root}
+				style={{
+					backgroundImage: `linear-gradient(
+						${color.alpha(0.25).toString()},
+						${color.alpha(0).toString()}
+					),
+					url(${require('@img/illustrations/pattern.png')})`,
+				}}
+			>
 				<div className={user}>
 					<Avatar
 						username={profile.username}
@@ -48,27 +60,10 @@ export class PageHeader extends React.Component<IProps, IState> {
 	}
 }
 
-const user = css`
-	display: flex;
-	justify-content: flex-start;
-	align-items: center;
-	margin-bottom: 10px;
-`;
-
-const username = css`
-	margin-left: 10px;
-`;
-
-const header = css`
-	background-image: linear-gradient(
-			${COLORS.CYAN.alpha(0.25).toString()},
-			${COLORS.CYAN.alpha(0).toString()}
-		),
-		url(${require('@img/illustrations/pattern.png')});
-
-	background-repeat: repeat;
-	background-size: 10%;
-	padding: 10px 10px 5px;
+const root = css`
+	background-repeat: repeat-x, repeat;
+	background-size: 100%, 10%;
+	padding: 10px;
 
 	h1 {
 		margin: 0;
@@ -82,4 +77,15 @@ const header = css`
 			margin: 0 10px;
 		}
 	}
+`;
+
+const user = css`
+	display: flex;
+	justify-content: flex-start;
+	align-items: center;
+	margin-bottom: 10px;
+`;
+
+const username = css`
+	margin-left: 10px;
 `;

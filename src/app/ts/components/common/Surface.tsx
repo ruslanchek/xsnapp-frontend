@@ -4,16 +4,21 @@ import { COLORS } from 'app/ts/theme';
 
 interface IProps {
 	className?: string;
+	onCLick?: () => void;
 }
 
 interface IState {}
 
 export class Surface extends React.Component<IProps, IState> {
+	public static defaultProps: Partial<IProps> = {
+		onCLick: () => {},
+	};
+
 	public state: IState = {};
 
 	public render() {
 		return (
-			<div className={cx(surface, this.props.className)}>
+			<div onClick={this.props.onCLick} className={cx(surface, this.props.className)}>
 				{this.props.children}
 			</div>
 		);

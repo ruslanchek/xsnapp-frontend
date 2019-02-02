@@ -8,6 +8,8 @@ import { EVideoFileKind } from '../../enums/video';
 import { Image } from '../ui/Image';
 import { COLORS, THEME } from '../../theme';
 import { Locale } from '../hocs/Locale';
+import { managers } from '../../managers';
+import { PATHS } from '../../config';
 
 interface IProps {
 	item: IItem;
@@ -22,7 +24,9 @@ export class UserListItem extends React.Component<IProps, IState> {
 		const { item } = this.props;
 
 		return (
-			<Surface className={root}>
+			<Surface className={root} onCLick={() => {
+				managers.route.go(PATHS.USER_EDIT_ITEM.replace(':itemId', item.id.toString()));
+			}}>
 				<div className={image}>{this.image}</div>
 
 				<div className={content}>
@@ -123,4 +127,5 @@ const title = css`
 
 const content = css`
 	padding: 10px;
+	margin-left: 5px;
 `;
