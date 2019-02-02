@@ -1,4 +1,7 @@
+import { __API_BASE_URL__ } from './src/app/ts/config';
+
 const path = require('path');
+const webpack = require('webpack');
 const packageData = require('./package');
 const HandlebarsPlugin = require('handlebars-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
