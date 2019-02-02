@@ -23,10 +23,12 @@ const applyGlobal = () => injectGlobal`
 
 	h1 {
 		font-size: ${THEME.FONT_SIZE_H1}px;
+		margin: 10px 0;
 	}
 
 	h2 {
 		font-size: ${THEME.FONT_SIZE_BIG}px;
+		margin: 10px 0;
 	}
 	
 	a {

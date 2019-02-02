@@ -5,7 +5,6 @@ import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { ListItem } from '../ui/ListItem';
 import { css } from 'react-emotion';
 import { PageLoading } from '../common/PageLoading';
-import { THEME } from '../../theme';
 
 interface IProps {}
 
@@ -51,5 +50,5 @@ export class HomePage extends React.Component<IProps, IState> {
 }
 
 const root = css`
-	padding: 10px 10px ${THEME.FOOTER_HEIGHT + 10}px 10px;
+	padding: 10px;
 `;

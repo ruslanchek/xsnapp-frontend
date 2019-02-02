@@ -119,8 +119,10 @@ export const AUTH_STYLES = {
 
 		> h2 {
 			margin: 0;
-			font-weight: 800;
+			font-weight: 400;
 			font-size: ${THEME.FONT_SIZE_REGULAR}px;
+			
+			${COMMON_STYLES.TEXT_WHITE_ALPHA};
 		}
 	`,
 

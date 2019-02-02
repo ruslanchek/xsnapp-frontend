@@ -15,6 +15,7 @@ import { EToastType } from '../../managers/ToastManager';
 import { Success } from '../common/Success';
 import { css } from 'emotion';
 import { PATHS } from '../../config';
+import { Link } from 'react-router-dom';
 
 interface IProps {}
 
@@ -98,7 +99,10 @@ export class PasswordResetConfirm extends React.Component<IProps, IState> {
 				)}
 
 				<div className={AUTH_STYLES.legals}>
-					<Locale id="SIGN_UP.LEGALS" values={{ url: PATHS.TERMS }} />
+					<Locale
+						id="LEGALS_LINK"
+						values={{ url: PATHS.TERMS }}
+					/>
 				</div>
 			</Form>
 		);

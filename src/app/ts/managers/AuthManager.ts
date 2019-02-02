@@ -3,6 +3,7 @@ import { managers } from '../managers';
 import { EApiRequestType, IApiResult } from './ApiManager';
 import { AuthStore } from '../stores/AuthStore';
 import { PATHS, API_PATHS } from '../config';
+import IProfile = AuthStore.IProfile;
 
 export class AuthManager extends Manager {
 	public reset(): void {
@@ -49,15 +50,15 @@ export class AuthManager extends Manager {
 
 	public async auth(): Promise<any> {
 		if (this.getToken()) {
-			const result = await managers.api.request<any>(
+			const result = await managers.api.request<{profile: IProfile}>(
 				EApiRequestType.GET,
 				API_PATHS.GET_PROFILE,
 			);
 
-			if (result && !result.error && result.data) {
+			if (result && !result.error && result.data && result.data.profile) {
 				AuthStore.store.setState({
 					authorized: true,
-					profile: result.data,
+					profile: result.data.profile,
 				});
 			} else {
 				AuthStore.store.setState({

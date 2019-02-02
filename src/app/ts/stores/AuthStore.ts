@@ -2,13 +2,11 @@ import { Store } from 'react-stores';
 
 export namespace AuthStore {
 	export interface IProfile {
-		id: number;
 		email: string;
-		emailVerified: boolean;
-		name: string;
-		phone: string;
-		type: string;
-		avatar: string;
+		emailConfirmed: boolean;
+		id: number;
+		lastSeen: Date;
+		username: string;
 	}
 
 	export interface IState {

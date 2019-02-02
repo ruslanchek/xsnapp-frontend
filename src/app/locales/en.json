@@ -1,38 +1,62 @@
 {
-    "RESPONSE": {
-        "USER_NOT_FOUND": "User not found",
-        "INVALID_FORM_DATA": "Invalid form data",
-        "WRONG_CREDENTIALS": "Wrong credentials",
-        "USER_ALREADY_REGISTERED": "Email already used",
-        "REGISTRATION_CLOSED": "Registration temporary closed"
-    },
-    "SIGN_UP": {
-        "SUBMIT": "Sign up",
-        "LEGALS": "By continuing, you agree to our<br/><a href=\"{{url}}\">Terms of Use</a>",
-        "TITLE": "Welcome!",
-        "TEXT": "Please register here",
-        "LINK": "Sign up"
-    },
-    "PASSWORD_RESET": {
-        "TITLE": "Password recovery",
-        "TEXT": "Enter your email and we'll send you instructions",
-        "SUBMIT": "Submit",
-        "LINK": "Forgot your password?",
-        "TITLE_SUCCESS": "Successful!",
-        "TEXT_SUCCESS": "We've sent you instructions how to obtain your new password"
-    },
-    "SIGN_IN": {
-        "LINK": "Sign in",
-        "TITLE": "Welcome back!",
-        "TEXT": "Put your credentials to sign in"
-    },
-    "FORM_LABEL": {
-        "EMAIL": "Email",
-        "PASSWORD": "Password",
-        "NEW_PASSWORD": "New password"
-    },
-    "PASSWORD_RESET_CONFIRM": {
-        "TITLE": "Password recovery",
-        "TEXT": "Set your new password"
-    }
+  "RESPONSE": {
+    "USER_NOT_FOUND": "User not found",
+    "INVALID_FORM_DATA": "Invalid form data",
+    "WRONG_CREDENTIALS": "Wrong credentials",
+    "USER_ALREADY_REGISTERED": "Email already used",
+    "REGISTRATION_CLOSED": "Registration temporary closed"
+  },
+  "SIGN_UP": {
+    "SUBMIT": "Sign up",
+    "TITLE": "Welcome!",
+    "TEXT": "Please register here",
+    "LINK": "Sign up"
+  },
+  "PASSWORD_RESET": {
+    "TITLE": "Password recovery",
+    "TEXT": "Enter your email and we'll send you instructions",
+    "SUBMIT": "Submit",
+    "LINK": "Forgot your password?",
+    "TITLE_SUCCESS": "Successful!",
+    "TEXT_SUCCESS": "We've sent you instructions how to obtain your new password"
+  },
+  "LEGALS_LINK": "By continuing, you agree to our<br><a href=\"{{url}}\">Terms of Use<\/a>",
+  "SIGN_IN": {
+    "LINK": "Sign in",
+    "TITLE": "Welcome back!",
+    "TEXT": "Put your credentials to sign in"
+  },
+  "FORM_LABEL": {
+    "EMAIL": "Email",
+    "PASSWORD": "Password",
+    "NEW_PASSWORD": "New password"
+  },
+  "PASSWORD_RESET_CONFIRM": {
+    "TITLE": "Password recovery",
+    "TEXT": "Set your new password"
+  },
+  "UPLOADS": {
+    "HEADER": "Your uploads",
+    "PROCESSING": "Processing"
+  },
+  "UPLOAD": {
+    "COMPLETED": "Upload completed successfully",
+    "UPLOADING": "Uploading",
+    "DONE": "Done",
+    "SELECT_FILE": "Select file",
+    "CONTINUE": "Continue",
+    "UPLOAD_YOUR_VIDEO": "Upload your video",
+    "YOUR_UPLOADS": "Your uploads",
+    "GREETINGS_TEXT": "You can upload up to <i>{{count}}<\/i> video per day",
+    "GREETINGS_TEXT_plural": "You can upload up to <i>{{count}}<\/i> videos per day",
+    "PARAMS_VIDEOS_LEFT": "<i>{{count}}<\/i> video left to upload today",
+    "PARAMS_VIDEOS_LEFT_plural": "<i>{{count}}<\/i> videos left to upload today",
+    "PARAMS_MINIMUM_LENGTH": "Minimum <i>5 seconds<\/i> for video",
+    "PARAMS_VR_FPS_SUPPORTED": "<i>VR<\/i>, <i>4K<\/i> and <i>60 FPS<\/i> supported",
+    "PARAMS_MAXIMUM_SIZE": "Maximum <i>5 GB<\/i> per video",
+    "STATISTICS": "<i>{{loaded}}<\/i> uploaded of <i>{{total}}<\/i><br>Estimated time <i>{{eta}}<\/i>",
+    "FILE_SIZE": "File size <i>{{size}}<\/i>",
+    "START": "Start upload",
+    "CANCEL": "Cancel"
+  }
 }

@@ -57,7 +57,7 @@ export class UserListItem extends React.Component<IProps, IState> {
 			return (
 				<div className={processing}>
 					<span>
-						<Locale id="Processing" />
+						<Locale id="UPLOADS.PROCESSING" />
 					</span>
 				</div>
 			);

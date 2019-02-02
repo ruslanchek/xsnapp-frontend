@@ -5,6 +5,8 @@ import { ItemsStore } from '../../stores/ItemsStore';
 import { managers } from '../../managers';
 import IItem = ItemsStore.IItem;
 import { UserListItem } from '../common/UserListItem';
+import { PageHeader } from '../common/PageHeader';
+import { Locale } from '../hocs/Locale';
 
 interface IProps {}
 
@@ -31,11 +33,14 @@ export class UserItemsPage extends React.Component<IProps, IState> {
 	public render() {
 		return (
 			<Layout showFooter={true} showHeader={true}>
+				<PageHeader
+					title={<Locale id="UPLOADS.HEADER" />}
+					count={this.state.items.length}
+				/>
+
 				<div className={root}>
 					{this.state.items.map((item, i) => {
-						return (
-							<UserListItem item={item} key={i} />
-						);
+						return <UserListItem item={item} key={i} />;
 					})}
 				</div>
 			</Layout>

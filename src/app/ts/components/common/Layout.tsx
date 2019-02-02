@@ -73,12 +73,25 @@ export class Layout extends React.PureComponent<IProps, {}> {
 					</div>
 				)}
 
-				{this.props.children}
+				<div className={cx(content, additionalRootClassNames)}>
+					{this.props.children}
+				</div>
+
 				{showFooter && <Footer />}
 			</div>
 		);
 	}
 }
+
+const content = css`
+  &.show-header {
+		padding-top: ${THEME.HEADER_HEIGHT}px;
+	}
+
+	&.show-footer {
+		padding-bottom: ${THEME.FOOTER_HEIGHT}px;
+	}
+`;
 
 const root = css`
 	height: 100vh;
@@ -90,7 +103,6 @@ const root = css`
 
 	&.show-header {
 		height: calc(100vh - ${THEME.HEADER_HEIGHT}px);
-		padding-top: ${THEME.HEADER_HEIGHT}px;
 	}
 
 	&.show-footer {

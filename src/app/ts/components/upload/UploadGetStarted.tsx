@@ -22,11 +22,16 @@ export class UploadGetStarted extends React.Component<IProps, IState> {
 
 				<div className={UPLOAD_STYLES.texts}>
 					<h1>
-						<Locale id="Upload your video" />
+						<Locale id="UPLOAD.UPLOAD_YOUR_VIDEO" />
 					</h1>
 
 					<div className="text">
-						You can upload up to <i>10</i> videos per day
+						<Locale
+							values={{
+								count: 10,
+							}}
+							id="UPLOAD.GREETINGS_TEXT"
+						/>
 					</div>
 				</div>
 
@@ -45,11 +50,14 @@ export class UploadGetStarted extends React.Component<IProps, IState> {
 						/>
 					}
 				>
-					<Locale id="Continue" />
+					<Locale id="UPLOAD.CONTINUE" />
 				</Button>
 
 				<div className={UPLOAD_STYLES.legals}>
-					<Locale id="SIGN_UP.LEGALS" values={{ url: PATHS.TERMS }} />
+					<Locale
+						id="LEGALS_LINK"
+						values={{ url: PATHS.TERMS }}
+					/>
 				</div>
 			</section>
 		);

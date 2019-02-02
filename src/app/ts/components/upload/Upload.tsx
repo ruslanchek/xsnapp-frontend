@@ -19,6 +19,7 @@ import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { ItemsStore } from '../../stores/ItemsStore';
 import IItem = ItemsStore.IItem;
 import { managers } from '../../managers';
+import { Link } from 'react-router-dom';
 
 interface IProps {}
 
@@ -97,10 +98,7 @@ export class Upload extends React.Component<IProps, IState> {
 								{upload.status !== EUploadStatus.Uploading &&
 									upload.status !== EUploadStatus.Done && (
 										<div className={UPLOAD_STYLES.legals}>
-											<Locale
-												id="SIGN_UP.LEGALS"
-												values={{ url: PATHS.TERMS }}
-											/>
+											<Locale id="LEGALS_LINK" values={{ url: PATHS.TERMS }} />
 										</div>
 									)}
 							</div>
@@ -116,15 +114,21 @@ export class Upload extends React.Component<IProps, IState> {
 			case EUploadStatus.Ready: {
 				return (
 					<>
-						<i>10</i> videos left to upload today
+						<Locale
+							id="UPLOAD.PARAMS_VIDEOS_LEFT"
+							values={{
+								count: 10,
+							}}
+						/>
 						<br />
-						Minimum <i>5 seconds</i> for video
+
+						<Locale id="UPLOAD.PARAMS_MINIMUM_LENGTH" />
 						<br />
-						<i>VR</i> and <i>60 FPS</i> supported
+
+						<Locale id="UPLOAD.PARAMS_VR_FPS_SUPPORTED" />
 						<br />
-						<i>4K</i> videos supported
-						<br />
-						Maximum <i>5 GB</i> per video
+
+						<Locale id="UPLOAD.PARAMS_MAXIMUM_SIZE" />
 						<br />
 					</>
 				);
@@ -132,44 +136,42 @@ export class Upload extends React.Component<IProps, IState> {
 
 			case EUploadStatus.FileSelected: {
 				return (
-					<>
-						File size:{' '}
-						<i>
-							{prettyBytes(upload.totalBytes, {
+					<Locale
+						id="UPLOAD.FILE_SIZE"
+						values={{
+							size: prettyBytes(upload.totalBytes, {
 								locale: CONFIG.DEFAULT_LOCALE,
-							})}
-						</i>
-					</>
+							}),
+						}}
+					/>
 				);
 			}
 
 			case EUploadStatus.Uploading: {
 				return (
-					<>
-						<i>
-							{prettyBytes(upload.loadedBytes, {
+					<Locale
+						id="UPLOAD.STATISTICS"
+						values={{
+							loaded: prettyBytes(upload.loadedBytes, {
 								locale: CONFIG.DEFAULT_LOCALE,
-							})}
-						</i>{' '}
-						uploaded of{' '}
-						<i>
-							{prettyBytes(upload.totalBytes, {
+							}),
+							total: prettyBytes(upload.totalBytes, {
 								locale: CONFIG.DEFAULT_LOCALE,
-							})}
-						</i>
-						<br />
-						Estimated time{' '}
-						<i>
-							{distanceInWords(new Date(Date.now() + upload.eta), new Date(), {
-								includeSeconds: true,
-							})}
-						</i>
-					</>
+							}),
+							eta: distanceInWords(
+								new Date(Date.now() + upload.eta),
+								new Date(),
+								{
+									includeSeconds: true,
+								},
+							),
+						}}
+					/>
 				);
 			}
 
 			case EUploadStatus.Done: {
-				return <>Upload completed successfully</>;
+				return <Locale id="UPLOAD.COMPLETED" />;
 			}
 
 			default: {
@@ -183,7 +185,7 @@ export class Upload extends React.Component<IProps, IState> {
 	): React.ReactNode {
 		switch (upload.status) {
 			case EUploadStatus.Ready: {
-				return <Locale id="Select video file" />;
+				return <Locale id="UPLOAD.SELECT_FILE" />;
 			}
 
 			case EUploadStatus.FileSelected: {
@@ -191,11 +193,11 @@ export class Upload extends React.Component<IProps, IState> {
 			}
 
 			case EUploadStatus.Uploading: {
-				return <>Uploading</>;
+				return <Locale id="UPLOAD.UPLOADING" />;
 			}
 
 			case EUploadStatus.Done: {
-				return <>Congratulations</>;
+				return <Locale id="UPLOAD.DONE" />;
 			}
 
 			default: {
@@ -216,7 +218,7 @@ export class Upload extends React.Component<IProps, IState> {
 						onClick={upload.selectFile}
 						theme={EButtonTheme.Round}
 					>
-						Select file
+						<Locale id="UPLOAD.SELECT_FILE"/>
 					</Button>
 				);
 			}
@@ -229,7 +231,7 @@ export class Upload extends React.Component<IProps, IState> {
 						onClick={upload.start}
 						theme={EButtonTheme.Round}
 					>
-						Start upload
+						<Locale id="UPLOAD.START"/>
 					</Button>
 				);
 			}
@@ -242,7 +244,7 @@ export class Upload extends React.Component<IProps, IState> {
 						onClick={upload.cancel}
 						theme={EButtonTheme.Round}
 					>
-						Cancel
+						<Locale id="UPLOAD.CANCEL"/>
 					</Button>
 				);
 			}
@@ -262,7 +264,7 @@ export class Upload extends React.Component<IProps, IState> {
 						}}
 						theme={EButtonTheme.Round}
 					>
-						Continue
+						<Locale id="UPLOAD.CONTINUE"/>
 						<SvgIcon
 							width={'30px'}
 							height={'30px'}

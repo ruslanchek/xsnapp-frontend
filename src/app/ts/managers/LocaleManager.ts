@@ -19,11 +19,12 @@ export class LocaleManager extends Manager {
 			resources: RESOURCES,
 			lng: CONFIG.DEFAULT_LOCALE,
 			fallbackLng: CONFIG.DEFAULT_LOCALE,
+			keySeparator: '.',
 			interpolation: {
 				escapeValue: false,
 			},
 			react: {
-				wait: false,
+				wait: true,
 			},
 		});
 

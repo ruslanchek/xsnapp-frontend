@@ -74,7 +74,7 @@ const head = css`
 const titleTop = css`
 	display: flex;
 	justify-content: space-between;
-	align-items: top;
+	align-items: flex-start;
 `;
 
 const titleBottom = css`
@@ -91,7 +91,7 @@ const header = css`
 	display: flex;
 	padding: 10px;
 	justify-content: space-between;
-	align-items: top;
+	align-items: flex-start;
 `;
 
 const titleBlock = css`

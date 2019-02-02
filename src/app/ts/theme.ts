@@ -3,7 +3,7 @@ import { css } from 'react-emotion';
 
 export const COLORS = {
 	GRAY: Color('#8E91AE'),
-	GRAY_LIGHT: Color('#E5E7F9'),
+	GRAY_LIGHT: Color('#F3F4FF'),
 	WHITE: Color('#FFFFFF'),
 	BLACK: Color('#0F1128'),
 	BLACK_LIGHT: Color('#0F1128').lighten(0.7),
