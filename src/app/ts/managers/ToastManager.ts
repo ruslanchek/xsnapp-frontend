@@ -36,7 +36,7 @@ export class ToastManager extends Manager {
 				onClose: () => {
 					this.prevText = null;
 					clearTimeout(this.toastTimeout);
-				}
+				},
 			});
 
 			clearTimeout(this.toastTimeout);

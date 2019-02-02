@@ -85,7 +85,8 @@ const root = css`
 	width: 100vw;
 	display: flex;
 	flex-direction: column;
-	padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+	padding: env(safe-area-inset-top) env(safe-area-inset-right)
+		env(safe-area-inset-bottom) env(safe-area-inset-left);
 
 	&.show-header {
 		height: calc(100vh - ${THEME.HEADER_HEIGHT}px);

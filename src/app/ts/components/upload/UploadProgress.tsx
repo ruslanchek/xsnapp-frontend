@@ -192,10 +192,10 @@ const percentCn = css`
 	font-weight: 200;
 	font-size: ${THEME.FONT_SIZE_BIG}px;
 	fill: ${COLORS.WHITE.toString()};
-	transition: opacity .5s;
+	transition: opacity 0.5s;
 `;
 
 const iconCn = css`
-	transition: transform .5s, opacity .5s;
+	transition: transform 0.5s, opacity 0.5s;
 	transform-origin: 7px 7px;
 `;

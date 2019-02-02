@@ -23,7 +23,11 @@ export enum EAuthPageFormType {
 export class AuthPage extends React.PureComponent<IProps, {}> {
 	public render() {
 		return (
-			<Layout backLink={PATHS.HOME} background={ELayoutBackgroundColor.Green} topLink={this.authLink}>
+			<Layout
+				backLink={PATHS.HOME}
+				background={ELayoutBackgroundColor.Green}
+				topLink={this.authLink}
+			>
 				<main className={root}>{this.getForm}</main>
 			</Layout>
 		);
@@ -36,7 +40,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 			case EAuthPageFormType.SignIn: {
 				return (
 					<Link to={PATHS.SIGN_UP}>
-						<Locale id="SIGN_UP.LINK"/>
+						<Locale id="SIGN_UP.LINK" />
 					</Link>
 				);
 			}
@@ -46,7 +50,7 @@ export class AuthPage extends React.PureComponent<IProps, {}> {
 			case EAuthPageFormType.SignUp: {
 				return (
 					<Link to={PATHS.SIGN_IN}>
-						<Locale id="SIGN_IN.LINK"/>
+						<Locale id="SIGN_IN.LINK" />
 					</Link>
 				);
 			}
@@ -89,4 +93,3 @@ const root = css`
 	flex-direction: column;
 	justify-content: center;
 `;
-

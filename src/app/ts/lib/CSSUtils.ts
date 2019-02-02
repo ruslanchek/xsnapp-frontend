@@ -9,7 +9,13 @@ export const mq = {
 };
 
 export class CSSUtils {
-	public static linearGradient(angle: number, fromColor: Color, toColor: Color, from: number, to: number): string {
+	public static linearGradient(
+		angle: number,
+		fromColor: Color,
+		toColor: Color,
+		from: number,
+		to: number,
+	): string {
 		return `linear-gradient(${angle.toString()}deg, ${fromColor.toString()} ${from}%, ${toColor.toString()} ${to}%)`;
 	}
 }

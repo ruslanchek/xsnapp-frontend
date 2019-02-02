@@ -13,7 +13,7 @@ interface IState {
 	files: FileList;
 	progress: number;
 	eta: number;
-	requestData: any,
+	requestData: any;
 	startTime: number;
 	totalBytes: number;
 	loadedBytes: number;
@@ -274,14 +274,14 @@ export class UploadController extends React.PureComponent<IProps, IState> {
 						});
 					},
 				})
-				.then((request) => {
+				.then(request => {
 					this.setState({
 						requestData: request.data,
 						status: EUploadStatus.Done,
 					});
 				})
 				.catch((error: AxiosError) => {
-					if(error.message === 'CANCEL') {
+					if (error.message === 'CANCEL') {
 						this.clear();
 					} else {
 						this.setState({

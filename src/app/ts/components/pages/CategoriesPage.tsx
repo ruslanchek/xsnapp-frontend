@@ -52,7 +52,7 @@ export class CategoriesPage extends React.Component<IProps, IState> {
 
 		const masonryOptions = {
 			transitionDuration: 400,
-			gutter: 10
+			gutter: 10,
 		};
 
 		if (isLoaded) {

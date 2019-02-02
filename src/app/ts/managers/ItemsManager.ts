@@ -20,7 +20,7 @@ export class ItemsManager extends Manager {
 			{},
 		);
 
-		if(result.data && result.data.items) {
+		if (result.data && result.data.items) {
 			return result.data.items;
 		}
 

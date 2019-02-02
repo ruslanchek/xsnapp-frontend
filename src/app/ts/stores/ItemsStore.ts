@@ -30,6 +30,7 @@ export namespace ItemsStore {
 		fileName: string;
 		id: number;
 		type: string;
+		main: boolean;
 	}
 
 	export interface IState {

@@ -10,23 +10,52 @@ export class Footer extends React.Component<{}, {}> {
 		return (
 			<footer className={root}>
 				<nav className={nav}>
-					<NavLink to={PATHS.HOME} exact className="link" activeClassName="active">
+					<NavLink
+						to={PATHS.HOME}
+						exact
+						className="link"
+						activeClassName="active"
+					>
 						<SvgIcon name={EIconName.ColorHome} width="24px" height="24px" />
 					</NavLink>
 
-					<NavLink to={PATHS.SEARCH} exact className="link" activeClassName="active">
+					<NavLink
+						to={PATHS.SEARCH}
+						exact
+						className="link"
+						activeClassName="active"
+					>
 						<SvgIcon name={EIconName.ColorSearch} width="22px" height="22px" />
 					</NavLink>
 
-					<NavLink to={PATHS.TV} exact className="link" activeClassName="active">
+					<NavLink
+						to={PATHS.TV}
+						exact
+						className="link"
+						activeClassName="active"
+					>
 						<SvgIcon name={EIconName.ColorTV} width="26px" height="26px" />
 					</NavLink>
 
-					<NavLink to={PATHS.CATEGORIES} exact className="link" activeClassName="active">
-						<SvgIcon name={EIconName.ColorCategories} width="24px" height="24px" />
+					<NavLink
+						to={PATHS.CATEGORIES}
+						exact
+						className="link"
+						activeClassName="active"
+					>
+						<SvgIcon
+							name={EIconName.ColorCategories}
+							width="24px"
+							height="24px"
+						/>
 					</NavLink>
 
-					<NavLink to={PATHS.USER} exact className="link" activeClassName="active">
+					<NavLink
+						to={PATHS.USER}
+						exact
+						className="link"
+						activeClassName="active"
+					>
 						<SvgIcon name={EIconName.ColorUser} width="24px" height="24px" />
 					</NavLink>
 				</nav>
@@ -55,12 +84,12 @@ const nav = css`
 	height: ${THEME.FOOTER_HEIGHT}px;
 	padding: 0 ${THEME.SECTION_PADDING_H}px;
 
-	>.link {
+	> .link {
 		display: flex;
 		color: ${COLORS.GRAY.toString()};
 		height: ${THEME.FOOTER_HEIGHT}px;
 		align-items: center;
-		
+
 		&.active {
 			color: ${COLORS.GRAY_LIGHT.toString()};
 		}

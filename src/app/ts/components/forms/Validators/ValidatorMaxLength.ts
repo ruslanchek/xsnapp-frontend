@@ -1,10 +1,7 @@
 import { Validator } from './Validator';
 
 export class ValidatorMaxLength extends Validator {
-	constructor(
-		readonly max: number,
-		readonly customErrorText?: string,
-	) {
+	constructor(readonly max: number, readonly customErrorText?: string) {
 		super();
 	}
 

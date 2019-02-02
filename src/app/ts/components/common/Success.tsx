@@ -103,36 +103,36 @@ const fadeIn = keyframes`
 `;
 
 const root = css`
-  #successAnimationCircle {
-	  stroke-dasharray: ${CIRCLE_LENGTH} ${CIRCLE_LENGTH};
-	  stroke: #FFF;
+	#successAnimationCircle {
+		stroke-dasharray: ${CIRCLE_LENGTH} ${CIRCLE_LENGTH};
+		stroke: #fff;
 	}
-	
+
 	#successAnimationCheck {
-	  stroke-dasharray: ${CHECK_LENGTH} ${CHECK_LENGTH};
-	  stroke: #FFF;
+		stroke-dasharray: ${CHECK_LENGTH} ${CHECK_LENGTH};
+		stroke: #fff;
 	}
-	
+
 	#successAnimationResult {
-	  fill: #FFF;
-	  opacity: 0;
+		fill: #fff;
+		opacity: 0;
 	}
-	
+
 	#successAnimation.animated {
-	  animation: 1s ease-out 0s 1 both ${scaleAnimation};
-	  
-	  #successAnimationCircle {
-	    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both ${drawCircle},
-	               0.3s linear 0.9s 1 both ${fadeOut};
-	  }
-	  
-	  #successAnimationCheck {
-	    animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both ${drawCheck},
-	               0.3s linear 0.9s 1 both ${fadeOut};
-	  }
-	  
-	  #successAnimationResult {
-	    animation: 0.3s linear 0.9s both ${fadeIn};
-	  }
+		animation: 1s ease-out 0s 1 both ${scaleAnimation};
+
+		#successAnimationCircle {
+			animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both ${drawCircle},
+				0.3s linear 0.9s 1 both ${fadeOut};
+		}
+
+		#successAnimationCheck {
+			animation: 1s cubic-bezier(0.77, 0, 0.175, 1) 0s 1 both ${drawCheck},
+				0.3s linear 0.9s 1 both ${fadeOut};
+		}
+
+		#successAnimationResult {
+			animation: 0.3s linear 0.9s both ${fadeIn};
+		}
 	}
 `;

@@ -13,6 +13,7 @@ import { Locale } from '../hocs/Locale';
 import { Success } from '../common/Success';
 import { css } from 'emotion';
 import { EToastType } from '../../managers/ToastManager';
+import { PATHS } from '../../config';
 
 interface IProps {}
 
@@ -41,10 +42,22 @@ export class PasswordReset extends React.Component<IProps, IState> {
 
 					<div className={AUTH_STYLES.head}>
 						<h1>
-							<Locale id={success ? 'PASSWORD_RESET.TITLE_SUCCESS' : 'PASSWORD_RESET.TITLE'} />
+							<Locale
+								id={
+									success
+										? 'PASSWORD_RESET.TITLE_SUCCESS'
+										: 'PASSWORD_RESET.TITLE'
+								}
+							/>
 						</h1>
 						<h2>
-							<Locale id={success ? 'PASSWORD_RESET.TEXT_SUCCESS' : 'PASSWORD_RESET.TEXT'} />
+							<Locale
+								id={
+									success
+										? 'PASSWORD_RESET.TEXT_SUCCESS'
+										: 'PASSWORD_RESET.TEXT'
+								}
+							/>
 						</h2>
 					</div>
 
@@ -92,7 +105,7 @@ export class PasswordReset extends React.Component<IProps, IState> {
 				)}
 
 				<div className={AUTH_STYLES.legals}>
-					<Locale id="SIGN_UP.LEGALS" />
+					<Locale id="SIGN_UP.LEGALS" values={{ url: PATHS.TERMS }} />
 				</div>
 			</Form>
 		);
@@ -118,7 +131,10 @@ export class PasswordReset extends React.Component<IProps, IState> {
 				managers.toast.toast(EToastType.Error, managers.locale.t(result.error));
 			}
 		} else {
-			managers.toast.toast(EToastType.Error, managers.locale.t('RESPONSE.INVALID_FORM_DATA'));
+			managers.toast.toast(
+				EToastType.Error,
+				managers.locale.t('RESPONSE.INVALID_FORM_DATA'),
+			);
 		}
 	};
 }

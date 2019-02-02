@@ -4,6 +4,7 @@ import { css } from 'react-emotion';
 import { ItemsStore } from '../../stores/ItemsStore';
 import { managers } from '../../managers';
 import IItem = ItemsStore.IItem;
+import { UserListItem } from '../common/UserListItem';
 
 interface IProps {}
 
@@ -30,16 +31,20 @@ export class UserItemsPage extends React.Component<IProps, IState> {
 	public render() {
 		return (
 			<Layout showFooter={true} showHeader={true}>
-				{this.state.items.map((item, i) => {
-					return <div key={i}>{item.title}</div>;
-				})}
+				<div className={root}>
+					{this.state.items.map((item, i) => {
+						return (
+							<UserListItem item={item} key={i} />
+						);
+					})}
+				</div>
 			</Layout>
 		);
 	}
 }
 
 const root = css`
-	padding: 15px;
+	padding: 10px;
 	flex-grow: 1;
 	display: flex;
 	flex-direction: column;

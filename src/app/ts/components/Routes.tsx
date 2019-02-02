@@ -13,6 +13,7 @@ import { TVPage } from './pages/TVPage';
 import { CategoriesPage } from './pages/CategoriesPage';
 import { UserItemsEditPage } from './pages/UserItemsEditPage';
 import { UserItemsPage } from './pages/UserItemsPage';
+import { TermsPage } from './pages/TermsPage';
 
 interface IState {
 	key: number;
@@ -241,6 +242,22 @@ export class Routes extends React.Component<{}, IState> {
 								authRule={ERouteAuthRule.AuthorizedOnly}
 							>
 								<UserItemsEditPage routeParams={props.match.params} />
+							</Page>
+						);
+					}}
+				/>
+
+				<Route
+					exact={true}
+					path={PATHS.TERMS}
+					render={props => {
+						return (
+							<Page
+								{...props}
+								layout={PageLayout.Default}
+								authRule={ERouteAuthRule.Shared}
+							>
+								<TermsPage />
 							</Page>
 						);
 					}}

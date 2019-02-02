@@ -116,7 +116,7 @@ export class Input extends React.PureComponent<IProps, {}> {
 										isIcon={!icon}
 										isShowed={!value}
 									>
-										<Locale id={label}/>
+										<Locale id={label} />
 									</LabelText>
 								</Labels>
 

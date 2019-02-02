@@ -31,7 +31,8 @@ export class Header extends React.Component<{}, {}> {
 				}}
 			>
 				<header className={root}>
-					{managers.route.history.location.pathname === PATHS.UPLOAD_GET_STARTED ? null : (
+					{managers.route.history.location.pathname ===
+					PATHS.UPLOAD_GET_STARTED ? null : (
 						<Link to={PATHS.UPLOAD_GET_STARTED}>
 							<Button type="button" theme={EButtonTheme.ThreeDimensional}>
 								Post

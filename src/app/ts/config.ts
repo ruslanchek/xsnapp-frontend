@@ -18,6 +18,7 @@ export const PATHS = {
 	UPLOAD_DO_UPLOAD: '/upload/do-upload',
 	USER_EDIT_ITEM: '/user/items/:itemId',
 	USER_ITEMS: '/user/items',
+	TERMS: '/terms',
 	NOT_FOUND: '/404',
 };
 
@@ -57,5 +58,5 @@ export const CONFIG = {
 	DEFAULT_LOCALE: 'en',
 	LOCALE_SYNONYMS: {},
 	DEFAULT_API_VERSION: 12,
-	TOAST_DELAY: 6000,
+	TOAST_DELAY: 4000,
 };

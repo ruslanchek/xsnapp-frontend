@@ -94,12 +94,12 @@ export class RouteManager extends Manager {
 	}
 
 	private scrollHandler = event => {
-		if(document.body.getBoundingClientRect().top > this.scrollPos) {
+		if (document.body.getBoundingClientRect().top > this.scrollPos) {
 			StateStore.store.setState({
 				hideHeader: false,
 			});
 		} else {
-			if(window.scrollY > THEME.HEADER_THRESHOLD) {
+			if (window.scrollY > THEME.HEADER_THRESHOLD) {
 				StateStore.store.setState({
 					hideHeader: true,
 				});

@@ -1,9 +1,7 @@
 import { Validator } from './Validator';
 
 export class ValidatorIsEmail extends Validator {
-	constructor(
-		readonly customErrorText?: string,
-	) {
+	constructor(readonly customErrorText?: string) {
 		super();
 	}
 

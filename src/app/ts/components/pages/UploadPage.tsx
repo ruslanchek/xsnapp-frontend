@@ -28,20 +28,18 @@ export class UploadPage extends React.Component<IProps, IState> {
 				backLink={this.getBackLink}
 				topLink={this.getTopLink}
 			>
-				<main className={root}>
-					{this.getContent}
-				</main>
+				<main className={root}>{this.getContent}</main>
 			</Layout>
 		);
 	}
 
 	private get getContent() {
 		switch (this.props.mode) {
-			case EUploadPageMode.GetStarted : {
+			case EUploadPageMode.GetStarted: {
 				return <UploadGetStarted />;
 			}
 
-			case EUploadPageMode.Upload : {
+			case EUploadPageMode.Upload: {
 				return <Upload />;
 			}
 		}
@@ -49,11 +47,11 @@ export class UploadPage extends React.Component<IProps, IState> {
 
 	private get getBackLink() {
 		switch (this.props.mode) {
-			case EUploadPageMode.GetStarted : {
+			case EUploadPageMode.GetStarted: {
 				return PATHS.HOME;
 			}
 
-			case EUploadPageMode.Upload : {
+			case EUploadPageMode.Upload: {
 				return PATHS.UPLOAD_GET_STARTED;
 			}
 		}

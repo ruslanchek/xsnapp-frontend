@@ -1,10 +1,7 @@
 import { Validator } from './Validator';
 
 export class ValidatorIsEqualModel extends Validator {
-	constructor(
-		readonly modelName: string,
-		readonly customErrorText?: string,
-	) {
+	constructor(readonly modelName: string, readonly customErrorText?: string) {
 		super();
 	}
 

@@ -11,15 +11,13 @@ export class InputErrors extends React.PureComponent<IProps, {}> {
 
 		return (
 			<FormContext.Consumer>
-				{(formContext) => {
+				{formContext => {
 					const errors = formContext.getErrors(inputName);
 
 					return (
 						<div>
 							{errors.map((error, i) => {
-								return (
-									<div key={i}>{error}</div>
-								);
+								return <div key={i}>{error}</div>;
 							})}
 						</div>
 					);

@@ -12,11 +12,7 @@ interface IState {}
 const ANIMATION_DURATION: number = 300;
 
 const ZoomInAndOut = ({ children, position, ...props }) => (
-	<CSSTransition
-		{...props}
-		timeout={ANIMATION_DURATION}
-		classNames={animation}
-	>
+	<CSSTransition {...props} timeout={ANIMATION_DURATION} classNames={animation}>
 		{children}
 	</CSSTransition>
 );
@@ -25,7 +21,7 @@ export class Toast extends React.PureComponent<IProps, IState> {
 	public render() {
 		return (
 			<ToastContainer
-				className={container}
+				className={root}
 				closeButton={false}
 				closeOnClick={true}
 				transition={ZoomInAndOut}
@@ -34,12 +30,12 @@ export class Toast extends React.PureComponent<IProps, IState> {
 	}
 }
 
-const container = css`
+const root = css`
 	position: fixed;
 	top: 15px;
-	left: 0;
+	left: 50%;
+	transform: translateX(-50%);
 	z-index: 1000;
-	width: 100%;
 	display: flex;
 	justify-content: center;
 	box-sizing: border-box;

@@ -13,6 +13,7 @@ import { ValidatorMinLength } from '../forms/Validators/ValidatorMinLength';
 import { Locale } from '../hocs/Locale';
 import { EToastType } from '../../managers/ToastManager';
 import { Success } from '../common/Success';
+import { PATHS } from '../../config';
 
 interface IProps {}
 
@@ -105,7 +106,7 @@ export class SignUp extends React.Component<IProps, IState> {
 				)}
 
 				<div className={AUTH_STYLES.legals}>
-					<Locale id="SIGN_UP.LEGALS" />
+					<Locale id="SIGN_UP.LEGALS" values={{ url: PATHS.TERMS }} />
 				</div>
 			</Form>
 		);

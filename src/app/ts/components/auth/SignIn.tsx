@@ -119,7 +119,7 @@ export class SignIn extends React.Component<IProps, IState> {
 				)}
 
 				<div className={AUTH_STYLES.legals}>
-					<Locale id="SIGN_UP.LEGALS" />
+					<Locale id="SIGN_UP.LEGALS" values={{ url: PATHS.TERMS }} />
 				</div>
 			</Form>
 		);

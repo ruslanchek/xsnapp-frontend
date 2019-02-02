@@ -1,10 +1,7 @@
 import { Validator } from './Validator';
 
 export class ValidatorRegExp extends Validator {
-	constructor(
-		readonly regExp: RegExp,
-		readonly customErrorText?: string,
-	) {
+	constructor(readonly regExp: RegExp, readonly customErrorText?: string) {
 		super();
 	}
 

@@ -47,6 +47,6 @@ const error = css`
 	border-radius: 5px;
 	color: ${COLORS.WHITE.toString()};
 	font-weight: bold;
-	box-shadow: 0 2px 5px ${COLORS.RED.alpha(.5).toString()};
-	animation: ${appear} .2s cubic-bezier(0.740, 0.240, 0.085, 1.185);
+	box-shadow: 0 2px 5px ${COLORS.RED.alpha(0.5).toString()};
+	animation: ${appear} 0.2s cubic-bezier(0.74, 0.24, 0.085, 1.185);
 `;

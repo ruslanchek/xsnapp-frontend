@@ -97,7 +97,10 @@ export class Upload extends React.Component<IProps, IState> {
 								{upload.status !== EUploadStatus.Uploading &&
 									upload.status !== EUploadStatus.Done && (
 										<div className={UPLOAD_STYLES.legals}>
-											<Locale id="SIGN_UP.LEGALS" />
+											<Locale
+												id="SIGN_UP.LEGALS"
+												values={{ url: PATHS.TERMS }}
+											/>
 										</div>
 									)}
 							</div>
@@ -175,7 +178,9 @@ export class Upload extends React.Component<IProps, IState> {
 		}
 	}
 
-	private getTitle(upload: IUploadRenderAttributes<IResultPayload>): React.ReactNode {
+	private getTitle(
+		upload: IUploadRenderAttributes<IResultPayload>,
+	): React.ReactNode {
 		switch (upload.status) {
 			case EUploadStatus.Ready: {
 				return <Locale id="Select video file" />;
@@ -199,7 +204,9 @@ export class Upload extends React.Component<IProps, IState> {
 		}
 	}
 
-	private getButtons(upload: IUploadRenderAttributes<IResultPayload>): React.ReactNode {
+	private getButtons(
+		upload: IUploadRenderAttributes<IResultPayload>,
+	): React.ReactNode {
 		switch (upload.status) {
 			case EUploadStatus.Ready: {
 				return (

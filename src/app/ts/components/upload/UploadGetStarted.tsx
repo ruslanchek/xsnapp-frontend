@@ -49,7 +49,7 @@ export class UploadGetStarted extends React.Component<IProps, IState> {
 				</Button>
 
 				<div className={UPLOAD_STYLES.legals}>
-					<Locale id="SIGN_UP.LEGALS" />
+					<Locale id="SIGN_UP.LEGALS" values={{ url: PATHS.TERMS }} />
 				</div>
 			</section>
 		);

@@ -9,9 +9,19 @@ export namespace StorageService {
 
 		get(name: string, overrideUserId?: boolean): string;
 
-		setJSON(name: string, object: any, overrideUserId?: boolean, secure?: boolean): void;
+		setJSON(
+			name: string,
+			object: any,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void;
 
-		set(name: string, value: string, overrideUserId?: boolean, secure?: boolean): void;
+		set(
+			name: string,
+			value: string,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void;
 
 		remove(name: string, overrideUserId?: boolean, secure?: boolean);
 	}
@@ -45,7 +55,7 @@ export namespace StorageService {
 
 					return true;
 				} catch (e) {
-					console.warn('Can\'t get native storage instance', e);
+					console.warn("Can't get native storage instance", e);
 
 					return false;
 				}
@@ -70,18 +80,34 @@ export namespace StorageService {
 			return JsCookies.get(name);
 		}
 
-		public setJSON(name: string, value: any, overrideUserId?: boolean, secure?: boolean): void {
+		public setJSON(
+			name: string,
+			value: any,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void {
 			value = JSON.stringify(value);
 
-			JsCookies.set(name, value, {...CONFIG.STORAGE.COOKIES.OPTIONS, ...{
-				secure: secure === true,
-			}});
+			JsCookies.set(name, value, {
+				...CONFIG.STORAGE.COOKIES.OPTIONS,
+				...{
+					secure: secure === true,
+				},
+			});
 		}
 
-		public set(name: string, value: string, overrideUserId?: boolean, secure?: boolean): void {
-			const opts = {...CONFIG.STORAGE.COOKIES.OPTIONS, ...{
-				secure: secure === true,
-			}};
+		public set(
+			name: string,
+			value: string,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void {
+			const opts = {
+				...CONFIG.STORAGE.COOKIES.OPTIONS,
+				...{
+					secure: secure === true,
+				},
+			};
 
 			if (!value) {
 				return JsCookies.remove(name, opts);
@@ -90,10 +116,17 @@ export namespace StorageService {
 			}
 		}
 
-		public remove(name: string, overrideUserId?: boolean, secure?: boolean): void {
-			const opts = {...CONFIG.STORAGE.COOKIES.OPTIONS, ...{
-				secure: secure === true,
-			}};
+		public remove(
+			name: string,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void {
+			const opts = {
+				...CONFIG.STORAGE.COOKIES.OPTIONS,
+				...{
+					secure: secure === true,
+				},
+			};
 
 			return JsCookies.remove(name, opts);
 		}
@@ -137,19 +170,33 @@ export namespace StorageService {
 			return this.storage.getItem(name);
 		}
 
-		public setJSON(name: string, value: any, overrideUserId?: boolean, secure?: boolean): void {
+		public setJSON(
+			name: string,
+			value: any,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void {
 			name = this.prefixName(name, overrideUserId);
 			value = JSON.stringify(value);
 
 			this.storage.setItem(name, value);
 		}
 
-		public set(name: string, value: string, overrideUserId?: boolean, secure?: boolean): void {
+		public set(
+			name: string,
+			value: string,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void {
 			name = this.prefixName(name, overrideUserId);
 			return this.storage.setItem(name, value);
 		}
 
-		public remove(name: string, overrideUserId?: boolean, secure?: boolean): void {
+		public remove(
+			name: string,
+			overrideUserId?: boolean,
+			secure?: boolean,
+		): void {
 			name = this.prefixName(name, overrideUserId);
 
 			this.storage.removeItem(name);

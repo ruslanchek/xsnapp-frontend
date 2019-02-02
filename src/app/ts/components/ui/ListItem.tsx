@@ -39,7 +39,7 @@ export class ListItem extends React.PureComponent<IProps, IState> {
 		const thumbnails = videoFiles
 			.filter(videoFile => videoFile.type === ItemsStore.EFileType.Thumbnail)
 			.sort((a, b) => {
-				return a.fileName.localeCompare(b.fileName);
+				return a === b ? 0 : a ? -1 : 1;
 			});
 
 		const previews = videoFiles.filter(

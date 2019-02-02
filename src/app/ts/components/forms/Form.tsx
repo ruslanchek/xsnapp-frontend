@@ -23,7 +23,7 @@ export interface IFormModel {
 
 export interface IFormModelOutput {
 	values: { [name: string]: string };
-	errors: { [name: string]: string[] }
+	errors: { [name: string]: string[] };
 	isValid: boolean;
 }
 
@@ -52,14 +52,13 @@ export class Form extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<form
-				onSubmit={this.handleSubmit}
-				className={this.props.className}
-			>
-				<FormContext.Provider value={{
-					setValue: this.setValue,
-					getErrors: this.getErrors,
-				}}>
+			<form onSubmit={this.handleSubmit} className={this.props.className}>
+				<FormContext.Provider
+					value={{
+						setValue: this.setValue,
+						getErrors: this.getErrors,
+					}}
+				>
 					{this.props.children}
 				</FormContext.Provider>
 			</form>
@@ -76,7 +75,7 @@ export class Form extends React.Component<IProps, IState> {
 
 				model[modelKey].errors = [];
 
-				validators.forEach((validator) => {
+				validators.forEach(validator => {
 					validator.model = model;
 
 					if (!validator.validate(value)) {
@@ -89,10 +88,13 @@ export class Form extends React.Component<IProps, IState> {
 			}
 		}
 
-		this.setState({
-			isValid,
-			model,
-		}, callback);
+		this.setState(
+			{
+				isValid,
+				model,
+			},
+			callback,
+		);
 	}
 
 	private collectModel(): IFormModelOutput {
@@ -116,8 +118,8 @@ export class Form extends React.Component<IProps, IState> {
 
 	private getErrors = (name: string) => {
 		const { model } = this.state;
-		
-		if(model[name] && model[name].errors) {
+
+		if (model[name] && model[name].errors) {
 			return model[name].errors;
 		} else {
 			return [];
@@ -129,21 +131,28 @@ export class Form extends React.Component<IProps, IState> {
 
 		newValues[name] = value;
 
-		this.setState({
-			model: newValues,
-		}, () => {
-			if(this.props.validateOn === EFormValidateOn.CHANGE || this.props.validateOn === EFormValidateOn.ALL) {
-				this.validate(() => {
-
-				});
-			}
-		});
+		this.setState(
+			{
+				model: newValues,
+			},
+			() => {
+				if (
+					this.props.validateOn === EFormValidateOn.CHANGE ||
+					this.props.validateOn === EFormValidateOn.ALL
+				) {
+					this.validate(() => {});
+				}
+			},
+		);
 	};
 
-	private handleSubmit = async (e) => {
+	private handleSubmit = async e => {
 		e.preventDefault();
 
-		if(this.props.validateOn === EFormValidateOn.SUBMIT || this.props.validateOn === EFormValidateOn.ALL) {
+		if (
+			this.props.validateOn === EFormValidateOn.SUBMIT ||
+			this.props.validateOn === EFormValidateOn.ALL
+		) {
 			this.validate(() => {
 				this.props.onSubmit(this.collectModel());
 			});

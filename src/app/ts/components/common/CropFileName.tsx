@@ -12,10 +12,10 @@ export class CropFileName extends React.PureComponent<IProps, {}> {
 		let result = text;
 		let postfix = '';
 
-		if(text.length > maxLength) {
-			if(textParts.length === 1) {
+		if (text.length > maxLength) {
+			if (textParts.length === 1) {
 				result = textParts[0];
-			} else if(textParts.length === 2) {
+			} else if (textParts.length === 2) {
 				result = textParts[0];
 				postfix = '.' + textParts[1];
 			} else {
@@ -25,9 +25,17 @@ export class CropFileName extends React.PureComponent<IProps, {}> {
 
 			const partLength = Math.ceil(maxLength / 2);
 
-			result = `${result.substr(0, partLength)}...${result.substr(result.length - partLength, partLength)}`;
+			result = `${result.substr(0, partLength)}...${result.substr(
+				result.length - partLength,
+				partLength,
+			)}`;
 		}
 
-		return <span>{result}{postfix}</span>;
+		return (
+			<span>
+				{result}
+				{postfix}
+			</span>
+		);
 	}
 }

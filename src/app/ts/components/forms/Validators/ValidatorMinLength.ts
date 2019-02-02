@@ -1,10 +1,7 @@
 import { Validator } from './Validator';
 
 export class ValidatorMinLength extends Validator {
-	constructor(
-		readonly min: number,
-		readonly customErrorText?: string,
-	) {
+	constructor(readonly min: number, readonly customErrorText?: string) {
 		super();
 	}
 
