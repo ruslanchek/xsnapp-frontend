@@ -3,13 +3,14 @@ import { css } from 'react-emotion';
 import { COLORS } from '../../theme';
 
 export interface IListFilterItem {
+	id: string;
 	title: string;
-	onClick: () => void;
-	isActive?: boolean;
 }
 
 interface IProps {
 	items: IListFilterItem[];
+	current: string;
+	onSelect: (id: string) => void;
 }
 
 interface IState {}
@@ -26,9 +27,9 @@ export class ListFilters extends React.PureComponent<IProps, IState> {
 					<div className="inner">
 						{items.map((item, i) => (
 							<span
-								className={item.isActive ? 'active' : ''}
+								className={item.id === this.props.current ? 'active' : ''}
 								key={i}
-								onClick={() => item.onClick()}
+								onClick={() => this.props.onSelect(item.id)}
 							>
 								{item.title}
 							</span>
@@ -58,7 +59,7 @@ const filters = css`
 			white-space: nowrap;
 
 			> span {
-				display: inline;
+				display: inline-block;
 				padding: 2px 10px 3px;
 				border: 1px solid ${COLORS.SKYBLUE.alpha(0.4).toString()};
 				border-radius: 3px;

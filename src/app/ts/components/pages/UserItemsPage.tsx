@@ -16,12 +16,14 @@ interface IProps {}
 interface IState {
 	loading: boolean;
 	items: IItem[];
+	currentFilter: string;
 }
 
 export class UserItemsPage extends React.Component<IProps, IState> {
 	public state: IState = {
 		loading: true,
 		items: [],
+		currentFilter: '',
 	};
 
 	public async componentDidMount() {
@@ -53,33 +55,40 @@ export class UserItemsPage extends React.Component<IProps, IState> {
 						color={COLORS.SKYBLUE}
 					/>
 
-					<ListFilters items={[
-						{
-							title: 'Published',
-							onClick: () => {}
-						},
+					<ListFilters
+						current={this.state.currentFilter}
+						onSelect={(id: string) => {
+							this.setState({
+								currentFilter: id,
+							});
+						}}
+						items={[
+							{
+								id: 'published',
+								title: 'Published',
+							},
 
-						{
-							title: 'Draft',
-							isActive: true,
-							onClick: () => {}
-						},
+							{
+								id: 'draft',
+								title: 'Draft',
+							},
 
-						{
-							title: 'Banned',
-							onClick: () => {}
-						},
+							{
+								id: 'banned',
+								title: 'Banned',
+							},
 
-						{
-							title: 'Processing',
-							onClick: () => {}
-						},
+							{
+								id: 'processing',
+								title: 'Processing',
+							},
 
-						{
-							title: 'Trending',
-							onClick: () => {}
-						}
-					]} />
+							{
+								id: 'trending',
+								title: 'Trending',
+							},
+						]}
+					/>
 
 					<div className={root}>
 						{this.state.items.map((item, i) => {
