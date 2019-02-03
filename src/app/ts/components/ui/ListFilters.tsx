@@ -60,14 +60,14 @@ const filters = css`
 
 			> span {
 				display: inline-block;
-				padding: 2px 10px 3px;
+				padding: 2px 10px;
 				border: 1px solid ${COLORS.SKYBLUE.alpha(0.4).toString()};
 				border-radius: 3px;
 				margin-right: 10px;
 				transition: background-color 0.2s, transform 0.2s;
 
 				&:active {
-					transform: scale(0.9);
+					transform: scale(1.2);
 				}
 
 				&.active {
