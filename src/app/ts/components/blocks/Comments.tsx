@@ -9,7 +9,7 @@ import { THEME, COLORS } from 'app/ts/theme';
 import { followStore } from 'react-stores';
 import { StateStore } from 'app/ts/stores/StateStore';
 import { AuthStore } from 'app/ts/stores/AuthStore';
-import { Loader } from '../common/Loader';
+import { Loader } from '../ui/Loader';
 import { Modal } from '../modals/Modal';
 import { Avatar } from '../ui/Avatar';
 

@@ -6,7 +6,7 @@ import { Layout } from '../common/Layout';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { ListItem } from '../ui/ListItem';
 import { css } from 'react-emotion';
-import { PageLoading } from '../common/PageLoading';
+import { PageLoading } from '../ui/PageLoading';
 import Masonry from 'react-masonry-component';
 import { ListItemSmall } from '../ui/ListItemSmall';
 import { THEME } from '../../theme';

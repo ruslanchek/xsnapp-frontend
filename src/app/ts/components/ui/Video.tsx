@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { css, cx } from 'react-emotion';
-import { Loader } from '../common/Loader';
+import { Loader } from './Loader';
 import { COLORS } from 'app/ts/theme';
 import { SvgIcon, EIconName } from './SvgIcon';
 

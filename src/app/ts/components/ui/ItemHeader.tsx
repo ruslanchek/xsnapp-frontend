@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { css } from 'react-emotion';
 import { COLORS, THEME } from 'app/ts/theme';
-import { Avatar } from '../ui/Avatar';
+import { Avatar } from './Avatar';
 import { Utils } from 'app/ts/lib/Utils';
-import { SvgIcon, EIconName } from '../ui/SvgIcon';
+import { SvgIcon, EIconName } from './SvgIcon';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { Link } from 'react-router-dom';
 import { PATHS } from 'app/ts/config';

@@ -3,7 +3,7 @@ import VisibilitySensor from 'react-visibility-sensor';
 import { css, cx } from 'react-emotion';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { COLORS, THEME } from 'app/ts/theme';
-import { Surface } from '../common/Surface';
+import { Surface } from './Surface';
 import { EIconName, SvgIcon } from './SvgIcon';
 import { Utils } from '../../lib/Utils';
 import { EVideoFileKind } from '../../enums/video';

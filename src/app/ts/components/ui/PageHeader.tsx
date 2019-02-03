@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Avatar } from '../ui/Avatar';
+import { Avatar } from './Avatar';
 import { Utils } from '../../lib/Utils';
 import { css } from 'emotion';
 import { COLORS } from '../../theme';
@@ -37,7 +37,7 @@ export class PageHeader extends React.Component<IProps, IState> {
 						${color.alpha(0.25).toString()},
 						${color.alpha(0).toString()}
 					),
-					url(${require('@img/illustrations/pattern.png')})`,
+					url(${require('../../../img/illustrations/pattern.png')})`,
 				}}
 			>
 				<div className={user}>

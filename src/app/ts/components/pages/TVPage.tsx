@@ -7,7 +7,7 @@ import { Layout } from '../common/Layout';
 import { ItemsStore } from 'app/ts/stores/ItemsStore';
 import { ListItem } from '../ui/ListItem';
 import { css } from 'react-emotion';
-import { PageLoading } from '../common/PageLoading';
+import { PageLoading } from '../ui/PageLoading';
 
 interface IProps {}
 

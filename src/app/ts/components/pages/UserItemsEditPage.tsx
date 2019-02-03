@@ -8,7 +8,7 @@ import { EApiRequestType } from '../../managers/ApiManager';
 import IItem = ItemsStore.IItem;
 import { Locale } from '../hocs/Locale';
 import { COLORS } from '../../theme';
-import { PageHeader } from '../common/PageHeader';
+import { PageHeader } from '../ui/PageHeader';
 
 interface IProps {
 	routeParams: {
@@ -57,6 +57,7 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 				<div className={root}>
 
 				</div>
+
 				{JSON.stringify(this.state.item)}
 			</Layout>
 		);

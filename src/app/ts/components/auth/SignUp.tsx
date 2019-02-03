@@ -4,7 +4,7 @@ import { Input } from '../forms/Input';
 import { ValidatorIsEmail } from '../forms/Validators/ValidatorIsEmail';
 import { ValidatorIsRequired } from '../forms/Validators/ValidatorIsRequired';
 import { COLORS } from '../../theme';
-import { Loader } from '../common/Loader';
+import { Loader } from '../ui/Loader';
 import { Button, EButtonTheme } from '../ui/Button';
 import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { managers } from '../../managers';
@@ -12,7 +12,7 @@ import { AUTH_STYLES } from './styles';
 import { ValidatorMinLength } from '../forms/Validators/ValidatorMinLength';
 import { Locale } from '../hocs/Locale';
 import { EToastType } from '../../managers/ToastManager';
-import { Success } from '../common/Success';
+import { Success } from '../ui/Success';
 import { PATHS } from '../../config';
 import { Link } from 'react-router-dom';
 

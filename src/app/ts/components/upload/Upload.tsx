@@ -10,7 +10,7 @@ import { COLORS } from 'app/ts/theme';
 import { Button, EButtonTheme } from '../ui/Button';
 import { UPLOAD_STYLES } from './styles';
 import { CSSTransition } from 'react-transition-group';
-import { CropFileName } from '../common/CropFileName';
+import { CropFileName } from '../ui/CropFileName';
 import { CONFIG, PATHS } from '../../config';
 import { distanceInWords } from 'date-fns';
 import * as prettyBytes from 'pretty-bytes';

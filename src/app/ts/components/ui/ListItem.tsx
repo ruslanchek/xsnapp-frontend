@@ -6,9 +6,9 @@ import { COLORS } from 'app/ts/theme';
 import { ListGallery } from './ListGallery';
 import { Link } from 'react-router-dom';
 import { PATHS } from 'app/ts/config';
-import { Surface } from '../common/Surface';
+import { Surface } from './Surface';
 import { SvgIcon, EIconName } from './SvgIcon';
-import { ItemHeader } from '../common/ItemHeader';
+import { ItemHeader } from './ItemHeader';
 import { Tags } from './Tags';
 
 interface IProps {

@@ -7,7 +7,7 @@ import { Link } from 'react-router-dom';
 import { css, cx } from 'emotion';
 import { COLORS, COMMON_STYLES } from '../../theme';
 import { PATHS } from '../../config';
-import { Loader } from '../common/Loader';
+import { Loader } from '../ui/Loader';
 import { Button, EButtonTheme } from '../ui/Button';
 import { EIconName, SvgIcon } from '../ui/SvgIcon';
 import { managers } from '../../managers';
@@ -15,7 +15,7 @@ import { AUTH_STYLES } from './styles';
 import { ValidatorMinLength } from '../forms/Validators/ValidatorMinLength';
 import { Locale } from '../hocs/Locale';
 import { EToastType } from '../../managers/ToastManager';
-import { Success } from '../common/Success';
+import { Success } from '../ui/Success';
 
 interface IProps {}
 

@@ -11,10 +11,10 @@ import {
 	EVideoFileKind,
 	EVideoFileExtension,
 } from 'app/ts/enums/video';
-import { PageLoading } from '../common/PageLoading';
+import { PageLoading } from '../ui/PageLoading';
 import { Comments } from '../blocks/Comments';
-import { Surface } from '../common/Surface';
-import { ItemHeader } from '../common/ItemHeader';
+import { Surface } from '../ui/Surface';
+import { ItemHeader } from '../ui/ItemHeader';
 import { Tags } from '../ui/Tags';
 
 interface IProps {

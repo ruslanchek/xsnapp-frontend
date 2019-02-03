@@ -5,7 +5,7 @@ import IItem = ItemsStore.IItem;
 import { Surface } from './Surface';
 import { Utils } from '../../lib/Utils';
 import { EVideoFileKind } from '../../enums/video';
-import { Image } from '../ui/Image';
+import { Image } from './Image';
 import { COLORS, THEME } from '../../theme';
 import { Locale } from '../hocs/Locale';
 import { managers } from '../../managers';
