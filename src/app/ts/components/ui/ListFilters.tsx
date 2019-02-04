@@ -67,7 +67,7 @@ const filters = css`
 				transition: background-color 0.2s, transform 0.2s;
 
 				&:active {
-					transform: scale(1.2);
+					transform: scale(1.05);
 				}
 
 				&.active {
