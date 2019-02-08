@@ -7,17 +7,19 @@ const CopyWebpackPlugin = require('copy-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 	.BundleAnalyzerPlugin;
-const port = 7000;
+const port = process.env.PORT || 7000;
 const host = '0.0.0.0';
+
+console.log('Starting dev on port', port);
 
 let plugins = [
 	// new BundleAnalyzerPlugin(),
 	new webpack.DefinePlugin({
-		"process.env": {
-			NODE_ENV: JSON.stringify(process.env.NODE_ENV)
+		'process.env': {
+			NODE_ENV: JSON.stringify(process.env.NODE_ENV),
 		},
 		__BASE_DOMAIN__: JSON.stringify(process.env.BASE_DOMAIN),
-		__API_BASE_URL__: JSON.stringify(process.env.API_BASE_URL)
+		__API_BASE_URL__: JSON.stringify(process.env.API_BASE_URL),
 	}),
 	new CleanWebpackPlugin(['dist'], {
 		verbose: true,
