@@ -10,8 +10,6 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer')
 const port = process.env.PORT || 7000;
 const host = '0.0.0.0';
 
-console.log('Starting dev on port', port);
-
 let plugins = [
 	// new BundleAnalyzerPlugin(),
 	new webpack.DefinePlugin({
