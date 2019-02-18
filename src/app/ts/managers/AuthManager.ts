@@ -44,6 +44,10 @@ export class AuthManager extends Manager {
 		managers.storage.cookies.set('token', token);
 	}
 
+	public removeToken(): void {
+		managers.storage.cookies.remove('token');
+	}
+
 	public getToken(): string {
 		return managers.storage.cookies.get('token');
 	}
@@ -61,6 +65,8 @@ export class AuthManager extends Manager {
 					profile: result.data.profile,
 				});
 			} else {
+				this.removeToken();
+
 				AuthStore.store.setState({
 					authorized: false,
 					profile: null,
