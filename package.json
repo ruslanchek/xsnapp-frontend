@@ -4,7 +4,7 @@
 	"description": "Xsnapp.com",
 	"scripts": {
 		"build:prod": "NODE_ENV=production BASE_DOMAIN=xsnapp.com API_BASE_URL=https://xsnapp.com/api webpack --config webpack.prod.js",
-		"dev": "NODE_ENV=development BASE_DOMAIN=mbrtn.local API_BASE_URL=http://mbrtn.local:7000/api webpack-dev-server --config webpack.dev.js --inline --mode=development",
+		"dev": "NODE_ENV=development BASE_DOMAIN=mbrtn.local PORT=7000 API_BASE_URL=http://mbrtn.local:5566/api webpack-dev-server --config webpack.dev.js --inline --mode=development",
 		"lint": "node_modules/tslint/bin/tslint \"src/app/**/*.ts\" \"src/app/**/*.tsx\" --project ./tsconfig.json",
 		"test": "jest --config ./jest.config.json --no-cache",
 		"locales": "node locales --download",
