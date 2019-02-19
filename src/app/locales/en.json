@@ -41,6 +41,10 @@
 		"EDIT_ITEM": "Edit video",
 		"UPLOAD_NEW_VIDEO": "Upload new"
 	},
+	"EDIT_ITEM": {
+		"TITLE": "Title",
+		"SAVE": "Save"
+	},
 	"UPLOAD": {
 		"COMPLETED": "Upload completed successfully",
 		"UPLOADING": "Uploading",
