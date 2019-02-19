@@ -7,6 +7,7 @@ import { LocaleManager } from './managers/LocaleManager';
 import { AuthManager } from './managers/AuthManager';
 import { ItemsManager } from './managers/ItemsManager';
 import { UserItemsManager } from './managers/UserItemsManager';
+import { CategoriesManager } from './managers/CategoriesManager';
 
 export class Managers {
 	public locale = new LocaleManager();
@@ -16,6 +17,7 @@ export class Managers {
 	public auth = new AuthManager();
 	public items = new ItemsManager();
 	public userItems = new UserItemsManager();
+	public categories = new CategoriesManager();
 	public toast = new ToastManager();
 
 	private initStartTime: number = 0;
@@ -58,6 +60,7 @@ export class Managers {
 		this.auth.reset();
 		this.items.reset();
 		this.userItems.reset();
+		this.categories.reset();
 		this.toast.reset();
 	}
 
@@ -82,6 +85,9 @@ export class Managers {
 
 		await this.userItems.init();
 		this.logTime('UserItems ready');
+
+		await this.categories.init();
+		this.logTime('Categories ready');
 
 		await this.toast.init();
 		this.logTime('ToastManager ready');

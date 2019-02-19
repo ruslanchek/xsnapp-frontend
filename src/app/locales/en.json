@@ -43,7 +43,8 @@
 	},
 	"EDIT_ITEM": {
 		"TITLE": "Title",
-		"SAVE": "Save"
+		"SAVE": "Save",
+		"SAVED_SUCCESSFUL": "Successfully updated"
 	},
 	"UPLOAD": {
 		"COMPLETED": "Upload completed successfully",

@@ -8,10 +8,12 @@ import { EApiRequestType } from '../../managers/ApiManager';
 import { Locale } from '../hocs/Locale';
 import { Link } from 'react-router-dom';
 import { Input } from '../forms/Input';
-import { EFormValidateOn, Form } from '../forms/Form';
+import { EFormValidateOn, Form, IFormModelOutput } from '../forms/Form';
 import { Button, EButtonTheme } from '../ui/Button';
 import IItem = ItemsStore.IItem;
 import { COLORS } from '../../theme';
+import { SelectCategory } from '../upload/SelectCategory';
+import { EToastType } from '../../managers/ToastManager';
 
 interface IProps {
 	routeParams: {
@@ -22,12 +24,14 @@ interface IProps {
 interface IState {
 	item: IItem;
 	isLoaded: boolean;
+	isLoading: boolean;
 }
 
 export class UserItemsEditPage extends React.Component<IProps, IState> {
 	public state: IState = {
 		item: null,
 		isLoaded: false,
+		isLoading: false,
 	};
 
 	public async componentDidMount() {
@@ -70,12 +74,12 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 	private get form() {
 		const { item } = this.state;
 
-		if(!item) {
+		if (!item) {
 			return null;
 		}
 
 		return (
-			<Form validateOn={EFormValidateOn.SUBMIT} onSubmit={() => {}}>
+			<Form validateOn={EFormValidateOn.SUBMIT} onSubmit={this.handleSubmit}>
 				<div className={row}>
 					<Input
 						name="title"
@@ -85,14 +89,50 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 					/>
 				</div>
 
+				<div className={row}>
+					<SelectCategory />
+				</div>
+
 				<div className={buttonsRow}>
-					<Button type="submit" theme={EButtonTheme.Round} color={COLORS.SKYBLUE.toString()}>
-						<Locale id="EDIT_ITEM.SAVE"/>
+					<Button
+						type="submit"
+						theme={EButtonTheme.Round}
+						color={COLORS.SKYBLUE.toString()}
+					>
+						<Locale id="EDIT_ITEM.SAVE" />
 					</Button>
 				</div>
 			</Form>
 		);
 	}
+
+	private handleSubmit = async (output: IFormModelOutput) => {
+		if (output.isValid) {
+			this.setState({
+				isLoading: true,
+			});
+
+			const result = await managers.userItems.edit(this.state.item.id, output.values);
+
+			this.setState({
+				isLoading: false,
+			});
+
+			if (!result.error && result.data) {
+				managers.toast.toast(
+					EToastType.Success,
+					managers.locale.t('EDIT_ITEM.SAVED_SUCCESSFUL'),
+				);
+			} else {
+				managers.toast.toast(EToastType.Error, managers.locale.t(result.error));
+			}
+		} else {
+			managers.toast.toast(
+				EToastType.Error,
+				managers.locale.t('RESPONSE.INVALID_FORM_DATA'),
+			);
+		}
+	};
 }
 
 const root = css`
@@ -102,9 +142,7 @@ const root = css`
 	flex-direction: column;
 `;
 
-const row = css`
-	
-`;
+const row = css``;
 
 const buttonsRow = css`
 	margin-top: 30px;

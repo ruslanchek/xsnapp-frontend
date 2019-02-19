@@ -1,7 +1,7 @@
 import { Manager } from './Manager';
 import { managers } from '../managers';
 import { ItemsStore } from '../stores/ItemsStore';
-import { EApiRequestType } from './ApiManager';
+import { EApiRequestType, IApiResult } from './ApiManager';
 import { API_PATHS } from '../config';
 
 export class UserItemsManager extends Manager {
@@ -25,5 +25,15 @@ export class UserItemsManager extends Manager {
 		}
 
 		return [];
+	}
+
+	public async edit(itemId: number, data: Partial<ItemsStore.IItem>): Promise<IApiResult<ItemsStore.IItem>> {
+		const result = await managers.api.request<ItemsStore.IItem>(
+			EApiRequestType.POST,
+			API_PATHS.EDIT_USER_ITEM.replace(':itemId', itemId.toString()),
+			data,
+		);
+
+		return result;
 	}
 }

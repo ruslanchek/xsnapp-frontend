@@ -191,7 +191,6 @@ const input = css`
 	color: ${COLORS.WHITE.toString()};
 	transition: border-color 0.2s;
 	box-sizing: border-box;
-	font-weight: 600;
 
 	&:focus {
 		border-color: ${COLORS.WHITE.alpha(1).toString()};

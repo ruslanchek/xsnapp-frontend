@@ -25,6 +25,8 @@ export const PATHS = {
 export const API_PATHS = {
 	GET_ITEMS: '/items',
 	GET_ITEM: '/items/:itemId',
+	GET_CATEGORIES: '/categories',
+	GET_CATEGORY: '/categories/:itemId',
 	GET_PROFILE: '/profile',
 	AUTH_LOGIN: '/auth/login',
 	AUTH_REGISTER: '/auth/register',
@@ -33,6 +35,7 @@ export const API_PATHS = {
 	UPLOAD: '/upload',
 	GET_USER_ITEMS: '/user/items',
 	GET_USER_ITEM: '/user/items/:itemId',
+	EDIT_USER_ITEM: '/user/items/:itemId',
 	GET_COMMENTS: '/comments/:itemId',
 	ADD_COMMENT: '/comments',
 };

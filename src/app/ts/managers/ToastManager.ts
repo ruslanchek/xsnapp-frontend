@@ -97,8 +97,8 @@ const toastStyle = css`
 
 const toastTypes = {
 	[EToastType.Info]: css`
-		background-color: ${COLORS.RED.toString()};
-		box-shadow: 0 2px 5px ${COLORS.RED.alpha(0.5).toString()};
+		background-color: ${COLORS.SKYBLUE.toString()};
+		box-shadow: 0 2px 5px ${COLORS.SKYBLUE.alpha(0.5).toString()};
 	`,
 
 	[EToastType.Error]: css`
@@ -107,8 +107,8 @@ const toastTypes = {
 	`,
 
 	[EToastType.Success]: css`
-		background-color: ${COLORS.RED.toString()};
-		box-shadow: 0 2px 5px ${COLORS.RED.alpha(0.5).toString()};
+		background-color: ${COLORS.GREEN.toString()};
+		box-shadow: 0 2px 5px ${COLORS.GREEN.alpha(0.5).toString()};
 	`,
 
 	[EToastType.Warning]: css`

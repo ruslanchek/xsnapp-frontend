@@ -7,6 +7,11 @@ export namespace ItemsStore {
 		Preview = 'preview',
 	}
 
+	export interface ICategory {
+		id: number;
+		title: string;
+	}
+
 	export interface IItemUser {
 		id: number;
 		username: string;
