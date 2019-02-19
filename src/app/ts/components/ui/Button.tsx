@@ -39,7 +39,7 @@ export class Button extends React.PureComponent<IProps, {}> {
 		return (
 			<button
 				style={styles}
-				className={cx(className, themes[theme])}
+				className={cx(buttonCn, themes[theme], className)}
 				type={type}
 				onClick={() => {
 					if (onClick) {
@@ -54,6 +54,15 @@ export class Button extends React.PureComponent<IProps, {}> {
 		);
 	}
 }
+
+const buttonCn = css`
+	user-select: none;
+	transition: transform 0.2s;
+
+	&:active {
+		transform: scale(0.95);
+	}
+`;
 
 const themes = {
 	[EButtonTheme.Round]: css`

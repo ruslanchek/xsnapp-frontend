@@ -62,12 +62,13 @@ const filters = css`
 				display: inline-block;
 				padding: 2px 10px;
 				border: 1px solid ${COLORS.SKYBLUE.alpha(0.4).toString()};
+				background-color: ${COLORS.SKYBLUE.alpha(0.1).toString()};
 				border-radius: 3px;
 				margin-right: 10px;
 				transition: background-color 0.2s, transform 0.2s;
 
 				&:active {
-					transform: scale(1.05);
+					transform: scale(0.95);
 				}
 
 				&.active {

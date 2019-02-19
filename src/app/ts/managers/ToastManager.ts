@@ -87,7 +87,7 @@ const appear = keyframes`
 
 const toastStyle = css`
 	color: ${COLORS.WHITE.toString()};
-	padding: 8px 10px;
+	padding: 7px 10px;
 	display: flex;
 	border-radius: 5px;
 	font-weight: bold;

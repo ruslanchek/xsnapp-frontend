@@ -32,10 +32,10 @@ export class Toast extends React.PureComponent<IProps, IState> {
 
 const root = css`
 	position: fixed;
-	top: 15px;
+	top: 9px;
 	left: 50%;
 	transform: translateX(-50%);
-	z-index: 1000;
+	z-index: 10000;
 	display: flex;
 	justify-content: center;
 	box-sizing: border-box;
