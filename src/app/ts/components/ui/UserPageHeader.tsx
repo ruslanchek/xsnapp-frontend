@@ -16,7 +16,7 @@ interface IProps {
 interface IState {}
 
 @followStore(AuthStore.store)
-export class PageHeader extends React.Component<IProps, IState> {
+export class UserPageHeader extends React.Component<IProps, IState> {
 	public static defaultProps: Partial<IProps> = {
 		count: null,
 		title: null,

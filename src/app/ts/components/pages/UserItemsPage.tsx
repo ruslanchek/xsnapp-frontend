@@ -5,7 +5,7 @@ import { ItemsStore } from '../../stores/ItemsStore';
 import { managers } from '../../managers';
 import IItem = ItemsStore.IItem;
 import { UserListItem } from '../ui/UserListItem';
-import { PageHeader } from '../ui/PageHeader';
+import { UserPageHeader } from '../ui/UserPageHeader';
 import { Locale } from '../hocs/Locale';
 import { COLORS } from '../../theme';
 import { PageLoading } from '../ui/PageLoading';
@@ -49,7 +49,7 @@ export class UserItemsPage extends React.Component<IProps, IState> {
 		} else {
 			return (
 				<>
-					<PageHeader
+					<UserPageHeader
 						title={<Locale id="UPLOADS.HEADER" />}
 						count={this.state.items.length}
 						color={COLORS.SKYBLUE}

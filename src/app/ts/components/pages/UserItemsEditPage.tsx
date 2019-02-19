@@ -1,14 +1,13 @@
 import * as React from 'react';
-import { Layout } from '../common/Layout';
+import { ELayoutBackgroundColor, Layout } from '../common/Layout';
 import { css } from 'react-emotion';
 import { API_PATHS, PATHS } from '../../config';
 import { managers } from '../../managers';
 import { ItemsStore } from '../../stores/ItemsStore';
 import { EApiRequestType } from '../../managers/ApiManager';
-import IItem = ItemsStore.IItem;
 import { Locale } from '../hocs/Locale';
-import { COLORS } from '../../theme';
-import { PageHeader } from '../ui/PageHeader';
+import { Link } from 'react-router-dom';
+import IItem = ItemsStore.IItem;
 
 interface IProps {
 	routeParams: {
@@ -48,15 +47,18 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 
 	public render() {
 		return (
-			<Layout showFooter={true} showHeader={true}>
-				<PageHeader
-					title={<Locale id="UPLOADS.EDIT_ITEM" />}
-					color={COLORS.SKYBLUE}
-				/>
-
-				<div className={root}>
-
-				</div>
+			<Layout
+				showFooter={false}
+				showHeader={false}
+				backLink={PATHS.USER_ITEMS}
+				background={ELayoutBackgroundColor.Skyblue}
+				topLink={
+					<Link to={PATHS.UPLOAD_DO_UPLOAD}>
+						<Locale id="UPLOADS.UPLOAD_NEW_VIDEO" />
+					</Link>
+				}
+			>
+				<div className={root} />
 
 				{JSON.stringify(this.state.item)}
 			</Layout>
