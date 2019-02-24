@@ -17,7 +17,7 @@ interface IState {
 	isContentVisible: boolean;
 }
 
-const ANIMATION_TIME: number = 350;
+const ANIMATION_TIME: number = 250;
 const DEFAULT_WIDTH: number = 400;
 
 export class Modal extends React.PureComponent<IProps, IState> {
@@ -113,10 +113,6 @@ export class Modal extends React.PureComponent<IProps, IState> {
 	};
 }
 
-interface IContentProps {
-	width: number;
-}
-
 const root = css`
 	align-items: center;
 	background-color: ${COLORS.BLACK_LIGHT.alpha(0.8).toString()};
@@ -159,30 +155,30 @@ const content = {
 		border-radius: 6px;
 		position: absolute;
 		box-shadow: ${THEME.BOX_SHADOW_ELEVATION_2};
-		width: calc(100% - 20px);
 		overflow: auto;
 		-webkit-overflow-scrolling: touch;
-		height: calc(80vh + 20px);
-		bottom: -20px;
+		bottom: 10px;
 		left: 10px;
+		right: 10px;
+		top: 10px;
 	`,
 
 	enter: css`
-		transform: translateY(100vh);
+		transform: scale(0.96);
 	`,
 
 	enterActive: css`
-		transform: translateY(0%);
+		transform: scale(1);
 		transition: transform ${ANIMATION_TIME}ms;
 		transition-timing-function: spring(100 100 100 -100);
 	`,
 
 	exit: css`
-		transform: translateY(0%);
+		transform: scale(1);
 	`,
 
 	exitActive: css`
-		transform: translateY(100vh);
+		transform: scale(0.96);
 		transition: transform ${ANIMATION_TIME}ms;
 		transition-timing-function: spring(1 90 11 -0.2);
 	`,

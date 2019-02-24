@@ -29,6 +29,7 @@ export namespace ItemsStore {
 		tags: string[];
 		views: number;
 		user: IItemUser;
+		category: ICategory;
 	}
 
 	export interface IVideoFile {

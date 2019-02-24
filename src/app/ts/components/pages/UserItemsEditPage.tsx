@@ -27,6 +27,11 @@ interface IState {
 	isLoading: boolean;
 }
 
+interface IFormModel {
+	title: string;
+	categoryId: number;
+}
+
 export class UserItemsEditPage extends React.Component<IProps, IState> {
 	public state: IState = {
 		item: null,
@@ -90,7 +95,7 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 				</div>
 
 				<div className={row}>
-					<SelectCategory />
+					<SelectCategory value={item.category.id} name="categoryId" />
 				</div>
 
 				<div className={buttonsRow}>
@@ -106,13 +111,16 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 		);
 	}
 
-	private handleSubmit = async (output: IFormModelOutput) => {
+	private handleSubmit = async (output: IFormModelOutput<IFormModel>) => {
 		if (output.isValid) {
 			this.setState({
 				isLoading: true,
 			});
 
-			const result = await managers.userItems.edit(this.state.item.id, output.values);
+			const result = await managers.userItems.edit(
+				this.state.item.id,
+				output.values,
+			);
 
 			this.setState({
 				isLoading: false,

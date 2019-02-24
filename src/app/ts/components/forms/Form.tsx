@@ -7,12 +7,12 @@ export const FormContext = React.createContext<IFormContext>({
 });
 
 export interface IFormContext {
-	setValue: (name: string, value: IFormValue) => void;
+	setValue: (name: string | number, value: IFormValue) => void;
 	getErrors: (name: string) => string[];
 }
 
 export interface IFormValue {
-	value: string;
+	value: string | number;
 	validators: Validator[];
 	errors?: string[];
 }
@@ -21,8 +21,8 @@ export interface IFormModel {
 	[name: string]: IFormValue;
 }
 
-export interface IFormModelOutput {
-	values: { [name: string]: string };
+export interface IFormModelOutput<T> {
+	values: T;
 	errors: { [name: string]: string[] };
 	isValid: boolean;
 }
@@ -34,7 +34,7 @@ export enum EFormValidateOn {
 }
 
 interface IProps {
-	onSubmit: (output: IFormModelOutput) => void;
+	onSubmit: (output: IFormModelOutput<any>) => void;
 	validateOn: EFormValidateOn;
 	className?: string;
 }
@@ -97,9 +97,9 @@ export class Form extends React.Component<IProps, IState> {
 		);
 	}
 
-	private collectModel(): IFormModelOutput {
+	private collectModel(): IFormModelOutput<any> {
 		const { model } = this.state;
-		const resultModel: { [name: string]: string } = {};
+		const resultModel: { [name: string]: string | number } = {};
 		const errors: { [name: string]: string[] } = {};
 
 		for (const modelKey in model) {
@@ -126,7 +126,7 @@ export class Form extends React.Component<IProps, IState> {
 		}
 	};
 
-	private setValue = (name: string, value: IFormValue) => {
+	private setValue = (name: string | number, value: IFormValue) => {
 		const newValues = this.state.model;
 
 		newValues[name] = value;

@@ -23,6 +23,10 @@ interface IState {
 	success: boolean;
 }
 
+interface IFormModel {
+	email: string;
+}
+
 export class PasswordReset extends React.Component<IProps, IState> {
 	public state: IState = {
 		isLoading: false,
@@ -115,7 +119,7 @@ export class PasswordReset extends React.Component<IProps, IState> {
 		);
 	}
 
-	private handleSubmit = async (output: IFormModelOutput) => {
+	private handleSubmit = async (output: IFormModelOutput<IFormModel>) => {
 		if (output.isValid) {
 			this.setState({
 				isLoading: true,

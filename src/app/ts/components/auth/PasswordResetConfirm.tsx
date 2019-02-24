@@ -24,6 +24,10 @@ interface IState {
 	success: boolean;
 }
 
+interface IFormModel {
+	newPassword: string;
+}
+
 export class PasswordResetConfirm extends React.Component<IProps, IState> {
 	public state: IState = {
 		isLoading: false,
@@ -108,7 +112,7 @@ export class PasswordResetConfirm extends React.Component<IProps, IState> {
 		);
 	}
 
-	private handleSubmit = async (output: IFormModelOutput) => {
+	private handleSubmit = async (output: IFormModelOutput<IFormModel>) => {
 		const urlParams = new URLSearchParams(window.location.search);
 		const token = urlParams.get('token');
 
@@ -119,7 +123,7 @@ export class PasswordResetConfirm extends React.Component<IProps, IState> {
 
 			const result = await managers.auth.passwordResetConfirm(
 				token,
-				output.values.newPassword,
+				output.values.newPassword as string,
 			);
 
 			this.setState({

@@ -46,6 +46,9 @@
 		"SAVE": "Save",
 		"SAVED_SUCCESSFUL": "Successfully updated"
 	},
+	"CATEGORIES": {
+		"SELECT_CATEGORY": "Select categories"
+	},
 	"UPLOAD": {
 		"COMPLETED": "Upload completed successfully",
 		"UPLOADING": "Uploading",
