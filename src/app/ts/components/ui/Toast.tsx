@@ -17,7 +17,7 @@ const ZoomInAndOut = ({ children, position, ...props }) => (
 	</CSSTransition>
 );
 
-export class Toast extends React.PureComponent<IProps, IState> {
+export class Toast extends React.Component<IProps, IState> {
 	public render() {
 		return (
 			<ToastContainer
