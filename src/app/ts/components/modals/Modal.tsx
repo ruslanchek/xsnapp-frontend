@@ -2,8 +2,7 @@ import * as React from 'react';
 import { CSSTransition } from 'react-transition-group';
 import { COLORS, THEME } from '../../theme';
 import { Portal } from '../ui/Portal';
-import { mq } from '../../lib/CSSUtils';
-import styled, { css } from 'react-emotion';
+import { css } from 'react-emotion';
 
 interface IProps {
 	isVisible: boolean;
