@@ -95,7 +95,7 @@ export class UserItemsEditPage extends React.Component<IProps, IState> {
 				</div>
 
 				<div className={row}>
-					<SelectCategory value={item.category.id} name="categoryId" />
+					<SelectCategory value={item.category ? item.category.id : null} name="categoryId" />
 				</div>
 
 				<div className={buttonsRow}>
