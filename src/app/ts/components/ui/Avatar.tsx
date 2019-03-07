@@ -75,6 +75,7 @@ export class Avatar extends React.PureComponent<IProps, IState> {
 								style={{
 									width: size,
 									height: size,
+									fontSize: `${size / 2.2}px`,
 								}}
 								className={noAvatar}
 							>
@@ -107,7 +108,6 @@ const image = css`
 `;
 
 const noAvatar = css`
-	font-size: ${THEME.FONT_SIZE_BIG}px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
