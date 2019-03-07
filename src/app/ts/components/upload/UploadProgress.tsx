@@ -15,7 +15,15 @@ const STROKE_WIDTH = 2;
 
 export class UploadProgress extends React.PureComponent<IProps, {}> {
 	public render() {
-		const { status, percent, className } = this.props;
+		let { percent } = this.props;
+
+		if (percent < 0) {
+			percent = 0;
+		} else if (percent > 100) {
+			percent = 100;
+		}
+
+		const { status, className } = this.props;
 		const size = this.props.size - BLUR_SIZE * 4 - STROKE_WIDTH * 2;
 		const fullSize = this.props.size;
 		const halfSize = fullSize / 2;
