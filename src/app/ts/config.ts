@@ -46,7 +46,7 @@ export const CONFIG = {
 	CONTENT_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/content',
 	AVATARS_PATH: 'https://static-xsnapp.ams3.cdn.digitaloceanspaces.com/avatars',
 	STORAGE: {
-		PREFIX: 'REALTHUB',
+		PREFIX: 'XSNAPP',
 		COOKIES: {
 			OPTIONS: {
 				domain: `.${__BASE_DOMAIN__}`,
